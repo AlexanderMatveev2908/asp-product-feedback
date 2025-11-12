@@ -419,15 +419,15 @@ poetry run python -m java_pkg_cli -h
 Run the SVG parser CLI using:
 
 ```bash
-poetry run python -m svg_ng_cli path_to_svg_file output_folder_path [svg_type]
+poetry run python -m svg_ng_cli input_dir_path output_dir_path [svg_type]
 ```
 
 ##### 🔧 Parameters
 
 | Parameter              | Description                                                 | Example                                                           |
 | ---------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------- |
-| **SVG file path**      | Required — path to the input `.svg` file                    | `assets/icons/user.svg`                                           |
-| **Output folder path** | Required — folder where parsed components will be generated | `src/app/icons/`                                                  |
+| **SVG file path**      | Required — path to the input svgs dir                       | `src/assets/icons/`                                               |
+| **Output folder path** | Required — folder where parsed components will be generated | `src/components/icons/`                                           |
 | **SVG type**           | Optional — determines how the SVG should be processed       | `f` => fill<br>`s` => stroke<br>`a` => advanced _(default: fill)_ |
 
 ---
