@@ -1,4 +1,4 @@
-# ? java
+# ? JAVA
 *.class
 *.log
 *.jar
@@ -8,7 +8,7 @@ out/
 bin/
 .gradle
 
-# ? python
+# ? PYTHON
 __pycache__/
 *.py[cod]
 *.pyo
@@ -21,8 +21,6 @@ __pycache__/
 .venv/
 venv/
 pip-wheel-metadata/
-
-# ? keep .vscode because it have useful settings for formatting
 
 # ? pytest
 htmlcov/
@@ -42,7 +40,7 @@ ruff_cache/
 *.lint
 *.typecheck
 
-# ? yarn
+# ? YARN
 .yarn/*
 !.yarn/patches/
 !.yarn/plugins/
@@ -51,21 +49,21 @@ ruff_cache/
 !.yarn/versions/
 !.yarnrc.yml
 
-# ? node
+# ? NODE
 node_modules/
 
-# ? ts build
+# ? TS
 *.tsbuildinfo
 
-# ? turbo
+# ? TURBO
 turbo/
 .turbo/
 
-# ? build apps
+# ? BUILD
 dist/
 build/
 
-# ? loggers
+# ? LOGGERS
 logger/
 logs/
 *.log
@@ -73,11 +71,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# ? client
+# ? CLIENT
 apps/*/.next/
 apps/*/out/
 
-# ? secrets
+# ? SECRETS
 *.pem
 *.key
 *.crt
@@ -87,13 +85,15 @@ certs/
 kind-secrets.**
 apps/client/src/environments/
 
-# ? assets
+# ? ASSETS
 uploads/
 apps/server/assets/
 
-# ? tests
+# ? TESTS
 playwright-report/
 test-results/
+
+# ? keep .vscode because it have useful settings for formatting
 
 # Avoid accidental upload of the Sketch and Figma design files
 #####################################################

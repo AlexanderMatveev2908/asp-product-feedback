@@ -61,8 +61,9 @@ jobs:
           java-version: 21
           cache: gradle
 
-      - name: 🔧 make gradlew executable
-        run: chmod +x apps/server/gradlew
+      - name: 🔧 generate gradle wrapper
+        working-directory: apps/server
+        run: gradle wrapper
 
       - name: 🔎 lint && types check
         run: yarn check
@@ -105,6 +106,10 @@ jobs:
 
       - name: 🛠️ install fly CLI lib
         uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: 🔧 generate gradle wrapper
+        working-directory: apps/server
+        run: gradle wrapper
 
       - name: ☕ deploy server
         working-directory: apps/server

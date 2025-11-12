@@ -1,8 +1,50 @@
 # ? ignore server stuff
 /apps/server
 
-# ? yarn
-.yarn/*
+# ? JAVA
+_.class
+_.log
+_.jar
+_.war
+\*.ear
+out/
+bin/
+.gradle
+
+# ? PYTHON
+**pycache**/
+_.py[cod]
+_.pyo
+_.pyd
+_.so
+_.egg
+_.egg-info/
+.eggs/
+.Python
+.venv/
+venv/
+pip-wheel-metadata/
+
+# ? pytest
+htmlcov/
+.cache/
+.tox/
+.coverage
+.coverage.\*
+.pytest_cache/
+nosetests.xml
+test-results.xml
+.pytest_cache/
+
+# ? mypy / ruff / linting
+.mypy*cache/
+.dmypy.json
+ruff_cache/
+*.lint
+\_.typecheck
+
+# ? YARN
+.yarn/\*
 !.yarn/patches/
 !.yarn/plugins/
 !.yarn/releases/
@@ -10,19 +52,62 @@
 !.yarn/versions/
 !.yarnrc.yml
 
-# ? node
+# ? NODE
 node_modules/
 
-# ? ts build
-*.tsbuildinfo
+# ? TS
+\*.tsbuildinfo
 
-# ? turbo
+# ? TURBO
 turbo/
 .turbo/
 
-# ? build apps
+# ? BUILD
 dist/
 build/
 
-# ? loggers
+# ? LOGGERS
 logger/
+logs/
+_.log
+npm-debug.log_
+yarn-debug.log*
+yarn-error.log*
+
+# ? CLIENT
+apps/_/.next/
+apps/_/out/
+
+# ? ASSETS
+uploads/
+apps/server/assets/
+
+# ? TESTS
+playwright-report/
+test-results/
+
+# ? keep .vscode because it have useful settings for formatting
+
+# Avoid accidental upload of the Sketch and Figma design files
+
+#####################################################
+
+## Please do not remove lines 5 and 6 - thanks! 🙂
+
+#####################################################
+_.sketch
+_.fig
+
+# Avoid accidental XD upload if you convert the design file
+
+###############################################
+
+## Please do not remove line 12 - thanks! 🙂
+
+###############################################
+\*.xd
+
+# Avoid your project being littered with annoying .DS_Store files!
+
+.DS_Store
+.prettierignore
