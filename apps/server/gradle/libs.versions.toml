@@ -1,0 +1,57 @@
+[versions]
+dependency-management = "1.1.6"
+
+guava = "33.2.1-jre"
+dotenv = "3.0.0"
+lombok = "1.18.34"
+
+reactor = "3.6.6"
+spring-boot = "3.3.4"
+
+lettuce = "6.4.0.RELEASE"
+
+junit = "5.10.3"
+junit-platform = "1.10.3"
+testlogger = "4.0.0"
+
+checkstyle = "10.20.1"
+pmd = "7.0.0"
+spotbugs = "4.8.6"
+spotbugs-gradle = "6.0.23" 
+spotbugs_annotations = "4.8.3"
+jackson_datatype_jdk8 = "2.17.2"
+datafaker = "2.1.0"
+
+
+
+[libraries]
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+dotenv = { module = "io.github.cdimascio:dotenv-java", version.ref = "dotenv" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+
+reactor-core = { module = "io.projectreactor:reactor-core", version.ref = "reactor" }
+spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation", version.ref = "spring-boot" }
+
+redis-lettuce = { module = "io.lettuce:lettuce-core", version.ref = "lettuce" }
+
+checkstyle = { module = "com.puppycrawl.tools:checkstyle", version.ref = "checkstyle" }
+spotbugs = { module = "com.github.spotbugs:spotbugs", version.ref = "spotbugs" }
+
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+datafaker = {module = "net.datafaker:datafaker", version.ref = "datafaker"}
+spotbugsAnnotations = {module = "com.github.spotbugs:spotbugs-annotations", version.ref = "spotbugs_annotations"}
+jacksonDatatypeJdk8 = {module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8", version.ref = "jackson_datatype_jdk8"}
+
+
+
+[plugins]
+dependency-management = { id = "io.spring.dependency-management", version.ref = "dependency-management" }
+
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+
+spotbugs = { id = "com.github.spotbugs", version.ref = "spotbugs-gradle" }
+
+testlogger = { id = "com.adarshr.test-logger", version.ref = "testlogger" }

@@ -1,0 +1,116 @@
+# ? ignore client stuff
+/apps/client
+
+# ? java
+*.class
+*.log
+*.jar
+*.war
+*.ear
+out/
+bin/
+.gradle
+
+# ? python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+.Python
+.venv/
+venv/
+pip-wheel-metadata/
+
+# ? keep .vscode because it have useful settings for formatting
+
+# ? pytest
+htmlcov/
+.cache/
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+nosetests.xml
+test-results.xml
+.pytest_cache/
+
+# ? mypy / ruff / linting
+.mypy_cache/
+.dmypy.json
+ruff_cache/
+*.lint
+*.typecheck
+
+# ? yarn
+.yarn/*
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+!.yarnrc.yml
+
+# ? node
+node_modules/
+
+# ? ts build
+*.tsbuildinfo
+
+# ? turbo
+turbo/
+.turbo/
+
+# ? build apps
+dist/
+build/
+
+# ? loggers
+logger/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ? client
+apps/*/.next/
+apps/*/out/
+
+# ? secrets
+*.pem
+*.key
+*.crt
+.env
+.env.*
+certs/
+kind-secrets.**
+apps/client/src/environments/
+
+# ? assets
+uploads/
+apps/server/assets/
+
+# ? tests
+playwright-report/
+test-results/
+
+# Avoid accidental upload of the Sketch and Figma design files
+#####################################################
+## Please do not remove lines 5 and 6 - thanks! 🙂 ##
+#####################################################
+*.sketch
+*.fig
+
+# Avoid accidental XD upload if you convert the design file
+###############################################
+## Please do not remove line 12 - thanks! 🙂 ##
+###############################################
+*.xd
+
+# Avoid your project being littered with annoying .DS_Store files!
+.DS_Store
+.prettierignore
