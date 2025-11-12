@@ -10,6 +10,14 @@ def patch_svg_attributes(svg: str, svg_type: SvgT) -> str:
     svg = re.sub(r"<metadata[^>]*>.*?</metadata>", "", svg, flags=re.DOTALL)
     svg = re.sub(r"<sodipodi:namedview[^>]*>.*?</sodipodi:namedview>", "", svg, flags=re.DOTALL)
 
+    if not re.search(r'\bviewBox\s*=', svg):
+        svg = re.sub(
+            r'(<svg\b(?![^>]*\bviewBox=)[^>]*?)>',
+            r'\1 viewBox="0 0 24 24">',
+            svg,
+            count=1
+        )
+
     def replacer(arg: re.Match) -> str:
         tag = arg.group(0)
         tag = re.sub(r'\bwidth="[^"]*"', r'[attr.width]="width()"', tag)
