@@ -10,7 +10,16 @@ def patch_svg_attributes(svg: str, svg_type: SvgT) -> str:
     svg = re.sub(r"<metadata[^>]*>.*?</metadata>", "", svg, flags=re.DOTALL)
     svg = re.sub(r"<sodipodi:namedview[^>]*>.*?</sodipodi:namedview>", "", svg, flags=re.DOTALL)
 
-    if not re.search(r'\bviewBox\s*=', svg):
+    match = re.search(r'width="(\d+)"\s+height="(\d+)"', svg)
+    if match:
+        w, h = match.groups()
+        svg = re.sub(
+            r'(<svg\b(?![^>]*\bviewBox=)[^>]*?)>',
+            rf'\1 viewBox="0 0 {w} {h}">',
+            svg,
+            count=1
+        )
+    else:
         svg = re.sub(
             r'(<svg\b(?![^>]*\bviewBox=)[^>]*?)>',
             r'\1 viewBox="0 0 24 24">',
@@ -72,6 +81,7 @@ def gen_template_ts(kebab_name: str, class_name: str, svg_type: SvgT) -> str:
     selector = f"{svg_type.selector_prefix()}-{kebab_name}"
 
     return f"""
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {{ Nullable }} from '@/common/types/etc';
 import {{ ChangeDetectionStrategy, Component, input, InputSignal }} from '@angular/core';
 

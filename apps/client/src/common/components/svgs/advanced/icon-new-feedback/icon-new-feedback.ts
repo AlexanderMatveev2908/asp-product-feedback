@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Nullable } from '@/common/types/etc';
 import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
 
