@@ -1,11 +1,4 @@
-import { SvgAdvIconEditFeedback } from '@/common/components/svgs/advanced/icon-edit-feedback/icon-edit-feedback';
-import { SvgFillIconArrowDown } from '@/common/components/svgs/fill/icon-arrow-down/icon-arrow-down';
-import { SvgFillIconArrowLeft } from '@/common/components/svgs/fill/icon-arrow-left/icon-arrow-left';
-import { SvgFillIconArrowUp } from '@/common/components/svgs/fill/icon-arrow-up/icon-arrow-up';
-import { SvgFillIconClose } from '@/common/components/svgs/fill/icon-close/icon-close';
-import { SvgFillIconComments } from '@/common/components/svgs/fill/icon-comments/icon-comments';
-import { SvgFillIconHamburger } from '@/common/components/svgs/fill/icon-hamburger/icon-hamburger';
-import { SvgFillIconPlus } from '@/common/components/svgs/fill/icon-plus/icon-plus';
+import { SvgAdvIconNewFeedback } from '@/common/components/svgs/advanced/icon-new-feedback/icon-new-feedback';
 import { SvgT } from '@/common/types/etc';
 import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -18,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
-  public readonly Curr: SvgT = SvgAdvIconEditFeedback;
+  public readonly Curr: SvgT = SvgAdvIconNewFeedback;
 }
