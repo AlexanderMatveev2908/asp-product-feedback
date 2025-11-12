@@ -10,10 +10,6 @@
   .root__input {
     @include mix.app__base(12px);
     @apply w-full h-[42px];
-
-    &::placeholder {
-      @apply text-gray__prm;
-    }
   }
 
   .root__svg {

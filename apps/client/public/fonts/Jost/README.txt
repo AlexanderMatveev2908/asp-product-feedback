@@ -1,32 +1,36 @@
-Rubik Variable Font
-===================
+Jost Variable Font
+==================
 
-This download contains Rubik as both variable fonts and static fonts.
+This download contains Jost as both variable fonts and static fonts.
 
-Rubik is a variable font with this axis:
+Jost is a variable font with this axis:
   wght
 
 This means all the styles are contained in these files:
-  Rubik-VariableFont_wght.ttf
-  Rubik-Italic-VariableFont_wght.ttf
+  Jost-VariableFont_wght.ttf
+  Jost-Italic-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
 that aren’t available as static fonts. Not all apps support variable fonts, and
-in those cases you can use the static font files for Rubik:
-  static/Rubik-Light.ttf
-  static/Rubik-Regular.ttf
-  static/Rubik-Medium.ttf
-  static/Rubik-SemiBold.ttf
-  static/Rubik-Bold.ttf
-  static/Rubik-ExtraBold.ttf
-  static/Rubik-Black.ttf
-  static/Rubik-LightItalic.ttf
-  static/Rubik-Italic.ttf
-  static/Rubik-MediumItalic.ttf
-  static/Rubik-SemiBoldItalic.ttf
-  static/Rubik-BoldItalic.ttf
-  static/Rubik-ExtraBoldItalic.ttf
-  static/Rubik-BlackItalic.ttf
+in those cases you can use the static font files for Jost:
+  static/Jost-Thin.ttf
+  static/Jost-ExtraLight.ttf
+  static/Jost-Light.ttf
+  static/Jost-Regular.ttf
+  static/Jost-Medium.ttf
+  static/Jost-SemiBold.ttf
+  static/Jost-Bold.ttf
+  static/Jost-ExtraBold.ttf
+  static/Jost-Black.ttf
+  static/Jost-ThinItalic.ttf
+  static/Jost-ExtraLightItalic.ttf
+  static/Jost-LightItalic.ttf
+  static/Jost-Italic.ttf
+  static/Jost-MediumItalic.ttf
+  static/Jost-SemiBoldItalic.ttf
+  static/Jost-BoldItalic.ttf
+  static/Jost-ExtraBoldItalic.ttf
+  static/Jost-BlackItalic.ttf
 
 Get started
 -----------
