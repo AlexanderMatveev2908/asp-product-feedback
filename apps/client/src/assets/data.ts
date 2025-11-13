@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-export const data = {
+export const mockData = {
   currentUser: {
     image: './assets/user-images/image-zena.jpg',
     name: 'Zena Kelley',
