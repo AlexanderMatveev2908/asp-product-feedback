@@ -24,10 +24,12 @@ export class MainDrop {
 
   public readonly options: SorterT[] = SortersUiFkt.sorters();
 
+  // ? listeners
   public onClick(): void {
     this.useDrop.isOpen.set(!this.useDrop.isOpen());
   }
 
+  // ? derived
   public readonly twd: Signal<string> = computed(() =>
     this.useDrop.isOpen()
       ? 'translate-y-0 opacity-1 pointer-events-auto'

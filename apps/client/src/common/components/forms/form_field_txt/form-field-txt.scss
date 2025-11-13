@@ -1,5 +1,3 @@
-@use 'exports/mix.scss' as mix;
-
 :host {
   @apply block w-full;
 }
@@ -8,7 +6,6 @@
   @apply w-full relative;
 
   .root__input {
-    @include mix.app__base(12px);
     @apply w-full h-[42px];
   }
 
