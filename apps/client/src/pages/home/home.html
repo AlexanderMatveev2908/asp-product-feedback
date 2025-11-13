@@ -3,7 +3,7 @@
   <app-btn-app [label]="'+ Add Feedback'" [varT]="'purple'" />
 </div>
 
-<app-page-wrapper [waitClient]="false" [eventT]="'INFO'">
+<app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="true" [minH]="'85vh'">
   <ng-template #contentRef>
     <div class="root">
       <ng-content *ngTemplateOutlet="noResults" />

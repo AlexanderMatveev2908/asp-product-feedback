@@ -1,4 +1,5 @@
 import { noticeReducer, NoticeStateT } from '@/features/notice/reducer/reducer';
+import { productsReducer, ProductsStateT } from '@/features/products/reducer/reducer';
 import {
   sidebarMobileReducer,
   SidebarMobileStateT,
@@ -10,10 +11,12 @@ export interface StoreStateT {
   toast: ToastStateT;
   notice: NoticeStateT;
   sidebarMobile: SidebarMobileStateT;
+  products: ProductsStateT;
 }
 
 export const rootReducer: ActionReducerMap<StoreStateT> = {
   toast: toastReducer,
   notice: noticeReducer,
   sidebarMobile: sidebarMobileReducer,
+  products: productsReducer,
 };

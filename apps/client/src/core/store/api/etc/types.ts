@@ -1,4 +1,4 @@
-import { Nullable } from '@/common/types/etc';
+import { Nullable, WithIdT } from '@/common/types/etc';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -45,3 +45,10 @@ export enum ApiStatusT {
   TOO_MANY_REQUESTS = 429,
   INTERNAL_SERVER_ERROR = 500,
 }
+
+export type SqlTableT<T> = T &
+  WithIdT<{
+    createdAt: number;
+    updatedAt: number;
+    deletedAt: number;
+  }>;

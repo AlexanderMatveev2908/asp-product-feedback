@@ -15,4 +15,6 @@ import { SvgAdvIllustrationEmpty } from '@/common/components/svgs/advanced/illus
 })
 export class Home {
   public readonly Detective: SvgT = SvgAdvIllustrationEmpty;
+
+  public data: unknown = null;
 }
