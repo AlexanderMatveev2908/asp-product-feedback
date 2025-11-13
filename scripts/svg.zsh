@@ -49,18 +49,10 @@ ngcv() {
         type_flag="a"
       fi
 
-      for svg_file in "$input_dir"/*.svg; do
-        local name=$(basename "$svg_file")
-
-        echo "⏳ parsing $name"
-
-        poetry run python -m svg_ng_cli "$svg_file" "$output_dir" "$type_flag" || {
-          echo "❌ failed to convert => $name"
-          continue
-        }
-      done
+      poetry run python -m svg_ng_cli "$input_dir" "$output_dir" "$type_flag"
     done
 
     echo "🎉 SVGs parsed 🎉"
   )
 }
+
