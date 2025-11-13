@@ -21,8 +21,6 @@ __pycache__/
 .venv/
 venv/
 pip-wheel-metadata/
-
-# ? pytest
 htmlcov/
 .cache/
 .tox/
@@ -32,8 +30,6 @@ htmlcov/
 nosetests.xml
 test-results.xml
 .pytest_cache/
-
-# ? mypy / ruff / linting
 .mypy_cache/
 .dmypy.json
 ruff_cache/
