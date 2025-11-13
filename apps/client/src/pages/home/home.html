@@ -3,29 +3,14 @@
   <app-btn-app [label]="'+ Add Feedback'" [varT]="'purple'" />
 </div>
 
-<app-page-wrapper [waitClient]="false" [eventT]="'INFO'">
+<app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="!products()" [minH]="'85vh'">
   <ng-template #contentRef>
     <div class="root">
-      <ng-content *ngTemplateOutlet="noResults" />
+      @if(products()){@for(p of products(); track p.id){
+      <app-product-item [item]="p" />
+      } }@else{
+      <app-home-no-data />
+      }
     </div>
   </ng-template>
 </app-page-wrapper>
-
-<ng-template #noResults>
-  <div class="root__no_res">
-    <div class="no_res__svg">
-      <ng-container *ngComponentOutlet="Detective" />
-    </div>
-
-    <span class="txt__hd__md no_res__label">There is no feedback yet.</span>
-
-    <span class="no_res__msg txt__bd__sm__reg"
-      >Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to
-      improve our app.</span
-    >
-
-    <div class="no_res__btn">
-      <app-btn-app [varT]="'purple'" [label]="'+ Add Feedback'" />
-    </div>
-  </div>
-</ng-template>

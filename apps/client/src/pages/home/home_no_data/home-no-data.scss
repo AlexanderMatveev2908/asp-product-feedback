@@ -1,0 +1,19 @@
+.root {
+  @apply bg-white w-full flex flex-col justify-center items-center py-[76px] px-[24px] rounded-[10px];
+
+  .root__svg {
+    @apply w-[110px] h-[110px];
+  }
+
+  .root__label {
+    @apply mt-[40px] text-blue__dark__1;
+  }
+
+  .root__msg {
+    @apply mt-[14px] text-blue__dark__0;
+  }
+
+  .root__btn {
+    @apply mt-[24px];
+  }
+}

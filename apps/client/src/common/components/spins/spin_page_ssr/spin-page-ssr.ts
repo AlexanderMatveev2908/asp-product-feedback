@@ -1,11 +1,10 @@
 import { UseMetaEventDir } from '@/core/directives/use_meta_event';
-import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
 import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-spin-page-ssr',
-  imports: [NgClass],
+  imports: [],
   templateUrl: './spin-page-ssr.html',
   styleUrl: './spin-page-ssr.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +14,7 @@ export class SpinPageSsr {
   public readonly useMetaEventDir: UseMetaEventDir = inject(UseMetaEventDir);
 
   // ? personal props
-  public readonly minH: InputSignal<string> = input('min-h-screen');
+  public readonly minH: InputSignal<string> = input('100vh');
 
   // ? static helpers
   public readonly IDs: string[] = Array.from({ length: 10 }, () => v4());

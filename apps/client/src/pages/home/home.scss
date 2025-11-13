@@ -3,25 +3,5 @@
 }
 
 .root {
-  @apply w-full py-[32px] px-[24px];
-
-  .root__no_res {
-    @apply bg-white w-full flex flex-col justify-center items-center py-[76px] px-[24px] rounded-[10px];
-
-    .no_res__svg {
-      @apply w-[110px] h-[110px];
-    }
-
-    .no_res__label {
-      @apply mt-[40px] text-blue__dark__1;
-    }
-
-    .no_res__msg {
-      @apply mt-[14px] text-blue__dark__0;
-    }
-
-    .no_res__btn {
-      @apply mt-[24px];
-    }
-  }
+  @apply w-full py-[32px] px-[24px] flex flex-col gap-[16px];
 }

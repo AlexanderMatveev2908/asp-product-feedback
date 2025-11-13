@@ -4,10 +4,11 @@ import { SvgT } from '@/common/types/etc';
 import { SidebarMobileSlice } from '@/features/sidebar_mobile/slice';
 import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-home-mobile',
-  imports: [NgComponentOutlet],
+  imports: [NgComponentOutlet, RouterLink],
   templateUrl: './navbar-home-mobile.html',
   styleUrl: './navbar-home-mobile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

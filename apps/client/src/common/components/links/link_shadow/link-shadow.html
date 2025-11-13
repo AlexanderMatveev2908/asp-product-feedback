@@ -2,7 +2,7 @@
 <a
   [attr.download]="download()"
   [attr.href]="path()"
-  class="root"
+  class="root app__with_pointer"
   [style.--clr]="useMetaDir.cssVar()"
   [style.--pad]="paddingProps()"
 >
@@ -13,7 +13,7 @@
   [attr.href]="path()"
   [attr.target]="'_blank'"
   [attr.rel]="'noopener noreferrer'"
-  class="root"
+  class="root app__with_pointer"
   [style.--clr]="useMetaDir.cssVar()"
   [style.--pad]="paddingProps()"
 >
@@ -22,7 +22,7 @@
 }@else {
 <a
   [routerLink]="path()"
-  class="root"
+  class="root app__with_pointer"
   [style.--clr]="useMetaDir.cssVar()"
   [style.--pad]="paddingProps()"
 >

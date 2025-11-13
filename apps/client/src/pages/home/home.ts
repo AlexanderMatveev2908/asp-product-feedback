@@ -1,18 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { BtnApp } from '@/common/components/btns/btn__app/btn-app';
 import { MainDrop } from '@/common/components/drop/main_drop/main-drop';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { SvgT } from '@/common/types/etc';
-import { SvgAdvIllustrationEmpty } from '@/common/components/svgs/advanced/illustration-empty/illustration-empty';
+import { Nullable } from '@/common/types/etc';
+import { ProductsSlice } from '@/features/products/slice';
+import { ProductT } from '@/features/products/etc/types';
+import { HomeNoData } from './home_no_data/home-no-data';
+import { ProductItem } from './product_item/product-item';
 
 @Component({
   selector: 'app-home',
-  imports: [PageWrapper, BtnApp, MainDrop, NgTemplateOutlet, NgComponentOutlet],
+  imports: [PageWrapper, BtnApp, MainDrop, HomeNoData, ProductItem],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
-  public readonly Detective: SvgT = SvgAdvIllustrationEmpty;
+  private readonly productsSLice: ProductsSlice = inject(ProductsSlice);
+
+  public readonly products: Signal<Nullable<ProductT[]>> = this.productsSLice.products;
 }

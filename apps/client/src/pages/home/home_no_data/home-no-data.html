@@ -1,0 +1,16 @@
+<div class="root">
+  <div class="root__svg">
+    <ng-container *ngComponentOutlet="Detective" />
+  </div>
+
+  <span class="txt__hd__md root__label">There is no feedback yet.</span>
+
+  <span class="root__msg txt__bd__sm__reg"
+    >Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to
+    improve our app.</span
+  >
+
+  <div class="root__btn">
+    <app-btn-app [varT]="'purple'" [label]="'+ Add Feedback'" />
+  </div>
+</div>
