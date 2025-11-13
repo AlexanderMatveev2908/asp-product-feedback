@@ -1,0 +1,14 @@
+<app-black-bg [css]="blackBgCSS()" />
+
+<div class="root z__sidebar" [ngClass]="twd()">
+  <div class="root__block_a">
+    <div class="block_a__content">
+      @for (f of filtersFeedback; track f.id){
+      <button class="content__filter">
+        <span class="txt__bd__sm">{{ f.label }}</span>
+      </button>
+      }
+    </div>
+  </div>
+  <div class="root__block_b"></div>
+</div>
