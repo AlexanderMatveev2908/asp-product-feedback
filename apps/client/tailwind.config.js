@@ -14,7 +14,7 @@ export default {
         blue__light__0: '#62BCFA',
         blue__dark__0: '#647196',
         blue__dark__1: '#3A4374',
-        blue__dark__2: '#4661E6',
+        blue__dark__2: '#373F68',
         gray__0: '#F2F4FF',
         gray__1: '#F7F8FD',
         orange__prm: '#F49F85',

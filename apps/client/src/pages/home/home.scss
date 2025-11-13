@@ -2,16 +2,9 @@
   @apply block w-full;
 }
 
+.header {
+  @apply h-[56px] w-full bg-blue__dark__2 px-[24px] flex items-center justify-between;
+}
+
 .root {
-  opacity: var(--opac);
-  grid-template-columns: repeat(1, 100%);
-  @apply w-full grid gap-[12px];
-
-  @media (min-width: 1200px) {
-    grid-template-columns: 500px 1fr;
-  }
-
-  .root__right {
-    @apply max-w-full w-full flex flex-col gap-[12px];
-  }
 }

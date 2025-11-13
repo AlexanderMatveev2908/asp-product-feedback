@@ -1,5 +1,6 @@
 :host {
-  @apply fixed inset-0 z-50 pointer-events-none;
+  z-index: 600;
+  @apply fixed inset-0 h-full w-full pointer-events-none;
 }
 
 .root {

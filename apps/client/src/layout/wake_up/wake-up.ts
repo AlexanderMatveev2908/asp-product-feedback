@@ -34,7 +34,6 @@ export class WakeUp implements AfterViewInit {
 
   // ? popup props
   public readonly popupStaticProps: PopupStaticPropsT = {
-    cls: 'wake_up',
     closeOnMouseOut: false,
     eventT: 'INFO',
     closePop: this.usePopHk.closePop,
