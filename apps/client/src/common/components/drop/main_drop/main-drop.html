@@ -15,7 +15,7 @@
     </div>
   </button>
 
-  <div class="root__drop" [ngClass]="twd()">
+  <div class="root__drop" [ngClass]="twd()" [style.opacity]="useDrop.isOpen() ? '1' : '0'">
     @for(s of options; track s.id; let idx = $index){
     <button class="drop__opt" [style.--border]="idx === options.length - 1 ? 'none' : '1px solid'">
       <span class="txt__bd__lg__reg">

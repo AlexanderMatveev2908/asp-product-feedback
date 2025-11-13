@@ -44,8 +44,8 @@ export class MainDrop {
   // ? derived
   public readonly twd: Signal<string> = computed(() =>
     this.useDrop.isOpen()
-      ? 'translate-y-0 opacity-1 pointer-events-auto'
-      : '-translate-y-[50px] opacity-0 pointer-events-none'
+      ? 'translate-y-0 pointer-events-auto'
+      : '-translate-y-[50px] pointer-events-none'
   );
 
   @HostListener('document:mousedown', ['$event'])
