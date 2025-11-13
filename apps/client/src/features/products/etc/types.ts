@@ -30,5 +30,5 @@ export type ProductT = SqlTableT<{
   upvotes: number;
   status: ProductStatusT;
   description: Nullable<string>;
-  comments: OrNone<CommentT>;
+  comments: OrNone<CommentT[]>;
 }>;

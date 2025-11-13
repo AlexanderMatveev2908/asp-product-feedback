@@ -22,5 +22,19 @@
   }
 
   .root__footer {
+    .footer__upvotes {
+      @apply flex justify-center items-center gap-[10px] w-fit py-[6px] px-[15px] rounded-[10px] bg-gray__0 min-h-[32px];
+
+      .upvotes__svg {
+        @apply w-[8px] h-[8px] text-blue__prm;
+      }
+    }
+
+    .footer__comments {
+      @apply flex items-center gap-[4px] w-fit;
+      .comments__svg {
+        @apply w-[18px] h-[18px];
+      }
+    }
   }
 }

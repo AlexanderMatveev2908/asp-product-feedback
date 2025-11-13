@@ -18,4 +18,26 @@
       {{ upperCat() }}
     </span>
   </div>
+
+  <div class="root__footer">
+    <div class="footer__upvotes">
+      <div class="upvotes__svg">
+        <ng-content *ngComponentOutlet="Chevron; inputs: { fill: 'white' }" />
+      </div>
+
+      <span class="txt__bd__sm__bold text-blue__dark__1">
+        {{ item().upvotes }}
+      </span>
+    </div>
+
+    <div class="footer__comments">
+      <div class="comments__svg">
+        <ng-content *ngComponentOutlet="Comment" />
+      </div>
+
+      <span class="txt__bd__sm__bold text-blue__dark__1">
+        {{ item().comments?.length }}
+      </span>
+    </div>
+  </div>
 </div>
