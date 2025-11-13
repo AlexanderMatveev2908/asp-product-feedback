@@ -6,10 +6,11 @@ import { Nullable } from '@/common/types/etc';
 import { ProductsSlice } from '@/features/products/slice';
 import { ProductT } from '@/features/products/etc/types';
 import { HomeNoData } from './home_no_data/home-no-data';
+import { ProductItem } from './product_item/product-item';
 
 @Component({
   selector: 'app-home',
-  imports: [PageWrapper, BtnApp, MainDrop, HomeNoData],
+  imports: [PageWrapper, BtnApp, MainDrop, HomeNoData, ProductItem],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

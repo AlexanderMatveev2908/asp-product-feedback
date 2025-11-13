@@ -1,0 +1,26 @@
+.root {
+  @apply w-full bg-white rounded-[10px] p-[24px] flex flex-col;
+
+  .root__header {
+    @apply w-full flex flex-col gap-[9px];
+
+    .header__title {
+      @apply flex justify-start text-blue__dark__1;
+    }
+
+    .header__desc {
+      @apply text-blue__dark__0;
+    }
+  }
+
+  .root__body {
+    @apply mt-[8px] bg-gray__0 rounded-[10px] text-blue__prm py-[5px] px-[16px] w-fit flex justify-center items-center min-h-[30px];
+  }
+
+  .root__footer {
+    @apply mt-[16px] flex items-center justify-between;
+  }
+
+  .root__footer {
+  }
+}
