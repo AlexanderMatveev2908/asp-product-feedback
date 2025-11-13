@@ -1,7 +1,10 @@
 @use 'exports/mix' as mix;
 
 .root {
-  background: var(--app__gradient);
+  background-image: url('../../assets/images/background-header.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   @apply sticky top-0 w-full h-[72px] flex px-[24px] items-center justify-between;
 
   .root__left {
