@@ -10,5 +10,24 @@
       }
     </div>
   </div>
-  <div class="root__block_b"></div>
+  <div class="root__block_b">
+    <div class="block_b__title_row">
+      <span class="txt__hd__md text-blue__dark__1"> Roadmap </span>
+
+      <span class="txt__bd__sm text-blue__prm border-b border-blue__prm">View</span>
+    </div>
+    <div class="block_b__content">
+      @for(f of filtersRoadmap; track f.id){
+      <div class="content__filter">
+        <div class="filter__label">
+          <div class="label__circle" [ngClass]="f.twdClr"></div>
+
+          <span class="txt__bd__lg__reg">{{ f.label }}</span>
+        </div>
+
+        <span class="txt__bd__lg__bold"> 2 </span>
+      </div>
+      }
+    </div>
+  </div>
 </div>
