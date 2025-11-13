@@ -11,13 +11,13 @@
 
           <div id="csr_notice__span_status" class="body__span">
             @let dataStatus = props().status|| useMetaDir.eventT();
-            <span class="text-5xl sm:text-8xl font-extrabold">
+            <span class="text-5xl sm:text-6xl font-extrabold">
               {{ dataStatus }}
             </span>
           </div>
 
           <div id="csr_notice__span_msg" class="body__span">
-            <span class="txt__xl">{{ props().msg }}</span>
+            <span class="txt__lg text-center">{{ props().msg }}</span>
           </div>
 
           <ng-container *ngTemplateOutlet="footerTpl" />

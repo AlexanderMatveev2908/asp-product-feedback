@@ -1,6 +1,6 @@
 <app-black-bg [css]="cssBlackBg()" />
 
-<div class="root" [ngClass]="cssZ()" [style.pointer-events]="isPop() ? 'auto' : 'none'">
+<div class="root z__generic_popup" [style.pointer-events]="isPop() ? 'auto' : 'none'">
   <div #popup class="root__pop" [style.--clr]="cssVarEvent()">
     <div class="pop__close_row">
       <app-close-btn [closeClick]="closeClick" [disabled]="!allowClose()" />

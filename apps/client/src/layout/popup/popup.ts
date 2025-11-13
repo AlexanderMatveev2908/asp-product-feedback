@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { PopupStaticPropsT } from './etc/types';
 import { BlackBg } from '@/layout/black_bg/black-bg';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { AnimationsPopSvc } from './etc/animations';
 import { CloseBtn } from '@/common/components/btns/close_btn/close-btn';
 import { Nullable } from '@/common/types/etc';
@@ -24,7 +24,7 @@ import { ElDomT, RefDomT, RefTemplateT } from '@/common/types/dom';
 
 @Component({
   selector: 'app-popup',
-  imports: [BlackBg, NgClass, CloseBtn, NgTemplateOutlet],
+  imports: [BlackBg, CloseBtn, NgTemplateOutlet],
   templateUrl: './popup.html',
   styleUrl: './popup.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,14 +46,13 @@ export class Popup extends UseInjCtxHk implements AfterViewInit {
 
   // ? black bg overlay props
   public cssBlackBg: Signal<string> = computed(
-    () => `${this.isPop() ? 'fixed' : 'hidden'} ${this.cssZ()}__bg`
+    () => `${this.isPop() ? 'fixed' : 'hidden'} z__generic_popup__bg`
   );
 
   // ? derived
   public readonly cssVarEvent: Signal<string> = computed(() =>
     LibMetaEvent.cssVarByT(this.staticProps().eventT)
   );
-  public cssZ: Signal<string> = computed(() => `z__${this.staticProps().cls}`);
 
   // ? children
   @ViewChild('popup') popup: RefDomT;

@@ -1,17 +1,12 @@
-import { WithIdT } from '@/common/types/etc';
+import { PairValLabelT } from '@/common/types/forms';
 import { RootUiFkt } from '../root';
 
-export type FilterFeedbackT = WithIdT<{
-  val: string;
-  label: string;
-}>;
-
-export interface FilterRoadmapT extends FilterFeedbackT {
+export interface FilterRoadmapT extends PairValLabelT {
   twdClr: string;
 }
 
 export class FiltersUiFkt extends RootUiFkt {
-  private static readonly _filtersFeedback: Omit<FilterFeedbackT, 'id'>[] = [
+  private static readonly _filtersFeedback: Omit<PairValLabelT, 'id'>[] = [
     {
       val: 'all',
       label: 'All',
@@ -38,7 +33,7 @@ export class FiltersUiFkt extends RootUiFkt {
     },
   ];
 
-  public static filtersFeedback(): FilterFeedbackT[] {
+  public static filtersFeedback(): PairValLabelT[] {
     return this.listWithIDs(this._filtersFeedback);
   }
 

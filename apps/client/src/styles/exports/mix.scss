@@ -15,11 +15,6 @@
   @include with_h($v);
 }
 
-@mixin app__base($radius) {
-  border-radius: $radius;
-  @apply outline-none bg-white/20 border border-white/30;
-}
-
 @mixin app__btn__scl($scale_hover) {
   transition: all 0.3s ease;
 
@@ -57,4 +52,9 @@
   &:hover {
     @include app__shadow($clr);
   }
+}
+
+@mixin app__btn__res($padding) {
+  padding: $padding;
+  @apply flex w-full justify-center max-w-full border-2 rounded-xl;
 }

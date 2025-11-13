@@ -21,8 +21,6 @@ __pycache__/
 .venv/
 venv/
 pip-wheel-metadata/
-
-# ? pytest
 htmlcov/
 .cache/
 .tox/
@@ -32,8 +30,6 @@ htmlcov/
 nosetests.xml
 test-results.xml
 .pytest_cache/
-
-# ? mypy / ruff / linting
 .mypy_cache/
 .dmypy.json
 ruff_cache/
@@ -94,6 +90,8 @@ playwright-report/
 test-results/
 
 # ? keep .vscode because it have useful settings for formatting
+
+frontend_master_md/
 
 # Avoid accidental upload of the Sketch and Figma design files
 #####################################################

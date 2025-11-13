@@ -8,3 +8,8 @@ export type TxtFieldT = WithIdT<{
   place: string;
   type: InputTxtT;
 }>;
+
+export type PairValLabelT = WithIdT<{
+  val: string;
+  label: string;
+}>;
