@@ -3,7 +3,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   inject,
   input,
   InputSignal,
@@ -16,10 +15,22 @@ import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { ElDomT, RefTemplateT } from '@/common/types/dom';
 import { UseMetaEventDir } from '@/core/directives/use_meta_event';
 import { NoticeWrapperPropsT } from './etc/types';
+import { LinkShadow } from '@/common/components/links/link_shadow/link-shadow';
+import { UseSpanDir } from '@/core/directives/use_span';
+import { SpanPropsT } from '@/common/components/els/span/etc/types';
+import { SvgStrokeHome } from '@/common/components/svgs/stroke/home/home';
 
 @Component({
   selector: 'app-csr-notice-wrapper',
-  imports: [NgComponentOutlet, PageWrapper, NgTemplateOutlet, PageWrapper],
+  imports: [
+    NgComponentOutlet,
+    NgTemplateOutlet,
+    PageWrapper,
+    PageWrapper,
+    LinkShadow,
+    UseSpanDir,
+    UseMetaEventDir,
+  ],
   templateUrl: './csr-notice-wrapper.html',
   styleUrl: './csr-notice-wrapper.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,13 +42,18 @@ export class CsrNoticeWrapper extends UseInjCtxHk implements AfterViewInit {
   // ? personal props
   public readonly props: InputSignal<NoticeWrapperPropsT> = input.required();
 
+  // ? statics
+  public readonly spanProps: SpanPropsT = {
+    label: 'Home',
+    Svg: SvgStrokeHome,
+  };
+
   // ? tmpl
   @ViewChild('contentRef', { read: TemplateRef })
   public contentRef: RefTemplateT;
 
   // ? projected
-  @ContentChild('header', { read: TemplateRef }) headerTpl: RefTemplateT;
-  @ContentChild('footer', { read: TemplateRef }) footerTpl: RefTemplateT;
+  // @ContentChild('footer', { read: TemplateRef }) footerTpl: RefTemplateT;
 
   private run: boolean = false;
 
