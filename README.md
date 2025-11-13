@@ -2,7 +2,7 @@
 
 ## 📌 About This Project
 
-Full-Stack **Product Feedback** application created as a learning project.  
+Full-Stack **Product Feedback** application created as learning project.  
 The UI and layout are built following the official design from [Frontend Mentor](https://www.frontendmentor.io/).
 
 **Live** version available on [Fly.io](https://asp-product-feedback-client.fly.dev).

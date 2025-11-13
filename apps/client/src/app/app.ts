@@ -2,15 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { WakeUp } from '@/layout/wake_up/wake-up';
 import { Toast } from '@/layout/toast/toast';
-import { NavbarHomeMobile } from '@/layout/navbar_home_mobile/navbar-home-mobile';
-import { SidebarMobile } from '@/layout/sidebar_mobile/sidebar-mobile';
 import { ProductsSlice } from '@/features/products/slice';
 import { mockData } from '@/assets/data';
 import { ProductT } from '@/features/products/etc/types';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, WakeUp, Toast, NavbarHomeMobile, SidebarMobile],
+  imports: [RouterOutlet, WakeUp, Toast],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

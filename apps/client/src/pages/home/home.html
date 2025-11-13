@@ -1,3 +1,6 @@
+<app-navbar-home-mobile />
+<app-sidebar-mobile />
+
 <div class="header">
   <app-main-drop />
   <app-btn-app [label]="'+ Add Feedback'" [varT]="'purple'" />
@@ -6,9 +9,13 @@
 <app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="!products()" [minH]="'85vh'">
   <ng-template #contentRef>
     <div class="root">
-      @if(products()){@for(p of products(); track p.id){
-      <app-product-item [item]="p" />
-      } }@else{
+      @if(products()) {
+      <!--  -->
+      @for(p of products(); track p.id){
+      <app-product-item [item]="p" [withLink]="true" />
+      }
+      <!--  -->
+      }@else{
       <app-home-no-data />
       }
     </div>
