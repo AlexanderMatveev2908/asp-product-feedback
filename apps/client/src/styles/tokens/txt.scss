@@ -1,20 +1,4 @@
-$txt_sizes: (
-  hd__xl: 72,
-  hd__lg: 30,
-  hd__md: 20,
-  hd__sm: 18,
-  hd__xs: 16,
-  bd__md: 14,
-);
-
-@each $k, $v in $txt_sizes {
-  .txt__#{$k} {
-    font-size: #{$v}px;
-    letter-spacing: 0;
-    line-height: if($k == hd__xl, 100%, 125%);
-  }
-}
-
+// ? common classes used custom elements
 .txt__xxs {
   @apply font-thin text-xs lg:text-sm;
 }
@@ -71,4 +55,52 @@ $txt_sizes: (
   -webkit-box-orient: vertical;
   white-space: normal;
   word-break: break-word;
+}
+
+// ? == headings ==
+.txt__hd__xl {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  letter-spacing: -0.33px;
+}
+
+.txt__hd__lg {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 29px;
+  letter-spacing: -0.25px;
+}
+
+.txt__hd__md {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: -0.25px;
+}
+
+.txt__hd_sm {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+}
+
+// ? == body ==
+.txt__bd__lg {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+}
+
+.txt__bd__md {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.txt__bd__sm {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 19px;
 }

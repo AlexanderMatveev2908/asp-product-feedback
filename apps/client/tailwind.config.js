@@ -6,14 +6,15 @@ export default {
     extend: {
       colors: {
         white_smoke: '#f5f5f5',
-        blue__prm: '#004C7E',
-        blue__sec: '#93C5FD',
-        green__prm: '#22C55E',
-        orange__prm: '#FB923C',
-        orange__light: '#FDBA74',
-        yellow__prm: '#FDE047',
-        yellow__light: '#FEF08A',
-        gray__prm: '#DBDAD1',
+        purple__prm: '#AD1FEA',
+        blue__prm: '#4661E6',
+        blue__light__0: '#62BCFA',
+        blue__dark__0: '#647196',
+        blue__dark__1: '#3A4374',
+        blue__dark__2: '#4661E6',
+        gray__0: '#F2F4FF',
+        gray__1: '#F7F8FD',
+        orange__prm: '#F49F85',
       },
       borderWidth: {
         3: '3px',

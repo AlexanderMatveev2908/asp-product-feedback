@@ -8,12 +8,12 @@ def setup_parser() -> argparse.ArgumentParser:
         description="🐍 convert SVG files into Angular components.",
     )
 
-    parser.add_argument("input", type=Path, help="path to the input SVG file")
+    parser.add_argument("input", type=Path, help="path to SVGs folder")
 
     parser.add_argument(
         "output",
         type=Path,
-        help="directory where the Angular component will be generated",
+        help="directory where the Angular components will be generated",
     )
 
     parser.add_argument(
