@@ -1,6 +1,6 @@
 <app-black-bg [css]="blackBgCSS()" />
 
-<div class="root z__sidebar" [ngClass]="twd()">
+<div #sideRef class="root z__sidebar" [ngClass]="twd()">
   <div class="root__block_a">
     <div class="block_a__content">
       @for (f of filtersFeedback; track f.id){
