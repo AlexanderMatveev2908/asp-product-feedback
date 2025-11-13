@@ -18,7 +18,7 @@
             <span class="txt__lg text-center">{{ props().msg }}</span>
           </div>
 
-          <ng-container *ngTemplateOutlet="footer" />
+          @if(props().tmpt === 'home'){ <ng-container *ngTemplateOutlet="footer" />}
         </div>
       </div>
     </div>

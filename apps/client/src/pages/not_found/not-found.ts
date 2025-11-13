@@ -15,5 +15,6 @@ export class NotFound {
   public readonly wrapEventsProps: NoticeWrapperPropsT = {
     msg: 'The treasure chest is empty. Someone got here before you... 💰',
     status: 404,
+    tmpt: 'home',
   };
 }

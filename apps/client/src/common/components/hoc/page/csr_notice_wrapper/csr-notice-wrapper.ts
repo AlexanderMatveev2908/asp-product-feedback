@@ -48,7 +48,7 @@ export class CsrNoticeWrapper extends UseInjCtxHk implements AfterViewInit {
     Svg: SvgStrokeHome,
   };
 
-  // ? tmpl
+  // ? template
   @ViewChild('contentRef', { read: TemplateRef })
   public contentRef: RefTemplateT;
 

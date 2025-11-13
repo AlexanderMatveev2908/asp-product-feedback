@@ -46,7 +46,7 @@ export class ProductsRead extends UseInjCtxHk implements OnInit {
           eventT: 'ERR',
           msg: 'Product not found',
           status: ApiStatusT.NOT_FOUND,
-          tmtp: 'home',
+          tmpt: 'home',
         });
 
       this.item.set(found);
