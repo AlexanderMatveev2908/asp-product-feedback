@@ -16,8 +16,12 @@
   font-family: 'Jost', sans-serif;
 }
 
+:root {
+  --app__gradient: radial-gradient(circle, #e84d70 0%, #a337f6 53%, #28a7ed 100%);
+}
+
 html {
-  @apply bg-blue__prm text-white;
+  @apply bg-gray__1 text-white;
   scroll-behavior: smooth;
 }
 
@@ -38,6 +42,6 @@ button {
   }
   &:disabled {
     cursor: not-allowed;
-    // opacity: 0.5;
+    opacity: 0.5;
   }
 }

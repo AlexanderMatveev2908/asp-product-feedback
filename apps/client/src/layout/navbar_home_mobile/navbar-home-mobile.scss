@@ -1,0 +1,18 @@
+@use 'exports/mix' as mix;
+
+.root {
+  background: var(--app__gradient);
+  @apply sticky top-0 w-full h-[72px] flex px-[24px] items-center justify-between;
+
+  .root__left {
+    @apply flex flex-col items-start;
+  }
+
+  .root__right {
+    @apply flex justify-center items-center;
+    button {
+      @include mix.sqr(20px);
+      @include mix.app__btn__scl(1.4);
+    }
+  }
+}
