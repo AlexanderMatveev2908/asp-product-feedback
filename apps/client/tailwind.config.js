@@ -4,6 +4,9 @@ export default {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
+      backgroundImage: {
+        app__gradient: 'var(--app__gradient)',
+      },
       colors: {
         white_smoke: '#f5f5f5',
         purple__prm: '#AD1FEA',
