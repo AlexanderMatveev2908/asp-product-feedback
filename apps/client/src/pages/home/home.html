@@ -1,4 +1,22 @@
-<div class="header"></div>
+<div class="header">
+  <div class="header__left">
+    <div class="left__label">
+      <span class="txt__bd__sm__reg"> Sort by :</span>
+      &nbsp;
+      <span class="txt__bd__sm__bold">Most Upvotes</span>
+    </div>
+
+    <div class="left__svg">
+      <div class="svg__item">
+        <ng-container *ngComponentOutlet="Chevron" />
+      </div>
+    </div>
+  </div>
+
+  <div class="header__right">
+    <app-btn-app [label]="'+ Add Feedback'" [varT]="'purple'" />
+  </div>
+</div>
 
 <app-page-wrapper [waitClient]="false" [eventT]="'INFO'">
   <ng-template #contentRef>
