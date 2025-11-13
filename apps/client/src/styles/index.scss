@@ -39,10 +39,16 @@ input {
 
 button {
   &:enabled {
-    cursor: pointer;
+    cursor: url('../assets/images/pointer.png') 0 0, pointer;
   }
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+}
+
+.app__with_pointer {
+  &:hover {
+    cursor: url('../assets/images/pointer.png') 0 0, pointer;
   }
 }
