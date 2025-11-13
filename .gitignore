@@ -95,6 +95,8 @@ test-results/
 
 # ? keep .vscode because it have useful settings for formatting
 
+frontend_master_md/
+
 # Avoid accidental upload of the Sketch and Figma design files
 #####################################################
 ## Please do not remove lines 5 and 6 - thanks! 🙂 ##
