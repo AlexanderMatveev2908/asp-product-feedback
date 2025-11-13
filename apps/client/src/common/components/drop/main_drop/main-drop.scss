@@ -1,0 +1,43 @@
+.root {
+  @apply flex h-fit items-center relative;
+
+  .root__btn {
+    @apply flex gap-[8px] h-fit items-center;
+
+    .btn__label {
+      @apply flex items-center h-fit;
+
+      span {
+        @apply transition-all duration-300;
+      }
+    }
+
+    .btn__svg {
+      @apply flex mt-1 items-center;
+
+      .svg__item {
+        @apply w-[8px] h-[8px] transition-all duration-300;
+      }
+    }
+  }
+
+  .root__drop {
+    transition: transform 0.4s, opacity 0.2s;
+    box-shadow: var(--app__shadow);
+    top: calc(100% + 16px);
+    @apply absolute left-0 w-[255px] z-50 bg-white rounded-[10px];
+
+    .drop__opt {
+      border-bottom: var(--border);
+      @apply w-full flex items-center justify-between px-[24px] py-[12px] border-blue__dark__1/15 transition-all duration-300 text-blue__dark__0;
+
+      &:hover {
+        @apply text-purple__prm;
+      }
+
+      .drop_opt__svg {
+        @apply w-[11px] h-[11px] text-purple__prm;
+      }
+    }
+  }
+}

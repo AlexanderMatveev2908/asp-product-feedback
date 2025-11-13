@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@a
 import { BlackBg } from '../black_bg/black-bg';
 import { SidebarMobileSlice } from '@/features/sidebar_mobile/slice';
 import { NgClass } from '@angular/common';
-import { FilterFeedbackT, FilterRoadmapT, FiltersUiFkt } from '@/core/ui_fkt/etc/filters';
+import { FilterRoadmapT, FiltersUiFkt } from '@/core/ui_fkt/etc/filters';
+import { PairValLabelT } from '@/common/types/forms';
 
 @Component({
   selector: 'app-sidebar-mobile',
@@ -23,6 +24,6 @@ export class SidebarMobile {
   );
 
   // ? static
-  public readonly filtersFeedback: FilterFeedbackT[] = FiltersUiFkt.filtersFeedback();
+  public readonly filtersFeedback: PairValLabelT[] = FiltersUiFkt.filtersFeedback();
   public readonly filtersRoadmap: FilterRoadmapT[] = FiltersUiFkt.filtersRoadmap();
 }

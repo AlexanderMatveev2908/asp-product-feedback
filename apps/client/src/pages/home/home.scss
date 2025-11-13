@@ -4,25 +4,6 @@
 
 .header {
   @apply h-[56px] w-full bg-blue__dark__2 px-[24px] flex justify-between items-center;
-
-  .header__left {
-    @apply flex gap-[8px] h-fit items-center;
-
-    .left__label {
-      @apply flex items-center h-fit;
-    }
-
-    .left__svg {
-      @apply flex mt-1 items-center;
-
-      .svg__item {
-        @apply w-[8px] h-[8px];
-      }
-    }
-  }
-
-  .header__right {
-  }
 }
 
 .root {

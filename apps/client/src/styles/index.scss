@@ -17,7 +17,8 @@
 }
 
 :root {
-  --app__gradient: radial-gradient(circle, #e84d70 0%, #a337f6 53%, #28a7ed 100%);
+  --app__shadow: 0 10px 40px -7px rgba(55, 63, 104, 0.35);
+  top: calc(100% + 16px);
 }
 
 html {

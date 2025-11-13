@@ -1,0 +1,31 @@
+<div class="root">
+  <button type="button" (click)="onClick()" class="root__btn">
+    <div class="btn__label">
+      <span class="txt__bd__sm__reg"> Sort by :</span>
+      &nbsp;
+      <span class="txt__bd__sm__bold" [style.opacity]="useDrop.isOpen() ? '75%' : '100%'"
+        >Most Upvotes</span
+      >
+    </div>
+
+    <div class="btn__svg">
+      <div class="svg__item" [style.transform]="`rotate(${useDrop.isOpen() ? '180deg':'0deg'})`">
+        <ng-container *ngComponentOutlet="Chevron" />
+      </div>
+    </div>
+  </button>
+
+  <div class="root__drop" [ngClass]="twd()">
+    @for(s of options; track s.id; let idx = $index){
+    <button class="drop__opt" [style.--border]="idx === options.length - 1 ? 'none' : '1px solid'">
+      <span class="txt__bd__lg__reg">
+        {{ s.label }}
+      </span>
+
+      <div class="drop_opt__svg">
+        <ng-container *ngComponentOutlet="Check; inputs: { fill: 'white' }" />
+      </div>
+    </button>
+    }
+  </div>
+</div>

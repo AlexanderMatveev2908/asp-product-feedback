@@ -3,7 +3,7 @@
 .root {
   background: var(--hex_def);
   @include mix.app__btn__scl(1.15);
-  @apply py-[10px] px-[16px] rounded-[10px];
+  @apply py-[10px] px-[16px] h-[40px] rounded-[10px] flex justify-center items-center;
 
   &:hover {
     background: var(--hex_hover);
