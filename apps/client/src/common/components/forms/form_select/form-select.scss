@@ -27,8 +27,22 @@
 
         .options__item {
           border-bottom: var(--border);
-          @apply w-full flex justify-start items-center py-[12px] px-[24px];
+          @apply w-full flex justify-between items-center py-[12px] px-[24px];
           border-color: #3a437415;
+
+          &:hover {
+            .item__label {
+              @apply text-purple__prm;
+            }
+          }
+
+          .item__label {
+            @apply text-blue__dark__0 transition-all duration-300;
+          }
+
+          .item__svg {
+            @apply w-[11px] h-[11-px] text-purple__prm;
+          }
         }
       }
     }
