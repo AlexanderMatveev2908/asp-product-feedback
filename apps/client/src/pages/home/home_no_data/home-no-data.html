@@ -11,6 +11,11 @@
   >
 
   <div class="root__btn">
-    <app-btn-app [varT]="'purple'" [label]="'+ Add Feedback'" />
+    <app-link-main
+      appUseMetaApp
+      [label]="'+ Add Feedback'"
+      [varT]="'purple'"
+      [path]="'/products/post'"
+    />
   </div>
 </div>

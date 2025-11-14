@@ -3,7 +3,12 @@
 
 <div class="header">
   <app-main-drop />
-  <app-btn-app [label]="'+ Add Feedback'" [varT]="'purple'" />
+  <app-link-main
+    appUseMetaApp
+    [label]="'+ Add Feedback'"
+    [varT]="'purple'"
+    [path]="'/products/post'"
+  />
 </div>
 
 <app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="!products()" [minH]="'85vh'">

@@ -10,7 +10,7 @@
           <span class="txt__bd__sm__bold text-blue__dark__0">Go Back</span>
         </a>
 
-        <app-btn-app [label]="'Edit Feedback'" varT="blue" />
+        <app-btn-main appUseMetaApp [label]="'Edit Feedback'" varT="blue" />
       </div>
 
       @if(item()){ <app-product-item [item]="item()!" [withLink]="true" />}
@@ -38,7 +38,7 @@
           <div class="content__footer">
             <span class="text-blue__dark__0 txt__bd__sm__reg">250 Characters left</span>
 
-            <app-btn-app [varT]="'purple'" [label]="'Post Comment'" />
+            <app-btn-main appUseMetaApp [varT]="'purple'" [label]="'Post Comment'" />
           </div>
         </form>
       </div>

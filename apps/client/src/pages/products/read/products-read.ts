@@ -17,13 +17,22 @@ import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { ApiStatusT } from '@/core/store/api/etc/types';
 import { SvgStrokeIconArrowLeft } from '@/common/components/svgs/stroke/icon-arrow-left/icon-arrow-left';
 import { NgComponentOutlet } from '@angular/common';
-import { BtnApp } from '@/common/components/btns/btn__app/btn-app';
+import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
 import { ProductItem } from '@/features/products/etc/components/product_item/product-item';
 import { CommentItem } from './comment_item/comment-item';
+import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 
 @Component({
   selector: 'app-products-read',
-  imports: [PageWrapper, NgComponentOutlet, RouterLink, BtnApp, ProductItem, CommentItem],
+  imports: [
+    PageWrapper,
+    NgComponentOutlet,
+    RouterLink,
+    BtnMain,
+    ProductItem,
+    CommentItem,
+    UseMetaAppDir,
+  ],
   templateUrl: './products-read.html',
   styleUrl: './products-read.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

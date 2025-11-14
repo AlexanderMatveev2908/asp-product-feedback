@@ -1,0 +1,10 @@
+<a
+  [routerLink]="path()"
+  class="root"
+  [style.--hex_def]="useMetaApp.varsHex().hexDef"
+  [style.--hex_hover]="useMetaApp.varsHex().hexHover"
+>
+  <span class="txt__bd__sm__bold">
+    {{ useMetaApp.label() }}
+  </span>
+</a>
