@@ -8,7 +8,7 @@ export abstract class _UseNavNoticeHk extends _UseRouterHk {
   private readonly noticeSlice: NoticeSlice = inject(NoticeSlice);
 
   public pushNotice(
-    arg: Omit<NoticeStateT, 'cb' | 'tmpt'> & { cb?: () => void; tmtp?: NoticeTmptT }
+    arg: Omit<NoticeStateT, 'cb' | 'tmpt'> & { cb?: () => void; tmpt?: NoticeTmptT }
   ): void {
     this.noticeSlice.notice = arg;
 

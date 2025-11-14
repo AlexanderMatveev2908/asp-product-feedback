@@ -6,11 +6,21 @@ import { Nullable } from '@/common/types/etc';
 import { ProductsSlice } from '@/features/products/slice';
 import { ProductT } from '@/features/products/etc/types';
 import { HomeNoData } from './home_no_data/home-no-data';
-import { ProductItem } from './product_item/product-item';
+import { ProductItem } from '../../features/products/etc/components/product_item/product-item';
+import { NavbarHomeMobile } from '@/layout/navbar_home_mobile/navbar-home-mobile';
+import { SidebarMobile } from '@/layout/sidebar_mobile/sidebar-mobile';
 
 @Component({
   selector: 'app-home',
-  imports: [PageWrapper, BtnApp, MainDrop, HomeNoData, ProductItem],
+  imports: [
+    PageWrapper,
+    BtnApp,
+    MainDrop,
+    HomeNoData,
+    ProductItem,
+    NavbarHomeMobile,
+    SidebarMobile,
+  ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

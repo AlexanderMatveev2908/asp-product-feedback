@@ -1,0 +1,13 @@
+<div class="root">
+  @if (isFirst()){
+  <div class="root__line"></div>
+  }
+  <app-header-comment [comment]="reply()" />
+
+  <div class="root__content">
+    <span class="txt__bd__sm__bold text-purple__prm"> {{ reply().replyingTo }}</span
+    >&nbsp;<span class="text-blue__dark__0 txt__bd__sm__reg">
+      {{ reply().content }}
+    </span>
+  </div>
+</div>

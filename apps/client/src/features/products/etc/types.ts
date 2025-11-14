@@ -19,9 +19,16 @@ export type UserT = SqlTableT<{
   image: ImageT | ImageDevT;
 }>;
 
+export type ReplyT = SqlTableT<{
+  content: string;
+  replyingTo: string;
+  user: UserT;
+}>;
+
 export type CommentT = SqlTableT<{
   content: string;
   user: UserT;
+  replies: Nullable<ReplyT[]>;
 }>;
 
 export type ProductT = SqlTableT<{

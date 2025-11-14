@@ -1,0 +1,15 @@
+<div class="root" [style.--border]="isLast() ? 'none' : '1px solid'">
+  <app-header-comment [comment]="comment()" />
+
+  <span class="txt__bd__sm__reg text-blue__dark__0">
+    {{ comment().content }}
+  </span>
+
+  @if(comment().replies?.length){
+  <div class="root__replies">
+    @for (r of comment().replies; track r.id; let idx = $index){
+    <app-reply-item [reply]="r" [isFirst]="idx === 0" />
+    }
+  </div>
+  }
+</div>

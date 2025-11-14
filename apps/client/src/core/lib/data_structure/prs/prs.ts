@@ -1,7 +1,7 @@
-import { BoolStrT, OrNone } from '@/common/types/etc';
-import { LibPrsDate } from './sub/0.date';
+import { BoolStrT, Nullable, OrNone } from '@/common/types/etc';
+import { LibShape } from '../shape';
 
-export class LibPrs extends LibPrsDate {
+export class LibPrs {
   public static devDate(date: Date | string | number): string {
     {
       const param =
@@ -17,17 +17,8 @@ export class LibPrs extends LibPrsDate {
     }
   }
 
-  // public static prettyDate(timestamp?: number): string {
-  //   return Intl.DateTimeFormat('en-US', {
-  //     weekday: 'long',
-  //     day: 'numeric',
-  //     month: 'long',
-  //     year: 'numeric',
-  //   }).format(new Date(timestamp ?? Date.now()));
-  // }
-
-  public static firstCharUpper(arg: string): string {
-    return arg[0].toUpperCase() + arg.slice(1).toLowerCase();
+  public static firstCharUpper(arg: OrNone<string>): string {
+    return LibShape.hasText(arg) ? arg![0].toUpperCase() + arg!.slice(1).toLowerCase() : '';
   }
 
   public static titleCase(arg: string): string {
@@ -71,7 +62,12 @@ export class LibPrs extends LibPrsDate {
     return minutes * 60 * 1000;
   }
 
-  public static roundNone(arg: OrNone<number>): number {
-    return Math.round(arg ?? 0);
+  public static asInt(arg: unknown): Nullable<number> {
+    if (typeof arg === 'number') return isNaN(arg) ? null : arg;
+
+    if (!LibShape.hasText(arg)) return null;
+
+    const parsed: number = parseInt(arg as string, 10);
+    return isNaN(parsed) ? null : parsed;
   }
 }

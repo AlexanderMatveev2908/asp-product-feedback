@@ -7,8 +7,6 @@
         </div>
 
         <div id="csr_notice__content" class="content__body">
-          <ng-container *ngTemplateOutlet="headerTpl" />
-
           <div id="csr_notice__span_status" class="body__span">
             @let dataStatus = props().status|| useMetaDir.eventT();
             <span class="text-5xl sm:text-6xl font-extrabold">
@@ -20,9 +18,21 @@
             <span class="txt__lg text-center">{{ props().msg }}</span>
           </div>
 
-          <ng-container *ngTemplateOutlet="footerTpl" />
+          @if(props().tmpt === 'home'){ <ng-container *ngTemplateOutlet="footer" />}
         </div>
       </div>
     </div>
   </ng-template>
 </app-page-wrapper>
+
+<ng-template #footer>
+  <div class="content__footer">
+    <app-link-shadow
+      [path]="'/'"
+      appUseSpanDir
+      [spanProps]="spanProps"
+      appUseMetaEventDir
+      [eventT]="useMetaDir.eventT()"
+    />
+  </div>
+</ng-template>

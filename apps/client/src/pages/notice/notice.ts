@@ -27,6 +27,7 @@ export class Notice implements OnInit {
   private readonly noticeSlice: NoticeSlice = inject(NoticeSlice);
   private readonly useStorage: UseStorageSvc = inject(UseStorageSvc);
 
+  // ? notice props
   public readonly wrapEventsProps: Signal<NoticeWrapperPropsT & { eventT: AppEventT }> = computed(
     () => {
       const { cb: _cb, ...rst } = this.noticeSlice._noticeState();
