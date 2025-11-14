@@ -1,0 +1,33 @@
+<div class="root">
+  <div class="root__body">
+    <span class="txt__bd__sm__bold text-blue__dark__1">
+      {{ item().title }}
+    </span>
+
+    <span class="txt__bd__sm__reg text-blue__dark__0">
+      {{ item().description }}
+    </span>
+  </div>
+
+  <div class="root__footer">
+    <div class="footer__cat">
+      <span class="txt__bd__sm__semi">
+        {{ catLabel() }}
+      </span>
+    </div>
+
+    <div class="footer__counts">
+      <app-btn-votes [upvotes]="item().upvotes" />
+
+      <div class="counts__comments">
+        <div class="comments__svg">
+          <ng-content *ngComponentOutlet="Comment" />
+        </div>
+
+        <span class="txt__bd__sm__bold text-blue__dark__1">
+          {{ item().comments?.length ?? 0 }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

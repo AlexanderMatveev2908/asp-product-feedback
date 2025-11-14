@@ -5,7 +5,7 @@ import { Nullable } from '@/common/types/etc';
 import { FeedbacksSlice } from '@/features/feedbacks/slice';
 import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { HomeNoData } from './home_no_data/home-no-data';
-import { ProductItem } from '../../features/feedbacks/etc/components/product_item/product-item';
+import { BaseFeedbackItem } from '../../features/feedbacks/etc/components/base_feedback_item/base-feedback-item';
 import { NavbarHomeMobile } from '@/layout/navbar_home_mobile/navbar-home-mobile';
 import { SidebarMobile } from '@/layout/sidebar_mobile/sidebar-mobile';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
@@ -17,7 +17,7 @@ import { LinkMain } from '@/common/components/links/link_main/link-main';
     PageWrapper,
     MainDrop,
     HomeNoData,
-    ProductItem,
+    BaseFeedbackItem,
     NavbarHomeMobile,
     SidebarMobile,
     UseMetaAppDir,

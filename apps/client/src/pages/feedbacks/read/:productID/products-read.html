@@ -6,7 +6,7 @@
         <app-btn-main appUseMetaApp [label]="'Edit Feedback'" varT="blue" />
       </div>
 
-      @if(item()){ <app-product-item [item]="item()!" [withLink]="true" />}
+      @if(item()){ <app-base-feedback-item [item]="item()!" />}
 
       <div class="root__comments">
         <div class="comments__title">

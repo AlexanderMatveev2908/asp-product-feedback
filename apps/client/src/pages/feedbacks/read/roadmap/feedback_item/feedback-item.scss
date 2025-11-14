@@ -14,20 +14,4 @@
       @apply w-[8px] h-[8px] rounded-full;
     }
   }
-
-  .root__content {
-    @apply w-full flex flex-col gap-[8px];
-
-    .content__body {
-      @apply w-full flex flex-col gap-[9px];
-    }
-
-    .content__footer {
-      @apply w-full flex flex-col gap-[16px];
-
-      .footer__cat {
-        @apply flex w-fit justify-center items-center bg-gray__0 rounded-[10px] py-[6px] px-[16px] text-blue__prm;
-      }
-    }
-  }
 }

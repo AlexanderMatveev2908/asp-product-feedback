@@ -9,11 +9,11 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { FooterFeedback } from '@/features/feedbacks/etc/components/footer_feedback/footer-feedback';
+import { FeedbackContent } from '@/features/feedbacks/etc/components/feedback_content/feedback-content';
 
 @Component({
   selector: 'app-feedback-item',
-  imports: [FooterFeedback],
+  imports: [FeedbackContent],
   templateUrl: './feedback-item.html',
   styleUrl: './feedback-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,8 +23,5 @@ export class FeedbackItem {
 
   public readonly statusLabel: Signal<Nullable<string>> = computed(() =>
     ProductsLibShape.statusLabelByVal(this.item().status)
-  );
-  public readonly catLabel: Signal<Nullable<string>> = computed(() =>
-    ProductsLibShape.catLabelByVal(this.item().category)
   );
 }
