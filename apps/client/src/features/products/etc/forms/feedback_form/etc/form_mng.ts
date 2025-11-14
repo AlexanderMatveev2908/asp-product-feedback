@@ -27,7 +27,10 @@ export class FeedbackFormMng extends RootFormMng {
     category: z
       .string()
       .min(1, 'Category required')
-      .refine((v: string) => ProductsLibShape.includedByCategories(v), 'Invalid category'),
+      .refine(
+        (v: string) => (!v ? true : ProductsLibShape.includedByCategories(v)),
+        'Invalid category'
+      ),
     content: z
       .string()
       .min(1, 'Content required')

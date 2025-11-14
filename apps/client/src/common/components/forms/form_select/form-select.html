@@ -18,6 +18,9 @@
         </div>
       </button>
 
+      @if(!useFormField.isValid()){
+      <app-form-err [errMsg]="useFormField.errMsg()" />
+      }
       <div
         class="drop__options"
         [style.--trsY]="useDrop.isOpen() ? '16px' : '-100%'"

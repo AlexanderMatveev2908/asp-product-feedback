@@ -14,11 +14,7 @@
     />
 
     @if(!useFormField.isValid()){
-    <div class="content__err">
-      <span class="txt__bd__sm__reg">
-        {{ useFormField.errMsg() }}
-      </span>
-    </div>
+    <app-form-err [errMsg]="useFormField.errMsg()" />
     }
   </div>
 </div>

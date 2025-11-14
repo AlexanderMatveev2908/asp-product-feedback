@@ -12,10 +12,11 @@ import { UseFocusHk } from '@/core/hooks/use_focus';
 import { FormHeaderField } from '../form_header_field/form-header-field';
 import { UseFormFieldDir } from '@/core/directives/use_form_field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormErr } from '../form_err/form-err';
 
 @Component({
   selector: 'app-form-field-txt',
-  imports: [ReactiveFormsModule, FormHeaderField],
+  imports: [ReactiveFormsModule, FormHeaderField, FormErr],
   templateUrl: './form-field-txt.html',
   styleUrl: './form-field-txt.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

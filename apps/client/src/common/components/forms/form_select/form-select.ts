@@ -22,10 +22,11 @@ import { FormControl } from '@angular/forms';
 import { LibLog } from '@/core/lib/dev/log';
 import { ClosableDom } from '@/core/lib/dom/closable';
 import { RefDomT } from '@/common/types/dom';
+import { FormErr } from '../form_err/form-err';
 
 @Component({
   selector: 'app-form-select',
-  imports: [FormHeaderField, NgComponentOutlet],
+  imports: [FormHeaderField, NgComponentOutlet, FormErr],
   templateUrl: './form-select.html',
   styleUrl: './form-select.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
