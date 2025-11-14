@@ -1,7 +1,16 @@
 <a [routerLink]="'/'" class="root">
-  <div class="root__svg">
-    <ng-content *ngComponentOutlet="Chevron; inputs: { fill: 'white' }" />
+  <div class="root__svg" [ngClass]="version() === 'a' ? 'text-blue__prm' : 'text-[#CDD2EE]'">
+    <ng-content
+      *ngComponentOutlet="
+        Chevron;
+        inputs: { fill: version() === 'a' ? 'white' : 'var(--blue__dark__2)' }
+      "
+    />
   </div>
 
-  <span class="txt__bd__sm__bold text-blue__dark__0">Go Back</span>
+  <span
+    class="txt__bd__sm__bold"
+    [ngClass]="version() === 'a' ? 'text-blue__dark__0' : 'text-white'"
+    >Go Back</span
+  >
 </a>

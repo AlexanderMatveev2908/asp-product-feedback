@@ -1,0 +1,17 @@
+.root {
+  @apply w-full bg-white rounded-[10px] overflow-hidden p-[24px] relative flex flex-col gap-[16px];
+
+  .root__line {
+    background: var(--bg);
+    @apply absolute top-0 left-0 w-full h-[6px];
+  }
+
+  .root__status {
+    @apply flex items-center gap-[8px];
+
+    .status__circle {
+      background: var(--bg);
+      @apply w-[8px] h-[8px] rounded-full;
+    }
+  }
+}

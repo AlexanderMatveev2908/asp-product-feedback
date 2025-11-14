@@ -7,7 +7,7 @@
     appUseMetaApp
     [label]="'+ Add Feedback'"
     [varT]="'purple'"
-    [path]="'/products/post'"
+    [path]="'/feedbacks/post'"
   />
 </div>
 
@@ -17,7 +17,7 @@
       @if(products()) {
       <!--  -->
       @for(p of products(); track p.id){
-      <app-product-item [item]="p" [withLink]="true" />
+      <app-base-feedback-item [item]="p" />
       }
       <!--  -->
       }@else{

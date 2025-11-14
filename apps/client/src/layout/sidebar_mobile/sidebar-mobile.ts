@@ -13,10 +13,11 @@ import { NgClass } from '@angular/common';
 import { FilterRoadmapT, FiltersUiFkt } from '@/core/ui_fkt/etc/filters';
 import { PairValLabelT } from '@/common/types/forms';
 import { ElDomT, RefDomT } from '@/common/types/dom';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-mobile',
-  imports: [BlackBg, NgClass],
+  imports: [BlackBg, NgClass, RouterLink],
   templateUrl: './sidebar-mobile.html',
   styleUrl: './sidebar-mobile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,27 @@
+.root {
+  @apply w-full flex flex-col gap-[8px];
+
+  .root__body {
+    @apply w-full flex flex-col gap-[9px];
+  }
+
+  .root__footer {
+    @apply w-full flex flex-col gap-[16px];
+
+    .footer__cat {
+      @apply flex w-fit justify-center items-center bg-gray__0 rounded-[10px] py-[6px] px-[16px] text-blue__prm;
+    }
+
+    .footer__counts {
+      @apply flex items-center justify-between;
+
+      .counts__comments {
+        @apply flex items-center gap-[4px] w-fit;
+
+        .comments__svg {
+          @apply w-[18px] h-[18px];
+        }
+      }
+    }
+  }
+}
