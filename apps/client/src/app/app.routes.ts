@@ -4,7 +4,8 @@ import { Notice } from '@/pages/notice/notice';
 import { ProductsLayout } from '@/pages/products/layout/products-layout';
 import { ProductsPost } from '@/pages/products/post/products-post';
 import { ProductsPut } from '@/pages/products/put/products-put';
-import { ProductsRead } from '@/pages/products/read/products-read';
+import { ProductsRead } from '@/pages/products/read/:productID/products-read';
+import { ProductsRoadmap } from '@/pages/products/read/roadmap/products-roadmap';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -27,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'put',
         component: ProductsPut,
+      },
+      {
+        path: 'read/roadmap',
+        component: ProductsRoadmap,
       },
       {
         path: 'read/:productID',
