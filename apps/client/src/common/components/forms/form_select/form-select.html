@@ -1,0 +1,49 @@
+<div class="root">
+  <app-form-header-field [f]="f()" />
+
+  <div class="root__content">
+    <div class="content__drop" #dropRef>
+      <button
+        type="button"
+        class="drop__span"
+        (click)="useDrop.toggle()"
+        [style.--border_clr]="useFormField.borderClr(useDrop.isOpen())"
+      >
+        <span class="txt__bd__sm__reg text-blue__dark__1">
+          {{ labelByVal() ?? 'Option required' }}
+        </span>
+
+        <div class="span__svg" [style.--rot]="useDrop.isOpen() ? '180deg' : '0deg'">
+          <ng-container *ngComponentOutlet="Chevron; inputs: { fill: 'var(--gray__1)' }" />
+        </div>
+      </button>
+
+      @if(!useFormField.isValid()){
+      <app-form-err [errMsg]="useFormField.errMsg()" />
+      }
+      <div
+        class="drop__options"
+        [style.--trsY]="useDrop.isOpen() ? '16px' : '-100%'"
+        [style.--pointer]="useDrop.isOpen() ? 'auto' : 'none'"
+        [style.--opc]="useDrop.isOpen() ? '1' : '0'"
+      >
+        @for(o of f().options; track o.id; let idx = $index){
+        <button
+          type="button"
+          class="options__item"
+          [style.--border]="idx === f().options.length - 1 ? 'none' : '1px solid'"
+          (click)="onChange(o.val)"
+        >
+          <span class="txt__bd__lg__reg item__label">{{ o.label }}</span>
+
+          @if(isChosen(o.val)){
+          <div class="item__svg">
+            <ng-container *ngComponentOutlet="Check; inputs: { fill: 'var(--gray__1)' }" />
+          </div>
+          }
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

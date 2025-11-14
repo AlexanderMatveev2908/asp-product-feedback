@@ -5,16 +5,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        white_smoke: '#f5f5f5',
-        purple__prm: '#AD1FEA',
-        blue__prm: '#4661E6',
-        blue__light__0: '#62BCFA',
-        blue__dark__0: '#647196',
-        blue__dark__1: '#3A4374',
-        blue__dark__2: '#373F68',
-        gray__0: '#F2F4FF',
-        gray__1: '#F7F8FD',
-        orange__prm: '#F49F85',
+        white_smoke: 'var(--white_smoke)',
+        purple__prm: 'var(--purple__prm)',
+        blue__prm: 'var(--blue__prm)',
+        blue__light__0: 'var(--blue__light__0)',
+        blue__dark__0: 'var(--blue__dark__0)',
+        blue__dark__1: 'var(--blue__dark__1)',
+        blue__dark__2: 'var(--blue__dark__2)',
+        gray__0: 'var(--gray__0)',
+        gray__1: 'var(--gray__1)',
+        orange__prm: 'var(--orange__prm)',
       },
       borderWidth: {
         3: '3px',

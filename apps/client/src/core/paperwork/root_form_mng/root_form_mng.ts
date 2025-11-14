@@ -1,5 +1,5 @@
 import { Nullable } from '@/common/types/etc';
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ZodSafeParseResult, ZodType } from 'zod';
 import { RootFormMngSubmitMng } from './sub/submit_failed';
 
@@ -37,5 +37,17 @@ export class RootFormMng extends RootFormMngSubmitMng {
 
       return errs;
     };
+  }
+
+  public static reset<T>(form: FormGroup, defForm: T): void {
+    form.reset(defForm);
+    for (const c of Object.values(form.controls)) {
+      c.setErrors(null);
+      c.markAsPristine();
+      c.markAsUntouched();
+      c.updateValueAndValidity();
+    }
+
+    form.updateValueAndValidity();
   }
 }

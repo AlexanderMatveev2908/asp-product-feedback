@@ -1,4 +1,4 @@
-import { Nullable, SvgT } from '@/common/types/etc';
+import { Nullable } from '@/common/types/etc';
 import { UseNavSvc } from '@/core/services/use_nav/index';
 import {
   ChangeDetectionStrategy,
@@ -8,22 +8,22 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { Params, RouterLink } from '@angular/router';
+import { Params } from '@angular/router';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { ProductT } from '@/features/products/etc/types';
 import { ProductsSlice } from '@/features/products/slice';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { ApiStatusT } from '@/core/store/api/etc/types';
-import { SvgStrokeIconArrowLeft } from '@/common/components/svgs/stroke/icon-arrow-left/icon-arrow-left';
-import { NgComponentOutlet } from '@angular/common';
-import { BtnApp } from '@/common/components/btns/btn__app/btn-app';
+import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
 import { ProductItem } from '@/features/products/etc/components/product_item/product-item';
 import { CommentItem } from './comment_item/comment-item';
+import { UseMetaAppDir } from '@/core/directives/use_meta_app';
+import { LinkBack } from '@/common/components/links/link_back/link-back';
 
 @Component({
   selector: 'app-products-read',
-  imports: [PageWrapper, NgComponentOutlet, RouterLink, BtnApp, ProductItem, CommentItem],
+  imports: [PageWrapper, BtnMain, ProductItem, CommentItem, UseMetaAppDir, LinkBack],
   templateUrl: './products-read.html',
   styleUrl: './products-read.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,8 +33,6 @@ export class ProductsRead extends UseInjCtxHk implements OnInit {
   private readonly productsSLice: ProductsSlice = inject(ProductsSlice);
 
   public readonly item: WritableSignal<Nullable<ProductT>> = signal(null);
-
-  public readonly Chevron: SvgT = SvgStrokeIconArrowLeft;
 
   ngOnInit(): void {
     const vars: Nullable<Params> = this.useNav.path_variables();

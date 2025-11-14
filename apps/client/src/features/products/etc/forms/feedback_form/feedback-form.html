@@ -1,0 +1,40 @@
+<div class="root">
+  <div class="root__svg">
+    <ng-container *ngComponentOutlet="currSVG()" />
+  </div>
+
+  <form [formGroup]="formPost" (ngSubmit)="onSubmit()" class="root__form">
+    <div class="form__title">
+      <span class="txt__hd__md">{{ currTitle() }}</span>
+    </div>
+
+    <app-form-field-txt
+      appUseFormField
+      [f]="fields.title"
+      [ctrl]="asFormControl('title')"
+      [focusOnMount]="true"
+    />
+
+    <app-form-select appUseFormField [f]="fields.category" [ctrl]="asFormControl('category')" />
+
+    <app-form-field-txt appUseFormField [f]="fields.content" [ctrl]="asFormControl('content')" />
+
+    <div class="form__footer">
+      <app-btn-main
+        appUseMetaApp
+        [label]="'Add Feedback'"
+        [varT]="'purple'"
+        [minW]="'100%'"
+        [btnT]="'submit'"
+      />
+      <app-btn-main
+        appUseMetaApp
+        [label]="'Cancel'"
+        [varT]="'blue'"
+        [minW]="'100%'"
+        [btnT]="'button'"
+        [onClick]="reset"
+      />
+    </div>
+  </form>
+</div>

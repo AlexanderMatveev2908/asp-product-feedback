@@ -1,23 +1,12 @@
-:host {
-  @apply block w-full;
-}
-
 .root {
-  @apply w-full relative;
+  @apply w-full flex flex-col gap-[16px];
 
-  .root__input {
-    @apply w-full h-[42px];
-  }
+  .root__content {
+    @apply w-full flex flex-col gap-[4px];
 
-  .root__svg {
-    @apply transition-all duration-300 absolute right-[14px] top-1/2 -translate-y-1/2 w-[16px] h-[16px] text-white/70;
-
-    &:enabled:hover {
-      @apply -translate-y-1/2 scale-[1.5];
-    }
-
-    &:enabled:active {
-      @apply duration-100 scale-75;
+    .content__input {
+      border-color: var(--border_clr);
+      @apply w-full bg-gray__1 rounded-[10px] py-[13px] px-[24px] outline-none border transition-all duration-300 text-blue__dark__1;
     }
   }
 }

@@ -1,4 +1,4 @@
-<div class="root">
+<div class="root tb">
   @if((!isHydrated() && waitClient()) || isPending()){
   <app-spin-page-ssr [minH]="minH()" [eventT]="eventT()" appUseMetaEventDir />
   }@else {

@@ -1,20 +1,29 @@
 <div class="root">
-  <input
-    [formControl]="ctrl()"
-    [type]="f().type"
-    [style.padding]="padding()"
-    [attr.data-field]="f().field"
-    class="root__input txt__hd__xs"
-    [placeholder]="f().place"
-  />
+  <app-form-header-field [f]="f()" />
 
-  @if(Svg()){
-  <button (click)="onSvgClick()()" [disabled]="disabled()" type="button" class="root__svg">
-    <div [ngClass]="additionalSvgTwd()">
-      <ng-container *ngComponentOutlet="Svg()" />
-    </div>
-  </button>
-  }
-
-  <app-form-field-err [ctrl]="ctrl()" />
+  <div class="root__content">
+    @if(f().type === 'textarea'){
+    <textarea
+      [formControl]="useFormField.ctrl()"
+      [attr.data-field]="f().field"
+      [placeholder]="f().place"
+      [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
+      (focus)="useFocus.onFocus()"
+      (blur)="useFocus.onBLur()"
+      class="content__input txt__bd__md min-h-[120px]"
+    ></textarea>
+    }@else{
+    <input
+      [formControl]="useFormField.ctrl()"
+      [type]="f().type"
+      [attr.data-field]="f().field"
+      [placeholder]="f().place"
+      [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
+      (focus)="useFocus.onFocus()"
+      (blur)="useFocus.onBLur()"
+      class="content__input txt__bd__md"
+    />} @if(!useFormField.isValid()){
+    <app-form-err [errMsg]="useFormField.errMsg()" />
+    }
+  </div>
 </div>
