@@ -27,7 +27,8 @@
 
         .options__item {
           border-bottom: var(--border);
-          @apply w-full flex justify-start items-center py-[12px] px-[24px]  border-blue__dark__1/15;
+          @apply w-full flex justify-start items-center py-[12px] px-[24px];
+          border-color: #3a437415;
         }
       }
     }

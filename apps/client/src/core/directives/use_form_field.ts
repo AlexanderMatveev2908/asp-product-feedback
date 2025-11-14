@@ -22,7 +22,7 @@ export class UseFormFieldDir extends UseInjCtxHk {
 
   // ? derived
   public readonly borderClr: (isSomething: boolean) => string = (isSomething: boolean) =>
-    this.isValid() ? (isSomething ? '#4661E6' : 'transparent') : '#D73737';
+    this.isValid() ? (isSomething ? 'var(--blue__prm)' : 'transparent') : '#D73737';
 
   public setupState(): void {
     const c: FormControl = this.ctrl();

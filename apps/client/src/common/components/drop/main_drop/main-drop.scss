@@ -30,7 +30,8 @@
 
     .drop__opt {
       border-bottom: var(--border);
-      @apply w-full flex items-center justify-between px-[24px] py-[12px] border-blue__dark__1/15 transition-all duration-300 text-blue__dark__0;
+      border-color: #3a437415;
+      @apply w-full flex items-center justify-between px-[24px] py-[12px] transition-all duration-300 text-blue__dark__0;
 
       &:hover {
         @apply text-purple__prm;
