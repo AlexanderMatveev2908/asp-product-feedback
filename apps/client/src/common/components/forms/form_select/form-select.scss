@@ -12,7 +12,22 @@
         @apply w-full py-[14px] px-[16px] rounded-[10px] bg-gray__1 flex items-center justify-between border transition-all duration-300;
 
         .span__svg {
-          @apply w-[8px] h-[8px] text-blue__prm;
+          transform: rotate(var(--rot));
+          @apply w-[8px] h-[8px] text-blue__prm transition-all duration-300;
+        }
+      }
+
+      .drop__options {
+        transition: transform 0.4s, opacity 0.2s;
+        transform: translateY(var(--trsY));
+        pointer-events: var(--pointer);
+        opacity: var(--opc);
+        box-shadow: var(--app__shadow);
+        @apply absolute top-full left-0 w-full bg-white z-50 rounded-[10px];
+
+        .options__item {
+          border-bottom: var(--border);
+          @apply w-full flex justify-start items-center py-[12px] px-[24px]  border-blue__dark__1/15;
         }
       }
     }

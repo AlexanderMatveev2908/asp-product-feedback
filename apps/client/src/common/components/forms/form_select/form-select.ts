@@ -14,7 +14,7 @@ import { FormHeaderField } from '../form_header_field/form-header-field';
 import { Nullable, SvgT } from '@/common/types/etc';
 import { SvgStrokeIconArrowDown } from '../../svgs/stroke/icon-arrow-down/icon-arrow-down';
 import { NgComponentOutlet } from '@angular/common';
-import { UseFocusHk } from '@/core/hooks/use_focus';
+import { UseDropHk } from '@/core/hooks/use_drop';
 
 @Component({
   selector: 'app-form-select',
@@ -22,7 +22,7 @@ import { UseFocusHk } from '@/core/hooks/use_focus';
   templateUrl: './form-select.html',
   styleUrl: './form-select.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UseFocusHk],
+  providers: [UseDropHk],
 })
 export class FormSelect implements OnInit {
   // ? props
@@ -32,7 +32,7 @@ export class FormSelect implements OnInit {
   public readonly useFormField: UseFormFieldDir = inject(UseFormFieldDir);
 
   // ? hooks
-  public readonly useFocus: UseFocusHk = inject(UseFocusHk);
+  public readonly useDrop: UseDropHk = inject(UseDropHk);
 
   // ? statics
   public readonly Chevron: SvgT = SvgStrokeIconArrowDown;

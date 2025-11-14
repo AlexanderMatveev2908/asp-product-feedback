@@ -21,8 +21,8 @@ export class UseFormFieldDir extends UseInjCtxHk {
   public touched: Nullable<Signal<boolean>> = null;
 
   // ? derived
-  public readonly borderClr: (isFocused: boolean) => string = (isFocused: boolean) =>
-    this.isValid() ? (isFocused ? '#4661E6' : 'transparent') : '#D73737';
+  public readonly borderClr: (isSomething: boolean) => string = (isSomething: boolean) =>
+    this.isValid() ? (isSomething ? '#4661E6' : 'transparent') : '#D73737';
 
   public setupState(): void {
     const c: FormControl = this.ctrl();

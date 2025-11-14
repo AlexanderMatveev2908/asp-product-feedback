@@ -3,20 +3,35 @@
 
   <div class="root__content">
     <div class="content__drop">
-      <div
+      <button
+        type="button"
         class="drop__span"
-        tabindex="-1"
-        (focus)="useFocus.onFocus()"
-        (blur)="useFocus.onBLur()"
-        [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
+        (click)="useDrop.toggle()"
+        [style.--border_clr]="useFormField.borderClr(useDrop.isOpen())"
       >
         <span class="txt__bd__sm__reg text-blue__dark__1">
           {{ labelByVal() ?? 'None' }}
         </span>
 
-        <div class="span__svg">
+        <div class="span__svg" [style.--rot]="useDrop.isOpen() ? '180deg' : '0deg'">
           <ng-container *ngComponentOutlet="Chevron; inputs: { fill: '#F7F8FD' }" />
         </div>
+      </button>
+
+      <div
+        class="drop__options"
+        [style.--trsY]="useDrop.isOpen() ? '16px' : '-100%'"
+        [style.--pointer]="useDrop.isOpen() ? 'auto' : 'none'"
+        [style.--opc]="useDrop.isOpen() ? '1' : '0'"
+      >
+        @for(o of f().options; track o.id; let idx = $index){
+        <div
+          class="options__item"
+          [style.--border]="idx === f().options.length - 1 ? 'none' : '1px solid'"
+        >
+          <span class="txt__bd__lg__reg text-blue__dark__0">{{ o.label }}</span>
+        </div>
+        }
       </div>
     </div>
   </div>
