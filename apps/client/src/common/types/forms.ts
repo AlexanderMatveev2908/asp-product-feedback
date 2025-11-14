@@ -17,7 +17,7 @@ export interface TxtFieldT extends BaseFieldT {
 
 export interface CheckFieldT extends BaseFieldT {
   type: CheckT;
-  options: WithIdT<PairValLabelT>[] | PairValLabelTypedT<unknown>;
+  options: WithIdT<PairValLabelT | PairValLabelTypedT<string>>[];
 }
 
 export type PairValLabelT = WithIdT<{

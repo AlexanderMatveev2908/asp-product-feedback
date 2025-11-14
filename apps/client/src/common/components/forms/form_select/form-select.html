@@ -1,0 +1,23 @@
+<div class="root">
+  <app-form-header-field [f]="f()" />
+
+  <div class="root__content">
+    <div class="content__drop">
+      <div
+        class="drop__span"
+        tabindex="-1"
+        (focus)="useFocus.onFocus()"
+        (blur)="useFocus.onBLur()"
+        [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
+      >
+        <span class="txt__bd__sm__reg text-blue__dark__1">
+          {{ labelByVal() ?? 'None' }}
+        </span>
+
+        <div class="span__svg">
+          <ng-container *ngComponentOutlet="Chevron; inputs: { fill: '#F7F8FD' }" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

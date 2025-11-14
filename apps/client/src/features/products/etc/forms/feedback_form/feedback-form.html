@@ -8,6 +8,8 @@
       <span class="txt__hd__md">{{ currTitle() }}</span>
     </div>
 
-    <app-form-field-txt [f]="fields.title" [ctrl]="asFormControl('title')" />
+    <app-form-field-txt appUseFormField [f]="fields.title" [ctrl]="asFormControl('title')" />
+
+    <app-form-select appUseFormField [f]="fields.category" [ctrl]="asFormControl('category')" />
   </form>
 </div>

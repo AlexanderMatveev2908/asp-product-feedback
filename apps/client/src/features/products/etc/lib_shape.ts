@@ -2,8 +2,12 @@ import { PairValLabelTypedT } from '@/common/types/forms';
 import { ProductCatT, ProductStatusT } from './types';
 import { RootUiFkt } from '@/core/ui_fkt/root';
 
-export class ProductsUiFkt extends RootUiFkt {
+export class ProductsLibShape extends RootUiFkt {
   private static readonly _categories: Omit<PairValLabelTypedT<ProductCatT>, 'id'>[] = [
+    {
+      label: 'Feature',
+      val: 'feature',
+    },
     {
       label: 'UI',
       val: 'ui',
@@ -11,10 +15,6 @@ export class ProductsUiFkt extends RootUiFkt {
     {
       label: 'UX',
       val: 'ux',
-    },
-    {
-      label: 'Feature',
-      val: 'feature',
     },
     {
       label: 'Enhancement',
@@ -28,6 +28,10 @@ export class ProductsUiFkt extends RootUiFkt {
 
   public static categories(): PairValLabelTypedT<ProductCatT>[] {
     return this.listWithIDs(this._categories);
+  }
+
+  public static defCat(): ProductCatT {
+    return this._categories[0].val;
   }
 
   public static includedByCategories(arg: string): boolean {

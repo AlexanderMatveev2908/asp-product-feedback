@@ -1,32 +1,22 @@
 <div class="root">
-  <div class="root__info">
-    <span class="txt__bd__sm__bold text-blue__dark__1">
-      {{ f().label }}
-    </span>
-
-    <span class="txt__bd__sm__reg text-blue__dark__0">
-      {{ f().comment }}
-    </span>
-  </div>
+  <app-form-header-field [f]="f()" />
 
   <div class="root__content">
     <input
-      [formControl]="ctrl()"
+      [formControl]="useFormField.ctrl()"
       [type]="f().type"
       [attr.data-field]="f().field"
       class="content__input txt__bd__md"
       [placeholder]="f().place"
-      [style.--border_clr]="
-        isValid() ? (useFocus.isFocused() ? '#4661E6' : 'transparent') : '#D73737'
-      "
+      [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
       (focus)="useFocus.onFocus()"
       (blur)="useFocus.onBLur()"
     />
 
-    @if(!isValid()){
+    @if(!useFormField.isValid()){
     <div class="content__err">
       <span class="txt__bd__sm__reg">
-        {{ errMsg() }}
+        {{ useFormField.errMsg() }}
       </span>
     </div>
     }

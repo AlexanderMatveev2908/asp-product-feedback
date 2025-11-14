@@ -1,9 +1,11 @@
 /* eslint-disable no-magic-numbers */
 import { Reg } from '@/core/paperwork/reg';
 import z, { ZodObject, ZodString } from 'zod';
-import { ProductsUiFkt } from '../../../ui_fkt';
+import { ProductsLibShape } from '../../../lib_shape';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
+
+export type FormKeyT = 'title' | 'category' | 'status' | 'content';
 
 export class FeedbackFormMng extends RootFormMng {
   public static readonly schemaPost: ZodObject<{
@@ -25,7 +27,7 @@ export class FeedbackFormMng extends RootFormMng {
     category: z
       .string()
       .min(1, 'Category required')
-      .refine((v: string) => ProductsUiFkt.includedByCategories(v), 'Invalid category'),
+      .refine((v: string) => ProductsLibShape.includedByCategories(v), 'Invalid category'),
     content: z
       .string()
       .min(1, 'Content required')
@@ -33,11 +35,15 @@ export class FeedbackFormMng extends RootFormMng {
       .regex(Reg.TXT, 'Invalid content'),
   });
 
-  public static formPost: FormGroup = new FormGroup(
+  public static formPost: FormGroup = new FormGroup<{
+    title: FormControl<string>;
+    category: FormControl<string>;
+    content: FormControl<string>;
+  }>(
     {
-      title: new FormControl(''),
-      category: new FormControl(''),
-      content: new FormControl(''),
+      title: new FormControl('', { nonNullable: true }),
+      category: new FormControl(ProductsLibShape.defCat(), { nonNullable: true }),
+      content: new FormControl('', { nonNullable: true }),
     },
     {
       validators: this.validate(this.schemaPost),

@@ -1,10 +1,6 @@
 .root {
   @apply w-full flex flex-col gap-[16px];
 
-  .root__info {
-    @apply w-full flex flex-col gap-[3px];
-  }
-
   .root__content {
     @apply w-full flex flex-col gap-[4px];
 

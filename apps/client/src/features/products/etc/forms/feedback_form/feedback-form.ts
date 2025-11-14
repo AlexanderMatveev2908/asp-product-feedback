@@ -6,12 +6,14 @@ import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
 import { FeedbackFormFields, FeedbackFormUiFkt } from './etc/ui_fkt';
 import { FormFieldTxt } from '@/common/components/forms/form_field_txt/form-field-txt';
-import { FeedbackFormMng } from './etc/form_mng';
+import { FeedbackFormMng, FormKeyT } from './etc/form_mng';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UseFormFieldDir } from '@/core/directives/use_form_field';
+import { FormSelect } from '@/common/components/forms/form_select/form-select';
 
 @Component({
   selector: 'app-feedback-form',
-  imports: [NgComponentOutlet, FormFieldTxt],
+  imports: [NgComponentOutlet, FormFieldTxt, UseFormFieldDir, FormSelect],
   templateUrl: './feedback-form.html',
   styleUrl: './feedback-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,7 +34,7 @@ export class FeedbackForm {
   public readonly fields: FeedbackFormFields = FeedbackFormUiFkt.formFields();
   public readonly formPost: FormGroup = FeedbackFormMng.formPost;
 
-  public asFormControl(formKey: string): FormControl {
+  public asFormControl(formKey: FormKeyT): FormControl {
     return this.formPost.get(formKey) as FormControl;
   }
 }
