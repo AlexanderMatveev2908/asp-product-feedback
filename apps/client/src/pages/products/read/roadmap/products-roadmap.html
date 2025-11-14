@@ -13,4 +13,34 @@
   />
 </div>
 
-<div class="root"></div>
+<app-page-wrapper [eventT]="'INFO'" [waitClient]="false">
+  <ng-template #contentRef>
+    <div class="root">
+      <div class="root__header">
+        @for(s of statuses; track s.id; let idx = $index){
+        <div class="header__status">
+          <span
+            class="txt__bd__sm__bold text-blue__dark__1 text-center"
+            [style.opacity]="idx === 1 ? '1' : '0.4'"
+          >
+            {{ s.label }} (3)</span
+          >
+        </div>
+
+        }
+
+        <div class="header__line"></div>
+      </div>
+
+      <div class="root__content">
+        <div class="content__header">
+          <span class="txt__hd__md text-blue__dark__1">In-Progress (3)</span>
+
+          <span class="txt__bd__sm__reg text-blue__dark__0">
+            Features currently being developed
+          </span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</app-page-wrapper>

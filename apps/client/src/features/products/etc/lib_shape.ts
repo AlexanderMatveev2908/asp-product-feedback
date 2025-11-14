@@ -62,4 +62,9 @@ export class ProductsLibShape extends RootUiFkt {
   public static statuses(): PairValLabelTypedT<ProductStatusT>[] {
     return this.listWithIDs(this._statuses);
   }
+  public static statusesFilter(): PairValLabelTypedT<ProductStatusT>[] {
+    return this.statuses().filter(
+      (v: PairValLabelTypedT<ProductStatusT>) => v.val !== 'suggestion'
+    );
+  }
 }
