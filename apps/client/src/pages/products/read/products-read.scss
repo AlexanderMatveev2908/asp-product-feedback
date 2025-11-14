@@ -3,14 +3,6 @@
 
   .root__header {
     @apply w-full flex items-center justify-between;
-
-    .header__back_link {
-      @apply w-fit flex items-center gap-[16px];
-
-      .back_link__svg {
-        @apply w-[10px] h-[10px] text-blue__prm;
-      }
-    }
   }
 
   .root__comments {

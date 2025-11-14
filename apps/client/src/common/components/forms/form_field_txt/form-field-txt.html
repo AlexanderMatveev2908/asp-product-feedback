@@ -2,19 +2,10 @@
   <input
     [formControl]="ctrl()"
     [type]="f().type"
-    [style.padding]="padding()"
     [attr.data-field]="f().field"
     class="root__input txt__hd__xs"
     [placeholder]="f().place"
   />
-
-  @if(Svg()){
-  <button (click)="onSvgClick()()" [disabled]="disabled()" type="button" class="root__svg">
-    <div [ngClass]="additionalSvgTwd()">
-      <ng-container *ngComponentOutlet="Svg()" />
-    </div>
-  </button>
-  }
 
   <app-form-field-err [ctrl]="ctrl()" />
 </div>

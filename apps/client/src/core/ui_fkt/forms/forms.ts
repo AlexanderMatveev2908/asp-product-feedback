@@ -1,14 +1,22 @@
-import { TxtFieldT } from '@/common/types/forms';
+import { CheckFieldT, PairValLabelT, TxtFieldT } from '@/common/types/forms';
 import { RootUiFkt } from '../root';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 
 export class FormsUiFkt extends RootUiFkt {
-  public static txtFieldOf(arg: Partial<TxtFieldT> & { name: string }): TxtFieldT {
-    return this.withID({
+  private static withSnakeTestField<T>(arg: T & { name: string }): T & { field: string } {
+    return {
       ...arg,
-      place: arg.place ?? LibPrs.txtOfCamelCase(arg.name, { titleCase: true }) + '...',
-      field: arg.field ?? arg.name,
-      type: arg.type ?? 'text',
-    });
+      field: LibPrs.toSnake(arg.name),
+    };
+  }
+
+  public static txtFieldOf(arg: Omit<TxtFieldT, 'id' | 'field'>): TxtFieldT {
+    return this.withID(this.withSnakeTestField(arg));
+  }
+
+  public static checkFieldOf(
+    arg: Omit<CheckFieldT, 'id' | 'field' | 'options'> & { options: PairValLabelT[] }
+  ): CheckFieldT {
+    return this.withID({ ...this.withSnakeTestField(arg), options: this.listWithIDs(arg.options) });
   }
 }

@@ -1,0 +1,15 @@
+.root {
+  @apply w-full relative pt-[20px];
+
+  .root__svg {
+    @apply absolute top-0 left-[24px] w-[40px] h-[40px];
+  }
+
+  .root__form {
+    @apply w-full rounded-[10px] p-[24px] pt-[44px] bg-white flex flex-col gap-[24px];
+
+    .form__title {
+      @apply text-blue__dark__1;
+    }
+  }
+}

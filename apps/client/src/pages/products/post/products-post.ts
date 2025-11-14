@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
+import { LinkBack } from '@/common/components/links/link_back/link-back';
+import { FeedbackForm } from '@/features/products/etc/forms/feedback_form/feedback-form';
 
 @Component({
   selector: 'app-products-post',
-  imports: [],
+  imports: [PageWrapper, LinkBack, FeedbackForm],
   templateUrl: './products-post.html',
   styleUrl: './products-post.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
