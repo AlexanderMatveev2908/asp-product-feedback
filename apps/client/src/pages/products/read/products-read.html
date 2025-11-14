@@ -13,7 +13,7 @@
         <app-btn-app [label]="'Edit Feedback'" varT="blue" />
       </div>
 
-      <app-product-item [item]="item()" [withLink]="true" />
+      @if(item()){ <app-product-item [item]="item()!" [withLink]="true" />}
 
       <div class="root__comments">
         <div class="comments__title">

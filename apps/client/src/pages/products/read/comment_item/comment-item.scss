@@ -1,32 +1,5 @@
-@use 'exports/mix' as mix;
-
 .root {
   @apply w-full flex flex-col gap-[16px] py-[24px];
   border-bottom: var(--border);
   border-color: #8c92b325;
-
-  .root__header {
-    @apply flex items-center justify-between;
-
-    .header__left {
-      @apply flex items-center gap-[16px];
-
-      .left__img {
-        @apply rounded-full overflow-hidden;
-        @include mix.sqr(40px);
-
-        img {
-          @apply object-cover min-w-full min-h-full;
-        }
-      }
-
-      .left__labels {
-        @apply flex flex-col;
-      }
-    }
-
-    .header__right {
-      @apply flex h-full items-center;
-    }
-  }
 }

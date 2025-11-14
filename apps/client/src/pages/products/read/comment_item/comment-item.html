@@ -1,27 +1,11 @@
 <div class="root" [style.--border]="isLast() ? 'none' : '1px solid'">
-  <div class="root__header">
-    <div class="header__left">
-      <div class="left__img">
-        <img [src]="devImage()" alt="thumbnail user" />
-      </div>
-
-      <div class="left__labels">
-        <span class="txt__bd__sm__bold text-blue__dark__1">
-          {{ comment().user.name }}
-        </span>
-
-        <span class="txt__bd__sm__reg text-blue__dark__0">
-          {{ comment().user.username }}
-        </span>
-      </div>
-    </div>
-
-    <div class="header__right">
-      <span class="txt__bd__sm__semi text-blue__prm">Reply</span>
-    </div>
-  </div>
+  <app-header-comment [comment]="comment()" />
 
   <span class="txt__bd__sm__reg text-blue__dark__0">
     {{ comment().content }}
   </span>
+
+  @if(comment().replies?.length){ @for (r of comment().replies; track r.id){
+  <app-reply-item [reply]="r" />
+  } }
 </div>

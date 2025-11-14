@@ -1,0 +1,21 @@
+<div class="root">
+  <div class="root__left">
+    <div class="left__img">
+      <img [src]="devImage()" alt="thumbnail user" />
+    </div>
+
+    <div class="left__labels">
+      <span class="txt__bd__sm__bold text-blue__dark__1">
+        {{ comment().user.name }}
+      </span>
+
+      <span class="txt__bd__sm__reg text-blue__dark__0">
+        {{ comment().user.username }}
+      </span>
+    </div>
+  </div>
+
+  <div class="root__right">
+    <span class="txt__bd__sm__semi text-blue__prm">Reply</span>
+  </div>
+</div>

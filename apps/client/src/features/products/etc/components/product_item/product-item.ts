@@ -1,6 +1,6 @@
 import { SvgAdvIconComments } from '@/common/components/svgs/advanced/icon-comments/icon-comments';
 import { SvgStrokeIconArrowUp } from '@/common/components/svgs/stroke/icon-arrow-up/icon-arrow-up';
-import { Nullable, SvgT } from '@/common/types/etc';
+import { SvgT } from '@/common/types/etc';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { ProductT } from '@/features/products/etc/types';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
@@ -22,11 +22,11 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductItem {
-  public readonly item: InputSignal<Nullable<ProductT>> = input.required();
+  public readonly item: InputSignal<ProductT> = input.required();
   public readonly withLink: InputSignal<boolean> = input.required();
 
   public readonly upperCat: Signal<string> = computed(() =>
-    LibPrs.firstCharUpper(this.item()?.category)
+    LibPrs.firstCharUpper(this.item().category)
   );
 
   // ? statics
