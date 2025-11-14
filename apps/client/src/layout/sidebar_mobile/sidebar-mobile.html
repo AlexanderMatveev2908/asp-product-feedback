@@ -14,7 +14,9 @@
     <div class="block_b__title_row">
       <span class="txt__hd__md text-blue__dark__1"> Roadmap </span>
 
-      <span class="txt__bd__sm__semi text-blue__prm border-b border-blue__prm">View</span>
+      <a [routerLink]="'/products/read/roadmap'">
+        <span class="txt__bd__sm__semi text-blue__prm border-b border-blue__prm">View</span>
+      </a>
     </div>
     <div class="block_b__content">
       @for(f of filtersRoadmap; track f.id){

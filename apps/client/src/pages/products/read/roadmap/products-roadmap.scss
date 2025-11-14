@@ -1,1 +1,10 @@
-.root{}
+.header {
+  @apply w-full h-[100px] bg-blue__dark__2 sticky top-0 py-[26px] px-[24px] flex items-center justify-between gap-[116px];
+
+  .header__left {
+    @apply flex flex-col gap-[8px];
+  }
+}
+
+.root {
+}
