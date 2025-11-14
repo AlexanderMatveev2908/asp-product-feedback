@@ -1,9 +1,9 @@
 import { Nullable, OrNone } from '@/common/types/etc';
 import { SqlTableT } from '@/core/store/api/etc/types';
 
-export type ProductCatT = 'ui' | 'ux' | 'feature' | 'enhancement' | 'bug';
+export type FeedbackCatT = 'ui' | 'ux' | 'feature' | 'enhancement' | 'bug';
 
-export type ProductStatusT = 'suggestion' | 'planned' | 'in_progress' | 'live';
+export type FeedbackStatusT = 'suggestion' | 'planned' | 'in_progress' | 'live';
 
 export type ImageT = SqlTableT<{
   publicId: string;
@@ -31,11 +31,11 @@ export type CommentT = SqlTableT<{
   user: UserT;
 }>;
 
-export type ProductT = SqlTableT<{
+export type FeedbackT = SqlTableT<{
   title: string;
-  category: ProductCatT;
+  category: FeedbackCatT;
   upvotes: number;
-  status: ProductStatusT;
+  status: FeedbackStatusT;
   description: Nullable<string>;
   comments: OrNone<CommentT[]>;
 }>;

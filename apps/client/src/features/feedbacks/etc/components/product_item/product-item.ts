@@ -1,5 +1,5 @@
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
-import { ProductT } from '@/features/products/etc/types';
+import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -20,7 +20,7 @@ import { FooterFeedback } from '../footer_feedback/footer-feedback';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductItem {
-  public readonly item: InputSignal<ProductT> = input.required();
+  public readonly item: InputSignal<FeedbackT> = input.required();
   public readonly withLink: InputSignal<boolean> = input.required();
 
   public readonly upperCat: Signal<string> = computed(() =>
@@ -30,5 +30,5 @@ export class ProductItem {
   // ? statics
 
   // ? derived
-  public readonly path: Signal<string> = computed(() => `products/read/${this.item()?.id}`);
+  public readonly path: Signal<string> = computed(() => `feedbacks/read/${this.item()?.id}`);
 }

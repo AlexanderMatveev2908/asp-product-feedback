@@ -1,7 +1,7 @@
-import { CommentT } from '@/features/products/etc/types';
+import { CommentT } from '@/features/feedbacks/etc/types';
 import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
 import { ReplyItem } from './reply_item/reply-item';
-import { HeaderComment } from '@/features/products/etc/components/header_comment/header-comment';
+import { HeaderComment } from '@/features/feedbacks/etc/components/header_comment/header-comment';
 
 @Component({
   selector: 'app-comment-item',

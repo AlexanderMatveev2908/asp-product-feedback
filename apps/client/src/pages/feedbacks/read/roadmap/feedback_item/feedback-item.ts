@@ -1,6 +1,6 @@
 import { Nullable } from '@/common/types/etc';
-import { ProductsLibShape } from '@/features/products/etc/lib_shape';
-import { ProductT } from '@/features/products/etc/types';
+import { ProductsLibShape } from '@/features/feedbacks/etc/lib_shape';
+import { FeedbackT } from '@/features/feedbacks/etc/types';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +9,7 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { FooterFeedback } from '@/features/products/etc/components/footer_feedback/footer-feedback';
+import { FooterFeedback } from '@/features/feedbacks/etc/components/footer_feedback/footer-feedback';
 
 @Component({
   selector: 'app-feedback-item',
@@ -19,7 +19,7 @@ import { FooterFeedback } from '@/features/products/etc/components/footer_feedba
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackItem {
-  public readonly item: InputSignal<ProductT> = input.required();
+  public readonly item: InputSignal<FeedbackT> = input.required();
 
   public readonly statusLabel: Signal<Nullable<string>> = computed(() =>
     ProductsLibShape.statusLabelByVal(this.item().status)

@@ -10,13 +10,13 @@ import {
 } from '@angular/core';
 import { Params } from '@angular/router';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
-import { ProductT } from '@/features/products/etc/types';
-import { ProductsSlice } from '@/features/products/slice';
+import { FeedbackT } from '@/features/feedbacks/etc/types';
+import { FeedbacksSlice } from '@/features/feedbacks/slice';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { ApiStatusT } from '@/core/store/api/etc/types';
 import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
-import { ProductItem } from '@/features/products/etc/components/product_item/product-item';
+import { ProductItem } from '@/features/feedbacks/etc/components/product_item/product-item';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { LinkBack } from '@/common/components/links/link_back/link-back';
 import { CommentItem } from './comment_item/comment-item';
@@ -30,9 +30,9 @@ import { CommentItem } from './comment_item/comment-item';
 })
 export class ProductsRead extends UseInjCtxHk implements OnInit {
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
-  private readonly productsSLice: ProductsSlice = inject(ProductsSlice);
+  private readonly productsSLice: FeedbacksSlice = inject(FeedbacksSlice);
 
-  public readonly item: WritableSignal<Nullable<ProductT>> = signal(null);
+  public readonly item: WritableSignal<Nullable<FeedbackT>> = signal(null);
 
   ngOnInit(): void {
     const vars: Nullable<Params> = this.useNav.path_variables();
@@ -40,11 +40,11 @@ export class ProductsRead extends UseInjCtxHk implements OnInit {
     const devID: Nullable<number> = LibPrs.asInt(productID);
 
     this.useEffect(() => {
-      const products: Nullable<ProductT[]> = this.productsSLice.products();
+      const products: Nullable<FeedbackT[]> = this.productsSLice.feedbacks();
       if (!products) return;
 
-      const found: Nullable<ProductT> =
-        products.find((p: ProductT) => (p.id as unknown as number) === devID) ?? null;
+      const found: Nullable<FeedbackT> =
+        products.find((p: FeedbackT) => (p.id as unknown as number) === devID) ?? null;
 
       if (!found)
         this.useNav.pushNotice({

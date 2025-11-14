@@ -4,9 +4,9 @@ import { LinkMain } from '@/common/components/links/link_main/link-main';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { PairValLabelTypedT } from '@/common/types/forms';
-import { ProductStatusT, ProductT } from '@/features/products/etc/types';
-import { ProductsLibShape } from '@/features/products/etc/lib_shape';
-import { ProductsSlice } from '@/features/products/slice';
+import { FeedbackStatusT, FeedbackT } from '@/features/feedbacks/etc/types';
+import { ProductsLibShape } from '@/features/feedbacks/etc/lib_shape';
+import { FeedbacksSlice } from '@/features/feedbacks/slice';
 import { FeedbackItem } from './feedback_item/feedback-item';
 
 @Component({
@@ -17,13 +17,13 @@ import { FeedbackItem } from './feedback_item/feedback-item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsRoadmap {
-  private readonly productsSlice: ProductsSlice = inject(ProductsSlice);
+  private readonly productsSlice: FeedbacksSlice = inject(FeedbacksSlice);
 
-  public readonly statuses: PairValLabelTypedT<ProductStatusT>[] =
+  public readonly statuses: PairValLabelTypedT<FeedbackStatusT>[] =
     ProductsLibShape.statusesFilter();
 
-  public readonly filtered: Signal<ProductT[]> = computed(() => {
-    const data: ProductT[] = this.productsSlice.products() ?? [];
-    return data.filter((p: ProductT) => p);
+  public readonly filtered: Signal<FeedbackT[]> = computed(() => {
+    const data: FeedbackT[] = this.productsSlice.feedbacks() ?? [];
+    return data.filter((p: FeedbackT) => p);
   });
 }
