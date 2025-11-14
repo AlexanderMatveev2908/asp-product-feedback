@@ -7,5 +7,7 @@
     <div class="form__title">
       <span class="txt__hd__md">{{ currTitle() }}</span>
     </div>
+
+    <app-form-field-txt [f]="fields.title" [ctrl]="asFormControl('title')" />
   </form>
 </div>

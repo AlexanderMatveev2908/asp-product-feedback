@@ -30,6 +30,12 @@ export class ProductsUiFkt extends RootUiFkt {
     return this.listWithIDs(this._categories);
   }
 
+  public static includedByCategories(arg: string): boolean {
+    return this._categories.some(
+      (pair: Omit<PairValLabelTypedT<ProductCatT>, 'id'>) => pair.val === arg
+    );
+  }
+
   private static readonly _statuses: Omit<PairValLabelTypedT<ProductStatusT>, 'id'>[] = [
     {
       label: 'Suggestion',

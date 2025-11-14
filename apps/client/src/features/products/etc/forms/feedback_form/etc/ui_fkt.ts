@@ -2,8 +2,15 @@ import { CheckFieldT, TxtFieldT } from '@/common/types/forms';
 import { FormsUiFkt } from '@/core/ui_fkt/forms/forms';
 import { ProductsUiFkt } from '../../../ui_fkt';
 
+export interface FeedbackFormFields {
+  title: TxtFieldT;
+  category: CheckFieldT;
+  status: CheckFieldT;
+  content: TxtFieldT;
+}
+
 export class FeedbackFormUiFkt extends FormsUiFkt {
-  public static title(): TxtFieldT {
+  private static title(): TxtFieldT {
     return this.txtFieldOf({
       name: 'title',
       label: 'Feedback Title',
@@ -13,7 +20,7 @@ export class FeedbackFormUiFkt extends FormsUiFkt {
     });
   }
 
-  public static category(): CheckFieldT {
+  private static category(): CheckFieldT {
     return this.checkFieldOf({
       name: 'title',
       label: 'Feedback Title',
@@ -23,7 +30,7 @@ export class FeedbackFormUiFkt extends FormsUiFkt {
     });
   }
 
-  public static status(): CheckFieldT {
+  private static status(): CheckFieldT {
     return this.checkFieldOf({
       name: 'status',
       label: 'Update Status',
@@ -33,7 +40,7 @@ export class FeedbackFormUiFkt extends FormsUiFkt {
     });
   }
 
-  public static content(): TxtFieldT {
+  private static content(): TxtFieldT {
     return this.txtFieldOf({
       name: 'content',
       label: 'Feedback Detail',
@@ -41,5 +48,14 @@ export class FeedbackFormUiFkt extends FormsUiFkt {
       type: 'textarea',
       place: '',
     });
+  }
+
+  public static formFields(): FeedbackFormFields {
+    return {
+      title: this.title(),
+      category: this.category(),
+      status: this.status(),
+      content: this.content(),
+    };
   }
 }
