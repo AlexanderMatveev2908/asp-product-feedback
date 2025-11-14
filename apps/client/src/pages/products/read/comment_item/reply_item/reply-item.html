@@ -1,3 +1,6 @@
 <div class="root">
-  <p>ReplyItem generated 🎉</p>
+  @if (isFirst()){
+  <div class="root__line"></div>
+  }
+  <app-header-comment [comment]="reply()" />
 </div>

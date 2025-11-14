@@ -5,7 +5,11 @@
     {{ comment().content }}
   </span>
 
-  @if(comment().replies?.length){ @for (r of comment().replies; track r.id){
-  <app-reply-item [reply]="r" />
-  } }
+  @if(comment().replies?.length){
+  <div class="root__replies">
+    @for (r of comment().replies; track r.id; let idx = $index){
+    <app-reply-item [reply]="r" [isFirst]="idx === 0" />
+    }
+  </div>
+  }
 </div>

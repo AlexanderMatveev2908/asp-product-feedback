@@ -6,7 +6,7 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { CommentT } from '../../types';
+import { CommentT, ReplyT } from '../../types';
 
 @Component({
   selector: 'app-header-comment',
@@ -16,7 +16,7 @@ import { CommentT } from '../../types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComment {
-  public readonly comment: InputSignal<CommentT> = input.required();
+  public readonly comment: InputSignal<CommentT | ReplyT> = input.required();
 
   public readonly devImage: Signal<string> = computed(
     () => `/images/users/${this.comment().user.image}`

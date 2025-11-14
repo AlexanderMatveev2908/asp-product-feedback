@@ -2,4 +2,8 @@
   @apply w-full flex flex-col gap-[16px] py-[24px];
   border-bottom: var(--border);
   border-color: #8c92b325;
+
+  .root__replies {
+    @apply w-full flex flex-col gap-[24px] mt-[8px];
+  }
 }

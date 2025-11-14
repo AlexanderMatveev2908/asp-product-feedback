@@ -1,1 +1,9 @@
-.root{}
+.root {
+  @apply w-full pl-[24px] relative;
+
+  .root__line {
+    background: #64719625;
+    @apply absolute w-[1px] top-0 left-0;
+    height: calc(100% + 46px);
+  }
+}
