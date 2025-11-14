@@ -36,6 +36,9 @@ export class SidebarMobile {
     this.sideSlice.isOpen() ? '-translate-x-full' : '-translate-x-0'
   );
 
+  // ? listeners
+  public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
+
   // ? static
   public readonly filtersFeedback: PairValLabelT[] = FiltersUiFkt.filtersFeedback();
   public readonly filtersRoadmap: FilterRoadmapT[] = FiltersUiFkt.filtersRoadmap();

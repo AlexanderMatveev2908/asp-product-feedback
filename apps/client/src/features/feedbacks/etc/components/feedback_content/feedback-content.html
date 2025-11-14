@@ -19,7 +19,7 @@
     <div class="footer__counts">
       <app-btn-votes [upvotes]="item().upvotes" />
 
-      <div class="counts__comments">
+      <a [routerLink]="path()" class="counts__comments">
         <div class="comments__svg">
           <ng-content *ngComponentOutlet="Comment" />
         </div>
@@ -27,7 +27,7 @@
         <span class="txt__bd__sm__bold text-blue__dark__1">
           {{ item().comments?.length ?? 0 }}
         </span>
-      </div>
+      </a>
     </div>
   </div>
 </div>
