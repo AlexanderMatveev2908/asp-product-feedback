@@ -1,5 +1,6 @@
+import { BtnT } from '@/common/types/dom';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
 
 @Component({
   selector: 'app-btn-main',
@@ -9,5 +10,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BtnMain {
+  public readonly btnT: InputSignal<BtnT> = input<BtnT>('button');
+  public readonly minW: InputSignal<string> = input('fit');
+
   public readonly useMetaApp: UseMetaAppDir = inject(UseMetaAppDir);
 }

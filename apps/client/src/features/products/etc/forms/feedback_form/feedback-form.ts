@@ -7,13 +7,25 @@ import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@a
 import { FeedbackFormFields, FeedbackFormUiFkt } from './etc/ui_fkt';
 import { FormFieldTxt } from '@/common/components/forms/form_field_txt/form-field-txt';
 import { FeedbackFormMng, FormKeyT } from './etc/form_mng';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UseFormFieldDir } from '@/core/directives/use_form_field';
 import { FormSelect } from '@/common/components/forms/form_select/form-select';
+import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
+import { UseMetaAppDir } from '@/core/directives/use_meta_app';
+import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
+import { LibLog } from '@/core/lib/dev/log';
 
 @Component({
   selector: 'app-feedback-form',
-  imports: [NgComponentOutlet, FormFieldTxt, UseFormFieldDir, FormSelect],
+  imports: [
+    ReactiveFormsModule,
+    NgComponentOutlet,
+    FormFieldTxt,
+    UseFormFieldDir,
+    FormSelect,
+    BtnMain,
+    UseMetaAppDir,
+  ],
   templateUrl: './feedback-form.html',
   styleUrl: './feedback-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,5 +48,14 @@ export class FeedbackForm {
 
   public asFormControl(formKey: FormKeyT): FormControl {
     return this.formPost.get(formKey) as FormControl;
+  }
+
+  public onSubmit(): void {
+    if (!this.formPost.valid) {
+      RootFormMng.onSubmitFailed(this.formPost);
+      return;
+    }
+
+    LibLog.logTtl('✅ ok', this.formPost.value);
   }
 }

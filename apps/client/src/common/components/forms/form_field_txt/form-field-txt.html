@@ -2,18 +2,27 @@
   <app-form-header-field [f]="f()" />
 
   <div class="root__content">
-    <input
+    @if(f().type === 'textarea'){
+    <textarea
       [formControl]="useFormField.ctrl()"
-      [type]="f().type"
       [attr.data-field]="f().field"
-      class="content__input txt__bd__md"
       [placeholder]="f().place"
       [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
       (focus)="useFocus.onFocus()"
       (blur)="useFocus.onBLur()"
-    />
-
-    @if(!useFormField.isValid()){
+      class="content__input txt__bd__md min-h-[120px]"
+    ></textarea>
+    }@else{
+    <input
+      [formControl]="useFormField.ctrl()"
+      [type]="f().type"
+      [attr.data-field]="f().field"
+      [placeholder]="f().place"
+      [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
+      (focus)="useFocus.onFocus()"
+      (blur)="useFocus.onBLur()"
+      class="content__input txt__bd__md"
+    />} @if(!useFormField.isValid()){
     <app-form-err [errMsg]="useFormField.errMsg()" />
     }
   </div>
