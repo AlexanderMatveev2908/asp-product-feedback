@@ -39,7 +39,7 @@ input {
 
 button {
   &:enabled {
-    cursor: url('../assets/images/pointer.png') 0 0, pointer;
+    cursor: url('/images/pointer.png') 0 0, pointer;
   }
   &:disabled {
     cursor: not-allowed;
@@ -49,6 +49,6 @@ button {
 
 a {
   &:hover {
-    cursor: url('../assets/images/pointer.png') 0 0, pointer;
+    cursor: url('/images/pointer.png') 0 0, pointer;
   }
 }

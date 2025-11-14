@@ -12,7 +12,7 @@
       @apply flex items-center gap-[16px];
 
       .left__img {
-        @apply rounded-full overflow-hidden border-2 border-blue__prm;
+        @apply rounded-full overflow-hidden;
         @include mix.sqr(40px);
 
         img {
