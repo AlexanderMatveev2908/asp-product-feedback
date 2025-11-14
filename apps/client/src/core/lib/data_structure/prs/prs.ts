@@ -1,4 +1,4 @@
-import { BoolStrT, Nullable } from '@/common/types/etc';
+import { BoolStrT, Nullable, OrNone } from '@/common/types/etc';
 import { LibShape } from '../shape';
 
 export class LibPrs {
@@ -17,8 +17,8 @@ export class LibPrs {
     }
   }
 
-  public static firstCharUpper(arg: string): string {
-    return arg[0].toUpperCase() + arg.slice(1).toLowerCase();
+  public static firstCharUpper(arg: OrNone<string>): string {
+    return LibShape.hasText(arg) ? arg![0].toUpperCase() + arg!.slice(1).toLowerCase() : '';
   }
 
   public static titleCase(arg: string): string {

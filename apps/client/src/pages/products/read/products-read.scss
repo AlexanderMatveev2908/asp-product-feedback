@@ -13,6 +13,15 @@
     }
   }
 
-  .root__card {
+  .root__comments {
+    @apply w-full bg-white rounded-[10px] p-[24px] flex flex-col;
+
+    .comments__title {
+      @apply flex items-center justify-start;
+    }
+
+    .comments__content {
+      @apply w-full flex flex-col;
+    }
   }
 }

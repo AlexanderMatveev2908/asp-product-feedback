@@ -13,8 +13,20 @@
         <app-btn-app [label]="'Edit Feedback'" varT="blue" />
       </div>
 
-      <div class="root__card">
-        <app-product-item [item]="item()!" [withLink]="true" />
+      <app-product-item [item]="item()" [withLink]="true" />
+
+      <div class="root__comments">
+        <div class="comments__title">
+          <span class="txt__hd__md text-blue__dark__1"
+            >{{ item()?.comments?.length ?? 0 }} Comments</span
+          >
+        </div>
+
+        <div class="comments__content">
+          @for(c of item()?.comments; track c.id; let idx = $index){
+          <app-comment-item [comment]="c" [isLast]="idx === (item()?.comments?.length ?? 0) - 1" />
+          }
+        </div>
       </div>
     </div>
   </ng-template>

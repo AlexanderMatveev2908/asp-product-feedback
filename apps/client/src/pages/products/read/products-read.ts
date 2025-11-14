@@ -19,10 +19,11 @@ import { SvgStrokeIconArrowLeft } from '@/common/components/svgs/stroke/icon-arr
 import { NgComponentOutlet } from '@angular/common';
 import { BtnApp } from '@/common/components/btns/btn__app/btn-app';
 import { ProductItem } from '@/features/products/etc/components/product_item/product-item';
+import { CommentItem } from './comment_item/comment-item';
 
 @Component({
   selector: 'app-products-read',
-  imports: [PageWrapper, NgComponentOutlet, RouterLink, BtnApp, ProductItem],
+  imports: [PageWrapper, NgComponentOutlet, RouterLink, BtnApp, ProductItem, CommentItem],
   templateUrl: './products-read.html',
   styleUrl: './products-read.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

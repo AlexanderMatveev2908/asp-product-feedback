@@ -68,9 +68,15 @@ export class WakeUp implements AfterViewInit {
         this.wakeUpApi.poll().pipe(finalize(() => this.usePopHk.isPop.set(false)))
       )
       .subscribe({
-        next: (_: ResApiT<void>) => {
+        next: (res: ResApiT<void>) => {
           const now = Date.now();
           this.useStorage.setItem('wakeUp', now);
+
+          this.toastSlice.ifNotPresent({
+            msg: res?.msg ?? 'server available',
+            status: 200,
+            eventT: 'OK',
+          });
         },
         error: (err: ErrApiT<void>) => {
           this.toastSlice.ifNotPresent({
