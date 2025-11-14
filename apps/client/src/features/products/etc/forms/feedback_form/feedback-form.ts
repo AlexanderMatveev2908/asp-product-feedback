@@ -58,4 +58,8 @@ export class FeedbackForm {
 
     LibLog.logTtl('✅ ok', this.formPost.value);
   }
+
+  public reset: () => void = () => {
+    RootFormMng.reset(this.formPost, FeedbackFormMng.defPostForm());
+  };
 }

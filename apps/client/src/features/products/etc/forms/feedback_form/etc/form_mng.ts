@@ -52,6 +52,14 @@ export class FeedbackFormMng extends RootFormMng {
       validators: this.validate(this.schemaPost),
     }
   );
+
+  public static defPostForm(): FeedbackFormPostT {
+    return {
+      title: '',
+      category: ProductsLibShape.defCat(),
+      content: '',
+    };
+  }
 }
 
 export type FeedbackFormPostT = z.infer<typeof FeedbackFormMng.schemaPost>;

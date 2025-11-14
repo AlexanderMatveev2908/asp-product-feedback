@@ -48,10 +48,13 @@ export class UseFormFieldDir extends UseInjCtxHk {
       void this.val?.();
       const touched: boolean = !!this.touched?.();
 
-      if (!touched) return;
+      if (!touched) {
+        this.isValid.set(true);
+        this.errMsg.set(null);
+        return;
+      }
 
       this.isValid.set(c.valid);
-
       if (!c.valid) this.errMsg.set(c.errors?.['zod']);
     });
   }

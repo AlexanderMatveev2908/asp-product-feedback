@@ -1,5 +1,6 @@
 <button
   [type]="btnT()"
+  (click)="onClick()?.()"
   [style.min-width]="minW()"
   class="root"
   [style.--hex_def]="useMetaApp.varsHex().hexDef"
