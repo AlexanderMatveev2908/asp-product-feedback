@@ -28,6 +28,20 @@
           }
         </div>
       </div>
+
+      <div class="root__comment_form">
+        <span class="text-blue__dark__1 txt__hd__md">Add Comment</span>
+
+        <form class="comment_form__content">
+          <textarea class="content__field" placeholder="Type your comment here"></textarea>
+
+          <div class="content__footer">
+            <span class="text-blue__dark__0 txt__bd__sm__reg">250 Characters left</span>
+
+            <app-btn-app [varT]="'purple'" [label]="'Post Comment'" />
+          </div>
+        </form>
+      </div>
     </div>
   </ng-template>
 </app-page-wrapper>

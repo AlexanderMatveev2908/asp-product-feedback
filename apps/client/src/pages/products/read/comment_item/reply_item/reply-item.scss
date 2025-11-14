@@ -1,5 +1,5 @@
 .root {
-  @apply w-full pl-[24px] relative;
+  @apply w-full pl-[24px] relative flex flex-col gap-[16px];
 
   .root__line {
     background: #64719625;

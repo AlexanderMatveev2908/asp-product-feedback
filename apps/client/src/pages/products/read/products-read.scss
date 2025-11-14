@@ -24,4 +24,24 @@
       @apply w-full flex flex-col;
     }
   }
+
+  .root__comment_form {
+    @apply w-full p-[24px] flex flex-col gap-[24px] bg-white rounded-[10px];
+
+    .comment_form__content {
+      @apply flex flex-col gap-[16px];
+
+      .content__field {
+        @apply bg-gray__1 w-full rounded-[10px] h-[80px] p-[16px] text-blue__dark__1;
+
+        &::placeholder {
+          color: #8c92b3;
+        }
+      }
+
+      .content__footer {
+        @apply w-full flex items-center justify-between;
+      }
+    }
+  }
 }
