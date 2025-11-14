@@ -1,9 +1,6 @@
-import { SvgAdvIconComments } from '@/common/components/svgs/advanced/icon-comments/icon-comments';
-import { SvgStrokeIconArrowUp } from '@/common/components/svgs/stroke/icon-arrow-up/icon-arrow-up';
-import { SvgT } from '@/common/types/etc';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { ProductT } from '@/features/products/etc/types';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,10 +10,11 @@ import {
   Signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FooterFeedback } from '../footer_feedback/footer-feedback';
 
 @Component({
   selector: 'app-product-item',
-  imports: [NgComponentOutlet, RouterLink, NgTemplateOutlet],
+  imports: [RouterLink, NgTemplateOutlet, FooterFeedback],
   templateUrl: './product-item.html',
   styleUrl: './product-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,8 +28,6 @@ export class ProductItem {
   );
 
   // ? statics
-  public readonly Chevron: SvgT = SvgStrokeIconArrowUp;
-  public readonly Comment: SvgT = SvgAdvIconComments;
 
   // ? derived
   public readonly path: Signal<string> = computed(() => `products/read/${this.item()?.id}`);

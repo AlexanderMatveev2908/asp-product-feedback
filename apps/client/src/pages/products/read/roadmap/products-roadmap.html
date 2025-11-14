@@ -40,6 +40,12 @@
             Features currently being developed
           </span>
         </div>
+
+        <div class="content__cards">
+          @for(p of filtered(); track p.id){
+          <app-feedback-item [item]="p" />
+          }
+        </div>
       </div>
     </div>
   </ng-template>

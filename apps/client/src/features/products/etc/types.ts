@@ -27,8 +27,8 @@ export type ReplyT = SqlTableT<{
 
 export type CommentT = SqlTableT<{
   content: string;
-  user: UserT;
   replies: Nullable<ReplyT[]>;
+  user: UserT;
 }>;
 
 export type ProductT = SqlTableT<{

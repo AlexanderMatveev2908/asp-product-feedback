@@ -29,5 +29,9 @@
     .content__header {
       @apply flex flex-col gap-[4px];
     }
+
+    .content__cards {
+      @apply w-full flex flex-col gap-[16px];
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { PairValLabelTypedT } from '@/common/types/forms';
 import { ProductCatT, ProductStatusT } from './types';
 import { RootUiFkt } from '@/core/ui_fkt/root';
+import { Nullable } from '@/common/types/etc';
 
 export class ProductsLibShape extends RootUiFkt {
   private static readonly _categories: Omit<PairValLabelTypedT<ProductCatT>, 'id'>[] = [
@@ -28,6 +29,13 @@ export class ProductsLibShape extends RootUiFkt {
 
   public static categories(): PairValLabelTypedT<ProductCatT>[] {
     return this.listWithIDs(this._categories);
+  }
+
+  public static catLabelByVal(arg: string): Nullable<string> {
+    return (
+      this._categories.find((el: Omit<PairValLabelTypedT<ProductCatT>, 'id'>) => el.val === arg)
+        ?.label ?? null
+    );
   }
 
   public static defCat(): ProductCatT {
@@ -65,6 +73,13 @@ export class ProductsLibShape extends RootUiFkt {
   public static statusesFilter(): PairValLabelTypedT<ProductStatusT>[] {
     return this.statuses().filter(
       (v: PairValLabelTypedT<ProductStatusT>) => v.val !== 'suggestion'
+    );
+  }
+
+  public static statusLabelByVal(arg: string): Nullable<string> {
+    return (
+      this._statuses.find((el: Omit<PairValLabelTypedT<ProductStatusT>, 'id'>) => el.val === arg)
+        ?.label ?? null
     );
   }
 }

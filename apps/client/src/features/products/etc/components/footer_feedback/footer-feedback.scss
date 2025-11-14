@@ -1,0 +1,11 @@
+.root {
+  @apply flex items-center justify-between;
+
+  .root__comments {
+    @apply flex items-center gap-[4px] w-fit;
+
+    .comments__svg {
+      @apply w-[18px] h-[18px];
+    }
+  }
+}

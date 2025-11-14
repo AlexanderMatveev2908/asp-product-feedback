@@ -1,0 +1,31 @@
+<div class="root" [style.--bg]="'var(--purple__prm)'">
+  <div class="root__line"></div>
+
+  <div class="root__status">
+    <div class="status__circle"></div>
+
+    <span class="txt__bd__sm__reg text-blue__dark__0">{{ statusLabel() }}</span>
+  </div>
+
+  <div class="root__content">
+    <div class="content__body">
+      <span class="txt__bd__sm__bold text-blue__dark__1">
+        {{ item().title }}
+      </span>
+
+      <span class="txt__bd__sm__reg text-blue__dark__0">
+        {{ item().description }}
+      </span>
+    </div>
+
+    <div class="content__footer">
+      <div class="footer__cat">
+        <span class="txt__bd__sm__semi">
+          {{ catLabel() }}
+        </span>
+      </div>
+
+      <app-footer-feedback [item]="item()" />
+    </div>
+  </div>
+</div>
