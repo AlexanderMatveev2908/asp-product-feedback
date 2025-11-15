@@ -7,23 +7,18 @@ import java.util.Map;
 
 import server.decorators.flow.ErrAPI;
 import server.lib.data_structure.Jack;
-import server.lib.data_structure.LibShape;
+import server.lib.data_structure.LibRuntime;
 import server.lib.data_structure.prs.sub.F_PrsCases;
 
 public final class LibPrs extends F_PrsCases {
 
-    public static final <T> T tFormJson(String json, Class<T> cls) {
+    public static final <T> T tFromJson(String json, Class<T> cls) {
         final Map<String, Object> map = mapFromJson(json);
         return tFromMap(map, cls);
     }
 
     public static final <T> T tFromMap(Map<String, Object> map, Class<T> cls) {
-        try {
-            return Jack.mapper.convertValue(map, cls);
-        } catch (Exception err) {
-            err.printStackTrace();
-            throw new ErrAPI("invalid form", 400);
-        }
+        return Jack.mapper.convertValue(map, cls);
     }
 
     public static final LinkedHashMap<String, Object> linkedMap(Object... kvp) {
@@ -38,22 +33,14 @@ public final class LibPrs extends F_PrsCases {
         return map;
     }
 
-    public static final <T> Map<String, Object> mapFormT(T arg) {
+    public static final <T> Map<String, Object> mapFromT(T arg) {
         final Map<String, Object> map = new HashMap<>();
-
-        if (LibShape.isNone(arg))
-            throw new ErrAPI("passed None to mapFromT");
 
         for (final Field field : arg.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            try {
-                map.put(field.getName(), field.get(arg));
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException("Failed to read field => " + field.getName(), e);
-            }
+            LibRuntime.inTryBlock(() -> map.put(field.getName(), field.get(arg)));
         }
 
         return map;
     }
-
 }

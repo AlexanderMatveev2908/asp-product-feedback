@@ -5,26 +5,16 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import server.lib.data_structure.Jack;
-import server.lib.dev.lib_log.LibLog;
+import server.lib.data_structure.LibRuntime;
 
 public class A_PrsBase {
 
   public static final String jsonFromObj(Object obj) {
-    try {
-      return Jack.mapper.writeValueAsString(obj);
-    } catch (Exception err) {
-      LibLog.logErr(err);
-      return "";
-    }
+    return LibRuntime.inTryBlock(() -> Jack.mapper.writeValueAsString(obj));
   }
 
   public static final Map<String, Object> mapFromJson(String txt) {
-    try {
-      return Jack.mapper.readValue(txt, new TypeReference<Map<String, Object>>() {
-      });
-    } catch (Exception err) {
-      LibLog.logErr(err);
-      return Map.of();
-    }
+    return LibRuntime.inTryBlock(() -> Jack.mapper.readValue(txt, new TypeReference<Map<String, Object>>() {
+    }));
   }
 }

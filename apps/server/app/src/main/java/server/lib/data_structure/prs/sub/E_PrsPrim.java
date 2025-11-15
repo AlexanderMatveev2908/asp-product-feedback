@@ -11,9 +11,6 @@ public class E_PrsPrim extends D_PrsB64 {
   }
 
   public static final long fromAnyToLong(Object arg) {
-    if (LibShape.isNone(arg))
-      throw new ErrAPI("expected string or number received None");
-
     if (arg instanceof final Number num)
       return num.longValue();
 

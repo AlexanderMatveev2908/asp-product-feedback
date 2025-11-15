@@ -8,5 +8,4 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 public class Jack {
   public static final ObjectMapper mapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT)
       .addModule(new Jdk8Module()).build();
-
 }
