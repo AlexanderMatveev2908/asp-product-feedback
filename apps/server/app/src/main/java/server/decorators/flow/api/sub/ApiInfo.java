@@ -85,7 +85,7 @@ public interface ApiInfo {
     return getPath().startsWith(arg);
   }
 
-  default boolean matchPath(String arg, HttpMethod method) {
+  default boolean matchPathAfterCutIdOut(String arg, HttpMethod method) {
     final String original = getPath();
     final String[] parts = original.split("\\/", -1);
     final int lastIdx = parts.length - 1;

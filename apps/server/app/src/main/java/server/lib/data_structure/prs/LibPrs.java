@@ -18,7 +18,11 @@ public final class LibPrs extends F_PrsCases {
     }
 
     public static final <T> T tFromMap(Map<String, Object> map, Class<T> cls) {
-        return Jack.mapper.convertValue(map, cls);
+        try {
+            return Jack.main.convertValue(map, cls);
+        } catch (Exception err) {
+            throw new ErrAPI("invalid data", 400);
+        }
     }
 
     public static final LinkedHashMap<String, Object> linkedMap(Object... kvp) {

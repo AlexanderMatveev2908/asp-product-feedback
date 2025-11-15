@@ -47,7 +47,7 @@ public final class ErrCatcher implements WebExceptionHandler {
 
         final byte[] bytes;
         try {
-            bytes = Jack.mapper.writeValueAsBytes(apiBody);
+            bytes = Jack.main.writeValueAsBytes(apiBody);
         } catch (JacksonException errOfErr) {
             throw new ErrAPI("err build json for err catcher");
         }

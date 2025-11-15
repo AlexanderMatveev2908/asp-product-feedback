@@ -64,7 +64,7 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
             if (bytes.length == 0)
                 return Mono.empty();
 
-            return Mono.fromCallable(() -> Jack.mapper.readValue(bytes, type)).cache();
+            return Mono.fromCallable(() -> Jack.main.readValue(bytes, type)).cache();
         }).onErrorMap(err -> new ErrAPI("wrong data format", 400));
     }
 

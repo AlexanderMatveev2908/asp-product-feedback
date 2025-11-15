@@ -63,7 +63,7 @@ public final class CorsMdw implements WebFilter {
 
         final String body;
         try {
-            body = Jack.mapper.writeValueAsString(Map.of("msg", msg, "status", 403));
+            body = Jack.main.writeValueAsString(Map.of("msg", msg, "status", 403));
         } catch (JsonProcessingException err) {
             throw new ErrAPI("err writing json for cors response");
         }
