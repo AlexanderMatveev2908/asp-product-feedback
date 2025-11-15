@@ -63,6 +63,8 @@ dependencies {
     // ? reactive database
     implementation(libs.r2dbcPostgresql)
     // ? manage pool connections
+    implementation(libs.r2dbcPool)
+    // ? provide ORM SQl style for Java
     implementation(libs.springBootStarterDataR2dbc)
 }
 //_e

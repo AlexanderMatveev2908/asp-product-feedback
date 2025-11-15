@@ -50,6 +50,7 @@ jacksonDatatypeJdk8 = {module = "com.fasterxml.jackson.datatype:jackson-datatype
 postgresql = {module = "org.postgresql:postgresql", version.ref = "postgresql"}
 liquibaseCore = {module = "org.liquibase:liquibase-core", version.ref = "liquibase_core"}
 r2dbcPostgresql = {module = "org.postgresql:r2dbc-postgresql", version.ref = "r2dbc_postgresql"}
+springBootStarterDataR2dbc = {module = "org.springframework.boot:spring-boot-starter-data-r2dbc"}
 
 
 
