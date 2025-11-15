@@ -3,6 +3,7 @@ package server.lib.data_structure;
 import java.util.List;
 import java.util.UUID;
 
+import server.decorators.Nullable;
 import server.paperwork.Reg;
 
 public final class LibShape {
@@ -15,7 +16,7 @@ public final class LibShape {
 
     public static final boolean isV4(String arg) {
         try {
-            final boolean res = Reg.isUUID(arg);
+            final boolean res = Reg.isUUID(Nullable.of(arg));
             UUID.fromString(arg);
 
             return res;

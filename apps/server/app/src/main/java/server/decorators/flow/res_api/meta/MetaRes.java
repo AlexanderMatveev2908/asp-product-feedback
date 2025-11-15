@@ -2,6 +2,7 @@ package server.decorators.flow.res_api.meta;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import server.decorators.Nullable;
 import server.paperwork.Reg;
 
 @Getter
@@ -33,7 +34,7 @@ public enum MetaRes {
         final String emj = ActT.emjFromStatus(status);
         final String safeMsg = msg != null ? msg : fromCode(status).getMsg();
 
-        final String prettyMsg = Reg.startsWithEmj(safeMsg) ? msg
+        final String prettyMsg = Reg.startsWithEmj(Nullable.of(safeMsg)) ? msg
                 : String.format("%s %s", emj, safeMsg);
 
         return prettyMsg;

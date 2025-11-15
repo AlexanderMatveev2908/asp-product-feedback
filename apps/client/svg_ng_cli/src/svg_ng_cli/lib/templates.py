@@ -80,7 +80,7 @@ def gen_template_html(svg_data: str, svg_type: SvgT) -> str:
 def gen_template_ts(kebab_name: str, class_name: str, svg_type: SvgT) -> str:
     selector = f"{svg_type.selector_prefix()}-{kebab_name}"
 
-    top_import: str = "import {{ Nullable }} from '@/common/types/etc';" if svg_type != SvgT.A else ""
+    top_import: str = "import { Nullable } from '@/common/types/etc';" if svg_type != SvgT.A else ""
 
     return f"""
 {top_import}

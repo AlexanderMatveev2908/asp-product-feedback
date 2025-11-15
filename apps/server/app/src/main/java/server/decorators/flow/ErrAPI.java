@@ -3,6 +3,7 @@ package server.decorators.flow;
 import java.util.Map;
 
 import lombok.Getter;
+import server.decorators.Nullable;
 import server.decorators.RootCls;
 
 @Getter
@@ -27,8 +28,8 @@ public final class ErrAPI extends RuntimeException implements RootCls {
         this(msg, 500, null);
     }
 
-    public final Map<String, Object> getData() {
-        return data == null ? null : Map.copyOf(data);
+    public final Nullable<Map<String, Object>> getData() {
+        return data == null ? Nullable.of(null) : Nullable.of(Map.copyOf(data));
     }
 
     @Override

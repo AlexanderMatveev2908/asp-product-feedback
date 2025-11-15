@@ -11,6 +11,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.server.ServerWebExchange;
 
+import server.decorators.Nullable;
 import server.lib.data_structure.LibShape;
 import server.paperwork.Reg;
 
@@ -40,8 +41,8 @@ public interface ApiInfo {
     if (vars == null)
       return Optional.empty();
 
-    String pathId = null;
-    if (!Reg.isUUID((pathId = vars.get(key))))
+    String pathId = vars.get(key);
+    if (!Reg.isUUID(Nullable.of(pathId)))
       return Optional.empty();
 
     return Optional.of(UUID.fromString(pathId));

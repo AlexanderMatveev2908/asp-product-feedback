@@ -4,13 +4,14 @@ import java.util.Optional;
 
 import org.springframework.web.server.ServerWebExchange;
 
+import server.decorators.Nullable;
 import server.decorators.flow.ErrAPI;
 import server.paperwork.Reg;
 
 public final record RecMetaErr(String msg, int status) {
 
   private static final String getMsgFromErr(Throwable err, String originalMsg) {
-    return Reg.startsWithEmj(originalMsg) ? originalMsg
+    return Reg.startsWithEmj(Nullable.of(originalMsg)) ? originalMsg
         : String.format("%s %s", err instanceof ErrAPI ? "❌" : "💣", originalMsg);
   }
 

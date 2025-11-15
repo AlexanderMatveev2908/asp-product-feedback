@@ -1,5 +1,5 @@
 
-import {{ Nullable }} from '@/common/types/etc';
+import { Nullable } from '@/common/types/etc';
 import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
 
 @Component({
