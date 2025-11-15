@@ -14,11 +14,11 @@ import reactor.core.publisher.Mono;
 public class SqlCmd {
   private final DbSQL dbSQL;
 
-  public <T> Mono<T> trxLowLevel(Function<DatabaseClient, Mono<T>> cb) {
+  public final <T> Mono<T> trxLowLevel(Function<DatabaseClient, Mono<T>> cb) {
     return cb.apply(dbSQL.getSqlClient()).as(dbSQL.getTrxMng()::transactional);
   }
 
-  public <T> Mono<T> trxHighLevel(Function<R2dbcEntityTemplate, Mono<T>> cb) {
+  public final <T> Mono<T> trxHighLevel(Function<R2dbcEntityTemplate, Mono<T>> cb) {
     return cb.apply(dbSQL.getOrm()).as(dbSQL.getTrxMng()::transactional);
   }
 }
