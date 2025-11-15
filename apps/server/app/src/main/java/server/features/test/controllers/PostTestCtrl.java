@@ -20,7 +20,7 @@ import server.lib.data_structure.LibShape;
 public class PostTestCtrl {
     private final PostFormSvc postFormSvc;
 
-    public Mono<ResponseEntity<ResAPI>> postMsg(Api api) {
+    public final Mono<ResponseEntity<ResAPI>> postMsg(Api api) {
         return api.getBd(new TypeReference<Map<String, Object>>() {
         }).flatMap(bd -> {
             var msg = (String) bd.get("msg");
@@ -32,7 +32,7 @@ public class PostTestCtrl {
         }).switchIfEmpty(Mono.error(new ErrAPI("missing msg", 400)));
     }
 
-    public Mono<ResponseEntity<ResAPI>> postFormData(Api api) {
+    public final Mono<ResponseEntity<ResAPI>> postFormData(Api api) {
         return postFormSvc.postForm(api).flatMap(tpl -> {
             return new ResAPI(200).msg(
                     "form parsed • processed • saved locally • uploaded on cloud • deleted locally • deleted from cloud")

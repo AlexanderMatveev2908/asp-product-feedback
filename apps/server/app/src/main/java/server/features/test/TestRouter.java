@@ -20,22 +20,22 @@ public class TestRouter {
     private final GetTestCtrl getCtrl;
 
     @GetMapping("/limited")
-    public Mono<ResponseEntity<ResAPI>> getLimited(Api api) {
+    public final Mono<ResponseEntity<ResAPI>> getLimited(Api api) {
         return getCtrl.getLimited(api);
     }
 
     @GetMapping
-    public Mono<ResponseEntity<ResAPI>> getTest(Api api) {
+    public final Mono<ResponseEntity<ResAPI>> getTest(Api api) {
         return getCtrl.getTest(api);
     }
 
     @PostMapping
-    public Mono<ResponseEntity<ResAPI>> postMsg(Api api) {
+    public final Mono<ResponseEntity<ResAPI>> postMsg(Api api) {
         return postCtrl.postMsg(api);
     }
 
     @PostMapping("/form-data")
-    public Mono<ResponseEntity<ResAPI>> postFormData(Api api) {
+    public final Mono<ResponseEntity<ResAPI>> postFormData(Api api) {
         return postCtrl.postFormData(api);
     }
 }

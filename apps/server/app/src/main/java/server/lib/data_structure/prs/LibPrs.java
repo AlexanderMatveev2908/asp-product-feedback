@@ -11,12 +11,12 @@ import server.lib.data_structure.prs.sub.F_PrsCases;
 
 public final class LibPrs extends F_PrsCases {
 
-    public static <T> T tFormJson(String json, Class<T> cls) {
+    public static final <T> T tFormJson(String json, Class<T> cls) {
         Map<String, Object> map = mapFromJson(json);
         return tFromMap(map, cls);
     }
 
-    public static <T> T tFromMap(Map<String, Object> map, Class<T> cls) {
+    public static final <T> T tFromMap(Map<String, Object> map, Class<T> cls) {
         try {
             return Jack.mapper.convertValue(map, cls);
         } catch (Exception err) {
@@ -25,7 +25,7 @@ public final class LibPrs extends F_PrsCases {
         }
     }
 
-    public static LinkedHashMap<String, Object> linkedMap(Object... kvp) {
+    public static final LinkedHashMap<String, Object> linkedMap(Object... kvp) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 
         if (kvp.length % 2 != 0)
@@ -37,7 +37,7 @@ public final class LibPrs extends F_PrsCases {
         return map;
     }
 
-    public static <T> Map<String, Object> mapFormT(T arg) {
+    public static final <T> Map<String, Object> mapFormT(T arg) {
         Map<String, Object> map = new HashMap<>();
 
         if (arg == null)

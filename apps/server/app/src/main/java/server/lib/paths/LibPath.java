@@ -35,7 +35,7 @@ public final class LibPath {
         throw new ErrAPI("do not instantiate");
     }
 
-    private static void ensureDirs() {
+    private static final void ensureDirs() {
         try {
             Files.createDirectories(IMAGES_DIR);
             Files.createDirectories(VIDEOS_DIR);

@@ -1,7 +1,7 @@
 package server.lib.dev.lib_log.sub;
 
 public class C_LibLogErr extends B_LibLogAio {
-  public static void logErr(Throwable err) {
+  public static final void logErr(Throwable err) {
     wErr(err);
 
     startLog();

@@ -27,7 +27,7 @@ public class PostFormSvc {
   private final CloudSvc cloud;
 
   @SuppressWarnings("unchecked")
-  private Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
+  private final Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
     Set<String> assetKeys = Set.of("images", "videos");
     List<Mono<CloudAsset>> promises = new ArrayList<>();
 
@@ -47,12 +47,12 @@ public class PostFormSvc {
     return Flux.merge(promises).collectList();
   }
 
-  private Mono<List<Integer>> reduceDeletions(List<CloudAsset> saved) {
+  private final Mono<List<Integer>> reduceDeletions(List<CloudAsset> saved) {
     return Flux.fromIterable(saved)
         .flatMap(el -> cloud.delete(el.getPublicId(), el.getResourceType())).collectList();
   }
 
-  public Mono<Tuple2<Integer, Integer>> postForm(Api api) {
+  public final Mono<Tuple2<Integer, Integer>> postForm(Api api) {
     var form = api.getParsedForm().orElse(null);
 
     if (form == null)

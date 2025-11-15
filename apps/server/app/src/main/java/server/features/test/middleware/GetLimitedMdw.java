@@ -11,7 +11,7 @@ import server.middleware.base_mdw.BaseMdw;
 @Component
 public class GetLimitedMdw extends BaseMdw {
     @Override
-    public Mono<Void> handle(Api api, WebFilterChain chain) {
+    public final Mono<Void> handle(Api api, WebFilterChain chain) {
         return isTarget(api, chain, "/test/limited", HttpMethod.GET, () -> {
             return limit(api, 3, 15).then(chain.filter(api));
         });

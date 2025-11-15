@@ -9,7 +9,7 @@ import server.lib.dev.lib_log.LibLog;
 
 public class A_PrsBase {
 
-  public static String jsonFromObj(Object obj) {
+  public static final String jsonFromObj(Object obj) {
     try {
       return Jack.mapper.writeValueAsString(obj);
     } catch (Exception err) {
@@ -18,7 +18,7 @@ public class A_PrsBase {
     }
   }
 
-  public static Map<String, Object> mapFromJson(String txt) {
+  public static final Map<String, Object> mapFromJson(String txt) {
     try {
       return Jack.mapper.readValue(txt, new TypeReference<Map<String, Object>>() {
       });

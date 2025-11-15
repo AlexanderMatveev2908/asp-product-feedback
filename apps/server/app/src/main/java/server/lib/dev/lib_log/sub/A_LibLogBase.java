@@ -12,7 +12,7 @@ public class A_LibLogBase {
     private record RecMainLog(String time, String fileName, String thread) {
     }
 
-    private static RecMainLog getMainLogInfo() {
+    private static final RecMainLog getMainLogInfo() {
         String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
         StackTraceElement caller = Arrays.stream(Thread.currentThread().getStackTrace())
@@ -25,28 +25,28 @@ public class A_LibLogBase {
         return new RecMainLog(time, fileName, thread);
     }
 
-    public static void limiter() {
+    public static final void limiter() {
         System.out.println("-".repeat(60));
     }
 
-    public static void startLog() {
+    public static final void startLog() {
         System.out.println("\n");
         limiter();
     }
 
-    public static void endLog() {
+    public static final void endLog() {
         limiter();
         System.out.println("\n");
     }
 
-    public static void logHeader(String title) {
+    public static final void logHeader(String title) {
         RecMainLog mainInfo = getMainLogInfo();
 
         System.out.printf("⏰ %s • 🗃️ %s • %s%n", mainInfo.time(), mainInfo.fileName(),
                 title != null ? "📌 " + title : "🧵 " + mainInfo.thread());
     }
 
-    public static void logTtl(String title, Object... arg) {
+    public static final void logTtl(String title, Object... arg) {
 
         startLog();
         logHeader(title);
@@ -60,7 +60,7 @@ public class A_LibLogBase {
         endLog();
     }
 
-    public static void log(Object... arg) {
+    public static final void log(Object... arg) {
         logTtl(null, arg);
     }
 

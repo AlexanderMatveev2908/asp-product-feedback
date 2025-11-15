@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public final class LibDev {
 
-    public void mng() {
+    public final void mng() {
     }
 
 }

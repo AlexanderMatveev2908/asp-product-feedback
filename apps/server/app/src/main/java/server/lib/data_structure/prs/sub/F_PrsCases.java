@@ -1,7 +1,7 @@
 package server.lib.data_structure.prs.sub;
 
 public class F_PrsCases extends E_PrsPrim {
-  public static String snakeToCamel(String key) {
+  public static final String snakeToCamel(String key) {
     StringBuilder sb = new StringBuilder();
     boolean upperNext = false;
 
