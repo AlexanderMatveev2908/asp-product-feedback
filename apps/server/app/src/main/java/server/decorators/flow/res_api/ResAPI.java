@@ -42,7 +42,7 @@ public final class ResAPI {
     public ResAPI() {
     }
 
-    public static Map<String, Object> flatData(Map<String, Object> data) {
+    public static final Map<String, Object> flatData(Map<String, Object> data) {
         Map<String, Object> flatten = new HashMap<>();
         if (data == null)
             flatten.put("data", null);
@@ -52,40 +52,40 @@ public final class ResAPI {
         return flatten;
     }
 
-    public Map<String, Object> getData() {
+    public final Map<String, Object> getData() {
         return data == null ? null : new LinkedHashMap<>(data);
     }
 
-    public List<ResponseCookie> getCookies() {
+    public final List<ResponseCookie> getCookies() {
         return List.copyOf(cookies);
     }
 
-    public ResAPI status(int status) {
+    public final ResAPI status(int status) {
         this.status = status;
         return this;
     }
 
-    public ResAPI msg(String msg) {
+    public final ResAPI msg(String msg) {
         this.msg = msg;
         return this;
     }
 
-    public ResAPI data(Map<String, Object> data) {
+    public final ResAPI data(Map<String, Object> data) {
         this.data = (data == null) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
         return this;
     }
 
-    public ResAPI cookie(ResponseCookie cookie) {
+    public final ResAPI cookie(ResponseCookie cookie) {
         this.cookies.add(cookie);
         return this;
     }
 
-    public ResAPI delCookie(ResponseCookie cookie) {
+    public final ResAPI delCookie(ResponseCookie cookie) {
         this.deleteCookies.add(cookie);
         return this;
     }
 
-    public Mono<ResponseEntity<ResAPI>> build() {
+    public final Mono<ResponseEntity<ResAPI>> build() {
 
         ResponseEntity.BodyBuilder builder = ResponseEntity.status(status);
         for (ResponseCookie cookie : cookies)

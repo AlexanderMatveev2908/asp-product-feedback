@@ -21,7 +21,7 @@ public enum MetaRes {
     private final int code;
     private final String msg;
 
-    public static MetaRes fromCode(int code) {
+    public static final MetaRes fromCode(int code) {
         for (MetaRes m : values())
             if (m.code == code)
                 return m;
@@ -29,7 +29,7 @@ public enum MetaRes {
         return null;
     }
 
-    public static String prettyMsg(String msg, int status) {
+    public static final String prettyMsg(String msg, int status) {
         String emj = ActT.emjFromStatus(status);
         String safeMsg = msg != null ? msg : fromCode(status).getMsg();
 

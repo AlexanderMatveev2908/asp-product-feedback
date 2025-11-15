@@ -27,7 +27,7 @@ public final class ErrAPI extends RuntimeException implements RootCls {
         this(msg, 500, null);
     }
 
-    public Map<String, Object> getData() {
+    public final Map<String, Object> getData() {
         return data == null ? null : Map.copyOf(data);
     }
 

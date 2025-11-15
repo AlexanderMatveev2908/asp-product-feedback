@@ -49,7 +49,7 @@ public final class AppFile {
         this.filePath = LibPath.ASSETS_DIR.resolve(this.field).resolve(this.filename);
     }
 
-    public void saveLocally() {
+    public final void saveLocally() {
         try {
             Files.write(this.getFilePath(), this.getBts(),
                     StandardOpenOption.CREATE,
@@ -59,7 +59,7 @@ public final class AppFile {
         }
     }
 
-    public void deleteLocally() {
+    public final void deleteLocally() {
         try {
             Files.deleteIfExists(this.getFilePath());
         } catch (IOException err) {
@@ -67,7 +67,7 @@ public final class AppFile {
         }
     }
 
-    public ByteArrayResource getResourceFromBts() {
+    public final ByteArrayResource getResourceFromBts() {
         return new ByteArrayResource(this.bts) {
             @Override
             public String getFilename() {
@@ -76,11 +76,11 @@ public final class AppFile {
         };
     }
 
-    public FileSystemResource getResourceFromPath() {
+    public final FileSystemResource getResourceFromPath() {
         return new FileSystemResource(filePath);
     }
 
-    public Map<String, Object> getFancyShape() {
+    public final Map<String, Object> getFancyShape() {
         Map<String, Object> fancyMap = new LinkedHashMap<>();
 
         try {

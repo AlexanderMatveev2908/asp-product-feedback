@@ -10,7 +10,7 @@ import server.decorators.flow.res_api.ResAPI;
 
 public final class ResApiJson extends JsonSerializer<ResAPI> {
     @Override
-    public void serialize(ResAPI res, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public final void serialize(ResAPI res, JsonGenerator gen, SerializerProvider serializers) throws IOException {
 
         gen.writeStartObject();
         gen.writeStringField("msg", res.getMsg());

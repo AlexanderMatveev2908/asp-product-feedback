@@ -17,7 +17,7 @@ public final class LifeSpawn {
     private final RD rd;
 
     @SuppressWarnings({ "UnnecessaryTemporaryOnConversionFromString" })
-    public void lifeCheck(WebServerInitializedEvent e) {
+    public final void lifeCheck(WebServerInitializedEvent e) {
         rd.dbSize().doOnNext(size -> {
 
             LibLog.log(String.format("🚀 server running on => %d...", e.getWebServer().getPort()),
