@@ -41,6 +41,8 @@ Together they form a clean, modern **full-stack architecture** 🚀
 - **Spring Boot (WebFlux)** — Reactive, non-blocking backend framework powered by an **event-loop** execution model
 - **Project Reactor** — Core reactive foundation powering **WebFlux** and **Redis** for fully non-blocking data flows
 - **Redis (Lettuce)** — Async/reactive Redis client for caching and real-time data
+- **PostgreSQL + R2DBC** — Asynchronous database access with reactive drivers
+- **Liquibase** — Database migrations, written in raw SQL for full control
 - **Cloudinary (Reactive WebClient)** — Manually integrated using Spring’s WebClient, enabling fully non-blocking image and video uploads
 - **java_pkg_cli** — Custom **Python** CLI utility to automatically add dependencies to both the **TOML catalog** and **Gradle build file**, eliminating repetitive hardcoding and improving consistency in dependency management
 
