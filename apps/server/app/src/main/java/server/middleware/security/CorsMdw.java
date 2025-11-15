@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.api.Api;
 import server.lib.data_structure.Jack;
@@ -34,12 +34,12 @@ public final class CorsMdw implements WebFilter {
     private final EnvVars envKeeper;
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
-        Api api = (Api) exc;
-        ServerHttpResponse res = api.getResponse();
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+        final Api api = (Api) exc;
+        final ServerHttpResponse res = api.getResponse();
 
-        String origin = api.getHeader(HttpHeaders.ORIGIN);
-        String allowed = envKeeper.getFrontUrl();
+        final String origin = api.getHeader(HttpHeaders.ORIGIN);
+        final String allowed = envKeeper.getFrontUrl();
 
         if (!origin.isBlank() && !origin.startsWith(allowed))
             return writeForbidden(res, origin);
@@ -54,28 +54,28 @@ public final class CorsMdw implements WebFilter {
         return chain.filter(api);
     }
 
-    private Mono<Void> writeForbidden(ServerHttpResponse res, String origin) {
+    private final Mono<Void> writeForbidden(ServerHttpResponse res, String origin) {
         res.setStatusCode(HttpStatus.FORBIDDEN);
         res.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
-        String msg = String.format("❌ %s not allowed ⚔️", origin);
+        final String msg = String.format("❌ %s not allowed ⚔️", origin);
         LibLog.log(msg);
 
-        String body;
+        final String body;
         try {
             body = Jack.mapper.writeValueAsString(Map.of("msg", msg, "status", 403));
         } catch (JsonProcessingException err) {
             throw new ErrAPI("err writing json for cors response");
         }
 
-        DataBuffer buff = res.bufferFactory().wrap(LibPrs.binaryFromUtf8(body));
+        final DataBuffer buff = res.bufferFactory().wrap(LibPrs.binaryFromUtf8(body));
         return res.writeWith(Mono.just(buff));
     }
 
-    private void setCorsHeaders(ServerHttpResponse res, String allowed) {
-        String allowedHdr = "Origin, Content-Type, Accept, Authorization";
+    private final void setCorsHeaders(ServerHttpResponse res, String allowed) {
+        final String allowedHdr = "Origin, Content-Type, Accept, Authorization";
 
-        HttpHeaders resHdr = res.getHeaders();
+        final HttpHeaders resHdr = res.getHeaders();
         resHdr.set(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, allowedHdr);
         resHdr.set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, allowed);
         resHdr.set(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, PATCH, DELETE, OPTIONS");

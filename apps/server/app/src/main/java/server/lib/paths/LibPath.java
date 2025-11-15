@@ -15,6 +15,8 @@ public final class LibPath {
     public static final Path LOG_DIR;
     public static final Path LOG_FILE;
     public static final Path LOG_FILE_ERR;
+    public static final Path CERTS_DIR;
+    public static final Path CA_FILE;
 
     static {
         ASSETS_DIR = SERVER_DIR.resolve("assets").normalize();
@@ -23,6 +25,8 @@ public final class LibPath {
         LOG_DIR = SERVER_DIR.resolve("logger").normalize();
         LOG_FILE = LOG_DIR.resolve("log.json");
         LOG_FILE_ERR = LOG_DIR.resolve("log_err.json");
+        CERTS_DIR = SERVER_DIR.resolve("certs").normalize();
+        CA_FILE = CERTS_DIR.resolve("supabase-ca.crt");
 
         ensureDirs();
     }
@@ -31,11 +35,12 @@ public final class LibPath {
         throw new ErrAPI("do not instantiate");
     }
 
-    private static void ensureDirs() {
+    private static final void ensureDirs() {
         try {
             Files.createDirectories(IMAGES_DIR);
             Files.createDirectories(VIDEOS_DIR);
             Files.createDirectories(LOG_DIR);
+            Files.createDirectories(CERTS_DIR);
 
             if (!Files.exists(LOG_FILE))
                 Files.createFile(LOG_FILE);

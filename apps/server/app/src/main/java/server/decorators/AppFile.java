@@ -40,7 +40,7 @@ public final class AppFile {
         this.bts = (bts == null) ? new byte[0] : bts.clone();
 
         String ext = "";
-        int idxDot = filename.lastIndexOf('.');
+        final int idxDot = filename.lastIndexOf('.');
         if (idxDot != -1 && idxDot < filename.length() - 1) {
             ext = filename.substring(idxDot);
         }
@@ -49,7 +49,7 @@ public final class AppFile {
         this.filePath = LibPath.ASSETS_DIR.resolve(this.field).resolve(this.filename);
     }
 
-    public void saveLocally() {
+    public final void saveLocally() {
         try {
             Files.write(this.getFilePath(), this.getBts(),
                     StandardOpenOption.CREATE,
@@ -59,7 +59,7 @@ public final class AppFile {
         }
     }
 
-    public void deleteLocally() {
+    public final void deleteLocally() {
         try {
             Files.deleteIfExists(this.getFilePath());
         } catch (IOException err) {
@@ -67,7 +67,7 @@ public final class AppFile {
         }
     }
 
-    public ByteArrayResource getResourceFromBts() {
+    public final ByteArrayResource getResourceFromBts() {
         return new ByteArrayResource(this.bts) {
             @Override
             public String getFilename() {
@@ -76,20 +76,20 @@ public final class AppFile {
         };
     }
 
-    public FileSystemResource getResourceFromPath() {
+    public final FileSystemResource getResourceFromPath() {
         return new FileSystemResource(filePath);
     }
 
-    public Map<String, Object> getFancyShape() {
-        Map<String, Object> fancyMap = new LinkedHashMap<>();
+    public final Map<String, Object> getFancyShape() {
+        final Map<String, Object> fancyMap = new LinkedHashMap<>();
 
         try {
-            Class<?> cls = this.getClass();
+            final Class<?> cls = this.getClass();
 
-            for (Field f : cls.getDeclaredFields()) {
+            for (final Field f : cls.getDeclaredFields()) {
                 f.setAccessible(true);
 
-                Object val = f.get(this);
+                final Object val = f.get(this);
 
                 if ("bts".equals(f.getName()))
                     fancyMap.put("bytes", "💾 long binary code...");

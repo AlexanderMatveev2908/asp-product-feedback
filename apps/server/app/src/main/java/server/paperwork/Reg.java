@@ -16,31 +16,31 @@ public final class Reg {
                 throw new ErrAPI("Keep Reg class as static helper");
         }
 
-        private static boolean checkReg(String arg, String reg) {
+        private static final boolean checkReg(String arg, String reg) {
                 return arg != null && Pattern.matches(reg, arg);
         }
 
-        public static boolean isName(String arg) {
+        public static final boolean isName(String arg) {
                 return checkReg(arg, NAME);
         }
 
-        public static boolean isTxt(String arg) {
+        public static final boolean isTxt(String arg) {
                 return checkReg(arg, TXT);
         }
 
-        public static boolean isInt(String arg) {
+        public static final boolean isInt(String arg) {
                 return checkReg(arg, INT);
         }
 
-        public static boolean isFloat(String arg) {
+        public static final boolean isFloat(String arg) {
                 return checkReg(arg, FLOAT);
         }
 
-        public static boolean isUUID(String arg) {
+        public static final boolean isUUID(String arg) {
                 return checkReg(arg, UUID);
         }
 
-        public static boolean startsWithEmj(String arg) {
+        public static final boolean startsWithEmj(String arg) {
                 return checkReg(arg, EMOJI);
 
         }

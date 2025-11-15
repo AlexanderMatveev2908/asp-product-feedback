@@ -24,10 +24,10 @@ import server.lib.dev.lib_log.LibLog;
 public final class LogMdw implements WebFilter {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
-        Api api = (Api) exc;
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+        final Api api = (Api) exc;
 
-        Map<String, Object> arg = new LinkedHashMap<>();
+        final Map<String, Object> arg = new LinkedHashMap<>();
         arg.put("url", api.getPath());
         arg.put("method", api.getMethod().toString());
         arg.put("accessToken", normalizeEmpty(api.getHeader("authorization")));
@@ -38,7 +38,7 @@ public final class LogMdw implements WebFilter {
 
         return api.getBdStr().defaultIfEmpty("").doOnNext(body -> {
 
-            var norm = api.getContentType().contains("multipart/form-data") ? null : normalizeEmpty(body);
+            final var norm = api.getContentType().contains("multipart/form-data") ? null : normalizeEmpty(body);
 
             try {
                 arg.put("body", LibShape.hasText(norm) ? LibPrs.mapFromJson((String) norm) : norm);
@@ -51,27 +51,27 @@ public final class LogMdw implements WebFilter {
 
     }
 
-    private Object normalizeEmpty(Object obj) {
+    private final Object normalizeEmpty(Object obj) {
         if (obj == null)
             return null;
-        if (obj instanceof String str && str.isBlank())
+        if (obj instanceof final String str && str.isBlank())
             return null;
-        if (obj instanceof Map<?, ?> map && map.isEmpty())
+        if (obj instanceof final Map<?, ?> map && map.isEmpty())
             return null;
 
         return obj;
     }
 
-    private Map<String, Object> handleParsedForm(Api api) {
-        var parsedForm = api.getParsedForm().orElse(null);
+    private final Map<String, Object> handleParsedForm(Api api) {
+        final var parsedForm = api.getParsedForm().orElse(null);
         if (parsedForm == null || parsedForm.isEmpty())
             return null;
 
-        Map<String, Object> cpyForm = parsedForm.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,
+        final Map<String, Object> cpyForm = parsedForm.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,
                 Map.Entry::getValue, (oldVal, newVal) -> newVal, LinkedHashMap::new));
 
-        List<AppFile> images = (List<AppFile>) cpyForm.get("images");
-        List<AppFile> videos = (List<AppFile>) cpyForm.get("videos");
+        final List<AppFile> images = (List<AppFile>) cpyForm.get("images");
+        final List<AppFile> videos = (List<AppFile>) cpyForm.get("videos");
 
         if (images != null)
             cpyForm.put("images", images.stream().map(AppFile::getFancyShape).toList());

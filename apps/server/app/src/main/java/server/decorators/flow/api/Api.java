@@ -33,7 +33,7 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
         super(exc);
 
         this.cachedBody = DataBufferUtils.join(exc.getRequest().getBody()).map(buf -> {
-            byte[] bytes = new byte[buf.readableByteCount()];
+            final byte[] bytes = new byte[buf.readableByteCount()];
             buf.read(bytes);
             DataBufferUtils.release(buf);
             return bytes;
@@ -41,12 +41,12 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
     }
 
     @Override
-    public ServerWebExchange getExch() {
+    public final ServerWebExchange getExch() {
         return this;
     }
 
     @Override
-    public ServerHttpRequest getRequest() {
+    public final ServerHttpRequest getRequest() {
         return new ServerHttpRequestDecorator(super.getRequest()) {
             @Override
             public Flux<DataBuffer> getBody() {
@@ -59,7 +59,7 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
         };
     }
 
-    public <T> Mono<T> getBd(TypeReference<T> type) {
+    public final <T> Mono<T> getBd(TypeReference<T> type) {
         return cachedBody.flatMap(bytes -> {
             if (bytes.length == 0)
                 return Mono.empty();
@@ -68,24 +68,25 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
         }).onErrorMap(err -> new ErrAPI("wrong data format", 400));
     }
 
-    public Mono<String> getBdStr() {
+    public final Mono<String> getBdStr() {
         return cachedBody.flatMap(optBytes -> {
             if (optBytes.length == 0)
                 return Mono.empty();
 
-            Charset charset = Optional.ofNullable(getRequest().getHeaders().getContentType()).map(MediaType::getCharset)
+            final Charset charset = Optional.ofNullable(getRequest().getHeaders().getContentType())
+                    .map(MediaType::getCharset)
                     .orElse(StandardCharsets.UTF_8);
 
             return Mono.just(new String(optBytes, charset));
         }).cache();
     }
 
-    public Mono<byte[]> getRawBd() {
+    public final Mono<byte[]> getRawBd() {
         return cachedBody.map(bytes -> bytes.clone()).cache();
     }
 
     // ? commit response
-    public boolean isResCmt() {
+    public final boolean isResCmt() {
         return getResponse().isCommitted();
     }
 

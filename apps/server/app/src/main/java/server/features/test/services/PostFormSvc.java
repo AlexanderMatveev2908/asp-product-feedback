@@ -27,16 +27,16 @@ public class PostFormSvc {
   private final CloudSvc cloud;
 
   @SuppressWarnings("unchecked")
-  private Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
-    Set<String> assetKeys = Set.of("images", "videos");
-    List<Mono<CloudAsset>> promises = new ArrayList<>();
+  private final Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
+    final Set<String> assetKeys = Set.of("images", "videos");
+    final List<Mono<CloudAsset>> promises = new ArrayList<>();
 
-    for (Map.Entry<String, Object> pair : form.entrySet()) {
+    for (final Map.Entry<String, Object> pair : form.entrySet()) {
       if (!assetKeys.contains(pair.getKey()))
         continue;
 
-      List<AppFile> arg = (List<AppFile>) pair.getValue();
-      for (AppFile f : arg) {
+      final List<AppFile> arg = (List<AppFile>) pair.getValue();
+      for (final AppFile f : arg) {
         if (!Files.exists(f.getFilePath()))
           throw new ErrAPI("file does not exist");
 
@@ -47,23 +47,23 @@ public class PostFormSvc {
     return Flux.merge(promises).collectList();
   }
 
-  private Mono<List<Integer>> reduceDeletions(List<CloudAsset> saved) {
+  private final Mono<List<Integer>> reduceDeletions(List<CloudAsset> saved) {
     return Flux.fromIterable(saved)
         .flatMap(el -> cloud.delete(el.getPublicId(), el.getResourceType())).collectList();
   }
 
-  public Mono<Tuple2<Integer, Integer>> postForm(Api api) {
-    var form = api.getParsedForm().orElse(null);
+  public final Mono<Tuple2<Integer, Integer>> postForm(Api api) {
+    final var form = api.getParsedForm().orElse(null);
 
     if (form == null)
       return Mono.error(new ErrAPI("no form data", 400));
 
     return reduceUploads(form).zipWhen(saved -> reduceDeletions(saved)).map(tpl -> {
-      List<CloudAsset> saved = tpl.getT1();
-      List<Integer> deleted = tpl.getT2();
+      final List<CloudAsset> saved = tpl.getT1();
+      final List<Integer> deleted = tpl.getT2();
 
-      int savedCount = saved.size();
-      int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
+      final int savedCount = saved.size();
+      final int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
 
       return Tuples.of(savedCount, deletedCount);
     });

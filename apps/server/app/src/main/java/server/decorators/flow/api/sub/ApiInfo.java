@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.server.ServerWebExchange;
 
@@ -84,11 +85,11 @@ public interface ApiInfo {
   }
 
   default boolean matchPath(String arg, HttpMethod method) {
-    String original = getPath();
-    String[] parts = original.split("\\/", -1);
-    int lastIdx = parts.length - 1;
-    String lastPart = parts[lastIdx];
-    String cut;
+    final String original = getPath();
+    final String[] parts = original.split("\\/", -1);
+    final int lastIdx = parts.length - 1;
+    final String lastPart = parts[lastIdx];
+    final String cut;
 
     if (lastPart.isBlank())
       cut = original.replaceFirst("\\/+$", "");
@@ -108,14 +109,14 @@ public interface ApiInfo {
   }
 
   private String getIp() {
-    var req = getExch().getRequest();
+    final ServerHttpRequest req = getExch().getRequest();
 
     return Optional.ofNullable(req.getRemoteAddress()).map(addr -> addr.getAddress()).map(inet -> inet.getHostAddress())
         .orElse("unknown");
   }
 
   default String getClientIp() {
-    String xff = getHeader("x-forwarded-for");
+    final String xff = getHeader("x-forwarded-for");
 
     if (!xff.isBlank())
       return xff.split(",")[0].trim();

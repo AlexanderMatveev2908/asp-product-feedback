@@ -9,7 +9,7 @@ import server.decorators.flow.res_api.ResAPI;
 @Component
 public class GetWakeUpCtrl {
 
-    public Mono<ResponseEntity<ResAPI>> wakeUp() {
+    public final Mono<ResponseEntity<ResAPI>> wakeUp() {
         return new ResAPI(200).msg("ops I did not listen the alarm ⏰").build();
     }
 }

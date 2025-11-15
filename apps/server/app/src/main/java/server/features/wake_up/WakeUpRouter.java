@@ -9,13 +9,14 @@ import server.decorators.flow.res_api.ResAPI;
 import server.features.wake_up.controllers.GetWakeUpCtrl;
 import server.router.RouterAPI;
 
-@RouterAPI("/api/v1/wake-up") @RequiredArgsConstructor
+@RouterAPI("/api/v1/wake-up")
+@RequiredArgsConstructor
 public class WakeUpRouter {
 
     private final GetWakeUpCtrl getCtrl;
 
     @GetMapping
-    public Mono<ResponseEntity<ResAPI>> wakeUp() {
+    public final Mono<ResponseEntity<ResAPI>> wakeUp() {
         return getCtrl.wakeUp();
     }
 }

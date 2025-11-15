@@ -17,13 +17,13 @@ import server.lib.paths.LibPath;
 public class B_LibLogAio extends A_LibLogBase {
   private static final ExecutorService logThread = Executors.newSingleThreadExecutor();
 
-  protected static void asyncLog(Path p, Object arg) {
+  protected static final void asyncLog(Path p, Object arg) {
     logThread.submit(() -> {
       try (BufferedWriter bw = Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
           StandardOpenOption.TRUNCATE_EXISTING)) {
 
-        String json;
-        if (arg instanceof Throwable err)
+        final String json;
+        if (arg instanceof final Throwable err)
           json = LibPrs.jsonFromObj(Map.of("msg", err.getMessage(), "type", err.getClass().getSimpleName(), "time",
               LocalTime.now().toString()));
         else
@@ -37,11 +37,11 @@ public class B_LibLogAio extends A_LibLogBase {
     });
   }
 
-  public static void wOk(Object arg) {
+  public static final void wOk(Object arg) {
     asyncLog(LibPath.LOG_FILE, arg);
   }
 
-  public static void wErr(Object arg) {
+  public static final void wErr(Object arg) {
     asyncLog(LibPath.LOG_FILE_ERR, arg);
   }
 

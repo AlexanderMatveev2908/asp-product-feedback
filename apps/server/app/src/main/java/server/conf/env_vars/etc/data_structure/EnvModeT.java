@@ -1,4 +1,4 @@
-package server.conf.env_conf.etc.data_structure;
+package server.conf.env_vars.etc.data_structure;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ public enum EnvModeT {
 
     private final String val;
 
-    public static EnvModeT fromValue(String val) {
-        for (EnvModeT mode : values())
+    public static final EnvModeT fromValue(String val) {
+        for (final EnvModeT mode : values())
             if (mode.val.equalsIgnoreCase(val))
                 return mode;
 

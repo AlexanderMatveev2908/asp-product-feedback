@@ -30,8 +30,12 @@ dependencies {
 // ? general
     implementation(libs.guava)
     implementation(libs.dotenv)
+    // ? shortcuts dev
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
+    testAnnotationProcessor(libs.lombok)
+    testCompileOnly(libs.lombok)
+    // ? validator
     implementation(libs.spring.boot.starter.validation)
     // ? core
     implementation(libs.reactor.core)
@@ -40,18 +44,28 @@ dependencies {
     implementation(libs.redis.lettuce)
     // ? checkers
     compileOnly(libs.spotbugsAnnotations)
+    testCompileOnly(libs.spotbugsAnnotations)
     // ? tests
     testImplementation(libs.spring.boot.starter.test) {
     exclude(group = "org.junit.vintage")
     }
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
-    testCompileOnly(libs.lombok)
-    testAnnotationProcessor(libs.lombok)
-    testImplementation(libs.datafaker)
-    testImplementation(libs.spotbugsAnnotations)
-    implementation(libs.jacksonDatatypeJdk8)
+    // ? faker
     implementation(libs.datafaker)
+    testImplementation(libs.datafaker)
+    // ? modern types parse
+    implementation(libs.jacksonDatatypeJdk8)
+    // ? sql core
+    runtimeOnly(libs.postgresql)
+    // ? migrations
+    implementation(libs.liquibaseCore)
+    // ? reactive database
+    implementation(libs.r2dbcPostgresql)
+    // ? manage pool connections
+    implementation(libs.r2dbcPool)
+    // ? provide ORM SQl style for Java
+    implementation(libs.springBootStarterDataR2dbc)
 }
 //_e
 

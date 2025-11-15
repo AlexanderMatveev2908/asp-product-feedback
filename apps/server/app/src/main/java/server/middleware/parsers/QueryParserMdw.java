@@ -17,11 +17,11 @@ import server.middleware.parsers.sub.ParserManager;
 public final class QueryParserMdw extends ParserManager implements WebFilter {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
-        Api api = (Api) exc;
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+        final Api api = (Api) exc;
 
-        String query = api.getQuery();
-        Map<String, Object> parsedQuery = nestDict(query);
+        final String query = api.getQuery();
+        final Map<String, Object> parsedQuery = nestDict(query);
 
         api.setParsedQueryAttr(parsedQuery);
 

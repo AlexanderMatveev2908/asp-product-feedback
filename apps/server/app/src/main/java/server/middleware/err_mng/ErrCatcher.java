@@ -23,9 +23,9 @@ import server.middleware.err_mng.etc.RecMetaErr;
 @Order(-1)
 public final class ErrCatcher implements WebExceptionHandler {
 
-    private ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
+    private final ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
         RecMetaErr recMetaErr = RecMetaErr.fromErr(exc, err);
-        Map<String, Object> data = (err instanceof ErrAPI errInst) ? errInst.getData() : null;
+        Map<String, Object> data = (err instanceof final ErrAPI errInst) ? errInst.getData() : null;
 
         ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data);
 
@@ -33,17 +33,17 @@ public final class ErrCatcher implements WebExceptionHandler {
     }
 
     @Override
-    public Mono<Void> handle(ServerWebExchange exc, Throwable err) {
+    public final Mono<Void> handle(ServerWebExchange exc, Throwable err) {
 
         LibLog.logErr(err);
 
-        ResAPI apiBody = extractResAPi(exc, err);
+        final ResAPI apiBody = extractResAPi(exc, err);
 
-        ServerHttpResponse res = exc.getResponse();
+        final ServerHttpResponse res = exc.getResponse();
         res.setStatusCode(HttpStatus.valueOf(apiBody.getStatus()));
         res.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
-        byte[] bytes;
+        final byte[] bytes;
         try {
             bytes = Jack.mapper.writeValueAsBytes(apiBody);
         } catch (JacksonException errOfErr) {

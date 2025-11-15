@@ -1,7 +1,7 @@
 package server.lib.dev.lib_log.sub;
 
 public class C_LibLogErr extends B_LibLogAio {
-  public static void logErr(Throwable err) {
+  public static final void logErr(Throwable err) {
     wErr(err);
 
     startLog();
@@ -15,15 +15,15 @@ public class C_LibLogErr extends B_LibLogAio {
 
     System.out.println("\t");
 
-    StackTraceElement[] frames = err.getStackTrace();
+    final StackTraceElement[] frames = err.getStackTrace();
 
-    for (StackTraceElement f : frames)
+    for (final StackTraceElement f : frames)
       System.out.printf("📂 %s => 🔢 %d | 🆎 %s | ☢️ %s%n", f.getFileName(), f.getLineNumber(), f.getMethodName(),
           f.toString());
 
-    String msg = err.getMessage();
-    int depth = frames.length;
-    StackTraceElement last = depth > 0 ? frames[0] : null;
+    final String msg = err.getMessage();
+    final int depth = frames.length;
+    final StackTraceElement last = depth > 0 ? frames[0] : null;
 
     System.out.println("\t");
     System.out.printf("📝 msg => %s%n", msg);

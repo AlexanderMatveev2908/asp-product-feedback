@@ -12,7 +12,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import server.conf.cloud.etc.sub.CloudSvcDelete;
 import server.conf.cloud.etc.sub.CloudSvcUpload;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.flow.ErrAPI;
 import server.lib.data_structure.prs.LibPrs;
 
@@ -24,30 +24,30 @@ public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
     private final EnvVars envKeeper;
 
     // ? expected as abstract
-    public EnvVars getEnvKeeper() {
+    public final EnvVars getEnvKeeper() {
         return envKeeper;
     }
 
-    public WebClient getClient() {
-        String cloudName = envKeeper.getCloudName();
+    public final WebClient getClient() {
+        final String cloudName = envKeeper.getCloudName();
         return webClientBuilder.baseUrl("https://api.cloudinary.com/v1_1/" + cloudName).build();
     }
 
-    public String genSign(Map<String, String> params) {
-        String cloudSecret = envKeeper.getCloudSecret();
+    public final String genSign(Map<String, String> params) {
+        final String cloudSecret = envKeeper.getCloudSecret();
 
-        String strParams = params.entrySet().stream().sorted(Map.Entry.comparingByKey())
+        final String strParams = params.entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .map(el -> el.getKey() + "=" + el.getValue()).collect(Collectors.joining("&")) + cloudSecret;
 
         return sign(strParams);
     }
 
     // ? private methods
-    private String sign(String params) {
+    private final String sign(String params) {
         try {
-            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-            byte[] digest = sha1.digest(LibPrs.binaryFromUtf8(params));
-            String sig = HexFormat.of().formatHex(digest);
+            final MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+            final byte[] digest = sha1.digest(LibPrs.binaryFromUtf8(params));
+            final String sig = HexFormat.of().formatHex(digest);
 
             return sig;
         } catch (Exception err) {

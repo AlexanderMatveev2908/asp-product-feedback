@@ -6,16 +6,16 @@ import java.util.UUID;
 import server.paperwork.Reg;
 
 public final class LibShape {
-    public static boolean hasText(Object val) {
-        if (val instanceof String str)
+    public static final boolean hasText(Object val) {
+        if (val instanceof final String str)
             return !str.isBlank();
 
         return false;
     }
 
-    public static boolean isV4(String arg) {
+    public static final boolean isV4(String arg) {
         try {
-            var res = Reg.isUUID(arg);
+            final boolean res = Reg.isUUID(arg);
             UUID.fromString(arg);
 
             return res;
@@ -24,8 +24,8 @@ public final class LibShape {
         }
     }
 
-    public static boolean isList(Object arg) {
-        if (arg instanceof List<?> argList)
+    public static final boolean isList(Object arg) {
+        if (arg instanceof final List<?> argList)
             return !argList.isEmpty();
 
         return false;

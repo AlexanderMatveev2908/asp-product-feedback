@@ -1,11 +1,11 @@
 package server.lib.data_structure.prs.sub;
 
 public class F_PrsCases extends E_PrsPrim {
-  public static String snakeToCamel(String key) {
-    StringBuilder sb = new StringBuilder();
+  public static final String snakeToCamel(String key) {
+    final StringBuilder sb = new StringBuilder();
     boolean upperNext = false;
 
-    for (char c : key.toCharArray()) {
+    for (final char c : key.toCharArray()) {
       if (c == '_') {
         upperNext = true;
       } else if (upperNext) {

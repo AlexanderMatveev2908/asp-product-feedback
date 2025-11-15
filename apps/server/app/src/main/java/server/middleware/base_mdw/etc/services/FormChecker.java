@@ -18,13 +18,13 @@ import server.decorators.flow.api.Api;
 public final class FormChecker {
     private final Validator checker;
 
-    public <T> Mono<Void> check(Api api, T form) {
-        Set<ConstraintViolation<T>> errs = checker.validate(form);
+    public final <T> Mono<Void> check(Api api, T form) {
+        final Set<ConstraintViolation<T>> errs = checker.validate(form);
 
         if (errs.isEmpty())
             return Mono.fromRunnable(() -> api.setMappedDataAttr(form));
 
-        List<Map<String, String>> errors = errs.stream()
+        final List<Map<String, String>> errors = errs.stream()
                 .map(err -> Map.of("field", err.getPropertyPath().toString(), "msg", err.getMessage())).toList();
 
         return Mono.error(new ErrAPI(errors.get(0).get("msg"), 422, Map.of("errs", errors)));

@@ -21,6 +21,10 @@ spotbugs-gradle = "6.0.23"
 spotbugs_annotations = "4.8.3"
 jackson_datatype_jdk8 = "2.17.2"
 datafaker = "2.1.0"
+postgresql = "42.7.3"
+liquibase_core = "4.30.0"
+r2dbc_postgresql = "1.0.5.RELEASE"
+r2dbc_pool = "1.0.2.RELEASE"
 
 
 
@@ -44,6 +48,11 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 datafaker = {module = "net.datafaker:datafaker", version.ref = "datafaker"}
 spotbugsAnnotations = {module = "com.github.spotbugs:spotbugs-annotations", version.ref = "spotbugs_annotations"}
 jacksonDatatypeJdk8 = {module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8", version.ref = "jackson_datatype_jdk8"}
+postgresql = {module = "org.postgresql:postgresql", version.ref = "postgresql"}
+liquibaseCore = {module = "org.liquibase:liquibase-core", version.ref = "liquibase_core"}
+r2dbcPostgresql = {module = "org.postgresql:r2dbc-postgresql", version.ref = "r2dbc_postgresql"}
+springBootStarterDataR2dbc = {module = "org.springframework.boot:spring-boot-starter-data-r2dbc"}
+r2dbcPool = {module = "io.r2dbc:r2dbc-pool", version.ref = "r2dbc_pool"}
 
 
 

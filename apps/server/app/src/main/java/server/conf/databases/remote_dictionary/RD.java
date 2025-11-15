@@ -1,7 +1,4 @@
-package server.conf.db.remote_dictionary;
-
-import java.util.HashMap;
-import java.util.Map;
+package server.conf.databases.remote_dictionary;
 
 import org.springframework.stereotype.Service;
 
@@ -9,7 +6,7 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import reactor.core.publisher.Mono;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.RootCls;
 import server.decorators.flow.ErrAPI;
 
@@ -25,11 +22,11 @@ public final class RD implements RootCls {
         this.cmd = cnt.reactive();
     }
 
-    public RedisReactiveCommands<String, String> getCmd() {
+    public final RedisReactiveCommands<String, String> getCmd() {
         return cmd;
     }
 
-    public Mono<String> checkConnection() {
+    public final Mono<String> checkConnection() {
         return cmd.ping()
                 .onErrorMap(err -> new ErrAPI("rd cnt failed"))
                 .map(res -> {
@@ -39,32 +36,7 @@ public final class RD implements RootCls {
                 });
     }
 
-    public Mono<Map<String, Object>> stats() {
-        return cmd.info()
-                .map(info -> {
-                    Map<String, Object> parsed = new HashMap<>();
-
-                    String[] lines = info.split("\n");
-                    for (String ln : lines) {
-                        ln = ln.trim();
-                        if (ln.isEmpty() || ln.startsWith("#"))
-                            continue;
-
-                        String[] kv = ln.split(":", 2);
-                        if (kv.length == 2)
-                            parsed.put(kv[0], kv[1]);
-
-                    }
-
-                    for (Map.Entry<String, Object> en : parsed.entrySet())
-                        System.out.println(String.format("📊 %s => %s", en.getKey(), en.getValue().toString()));
-
-                    return parsed;
-                })
-                .onErrorMap(err -> new ErrAPI("rd fetch stats failed"));
-    }
-
-    public Mono<Integer> dbSize() {
+    public final Mono<Integer> dbSize() {
         return cmd.dbsize()
                 .onErrorMap(err -> new ErrAPI("rd fetch db size failed"))
                 .map(size -> {
@@ -72,7 +44,7 @@ public final class RD implements RootCls {
                 });
     }
 
-    public void close() {
+    public final void close() {
         if (cnt != null && cnt.isOpen())
             cnt.close();
 

@@ -7,14 +7,14 @@ import server.decorators.flow.ErrAPI;
 
 public interface RootCls {
     default String reflectiveToString() {
-        StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + "{");
+        final StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + "{");
 
         try {
             Class<?> curr = this.getClass();
 
             while (curr != null && !curr.getName().startsWith("java.")) {
-                for (Field f : curr.getDeclaredFields()) {
-                    int mods = f.getModifiers();
+                for (final Field f : curr.getDeclaredFields()) {
+                    final int mods = f.getModifiers();
                     if (Modifier.isStatic(mods) || Modifier.isTransient(mods))
                         continue;
 

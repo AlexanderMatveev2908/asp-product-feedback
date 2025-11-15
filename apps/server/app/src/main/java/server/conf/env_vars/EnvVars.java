@@ -1,12 +1,12 @@
-package server.conf.env_conf;
+package server.conf.env_vars;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import server.conf.env_conf.etc.data_structure.EnvModeT;
-import server.conf.env_conf.etc.paperwork.Resolved;
+import server.conf.env_vars.etc.data_structure.EnvModeT;
+import server.conf.env_vars.etc.paperwork.Resolved;
 
 @Data
 @Validated
@@ -57,11 +57,11 @@ public final class EnvVars {
     @Resolved
     private String redisUrl;
 
-    public EnvModeT getMode() {
+    public final EnvModeT getMode() {
         return EnvModeT.fromValue(this.envMode);
     }
 
-    public String getFrontUrl() {
+    public final String getFrontUrl() {
         return switch (getMode()) {
             case DEV -> frontUrlDev;
             case TEST -> frontUrlTest;
@@ -69,7 +69,7 @@ public final class EnvVars {
         };
     }
 
-    public String getBackUrl() {
+    public final String getBackUrl() {
         return switch (getMode()) {
             case DEV -> backUrlDev;
             case TEST -> backUrlTest;
