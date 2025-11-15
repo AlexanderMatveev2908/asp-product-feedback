@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import reactor.core.publisher.Mono;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.lib.dev.lib_log.LibLog;
 
 public interface CloudSvcDelete {

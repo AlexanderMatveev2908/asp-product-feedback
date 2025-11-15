@@ -1,12 +1,12 @@
-package server.conf.env_conf;
+package server.conf.env_vars;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import server.conf.env_conf.etc.data_structure.EnvModeT;
-import server.conf.env_conf.etc.paperwork.Resolved;
+import server.conf.env_vars.etc.data_structure.EnvModeT;
+import server.conf.env_vars.etc.paperwork.Resolved;
 
 @Data
 @Validated

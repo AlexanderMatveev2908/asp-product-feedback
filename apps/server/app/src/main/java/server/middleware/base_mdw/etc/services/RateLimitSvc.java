@@ -11,9 +11,9 @@ import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.conf.db.remote_dictionary.RD;
-import server.conf.env_conf.EnvVars;
-import server.conf.env_conf.etc.data_structure.EnvModeT;
+import server.conf.databases.remote_dictionary.RD;
+import server.conf.env_vars.EnvVars;
+import server.conf.env_vars.etc.data_structure.EnvModeT;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.api.Api;
 

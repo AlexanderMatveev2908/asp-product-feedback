@@ -1,4 +1,4 @@
-package server.conf.db.remote_dictionary;
+package server.conf.databases.remote_dictionary;
 
 import org.springframework.stereotype.Service;
 
@@ -6,7 +6,7 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import reactor.core.publisher.Mono;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.RootCls;
 import server.decorators.flow.ErrAPI;
 

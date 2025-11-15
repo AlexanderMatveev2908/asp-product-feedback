@@ -1,4 +1,4 @@
-package server.conf.env_conf.etc.data_structure;
+package server.conf.env_vars.etc.data_structure;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

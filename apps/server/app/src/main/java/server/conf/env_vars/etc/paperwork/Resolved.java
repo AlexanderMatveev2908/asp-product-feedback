@@ -1,4 +1,4 @@
-package server.conf.env_conf.etc.paperwork;
+package server.conf.env_vars.etc.paperwork;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
-import server.conf.db.remote_dictionary.RD;
-import server.conf.env_conf.EnvVars;
+import server.conf.databases.remote_dictionary.RD;
+import server.conf.env_vars.EnvVars;
 import server.lib.dev.lib_log.LibLog;
 
 @Service

@@ -1,4 +1,4 @@
-package server.conf.env_conf;
+package server.conf.env_vars;
 
 import java.net.URI;
 import java.nio.file.Files;

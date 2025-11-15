@@ -12,7 +12,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import server.conf.cloud.etc.sub.CloudSvcDelete;
 import server.conf.cloud.etc.sub.CloudSvcUpload;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.flow.ErrAPI;
 import server.lib.data_structure.prs.LibPrs;
 

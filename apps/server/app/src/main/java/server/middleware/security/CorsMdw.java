@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.api.Api;
 import server.lib.data_structure.Jack;

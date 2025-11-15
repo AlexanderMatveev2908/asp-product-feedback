@@ -1,4 +1,4 @@
-package server.conf.db.remote_dictionary;
+package server.conf.databases.remote_dictionary;
 
 import java.time.Duration;
 import java.util.List;

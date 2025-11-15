@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 import reactor.core.publisher.Mono;
 import server.conf.cloud.etc.data_structure.CloudAsset;
 import server.conf.cloud.etc.data_structure.CloudResourceT;
-import server.conf.env_conf.EnvVars;
+import server.conf.env_vars.EnvVars;
 import server.decorators.AppFile;
 
 public interface CloudSvcUpload {
