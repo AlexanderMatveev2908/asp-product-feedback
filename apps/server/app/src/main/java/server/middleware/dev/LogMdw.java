@@ -3,7 +3,6 @@ package server.middleware.dev;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,9 @@ import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
 import server.decorators.AppFile;
+import server.decorators.Nullable;
 import server.decorators.flow.api.Api;
+import server.lib.data_structure.LibMemory;
 import server.lib.data_structure.LibShape;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.lib_log.LibLog;
@@ -30,54 +31,51 @@ public final class LogMdw implements WebFilter {
         final Map<String, Object> arg = new LinkedHashMap<>();
         arg.put("url", api.getPath());
         arg.put("method", api.getMethod().toString());
-        arg.put("accessToken", normalizeEmpty(api.getHeader("authorization")));
-        arg.put("refreshToken", normalizeEmpty(api.getCookie("refreshToken")));
-        arg.put("query", normalizeEmpty(api.getQuery()));
+        arg.put("accessToken", normalizeEmpty(api.getHeader("authorization")).get());
+        arg.put("refreshToken", normalizeEmpty(api.getCookie("refreshToken")).get());
+        arg.put("query", normalizeEmpty(api.getQuery()).get());
         arg.put("parsedQuery", api.getParsedQuery().orElse(null));
         arg.put("parsedForm", handleParsedForm(api));
 
         return api.getBdStr().defaultIfEmpty("").doOnNext(body -> {
 
-            final var norm = api.getContentType().contains("multipart/form-data") ? null : normalizeEmpty(body);
+            final Nullable<Object> norm = api.getContentType().contains("multipart/form-data") ? Nullable.asNone()
+                    : normalizeEmpty(body);
 
-            try {
-                arg.put("body", LibShape.hasText(norm) ? LibPrs.mapFromJson((String) norm) : norm);
-            } catch (Exception err) {
-                LibLog.logErr(err);
-            }
+            arg.put("body", LibShape.hasText(norm.get()) ? LibPrs.mapFromJson((String) norm.get()) : norm.get());
 
             LibLog.wOk(arg);
         }).then(chain.filter(api));
 
     }
 
-    private final Object normalizeEmpty(Object obj) {
-        if (obj == null)
-            return null;
-        if (obj instanceof final String str && str.isBlank())
-            return null;
-        if (obj instanceof final Map<?, ?> map && map.isEmpty())
-            return null;
+    private final Nullable<Object> normalizeEmpty(Object obj) {
+        if (LibShape.isNone(obj))
+            return Nullable.asNone();
 
-        return obj;
+        if (obj instanceof final String str && !LibShape.hasText(str))
+            return Nullable.asNone();
+        if (obj instanceof final Map<?, ?> map && map.isEmpty())
+            return Nullable.asNone();
+
+        return Nullable.of(obj);
     }
 
     private final Map<String, Object> handleParsedForm(Api api) {
-        final var parsedForm = api.getParsedForm().orElse(null);
-        if (parsedForm == null || parsedForm.isEmpty())
+        final Nullable<Map<String, Object>> parsedForm = api.getParsedForm();
+        if (parsedForm.isNone())
             return null;
 
-        final Map<String, Object> cpyForm = parsedForm.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,
-                Map.Entry::getValue, (oldVal, newVal) -> newVal, LinkedHashMap::new));
+        final Map<String, Object> cpyForm = LibMemory.cpyMap(parsedForm.get());
 
-        final List<AppFile> images = (List<AppFile>) cpyForm.get("images");
-        final List<AppFile> videos = (List<AppFile>) cpyForm.get("videos");
+        final Nullable<List<AppFile>> images = Nullable.of((List<AppFile>) cpyForm.get("images"));
+        final Nullable<List<AppFile>> videos = Nullable.of((List<AppFile>) cpyForm.get("videos"));
 
-        if (images != null)
-            cpyForm.put("images", images.stream().map(AppFile::getFancyShape).toList());
+        if (images.isPresent())
+            cpyForm.put("images", images.get().stream().map(AppFile::getFancyShape).toList());
 
-        if (videos != null)
-            cpyForm.put("videos", videos.stream().map(AppFile::getFancyShape).toList());
+        if (videos.isPresent())
+            cpyForm.put("videos", videos.get().stream().map(AppFile::getFancyShape).toList());
 
         return cpyForm;
     }

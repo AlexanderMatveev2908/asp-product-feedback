@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import server.decorators.flow.ErrAPI;
+import server.lib.data_structure.LibShape;
 
 public interface RootCls {
     default String reflectiveToString() {
@@ -12,7 +13,7 @@ public interface RootCls {
         try {
             Class<?> curr = this.getClass();
 
-            while (curr != null && !curr.getName().startsWith("java.")) {
+            while (LibShape.isPresent(curr) && !curr.getName().startsWith("java.")) {
                 for (final Field f : curr.getDeclaredFields()) {
                     final int mods = f.getModifiers();
                     if (Modifier.isStatic(mods) || Modifier.isTransient(mods))

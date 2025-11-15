@@ -1,7 +1,6 @@
 package server.middleware.base_mdw;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -61,7 +60,7 @@ public abstract class BaseMdw implements WebFilter {
     }
 
     protected final <T> Mono<T> checkMultipartForm(Api api, Class<T> cls) {
-        final Optional<Map<String, Object>> parsedFormData = api.getParsedForm();
+        final Nullable<Map<String, Object>> parsedFormData = api.getParsedForm();
         return Mono.defer(() -> parsedFormData.isPresent() ? Mono.just(parsedFormData.get()) : grabBody(api))
                 .flatMap(mapArg -> convertAndCheckForm(api, mapArg, cls));
     }

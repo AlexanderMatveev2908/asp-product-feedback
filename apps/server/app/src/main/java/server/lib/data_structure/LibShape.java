@@ -8,6 +8,7 @@ import server.decorators.flow.ErrAPI;
 import server.paperwork.Reg;
 
 public final class LibShape {
+
     public static final <T> boolean isNone(T arg) {
         return arg == null;
     }
@@ -18,7 +19,7 @@ public final class LibShape {
 
     public static final <T> void yellNone(T arg) {
         if (isNone(arg))
-            throw new ErrAPI("expected value T, received none");
+            throw new ErrAPI("expected Object, received None");
     }
 
     public static final boolean hasText(Object val) {

@@ -5,7 +5,7 @@ import server.lib.data_structure.LibShape;
 
 // ! used only when arg could intentionally can be left as null
 // ! in other places arg must in every case be a non-nullable value
-// ! like an empty string or empty map which at least have methods
+// ! like an empty string or empty map but never 'null'
 @RequiredArgsConstructor
 public final class Nullable<T> {
   public final T data;
@@ -14,7 +14,7 @@ public final class Nullable<T> {
     return new Nullable<K>(arg);
   }
 
-  public static final <K> Nullable<K> none() {
+  public static final <K> Nullable<K> asNone() {
     return new Nullable<K>(null);
   }
 
@@ -24,6 +24,10 @@ public final class Nullable<T> {
 
   public final boolean isPresent() {
     return LibShape.isPresent(data);
+  }
+
+  public final void yellNone() {
+    LibShape.yellNone(data);
   }
 
   public final <K> Object orElse(K def) {

@@ -2,7 +2,6 @@ package server.decorators.flow.res_api;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import lombok.Getter;
 import reactor.core.publisher.Mono;
 import server.decorators.flow.res_api.data_structure.ResApiJson;
 import server.decorators.flow.res_api.meta.MetaRes;
+import server.lib.data_structure.LibShape;
 
 @SuppressFBWarnings({ "EI" })
 @Getter
@@ -32,7 +32,7 @@ public final class ResAPI {
     public ResAPI(int status, String msg, Map<String, Object> data) {
         this.status = status;
         this.msg = msg;
-        this.data = (data == null) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
+        this.data = LibShape.isNone(data) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
     }
 
     public ResAPI(int status) {
@@ -40,16 +40,6 @@ public final class ResAPI {
     }
 
     public ResAPI() {
-    }
-
-    public static final Map<String, Object> flatData(Map<String, Object> data) {
-        final Map<String, Object> flatten = new HashMap<>();
-        if (data == null)
-            flatten.put("data", null);
-        else
-            flatten.putAll(data);
-
-        return flatten;
     }
 
     public final Map<String, Object> getData() {

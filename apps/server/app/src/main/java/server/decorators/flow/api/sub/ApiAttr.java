@@ -1,7 +1,6 @@
 package server.decorators.flow.api.sub;
 
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.web.server.ServerWebExchange;
 
@@ -41,9 +40,9 @@ public interface ApiAttr {
     setAttr("parsedForm", parsed);
   }
 
-  default Optional<Map<String, Object>> getParsedForm() {
+  default Nullable<Map<String, Object>> getParsedForm() {
     Map<String, Object> val = getExch().getAttribute("parsedForm");
-    return val != null ? Optional.of(val) : Optional.empty();
+    return Nullable.of(val);
   }
 
 }

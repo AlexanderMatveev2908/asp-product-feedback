@@ -35,17 +35,18 @@ public interface ApiInfo {
   }
 
   // ? path var available at endpoint level
-  default Optional<UUID> getPathVarId(String key) {
-    Map<String, String> vars = getExch().getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+  default Nullable<UUID> getPathVarId(String key) {
+    Nullable<Map<String, String>> vars = Nullable
+        .of(getExch().getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
 
-    if (vars == null)
-      return Optional.empty();
+    if (vars.isNone())
+      return Nullable.asNone();
 
-    String pathId = vars.get(key);
+    String pathId = vars.get().get(key);
     if (!Reg.isUUID(Nullable.of(pathId)))
-      return Optional.empty();
+      return Nullable.asNone();
 
-    return Optional.of(UUID.fromString(pathId));
+    return Nullable.of(UUID.fromString(pathId));
   }
 
   default Optional<UUID> getPathVarId() {

@@ -14,7 +14,7 @@ import server.lib.data_structure.LibShape;
 public class ParserManager {
     protected static final Nullable<Map<String, Object>> nestDict(String query) {
         if (!LibShape.hasText(query))
-            return Nullable.none();
+            return Nullable.asNone();
 
         final Map<String, Object> dict = new HashMap<>();
 
@@ -59,7 +59,7 @@ public class ParserManager {
 
         if (existingVal instanceof List)
             ((List<Object>) existingVal).add(val);
-        else if (existingVal != null)
+        else if (LibShape.isPresent(existingVal))
             curr.put(lastKey, new ArrayList<>(List.of(existingVal, val)));
         else
             curr.put(lastKey, isArrayKey ? new ArrayList<>(List.of(val)) : val);

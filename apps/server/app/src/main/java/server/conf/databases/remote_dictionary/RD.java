@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 import server.conf.env_vars.EnvVars;
 import server.decorators.RootCls;
 import server.decorators.flow.ErrAPI;
+import server.lib.data_structure.LibShape;
 
 @Service
 public final class RD implements RootCls {
@@ -45,10 +46,10 @@ public final class RD implements RootCls {
     }
 
     public final void close() {
-        if (cnt != null && cnt.isOpen())
+        if (LibShape.isPresent(cnt) && cnt.isOpen())
             cnt.close();
 
-        if (client != null)
+        if (LibShape.isPresent(client))
             client.shutdown();
     }
 

@@ -17,6 +17,7 @@ import reactor.util.function.Tuples;
 import server.conf.cloud.CloudSvc;
 import server.conf.cloud.etc.data_structure.CloudAsset;
 import server.decorators.AppFile;
+import server.decorators.Nullable;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.api.Api;
 
@@ -53,12 +54,12 @@ public class PostFormSvc {
   }
 
   public final Mono<Tuple2<Integer, Integer>> postForm(Api api) {
-    final var form = api.getParsedForm().orElse(null);
+    final Nullable<Map<String, Object>> form = api.getParsedForm();
 
-    if (form == null)
+    if (form.isNone())
       return Mono.error(new ErrAPI("no form data", 400));
 
-    return reduceUploads(form).zipWhen(saved -> reduceDeletions(saved)).map(tpl -> {
+    return reduceUploads(form.get()).zipWhen(saved -> reduceDeletions(saved)).map(tpl -> {
       final List<CloudAsset> saved = tpl.getT1();
       final List<Integer> deleted = tpl.getT2();
 
