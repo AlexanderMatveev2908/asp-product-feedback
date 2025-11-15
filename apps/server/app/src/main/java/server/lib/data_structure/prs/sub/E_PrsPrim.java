@@ -1,14 +1,13 @@
 package server.lib.data_structure.prs.sub;
 
-import java.util.Optional;
-
+import server.decorators.Nullable;
 import server.decorators.flow.ErrAPI;
 import server.lib.data_structure.LibShape;
 
 public class E_PrsPrim extends D_PrsB64 {
 
-  public static final Optional<String> fromAnyToStr(Object arg) {
-    return LibShape.hasText(arg) ? Optional.of((String) arg) : Optional.empty();
+  public static final Nullable<String> fromAnyToStr(Object arg) {
+    return LibShape.hasText(arg) ? Nullable.of((String) arg) : Nullable.asNone();
   }
 
   public static final long fromAnyToLong(Object arg) {

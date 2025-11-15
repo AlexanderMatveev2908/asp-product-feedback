@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +21,7 @@ import reactor.core.scheduler.Schedulers;
 import server.decorators.AppFile;
 import server.decorators.Nullable;
 import server.decorators.flow.api.Api;
+import server.lib.data_structure.LibShape;
 import server.middleware.parsers.sub.ParserManager;
 
 @Component
@@ -111,18 +111,18 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         });
     }
 
-    private static final Optional<AppFile> handleAsset(CtxPart part) {
+    private static final Nullable<AppFile> handleAsset(CtxPart part) {
         final String filename = findPattern("filename", part.headers);
-        if (filename == null)
-            return Optional.empty();
+        if (LibShape.isNone(filename))
+            return Nullable.asNone();
 
         final Matcher cm = Pattern.compile("Content-Type: (.+)").matcher(part.headers);
         final String contentTypePart = cm.find() ? cm.group(1).trim() : null;
-        if (contentTypePart == null)
-            return Optional.empty();
+        if (LibShape.isNone(contentTypePart))
+            return Nullable.asNone();
 
         final Nullable<byte[]> rawFile = Nullable.of(part.body.getBytes(StandardCharsets.ISO_8859_1));
-        return Optional.of(new AppFile(part.name, filename, contentTypePart, rawFile));
+        return Nullable.of(new AppFile(part.name, filename, contentTypePart, rawFile));
     }
 
     public static final String findPattern(String key, String headers) {

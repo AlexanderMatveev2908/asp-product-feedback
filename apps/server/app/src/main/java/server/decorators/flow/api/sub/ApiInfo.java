@@ -1,7 +1,6 @@
 package server.decorators.flow.api.sub;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -21,7 +20,7 @@ public interface ApiInfo {
 
   // ? hdr
   default String getHeader(String name) {
-    return Optional.ofNullable(getExch().getRequest().getHeaders().getFirst(name)).orElse("");
+    return Nullable.of(getExch().getRequest().getHeaders().getFirst(name)).orElse("");
   }
 
   default void addHeader(String k, Object v) {
@@ -30,7 +29,7 @@ public interface ApiInfo {
 
   // ? cookies
   default String getCookie(String name) {
-    return Optional.ofNullable(getExch().getRequest().getCookies().getFirst(name)).map(cookie -> cookie.getValue())
+    return Nullable.of(getExch().getRequest().getCookies().getFirst(name)).map(cookie -> cookie.getValue())
         .orElse("");
   }
 
@@ -49,13 +48,13 @@ public interface ApiInfo {
     return Nullable.of(UUID.fromString(pathId));
   }
 
-  default Optional<UUID> getPathVarId() {
-    String path = getPath();
-    String[] parts = path.split("\\/");
-    int lastIdx = parts.length - 1;
-    String pathId;
+  default Nullable<UUID> getPathVarId() {
+    final String path = getPath();
+    final String[] parts = path.split("\\/");
+    final int lastIdx = parts.length - 1;
+    final String pathId = parts[lastIdx];
 
-    return LibShape.isV4((pathId = parts[lastIdx])) ? Optional.of(UUID.fromString(pathId)) : Optional.empty();
+    return LibShape.isV4(pathId) ? Nullable.of(UUID.fromString(pathId)) : Nullable.asNone();
   }
 
   default boolean hasPathUUID() {
@@ -64,7 +63,7 @@ public interface ApiInfo {
 
   // ? query
   default String getQuery() {
-    return Optional.ofNullable(getExch().getRequest().getURI().getQuery()).orElse("");
+    return Nullable.of(getExch().getRequest().getURI().getQuery()).orElse("");
   }
 
   // ? general
@@ -106,14 +105,17 @@ public interface ApiInfo {
   }
 
   default String getContentType() {
-    return Optional.ofNullable(getExch().getRequest().getHeaders().getContentType()).map(MediaType::toString)
+    return Nullable.of(getExch().getRequest().getHeaders().getContentType()).map(MediaType::toString)
         .orElse("");
   }
 
   private String getIp() {
     final ServerHttpRequest req = getExch().getRequest();
 
-    return Optional.ofNullable(req.getRemoteAddress()).map(addr -> addr.getAddress()).map(inet -> inet.getHostAddress())
+    // ? 1 level nesting -> ip+port
+    // ? 2 level nesting -> ip+hostname
+    // ? 3 level nesting -> ip only
+    return Nullable.of(req.getRemoteAddress()).map(addr -> addr.getAddress()).map(inet -> inet.getHostAddress())
         .orElse("unknown");
   }
 

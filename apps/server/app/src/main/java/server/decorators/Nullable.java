@@ -1,5 +1,8 @@
 package server.decorators;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import lombok.RequiredArgsConstructor;
 import server.lib.data_structure.LibShape;
 
@@ -26,12 +29,22 @@ public final class Nullable<T> {
     return LibShape.isPresent(data);
   }
 
-  public final void yellNone() {
-    LibShape.yellNone(data);
+  public final T orElse(T def) {
+    return isPresent() ? data : def;
   }
 
-  public final <K> Object orElse(K def) {
-    return isPresent() ? get() : def;
+  public final T yellIfNone() {
+    LibShape.yellNone(data);
+    return get();
+  }
+
+  public final <K> Nullable<K> map(Function<T, K> cb) {
+    return isPresent() ? Nullable.of(cb.apply(data)) : Nullable.asNone();
+  }
+
+  public final void ifPresent(Consumer<T> cb) {
+    if (isPresent())
+      cb.accept(data);
   }
 
   public final T get() {

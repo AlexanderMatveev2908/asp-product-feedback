@@ -2,7 +2,6 @@ package server.decorators.flow.api;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -17,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import server.decorators.Nullable;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.api.sub.ApiAttr;
 import server.decorators.flow.api.sub.ApiInfo;
@@ -73,7 +73,7 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
             if (optBytes.length == 0)
                 return Mono.empty();
 
-            final Charset charset = Optional.ofNullable(getRequest().getHeaders().getContentType())
+            final Charset charset = Nullable.of(getRequest().getHeaders().getContentType())
                     .map(MediaType::getCharset)
                     .orElse(StandardCharsets.UTF_8);
 

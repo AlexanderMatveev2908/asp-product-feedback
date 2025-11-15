@@ -1,7 +1,5 @@
 package server.middleware.err_mng.etc;
 
-import java.util.Optional;
-
 import org.springframework.web.server.ServerWebExchange;
 
 import server.decorators.Nullable;
@@ -20,7 +18,7 @@ public final record RecMetaErr(String msg, int status) {
   }
 
   public static final RecMetaErr fromErr(ServerWebExchange exc, Throwable err) {
-    final String originalMsg = Optional.ofNullable(err.getMessage()).orElse("");
+    final String originalMsg = Nullable.of(err.getMessage()).orElse("");
     final RouteFlags flags = RouteFlags.fromMsg(originalMsg);
 
     return flags.isRouteIssue() ? new RecMetaErr(flags.getRouteErrMsg(exc), flags.getRouteErrStatus())
