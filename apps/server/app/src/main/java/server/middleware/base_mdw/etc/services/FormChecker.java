@@ -18,7 +18,7 @@ import server.decorators.flow.api.Api;
 public final class FormChecker {
     private final Validator checker;
 
-    public <T> Mono<Void> check(Api api, T form) {
+    public final <T> Mono<Void> check(Api api, T form) {
         Set<ConstraintViolation<T>> errs = checker.validate(form);
 
         if (errs.isEmpty())

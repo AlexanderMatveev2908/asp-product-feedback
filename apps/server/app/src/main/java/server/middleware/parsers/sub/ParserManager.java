@@ -9,7 +9,7 @@ import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class ParserManager {
-    protected static Map<String, Object> nestDict(String query) {
+    protected static final Map<String, Object> nestDict(String query) {
         if (query == null || query.isBlank())
             return null;
 
@@ -31,7 +31,7 @@ public class ParserManager {
     }
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private static void nestKeyVal(Map<String, Object> dict, String key, Object val) {
+    private static final void nestKeyVal(Map<String, Object> dict, String key, Object val) {
         boolean isArrayKey = key.endsWith("[]");
         String[] parts = key.replace("]", "").split("\\[");
 
@@ -51,7 +51,7 @@ public class ParserManager {
         addVal(curr, lastKey, isArrayKey, val);
     }
 
-    private static void addVal(Map<String, Object> curr, String lastKey, boolean isArrayKey, Object val) {
+    private static final void addVal(Map<String, Object> curr, String lastKey, boolean isArrayKey, Object val) {
         Object existingVal = curr.get(lastKey);
 
         if (existingVal instanceof List)

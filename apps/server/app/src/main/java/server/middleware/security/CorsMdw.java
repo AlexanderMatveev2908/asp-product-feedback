@@ -34,7 +34,7 @@ public final class CorsMdw implements WebFilter {
     private final EnvVars envKeeper;
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
         Api api = (Api) exc;
         ServerHttpResponse res = api.getResponse();
 
@@ -54,7 +54,7 @@ public final class CorsMdw implements WebFilter {
         return chain.filter(api);
     }
 
-    private Mono<Void> writeForbidden(ServerHttpResponse res, String origin) {
+    private final Mono<Void> writeForbidden(ServerHttpResponse res, String origin) {
         res.setStatusCode(HttpStatus.FORBIDDEN);
         res.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
@@ -72,7 +72,7 @@ public final class CorsMdw implements WebFilter {
         return res.writeWith(Mono.just(buff));
     }
 
-    private void setCorsHeaders(ServerHttpResponse res, String allowed) {
+    private final void setCorsHeaders(ServerHttpResponse res, String allowed) {
         String allowedHdr = "Origin, Content-Type, Accept, Authorization";
 
         HttpHeaders resHdr = res.getHeaders();

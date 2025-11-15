@@ -23,7 +23,7 @@ import server.middleware.err_mng.etc.RecMetaErr;
 @Order(-1)
 public final class ErrCatcher implements WebExceptionHandler {
 
-    private ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
+    private final ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
         RecMetaErr recMetaErr = RecMetaErr.fromErr(exc, err);
         Map<String, Object> data = (err instanceof ErrAPI errInst) ? errInst.getData() : null;
 
@@ -33,7 +33,7 @@ public final class ErrCatcher implements WebExceptionHandler {
     }
 
     @Override
-    public Mono<Void> handle(ServerWebExchange exc, Throwable err) {
+    public final Mono<Void> handle(ServerWebExchange exc, Throwable err) {
 
         LibLog.logErr(err);
 

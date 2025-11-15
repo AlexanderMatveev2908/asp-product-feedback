@@ -28,7 +28,7 @@ import server.middleware.parsers.sub.ParserManager;
 public final class FormDataParser extends ParserManager implements WebFilter {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
         var api = (Api) exc;
 
         return splitParts(api).flatMap(parts -> {
@@ -54,7 +54,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         api.isResCmt() ? Mono.empty() : chain.filter(api)));
     }
 
-    private Mono<String[]> splitParts(Api api) {
+    private final Mono<String[]> splitParts(Api api) {
         String contentType = api.getContentType();
         if (!contentType.startsWith("multipart/form-data"))
             return Mono.empty();
@@ -70,7 +70,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         });
     }
 
-    private void handlePart(String prt, CtxParse ctx) {
+    private final void handlePart(String prt, CtxParse ctx) {
         String[] headerAndBody = prt.split("\r\n\r\n", 2);
         if (headerAndBody.length < 2)
             return;
@@ -88,7 +88,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         }
     }
 
-    private void handleAssetPart(CtxPart part, CtxParse ctx) {
+    private final void handleAssetPart(CtxPart part, CtxParse ctx) {
         if (!Set.of("images", "videos").contains(part.name))
             return;
 
@@ -106,7 +106,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         });
     }
 
-    private static Optional<AppFile> handleAsset(CtxPart part) {
+    private static final Optional<AppFile> handleAsset(CtxPart part) {
         String filename = findPattern("filename", part.headers);
         if (filename == null)
             return Optional.empty();
@@ -120,24 +120,24 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         return Optional.of(new AppFile(part.name, filename, contentTypePart, rawFile));
     }
 
-    public static String findPattern(String key, String headers) {
+    public static final String findPattern(String key, String headers) {
         Matcher m = Pattern.compile(String.format("%s=\"([^\"]+)\"", Pattern.quote(key))).matcher(headers);
         return !m.find() ? null : m.group(1);
     }
 }
 
 class CtxParse {
-    StringBuilder sb = new StringBuilder();
-    List<AppFile> images = new ArrayList<>();
-    List<AppFile> videos = new ArrayList<>();
-    List<Mono<Void>> promises = new ArrayList<>();
+    public final StringBuilder sb = new StringBuilder();
+    public final List<AppFile> images = new ArrayList<>();
+    public final List<AppFile> videos = new ArrayList<>();
+    public final List<Mono<Void>> promises = new ArrayList<>();
 
 }
 
 class CtxPart {
-    final String headers;
-    final String body;
-    final String name;
+    public final String headers;
+    public final String body;
+    public final String name;
 
     CtxPart(String headers, String body) {
         this.headers = headers;

@@ -24,7 +24,7 @@ import server.lib.dev.lib_log.LibLog;
 public final class LogMdw implements WebFilter {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
         Api api = (Api) exc;
 
         Map<String, Object> arg = new LinkedHashMap<>();
@@ -51,7 +51,7 @@ public final class LogMdw implements WebFilter {
 
     }
 
-    private Object normalizeEmpty(Object obj) {
+    private final Object normalizeEmpty(Object obj) {
         if (obj == null)
             return null;
         if (obj instanceof String str && str.isBlank())
@@ -62,7 +62,7 @@ public final class LogMdw implements WebFilter {
         return obj;
     }
 
-    private Map<String, Object> handleParsedForm(Api api) {
+    private final Map<String, Object> handleParsedForm(Api api) {
         var parsedForm = api.getParsedForm().orElse(null);
         if (parsedForm == null || parsedForm.isEmpty())
             return null;

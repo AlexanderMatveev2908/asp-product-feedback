@@ -16,7 +16,7 @@ import server.decorators.flow.api.Api;
 @Order(0)
 public final class Ninja implements WebFilter {
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
         return chain.filter(new Api(exc));
     }
 }

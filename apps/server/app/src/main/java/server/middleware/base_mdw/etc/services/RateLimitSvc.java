@@ -28,7 +28,7 @@ public final class RateLimitSvc {
         this.envKeeper = envKeeper;
     }
 
-    private LimitData extractLimitData(Api api, Integer minutes) {
+    private final LimitData extractLimitData(Api api, Integer minutes) {
         long now = System.currentTimeMillis();
         long windowMs = Duration.ofMinutes(minutes).toMillis();
 
@@ -42,14 +42,14 @@ public final class RateLimitSvc {
         return new LimitData(now, windowMs, key, val);
     }
 
-    private Mono<Long> getIpCount(LimitData data) {
+    private final Mono<Long> getIpCount(LimitData data) {
         return cmd.zremrangebyscore(data.getKey(), Range.create(0, data.expired()))
                 .then(cmd.zadd(data.getKey(), data.getNow(), data.getVal()))
                 .then(cmd.zcard(data.getKey()))
                 .flatMap(count -> cmd.pexpire(data.getKey(), data.getWindowMs() + 1).thenReturn(count));
     }
 
-    private Mono<Void> withError(Api api, LimitData data) {
+    private final Mono<Void> withError(Api api, LimitData data) {
         return cmd.zrangeWithScores(data.getKey(), 0, 0).singleOrEmpty().flatMap(tuple -> {
             long oldest = (long) tuple.getScore();
             long resetMs = data.reset(oldest);
@@ -61,7 +61,7 @@ public final class RateLimitSvc {
         });
     }
 
-    public Mono<Void> limit(Api api, int limit, int minutes) {
+    public final Mono<Void> limit(Api api, int limit, int minutes) {
         if (envKeeper.getMode().equals(EnvModeT.TEST))
             return Mono.empty();
 

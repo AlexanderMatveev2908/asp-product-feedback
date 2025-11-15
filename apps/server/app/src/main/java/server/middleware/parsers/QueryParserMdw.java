@@ -17,7 +17,7 @@ import server.middleware.parsers.sub.ParserManager;
 public final class QueryParserMdw extends ParserManager implements WebFilter {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
+    public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
         Api api = (Api) exc;
 
         String query = api.getQuery();

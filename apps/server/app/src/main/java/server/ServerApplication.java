@@ -18,7 +18,7 @@ public class ServerApplication {
 
     private final LifeSpawn lifeSpawn;
 
-    public static void main(String[] args) {
+    public static final void main(String[] args) {
 
         try {
             SpringApplication.run(ServerApplication.class, args);
@@ -28,7 +28,7 @@ public class ServerApplication {
     }
 
     @Bean
-    ApplicationListener<WebServerInitializedEvent> startCheck() {
+    public ApplicationListener<WebServerInitializedEvent> startCheck() {
         return e -> {
 
             try {
