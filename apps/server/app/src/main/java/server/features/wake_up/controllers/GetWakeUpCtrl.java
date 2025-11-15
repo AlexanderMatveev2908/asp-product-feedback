@@ -10,6 +10,6 @@ import server.decorators.flow.res_api.ResAPI;
 public class GetWakeUpCtrl {
 
     public final Mono<ResponseEntity<ResAPI>> wakeUp() {
-        return new ResAPI(200).msg("ops I did not listen the alarm ⏰").build();
+        return ResAPI.withStatus(200).msg("ops I did not listen the alarm ⏰").build();
     }
 }

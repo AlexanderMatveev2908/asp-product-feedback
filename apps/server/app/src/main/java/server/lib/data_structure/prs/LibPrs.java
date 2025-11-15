@@ -7,6 +7,7 @@ import java.util.Map;
 
 import server.decorators.flow.ErrAPI;
 import server.lib.data_structure.Jack;
+import server.lib.data_structure.LibShape;
 import server.lib.data_structure.prs.sub.F_PrsCases;
 
 public final class LibPrs extends F_PrsCases {
@@ -40,8 +41,8 @@ public final class LibPrs extends F_PrsCases {
     public static final <T> Map<String, Object> mapFormT(T arg) {
         final Map<String, Object> map = new HashMap<>();
 
-        if (arg == null)
-            return map;
+        if (LibShape.isNone(arg))
+            throw new ErrAPI("passed None to mapFromT");
 
         for (final Field field : arg.getClass().getDeclaredFields()) {
             field.setAccessible(true);

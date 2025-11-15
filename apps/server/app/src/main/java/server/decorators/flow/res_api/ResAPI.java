@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import reactor.core.publisher.Mono;
+import server.decorators.Nullable;
 import server.decorators.flow.res_api.data_structure.ResApiJson;
 import server.decorators.flow.res_api.meta.MetaRes;
 import server.lib.data_structure.LibShape;
@@ -35,15 +36,19 @@ public final class ResAPI {
         this.data = LibShape.isNone(data) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
     }
 
-    public ResAPI(int status) {
+    private ResAPI(int status) {
         this.status = status;
     }
 
     public ResAPI() {
     }
 
-    public final Map<String, Object> getData() {
-        return data == null ? null : new LinkedHashMap<>(data);
+    public static final ResAPI withStatus(int status) {
+        return new ResAPI(status);
+    }
+
+    public final Nullable<Map<String, Object>> getData() {
+        return LibShape.isNone(data) ? Nullable.asNone() : Nullable.of(new LinkedHashMap<>(data));
     }
 
     public final List<ResponseCookie> getCookies() {
@@ -61,7 +66,7 @@ public final class ResAPI {
     }
 
     public final ResAPI data(Map<String, Object> data) {
-        this.data = (data == null) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
+        this.data = LibShape.isNone(data) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
         return this;
     }
 
@@ -89,7 +94,7 @@ public final class ResAPI {
 
         final String prettyMsg = MetaRes.prettyMsg(msg, status);
 
-        final ResAPI myRes = new ResAPI().status(status).msg(prettyMsg).data(data);
+        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data);
 
         return Mono.just(builder.body(myRes));
     }

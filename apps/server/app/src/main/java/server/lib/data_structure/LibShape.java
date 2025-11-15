@@ -10,7 +10,7 @@ import server.paperwork.Reg;
 public final class LibShape {
 
     public static final <T> boolean isNone(T arg) {
-        return arg == null;
+        return !isPresent(arg);
     }
 
     public static final <T> boolean isPresent(T arg) {

@@ -13,6 +13,7 @@ import org.springframework.web.server.WebExceptionHandler;
 import com.fasterxml.jackson.core.JacksonException;
 
 import reactor.core.publisher.Mono;
+import server.decorators.Nullable;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.res_api.ResAPI;
 import server.lib.data_structure.Jack;
@@ -25,9 +26,10 @@ public final class ErrCatcher implements WebExceptionHandler {
 
     private final ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
         RecMetaErr recMetaErr = RecMetaErr.fromErr(exc, err);
-        Map<String, Object> data = (err instanceof final ErrAPI errInst) ? errInst.getData().get() : null;
+        Nullable<Map<String, Object>> data = (err instanceof final ErrAPI errInst) ? errInst.getData()
+                : Nullable.asNone();
 
-        ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data);
+        ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data.get());
 
         return apiBody;
     }

@@ -80,7 +80,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
             return;
 
         final CtxPart part = new CtxPart(headerAndBody[0], headerAndBody[1]);
-        if (part.name == null)
+        if (LibShape.isNone(part.name))
             return;
 
         if (part.headers.contains("filename=")) {

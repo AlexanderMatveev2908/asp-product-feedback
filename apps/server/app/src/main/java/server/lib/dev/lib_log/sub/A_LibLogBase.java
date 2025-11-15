@@ -3,7 +3,9 @@ package server.lib.dev.lib_log.sub;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Optional;
 
+import server.lib.data_structure.LibShape;
 import server.lib.dev.lib_log.LibLog;
 
 public class A_LibLogBase {
@@ -15,11 +17,11 @@ public class A_LibLogBase {
     private static final RecMainLog getMainLogInfo() {
         final String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
-        final StackTraceElement caller = Arrays.stream(Thread.currentThread().getStackTrace())
+        final Optional<StackTraceElement> caller = Arrays.stream(Thread.currentThread().getStackTrace())
                 .filter(f -> f.getClassName().startsWith(APP_PKG))
-                .filter(f -> !f.getClassName().contains(LibLog.class.getSimpleName())).findFirst().orElse(null);
+                .filter(f -> !f.getClassName().contains(LibLog.class.getSimpleName())).findFirst();
 
-        final String fileName = (caller != null) ? caller.getFileName() : "unknown caller";
+        final String fileName = caller.isPresent() ? caller.get().getFileName() : "unknown caller";
         final String thread = Thread.currentThread().getName();
 
         return new RecMainLog(time, fileName, thread);
@@ -43,18 +45,18 @@ public class A_LibLogBase {
         final RecMainLog mainInfo = getMainLogInfo();
 
         System.out.printf("⏰ %s • 🗃️ %s • %s%n", mainInfo.time(), mainInfo.fileName(),
-                title != null ? "📌 " + title : "🧵 " + mainInfo.thread());
+                LibShape.hasText(title) ? "📌 " + title : "🧵 " + mainInfo.thread());
     }
 
-    public static final void logTtl(String title, Object... arg) {
+    public static final void logTtl(String title, Object... args) {
 
         startLog();
         logHeader(title);
 
         System.out.println("\t");
 
-        if (arg != null)
-            for (final Object v : arg)
+        if (LibShape.isPresent(args))
+            for (final Object v : args)
                 System.out.println(v);
 
         endLog();

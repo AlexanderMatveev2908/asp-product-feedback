@@ -17,10 +17,10 @@ public final class ResApiJson extends JsonSerializer<ResAPI> {
         gen.writeStringField("msg", res.getMsg());
         gen.writeNumberField("status", res.getStatus());
 
-        if (res.getData() == null)
+        if (res.getData().isNone())
             gen.writeNullField("data");
         else
-            for (final Entry<String, Object> pair : res.getData().entrySet())
+            for (final Entry<String, Object> pair : res.getData().get().entrySet())
                 gen.writeObjectField(pair.getKey(), pair.getValue());
 
         gen.writeEndObject();

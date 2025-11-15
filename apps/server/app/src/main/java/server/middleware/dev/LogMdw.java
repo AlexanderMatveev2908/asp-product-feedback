@@ -35,7 +35,7 @@ public final class LogMdw implements WebFilter {
         arg.put("refreshToken", normalizeEmpty(api.getCookie("refreshToken")).get());
         arg.put("query", normalizeEmpty(api.getQuery()).get());
         arg.put("parsedQuery", api.getParsedQuery().orElse(null));
-        arg.put("parsedForm", handleParsedForm(api));
+        arg.put("parsedForm", handleParsedForm(api).get());
 
         return api.getBdStr().defaultIfEmpty("").doOnNext(body -> {
 
@@ -61,10 +61,10 @@ public final class LogMdw implements WebFilter {
         return Nullable.of(obj);
     }
 
-    private final Map<String, Object> handleParsedForm(Api api) {
+    private final Nullable<Map<String, Object>> handleParsedForm(Api api) {
         final Nullable<Map<String, Object>> parsedForm = api.getParsedForm();
         if (parsedForm.isNone())
-            return null;
+            return Nullable.asNone();
 
         final Map<String, Object> cpyForm = LibMemory.cpyMap(parsedForm.get());
 
@@ -77,7 +77,7 @@ public final class LogMdw implements WebFilter {
         if (videos.isPresent())
             cpyForm.put("videos", videos.get().stream().map(AppFile::getFancyShape).toList());
 
-        return cpyForm;
+        return Nullable.of(cpyForm);
     }
 
 }

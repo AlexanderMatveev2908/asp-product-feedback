@@ -26,15 +26,15 @@ public class PostTestCtrl {
             final var msg = (String) bd.get("msg");
 
             if (!LibShape.hasText(msg))
-                return new ResAPI(400).msg("missing msg").build();
+                return ResAPI.withStatus(400).msg("missing msg").build();
 
-            return new ResAPI(200).msg("msg received").data(Map.of("clientMsg", msg)).build();
+            return ResAPI.withStatus(200).msg("msg received").data(Map.of("clientMsg", msg)).build();
         }).switchIfEmpty(Mono.error(new ErrAPI("missing msg", 400)));
     }
 
     public final Mono<ResponseEntity<ResAPI>> postFormData(Api api) {
         return postFormSvc.postForm(api).flatMap(tpl -> {
-            return new ResAPI(200).msg(
+            return ResAPI.withStatus(200).msg(
                     "form parsed • processed • saved locally • uploaded on cloud • deleted locally • deleted from cloud")
                     .data(Map.of("saved", tpl.getT1(), "deleted", tpl.getT2())).build();
         });
