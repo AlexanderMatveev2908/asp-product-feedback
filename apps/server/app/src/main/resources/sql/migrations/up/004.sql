@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS images (
-  public_id VARCHAR(255) NOT NULL,
-  url VARCHAR(255) NOT NULL,
+  public_id TEXT NOT NULL,
+  url TEXT NOT NULL,
   user_id UUID NOT NULL UNIQUE REFERENCES users(id)
 ) INHERITS (root_table);
 
