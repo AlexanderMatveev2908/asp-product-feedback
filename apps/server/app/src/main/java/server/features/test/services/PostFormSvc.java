@@ -25,6 +25,7 @@ import server.decorators.flow.api.Api;
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2" })
 public class PostFormSvc {
+  private static final boolean deleteUploads = true;
   private final CloudSvc cloud;
 
   @SuppressWarnings("unchecked")
@@ -59,15 +60,16 @@ public class PostFormSvc {
     if (form.isNone())
       return Mono.error(new ErrAPI("no form data", 400));
 
-    return reduceUploads(form.get()).zipWhen(saved -> reduceDeletions(saved)).map(tpl -> {
-      final List<CloudAsset> saved = tpl.getT1();
-      final List<Integer> deleted = tpl.getT2();
+    return reduceUploads(form.get()).zipWhen(saved -> deleteUploads ? reduceDeletions(saved) : Mono.just(List.of(0)))
+        .map(tpl -> {
+          final List<CloudAsset> saved = tpl.getT1();
+          final List<Integer> deleted = tpl.getT2();
 
-      final int savedCount = saved.size();
-      final int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
+          final int savedCount = saved.size();
+          final int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
 
-      return Tuples.of(savedCount, deletedCount);
-    });
+          return Tuples.of(savedCount, deletedCount);
+        });
   }
 
 }
