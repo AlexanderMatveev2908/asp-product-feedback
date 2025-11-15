@@ -25,7 +25,7 @@ public final class ErrCatcher implements WebExceptionHandler {
 
     private final ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
         RecMetaErr recMetaErr = RecMetaErr.fromErr(exc, err);
-        Map<String, Object> data = (err instanceof ErrAPI errInst) ? errInst.getData() : null;
+        Map<String, Object> data = (err instanceof final ErrAPI errInst) ? errInst.getData() : null;
 
         ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data);
 

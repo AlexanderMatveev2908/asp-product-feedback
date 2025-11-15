@@ -54,9 +54,9 @@ public final class LogMdw implements WebFilter {
     private final Object normalizeEmpty(Object obj) {
         if (obj == null)
             return null;
-        if (obj instanceof String str && str.isBlank())
+        if (obj instanceof final String str && str.isBlank())
             return null;
-        if (obj instanceof Map<?, ?> map && map.isEmpty())
+        if (obj instanceof final Map<?, ?> map && map.isEmpty())
             return null;
 
         return obj;

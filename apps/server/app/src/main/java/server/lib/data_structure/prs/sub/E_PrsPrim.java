@@ -15,10 +15,10 @@ public class E_PrsPrim extends D_PrsB64 {
     if (arg == null)
       throw new ErrAPI("expected string or number received null");
 
-    if (arg instanceof Number num)
+    if (arg instanceof final Number num)
       return num.longValue();
 
-    if (arg instanceof String str)
+    if (arg instanceof final String str)
       return Long.parseLong(str);
 
     throw new ErrAPI("unknown arg type");

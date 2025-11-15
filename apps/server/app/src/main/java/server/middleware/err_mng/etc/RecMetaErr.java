@@ -15,7 +15,7 @@ public final record RecMetaErr(String msg, int status) {
   }
 
   private static final int getStatusFromErr(Throwable err) {
-    return err instanceof ErrAPI errInst ? errInst.getStatus() : 500;
+    return err instanceof final ErrAPI errInst ? errInst.getStatus() : 500;
   }
 
   public static final RecMetaErr fromErr(ServerWebExchange exc, Throwable err) {
