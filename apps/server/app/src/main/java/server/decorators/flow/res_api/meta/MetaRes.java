@@ -30,10 +30,10 @@ public enum MetaRes {
     }
 
     public static final String prettyMsg(String msg, int status) {
-        String emj = ActT.emjFromStatus(status);
-        String safeMsg = msg != null ? msg : fromCode(status).getMsg();
+        final String emj = ActT.emjFromStatus(status);
+        final String safeMsg = msg != null ? msg : fromCode(status).getMsg();
 
-        String prettyMsg = Reg.startsWithEmj(safeMsg) ? msg
+        final String prettyMsg = Reg.startsWithEmj(safeMsg) ? msg
                 : String.format("%s %s", emj, safeMsg);
 
         return prettyMsg;

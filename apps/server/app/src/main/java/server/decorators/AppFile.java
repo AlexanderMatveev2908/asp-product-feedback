@@ -40,7 +40,7 @@ public final class AppFile {
         this.bts = (bts == null) ? new byte[0] : bts.clone();
 
         String ext = "";
-        int idxDot = filename.lastIndexOf('.');
+        final int idxDot = filename.lastIndexOf('.');
         if (idxDot != -1 && idxDot < filename.length() - 1) {
             ext = filename.substring(idxDot);
         }
@@ -81,15 +81,15 @@ public final class AppFile {
     }
 
     public final Map<String, Object> getFancyShape() {
-        Map<String, Object> fancyMap = new LinkedHashMap<>();
+        final Map<String, Object> fancyMap = new LinkedHashMap<>();
 
         try {
-            Class<?> cls = this.getClass();
+            final Class<?> cls = this.getClass();
 
             for (Field f : cls.getDeclaredFields()) {
                 f.setAccessible(true);
 
-                Object val = f.get(this);
+                final Object val = f.get(this);
 
                 if ("bts".equals(f.getName()))
                     fancyMap.put("bytes", "💾 long binary code...");

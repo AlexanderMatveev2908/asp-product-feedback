@@ -43,7 +43,7 @@ public final class ResAPI {
     }
 
     public static final Map<String, Object> flatData(Map<String, Object> data) {
-        Map<String, Object> flatten = new HashMap<>();
+        final Map<String, Object> flatten = new HashMap<>();
         if (data == null)
             flatten.put("data", null);
         else
@@ -87,7 +87,7 @@ public final class ResAPI {
 
     public final Mono<ResponseEntity<ResAPI>> build() {
 
-        ResponseEntity.BodyBuilder builder = ResponseEntity.status(status);
+        final ResponseEntity.BodyBuilder builder = ResponseEntity.status(status);
         for (ResponseCookie cookie : cookies)
             builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
 
@@ -97,9 +97,9 @@ public final class ResAPI {
         if (status == 204)
             return Mono.just(builder.build());
 
-        String prettyMsg = MetaRes.prettyMsg(msg, status);
+        final String prettyMsg = MetaRes.prettyMsg(msg, status);
 
-        ResAPI myRes = new ResAPI().status(status).msg(prettyMsg).data(data);
+        final ResAPI myRes = new ResAPI().status(status).msg(prettyMsg).data(data);
 
         return Mono.just(builder.body(myRes));
     }

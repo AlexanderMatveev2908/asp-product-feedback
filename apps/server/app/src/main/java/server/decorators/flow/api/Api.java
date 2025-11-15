@@ -33,7 +33,7 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
         super(exc);
 
         this.cachedBody = DataBufferUtils.join(exc.getRequest().getBody()).map(buf -> {
-            byte[] bytes = new byte[buf.readableByteCount()];
+            final byte[] bytes = new byte[buf.readableByteCount()];
             buf.read(bytes);
             DataBufferUtils.release(buf);
             return bytes;
@@ -73,7 +73,8 @@ public final class Api extends ServerWebExchangeDecorator implements ApiInfo, Ap
             if (optBytes.length == 0)
                 return Mono.empty();
 
-            Charset charset = Optional.ofNullable(getRequest().getHeaders().getContentType()).map(MediaType::getCharset)
+            final Charset charset = Optional.ofNullable(getRequest().getHeaders().getContentType())
+                    .map(MediaType::getCharset)
                     .orElse(StandardCharsets.UTF_8);
 
             return Mono.just(new String(optBytes, charset));

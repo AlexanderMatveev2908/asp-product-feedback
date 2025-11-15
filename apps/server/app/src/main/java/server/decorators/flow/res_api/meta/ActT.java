@@ -12,7 +12,7 @@ public enum ActT {
     private final String emj;
 
     public static final String emjFromStatus(int status) {
-        ActT act = (status >= 200 && status < 300) ? ActT.OK : ActT.ERR;
+        final ActT act = (status >= 200 && status < 300) ? ActT.OK : ActT.ERR;
         return act.getEmj();
     }
 
