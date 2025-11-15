@@ -1,15 +1,11 @@
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Nullable } from '@/common/types/etc';
 import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
 
 @Component({
   selector: 'app-svg-advanced-icon-comments',
   templateUrl: `./icon-comments.html`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgAdvIconComments {
-    width: InputSignal<'auto' | string> = input('100%');
-    height: InputSignal<'auto' | string> = input('100%');
-    
+  width: InputSignal<'auto' | string> = input('100%');
+  height: InputSignal<'auto' | string> = input('100%');
 }
