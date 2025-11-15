@@ -20,6 +20,7 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import server.decorators.AppFile;
+import server.decorators.Nullable;
 import server.decorators.flow.api.Api;
 import server.middleware.parsers.sub.ParserManager;
 
@@ -117,7 +118,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         if (contentTypePart == null)
             return Optional.empty();
 
-        final byte[] rawFile = part.body.getBytes(StandardCharsets.ISO_8859_1);
+        final Nullable<byte[]> rawFile = Nullable.of(part.body.getBytes(StandardCharsets.ISO_8859_1));
         return Optional.of(new AppFile(part.name, filename, contentTypePart, rawFile));
     }
 

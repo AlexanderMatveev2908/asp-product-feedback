@@ -33,11 +33,11 @@ public final class AppFile {
             String field,
             String filename,
             String contentType,
-            byte[] bts) {
+            Nullable<byte[]> bts) {
 
         this.field = field;
         this.contentType = contentType;
-        this.bts = (bts == null) ? new byte[0] : bts.clone();
+        this.bts = bts.isNull() ? new byte[0] : bts.get().clone();
 
         String ext = "";
         final int idxDot = filename.lastIndexOf('.');

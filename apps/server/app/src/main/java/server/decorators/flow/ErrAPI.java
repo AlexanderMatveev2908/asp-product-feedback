@@ -11,13 +11,13 @@ public final class ErrAPI extends RuntimeException implements RootCls {
 
     private final String msg;
     private final int status;
-    private final Map<String, Object> data;
+    private final Nullable<Map<String, Object>> data;
 
-    public ErrAPI(String msg, int status, Map<String, Object> data) {
+    public ErrAPI(String msg, int status, Nullable<Map<String, Object>> data) {
         super("❌ " + msg);
         this.msg = super.getMessage();
         this.status = status;
-        this.data = (data == null) ? null : Map.copyOf(data);
+        this.data = data;
     }
 
     public ErrAPI(String msg, int status) {
@@ -26,10 +26,6 @@ public final class ErrAPI extends RuntimeException implements RootCls {
 
     public ErrAPI(String msg) {
         this(msg, 500, null);
-    }
-
-    public final Nullable<Map<String, Object>> getData() {
-        return data == null ? Nullable.of(null) : Nullable.of(Map.copyOf(data));
     }
 
     @Override
