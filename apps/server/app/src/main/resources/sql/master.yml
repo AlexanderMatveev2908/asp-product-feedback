@@ -1,1 +1,32 @@
 databaseChangeLog:
+  - changeSet:
+      id: "001_define_root_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/001.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/001.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "001_define_trigger_timestamp_function"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/002.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/002.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
