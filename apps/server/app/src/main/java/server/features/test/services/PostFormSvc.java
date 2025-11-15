@@ -28,14 +28,14 @@ public class PostFormSvc {
 
   @SuppressWarnings("unchecked")
   private final Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
-    Set<String> assetKeys = Set.of("images", "videos");
-    List<Mono<CloudAsset>> promises = new ArrayList<>();
+    final Set<String> assetKeys = Set.of("images", "videos");
+    final List<Mono<CloudAsset>> promises = new ArrayList<>();
 
     for (Map.Entry<String, Object> pair : form.entrySet()) {
       if (!assetKeys.contains(pair.getKey()))
         continue;
 
-      List<AppFile> arg = (List<AppFile>) pair.getValue();
+      final List<AppFile> arg = (List<AppFile>) pair.getValue();
       for (AppFile f : arg) {
         if (!Files.exists(f.getFilePath()))
           throw new ErrAPI("file does not exist");
@@ -53,17 +53,17 @@ public class PostFormSvc {
   }
 
   public final Mono<Tuple2<Integer, Integer>> postForm(Api api) {
-    var form = api.getParsedForm().orElse(null);
+    final var form = api.getParsedForm().orElse(null);
 
     if (form == null)
       return Mono.error(new ErrAPI("no form data", 400));
 
     return reduceUploads(form).zipWhen(saved -> reduceDeletions(saved)).map(tpl -> {
-      List<CloudAsset> saved = tpl.getT1();
-      List<Integer> deleted = tpl.getT2();
+      final List<CloudAsset> saved = tpl.getT1();
+      final List<Integer> deleted = tpl.getT2();
 
-      int savedCount = saved.size();
-      int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
+      final int savedCount = saved.size();
+      final int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
 
       return Tuples.of(savedCount, deletedCount);
     });
