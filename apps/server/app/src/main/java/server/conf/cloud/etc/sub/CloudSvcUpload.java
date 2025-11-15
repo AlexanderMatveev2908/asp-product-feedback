@@ -27,7 +27,7 @@ public interface CloudSvcUpload {
   public abstract WebClient getClient();
 
   default String getSignUpload(String tmsp, String folder, String publicId) {
-    Map<String, String> params = new HashMap<>();
+    final Map<String, String> params = new HashMap<>();
     params.put("folder", folder);
     params.put("timestamp", tmsp);
     params.put("public_id", publicId);
@@ -36,24 +36,25 @@ public interface CloudSvcUpload {
   }
 
   private String getFolderName(AppFile file) {
-    String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
+    final String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
     return appSnakeName + "__" + file.getField();
   }
 
   private UploadData extractDataUpload(AppFile file) {
-    String cloudKey = getEnvKeeper().getCloudKey();
-    String tmsp = String.valueOf(Instant.now().getEpochSecond());
-    String folder = getFolderName(file);
+    final String cloudKey = getEnvKeeper().getCloudKey();
+    final String tmsp = String.valueOf(Instant.now().getEpochSecond());
+    final String folder = getFolderName(file);
 
-    String filename = file.getFilename();
-    String publicId = filename.substring(0, filename.lastIndexOf('.'));
+    final String filename = file.getFilename();
+    final String publicId = filename.substring(0, filename.lastIndexOf('.'));
 
-    String assetT = CloudResourceT.fromFileField(file.getField());
-    AbstractResource fileResource = assetT.equals("image") ? file.getResourceFromBts() : file.getResourceFromPath();
+    final String assetT = CloudResourceT.fromFileField(file.getField());
+    final AbstractResource fileResource = assetT.equals("image") ? file.getResourceFromBts()
+        : file.getResourceFromPath();
 
-    String url = "/" + assetT + "/upload";
+    final String url = "/" + assetT + "/upload";
 
-    UploadData data = UploadData.builder()
+    final UploadData data = UploadData.builder()
         .cloudKey(cloudKey)
         .tmsp(tmsp)
         .publicId(publicId)
@@ -66,7 +67,7 @@ public interface CloudSvcUpload {
   }
 
   private MultipartBodyBuilder buildForm(UploadData dataUpload) {
-    MultipartBodyBuilder form = new MultipartBodyBuilder();
+    final MultipartBodyBuilder form = new MultipartBodyBuilder();
     form.part("api_key", dataUpload.getCloudKey());
     form.part("signature", getSignUpload(dataUpload.getTmsp(), dataUpload.getFolder(), dataUpload.getPublicId()));
     form.part("timestamp", dataUpload.getTmsp());
@@ -79,8 +80,8 @@ public interface CloudSvcUpload {
   }
 
   default Mono<CloudAsset> upload(AppFile file) {
-    UploadData dataUpload = extractDataUpload(file);
-    MultipartBodyBuilder form = buildForm(dataUpload);
+    final UploadData dataUpload = extractDataUpload(file);
+    final MultipartBodyBuilder form = buildForm(dataUpload);
 
     return getClient().post().uri(dataUpload.getUrl()).contentType(MediaType.MULTIPART_FORM_DATA)
         .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Map.class)

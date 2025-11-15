@@ -25,7 +25,7 @@ public interface CloudSvcDelete {
   public abstract WebClient getClient();
 
   private String getSignDelete(String tmsp, String publicId) {
-    Map<String, String> params = new HashMap<>();
+    final Map<String, String> params = new HashMap<>();
     params.put("timestamp", tmsp);
     params.put("public_id", publicId);
 
@@ -34,16 +34,16 @@ public interface CloudSvcDelete {
   }
 
   private DeleteData extractDeleteData(String publicId, String resourceType) {
-    String cloudKey = getEnvKeeper().getCloudKey();
-    String tmsp = String.valueOf(Instant.now().getEpochSecond());
+    final String cloudKey = getEnvKeeper().getCloudKey();
+    final String tmsp = String.valueOf(Instant.now().getEpochSecond());
 
-    String url = "/" + resourceType + "/destroy";
+    final String url = "/" + resourceType + "/destroy";
 
     return new DeleteData(cloudKey, tmsp, publicId, url);
   }
 
   private MultipartBodyBuilder buildForm(DeleteData deleteData) {
-    MultipartBodyBuilder form = new MultipartBodyBuilder();
+    final MultipartBodyBuilder form = new MultipartBodyBuilder();
     form.part("api_key", deleteData.getCloudKey());
     form.part("public_id", deleteData.getPublicId());
     form.part("timestamp", deleteData.getTmsp());
@@ -53,14 +53,14 @@ public interface CloudSvcDelete {
   }
 
   default Mono<Integer> delete(String publicId, String resourceType) {
-    DeleteData deleteData = extractDeleteData(publicId, resourceType);
-    MultipartBodyBuilder form = buildForm(deleteData);
+    final DeleteData deleteData = extractDeleteData(publicId, resourceType);
+    final MultipartBodyBuilder form = buildForm(deleteData);
 
     return getClient().post().uri(deleteData.getUrl()).contentType(MediaType.MULTIPART_FORM_DATA)
         .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Map.class)
         .flatMap(map -> {
-          String result = map.get("result").toString();
-          int count = "ok".equals(result) ? 1 : 0;
+          final String result = map.get("result").toString();
+          final int count = "ok".equals(result) ? 1 : 0;
           LibLog.log(String.format("✂️ deleted %d %s", count, resourceType));
           return Mono.just(count);
         });
@@ -71,10 +71,8 @@ public interface CloudSvcDelete {
 @SuperBuilder
 @Getter
 class DeleteData {
-
   private final String cloudKey;
   private final String tmsp;
   private final String publicId;
   private final String url;
-
 }

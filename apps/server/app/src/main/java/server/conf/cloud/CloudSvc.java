@@ -29,14 +29,14 @@ public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
     }
 
     public final WebClient getClient() {
-        String cloudName = envKeeper.getCloudName();
+        final String cloudName = envKeeper.getCloudName();
         return webClientBuilder.baseUrl("https://api.cloudinary.com/v1_1/" + cloudName).build();
     }
 
     public final String genSign(Map<String, String> params) {
-        String cloudSecret = envKeeper.getCloudSecret();
+        final String cloudSecret = envKeeper.getCloudSecret();
 
-        String strParams = params.entrySet().stream().sorted(Map.Entry.comparingByKey())
+        final String strParams = params.entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .map(el -> el.getKey() + "=" + el.getValue()).collect(Collectors.joining("&")) + cloudSecret;
 
         return sign(strParams);
@@ -45,9 +45,9 @@ public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
     // ? private methods
     private final String sign(String params) {
         try {
-            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-            byte[] digest = sha1.digest(LibPrs.binaryFromUtf8(params));
-            String sig = HexFormat.of().formatHex(digest);
+            final MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+            final byte[] digest = sha1.digest(LibPrs.binaryFromUtf8(params));
+            final String sig = HexFormat.of().formatHex(digest);
 
             return sig;
         } catch (Exception err) {

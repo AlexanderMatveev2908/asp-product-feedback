@@ -14,7 +14,7 @@ public final class CloudAsset {
     public static final CloudAsset fromMap(Map<?, ?> arg) {
 
         try {
-            CloudAsset asset = new CloudAsset((String) arg.get("public_id"),
+            final CloudAsset asset = new CloudAsset((String) arg.get("public_id"),
                     (String) arg.get("secure_url"),
                     (String) arg.get("resource_type"));
             return asset;
