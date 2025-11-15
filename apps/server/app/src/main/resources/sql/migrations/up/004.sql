@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS images (
 ALTER TABLE images
     ADD CONSTRAINT images_pkey PRIMARY KEY (id);
 
-CREATE INDEX idx__images_user ON images(user_id);
+CREATE INDEX idx__images__user ON images(user_id);
 
 CREATE TRIGGER trigger_timestamp_images
 BEFORE INSERT OR UPDATE ON images

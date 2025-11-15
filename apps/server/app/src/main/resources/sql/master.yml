@@ -78,3 +78,35 @@ databaseChangeLog:
             relativeToChangelogFile: true
             splitStatements: false
             stripComments: true
+
+  - changeSet:
+      id: "006_comments_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/006.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/006.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "007_replies_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/007.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/007.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
