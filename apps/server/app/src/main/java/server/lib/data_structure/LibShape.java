@@ -7,6 +7,10 @@ import server.decorators.Nullable;
 import server.paperwork.Reg;
 
 public final class LibShape {
+    public static final <T> boolean isNone(T arg) {
+        return arg != null;
+    }
+
     public static final boolean hasText(Object val) {
         if (val instanceof final String str)
             return !str.isBlank();

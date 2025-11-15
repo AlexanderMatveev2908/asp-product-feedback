@@ -7,11 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import server.decorators.Nullable;
+import server.lib.data_structure.LibShape;
+
 @SuppressWarnings("unchecked")
 public class ParserManager {
-    protected static final Map<String, Object> nestDict(String query) {
-        if (query == null || query.isBlank())
-            return null;
+    protected static final Nullable<Map<String, Object>> nestDict(String query) {
+        if (!LibShape.hasText(query))
+            return Nullable.none();
 
         final Map<String, Object> dict = new HashMap<>();
 
@@ -27,7 +30,7 @@ public class ParserManager {
             nestKeyVal(dict, rawKey, rawVal);
         }
 
-        return dict;
+        return Nullable.of(dict);
     }
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")

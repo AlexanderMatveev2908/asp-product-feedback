@@ -9,6 +9,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
+import server.decorators.Nullable;
 import server.decorators.flow.api.Api;
 import server.middleware.parsers.sub.ParserManager;
 
@@ -21,9 +22,10 @@ public final class QueryParserMdw extends ParserManager implements WebFilter {
         final Api api = (Api) exc;
 
         final String query = api.getQuery();
-        final Map<String, Object> parsedQuery = nestDict(query);
+        final Nullable<Map<String, Object>> parsedQuery = nestDict(query);
 
-        api.setParsedQueryAttr(parsedQuery);
+        if (parsedQuery.isPresent())
+            api.setParsedQueryAttr(parsedQuery.get());
 
         return chain.filter(api);
     }

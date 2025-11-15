@@ -5,17 +5,13 @@ import java.util.Optional;
 
 import org.springframework.web.server.ServerWebExchange;
 
+import server.decorators.Nullable;
+
 public interface ApiAttr {
   ServerWebExchange getExch();
 
   default <T> void setAttr(String key, T value) {
-    if (key == null)
-      return;
-    if (value == null)
-      getExch().getAttributes().remove(key);
-    else
-      getExch().getAttributes().put(key, value);
-
+    getExch().getAttributes().put(key, value);
   }
 
   // ? instance form parsed in mdw and set before svc or ctrl
@@ -23,7 +19,7 @@ public interface ApiAttr {
     setAttr("mappedData", data);
   }
 
-  default <T> T getMappedData() {
+  default <T> Nullable<T> getMappedData() {
     return getExch().getAttribute("mappedData");
   }
 
@@ -32,9 +28,9 @@ public interface ApiAttr {
     setAttr("parsedQuery", parsed);
   }
 
-  default Optional<Map<String, Object>> getParsedQuery() {
+  default Nullable<Map<String, Object>> getParsedQuery() {
     Map<String, Object> val = getExch().getAttribute("parsedQuery");
-    return val != null ? Optional.of(val) : Optional.empty();
+    return Nullable.of(val);
   }
 
   // ? parsed form

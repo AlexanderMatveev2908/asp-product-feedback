@@ -13,12 +13,20 @@ public final class Nullable<T> {
     return new Nullable<K>(arg);
   }
 
+  public static final <K> Nullable<K> none() {
+    return new Nullable<K>(null);
+  }
+
   public final boolean isNull() {
     return data == null;
   }
 
   public final boolean isPresent() {
     return data != null;
+  }
+
+  public final <K> Object orElse(K def) {
+    return isPresent() ? get() : def;
   }
 
   public final T get() {

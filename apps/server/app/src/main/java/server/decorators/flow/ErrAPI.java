@@ -21,11 +21,11 @@ public final class ErrAPI extends RuntimeException implements RootCls {
     }
 
     public ErrAPI(String msg, int status) {
-        this(msg, status, null);
+        this(msg, status, Nullable.none());
     }
 
     public ErrAPI(String msg) {
-        this(msg, 500, null);
+        this(msg, 500, Nullable.none());
     }
 
     @Override

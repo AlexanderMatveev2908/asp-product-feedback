@@ -39,11 +39,14 @@ public final class FormDataParser extends ParserManager implements WebFilter {
             if (ctx.sb.length() > 0)
                 ctx.sb.setLength(ctx.sb.length() - 1);
 
-            final Map<String, Object> parsedForm = nestDict(ctx.sb.toString());
-            parsedForm.put("images", ctx.images);
-            parsedForm.put("videos", ctx.videos);
+            final Nullable<Map<String, Object>> parsedForm = nestDict(ctx.sb.toString());
 
-            api.setParsedFormAttr(parsedForm);
+            if (parsedForm.isPresent()) {
+                final Map<String, Object> mappedForm = parsedForm.get();
+                mappedForm.put("images", ctx.images);
+                mappedForm.put("videos", ctx.videos);
+                api.setParsedFormAttr(mappedForm);
+            }
 
             return Mono.when(ctx.promises.isEmpty() ? Mono.empty() : Mono.when(ctx.promises)).then(chain.filter(api));
 

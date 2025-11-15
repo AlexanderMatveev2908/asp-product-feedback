@@ -14,6 +14,7 @@ import org.springframework.web.server.WebFilterChain;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import reactor.core.publisher.Mono;
+import server.decorators.Nullable;
 import server.decorators.flow.ErrAPI;
 import server.decorators.flow.api.Api;
 import server.lib.data_structure.prs.LibPrs;
@@ -66,7 +67,7 @@ public abstract class BaseMdw implements WebFilter {
     }
 
     protected final <T> Mono<T> checkQueryForm(Api api, Class<T> cls) {
-        final Optional<Map<String, Object>> parsedQuery = api.getParsedQuery();
+        final Nullable<Map<String, Object>> parsedQuery = api.getParsedQuery();
         return Mono.defer(() -> !parsedQuery.isPresent() ? Mono.error(new ErrAPI("data not provided", 400))
                 : convertAndCheckForm(api, parsedQuery.get(), cls));
     }
