@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.redis.lettuce)
     // ? checkers
     compileOnly(libs.spotbugsAnnotations)
-    testImplementation(libs.spotbugsAnnotations)
+    testCompileOnly(libs.spotbugsAnnotations)
     // ? tests
     testImplementation(libs.spring.boot.starter.test) {
     exclude(group = "org.junit.vintage")
