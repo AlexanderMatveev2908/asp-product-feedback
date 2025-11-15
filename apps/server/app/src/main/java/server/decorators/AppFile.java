@@ -86,7 +86,7 @@ public final class AppFile {
         try {
             final Class<?> cls = this.getClass();
 
-            for (Field f : cls.getDeclaredFields()) {
+            for (final Field f : cls.getDeclaredFields()) {
                 f.setAccessible(true);
 
                 final Object val = f.get(this);

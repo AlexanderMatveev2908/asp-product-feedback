@@ -31,12 +31,12 @@ public class PostFormSvc {
     final Set<String> assetKeys = Set.of("images", "videos");
     final List<Mono<CloudAsset>> promises = new ArrayList<>();
 
-    for (Map.Entry<String, Object> pair : form.entrySet()) {
+    for (final Map.Entry<String, Object> pair : form.entrySet()) {
       if (!assetKeys.contains(pair.getKey()))
         continue;
 
       final List<AppFile> arg = (List<AppFile>) pair.getValue();
-      for (AppFile f : arg) {
+      for (final AppFile f : arg) {
         if (!Files.exists(f.getFilePath()))
           throw new ErrAPI("file does not exist");
 

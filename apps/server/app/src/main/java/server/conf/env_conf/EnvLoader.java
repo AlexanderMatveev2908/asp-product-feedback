@@ -69,7 +69,7 @@ public final class EnvLoader implements EnvironmentPostProcessor {
     private final void appSetup(Dotenv dotenv, Properties props, ConfigurableEnvironment env) {
         final Set<DotenvEntry> existingVars = dotenv.entries();
 
-        for (DotenvEntry pair : existingVars)
+        for (final DotenvEntry pair : existingVars)
             props.put(pair.getKey(), pair.getValue());
 
         env.getPropertySources().addFirst(new PropertiesPropertySource("dotenv", props));

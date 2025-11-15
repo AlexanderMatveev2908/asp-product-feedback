@@ -22,7 +22,7 @@ public enum MetaRes {
     private final String msg;
 
     public static final MetaRes fromCode(int code) {
-        for (MetaRes m : values())
+        for (final MetaRes m : values())
             if (m.code == code)
                 return m;
 

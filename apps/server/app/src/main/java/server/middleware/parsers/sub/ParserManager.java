@@ -15,7 +15,7 @@ public class ParserManager {
 
         final Map<String, Object> dict = new HashMap<>();
 
-        for (String pair : query.split("&")) {
+        for (final String pair : query.split("&")) {
             final String[] kv = pair.split("=", 2);
 
             if (kv.length < 2)

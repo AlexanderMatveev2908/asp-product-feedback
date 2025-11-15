@@ -14,7 +14,7 @@ public enum EnvModeT {
     private final String val;
 
     public static final EnvModeT fromValue(String val) {
-        for (EnvModeT mode : values())
+        for (final EnvModeT mode : values())
             if (mode.val.equalsIgnoreCase(val))
                 return mode;
 

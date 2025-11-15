@@ -17,7 +17,7 @@ public class C_LibLogErr extends B_LibLogAio {
 
     final StackTraceElement[] frames = err.getStackTrace();
 
-    for (StackTraceElement f : frames)
+    for (final StackTraceElement f : frames)
       System.out.printf("📂 %s => 🔢 %d | 🆎 %s | ☢️ %s%n", f.getFileName(), f.getLineNumber(), f.getMethodName(),
           f.toString());
 

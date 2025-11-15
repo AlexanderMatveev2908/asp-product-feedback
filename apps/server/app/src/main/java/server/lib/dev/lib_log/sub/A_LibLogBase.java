@@ -54,7 +54,7 @@ public class A_LibLogBase {
         System.out.println("\t");
 
         if (arg != null)
-            for (Object v : arg)
+            for (final Object v : arg)
                 System.out.println(v);
 
         endLog();

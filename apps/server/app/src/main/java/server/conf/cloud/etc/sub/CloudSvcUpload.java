@@ -86,7 +86,7 @@ public interface CloudSvcUpload {
     return getClient().post().uri(dataUpload.getUrl()).contentType(MediaType.MULTIPART_FORM_DATA)
         .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Map.class)
         .flatMap(map -> {
-          CloudAsset asset = CloudAsset.fromMap(map);
+          final CloudAsset asset = CloudAsset.fromMap(map);
           return Mono.just(asset);
         });
   }

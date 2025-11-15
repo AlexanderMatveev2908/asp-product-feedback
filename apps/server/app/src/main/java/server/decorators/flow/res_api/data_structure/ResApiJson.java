@@ -1,6 +1,7 @@
 package server.decorators.flow.res_api.data_structure;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -19,7 +20,7 @@ public final class ResApiJson extends JsonSerializer<ResAPI> {
         if (res.getData() == null)
             gen.writeNullField("data");
         else
-            for (var pair : res.getData().entrySet())
+            for (final Entry<String, Object> pair : res.getData().entrySet())
                 gen.writeObjectField(pair.getKey(), pair.getValue());
 
         gen.writeEndObject();

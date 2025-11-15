@@ -88,10 +88,10 @@ public final class ResAPI {
     public final Mono<ResponseEntity<ResAPI>> build() {
 
         final ResponseEntity.BodyBuilder builder = ResponseEntity.status(status);
-        for (ResponseCookie cookie : cookies)
+        for (final ResponseCookie cookie : cookies)
             builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
 
-        for (ResponseCookie cookie : deleteCookies)
+        for (final ResponseCookie cookie : deleteCookies)
             builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
 
         if (status == 204)

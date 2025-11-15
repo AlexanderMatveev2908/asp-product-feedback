@@ -5,7 +5,7 @@ public class F_PrsCases extends E_PrsPrim {
     final StringBuilder sb = new StringBuilder();
     boolean upperNext = false;
 
-    for (char c : key.toCharArray()) {
+    for (final char c : key.toCharArray()) {
       if (c == '_') {
         upperNext = true;
       } else if (upperNext) {
