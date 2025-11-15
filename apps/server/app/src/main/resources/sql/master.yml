@@ -16,7 +16,7 @@ databaseChangeLog:
             stripComments: true
 
   - changeSet:
-      id: "001_define_trigger_timestamp_function"
+      id: "002_define_trigger_timestamp_function"
       author: ninja
       changes:
         - sqlFile:
@@ -27,6 +27,38 @@ databaseChangeLog:
       rollback:
         - sqlFile:
             path: migrations/down/002.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "003_define_users_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/003.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/003.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "004_define_images_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/004.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/004.sql
             relativeToChangelogFile: true
             splitStatements: false
             stripComments: true
