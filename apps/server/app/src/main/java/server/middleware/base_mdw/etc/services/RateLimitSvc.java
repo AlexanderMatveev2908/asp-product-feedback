@@ -29,15 +29,15 @@ public final class RateLimitSvc {
     }
 
     private final LimitData extractLimitData(Api api, Integer minutes) {
-        long now = System.currentTimeMillis();
-        long windowMs = Duration.ofMinutes(minutes).toMillis();
+        final long now = System.currentTimeMillis();
+        final long windowMs = Duration.ofMinutes(minutes).toMillis();
 
-        String ip = api.getClientIp();
-        String path = api.getPath();
-        String method = api.getMethod().toString();
+        final String ip = api.getClientIp();
+        final String path = api.getPath();
+        final String method = api.getMethod().toString();
 
-        String key = String.format("rl:%s:%s__%s", ip, path, method);
-        String val = now + ":" + UUID.randomUUID();
+        final String key = String.format("rl:%s:%s__%s", ip, path, method);
+        final String val = now + ":" + UUID.randomUUID();
 
         return new LimitData(now, windowMs, key, val);
     }
@@ -51,8 +51,8 @@ public final class RateLimitSvc {
 
     private final Mono<Void> withError(Api api, LimitData data) {
         return cmd.zrangeWithScores(data.getKey(), 0, 0).singleOrEmpty().flatMap(tuple -> {
-            long oldest = (long) tuple.getScore();
-            long resetMs = data.reset(oldest);
+            final long oldest = (long) tuple.getScore();
+            final long resetMs = data.reset(oldest);
 
             api.addHeader("RateLimit-Reset", resetMs);
 
@@ -65,11 +65,11 @@ public final class RateLimitSvc {
         if (envKeeper.getMode().equals(EnvModeT.TEST))
             return Mono.empty();
 
-        LimitData data = extractLimitData(api, minutes);
+        final LimitData data = extractLimitData(api, minutes);
 
         return getIpCount(data)
                 .flatMap(count -> {
-                    int remaining = Math.max(0, limit - count.intValue());
+                    final int remaining = Math.max(0, limit - count.intValue());
 
                     // ? method itself use String.valueOf on 2 arg
                     api.addHeader("RateLimit-Limit", limit);

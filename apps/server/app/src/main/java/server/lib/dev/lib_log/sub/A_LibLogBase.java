@@ -13,14 +13,14 @@ public class A_LibLogBase {
     }
 
     private static final RecMainLog getMainLogInfo() {
-        String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        final String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
-        StackTraceElement caller = Arrays.stream(Thread.currentThread().getStackTrace())
+        final StackTraceElement caller = Arrays.stream(Thread.currentThread().getStackTrace())
                 .filter(f -> f.getClassName().startsWith(APP_PKG))
                 .filter(f -> !f.getClassName().contains(LibLog.class.getSimpleName())).findFirst().orElse(null);
 
-        String fileName = (caller != null) ? caller.getFileName() : "unknown caller";
-        String thread = Thread.currentThread().getName();
+        final String fileName = (caller != null) ? caller.getFileName() : "unknown caller";
+        final String thread = Thread.currentThread().getName();
 
         return new RecMainLog(time, fileName, thread);
     }
@@ -40,7 +40,7 @@ public class A_LibLogBase {
     }
 
     public static final void logHeader(String title) {
-        RecMainLog mainInfo = getMainLogInfo();
+        final RecMainLog mainInfo = getMainLogInfo();
 
         System.out.printf("⏰ %s • 🗃️ %s • %s%n", mainInfo.time(), mainInfo.fileName(),
                 title != null ? "📌 " + title : "🧵 " + mainInfo.thread());

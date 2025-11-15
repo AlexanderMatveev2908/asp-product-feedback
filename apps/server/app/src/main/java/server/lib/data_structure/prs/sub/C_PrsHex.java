@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class C_PrsHex extends B_PrsUtf8 {
   public static final String utf8FromHex(String txtHex) {
-    byte[] utf8Bytes = HexFormat.of().parseHex(txtHex);
+    final byte[] utf8Bytes = HexFormat.of().parseHex(txtHex);
     return utf8FromBinary(utf8Bytes);
   }
 

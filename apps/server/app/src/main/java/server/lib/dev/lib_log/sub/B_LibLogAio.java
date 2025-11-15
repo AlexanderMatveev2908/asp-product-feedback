@@ -22,8 +22,8 @@ public class B_LibLogAio extends A_LibLogBase {
       try (BufferedWriter bw = Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
           StandardOpenOption.TRUNCATE_EXISTING)) {
 
-        String json;
-        if (arg instanceof Throwable err)
+        final String json;
+        if (arg instanceof final Throwable err)
           json = LibPrs.jsonFromObj(Map.of("msg", err.getMessage(), "type", err.getClass().getSimpleName(), "time",
               LocalTime.now().toString()));
         else

@@ -37,13 +37,13 @@ public final class ErrCatcher implements WebExceptionHandler {
 
         LibLog.logErr(err);
 
-        ResAPI apiBody = extractResAPi(exc, err);
+        final ResAPI apiBody = extractResAPi(exc, err);
 
-        ServerHttpResponse res = exc.getResponse();
+        final ServerHttpResponse res = exc.getResponse();
         res.setStatusCode(HttpStatus.valueOf(apiBody.getStatus()));
         res.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
-        byte[] bytes;
+        final byte[] bytes;
         try {
             bytes = Jack.mapper.writeValueAsBytes(apiBody);
         } catch (JacksonException errOfErr) {

@@ -19,8 +19,8 @@ public final record RecMetaErr(String msg, int status) {
   }
 
   public static final RecMetaErr fromErr(ServerWebExchange exc, Throwable err) {
-    String originalMsg = Optional.ofNullable(err.getMessage()).orElse("");
-    RouteFlags flags = RouteFlags.fromMsg(originalMsg);
+    final String originalMsg = Optional.ofNullable(err.getMessage()).orElse("");
+    final RouteFlags flags = RouteFlags.fromMsg(originalMsg);
 
     return flags.isRouteIssue() ? new RecMetaErr(flags.getRouteErrMsg(exc), flags.getRouteErrStatus())
         : new RecMetaErr(getMsgFromErr(err, originalMsg), getStatusFromErr(err));
@@ -29,8 +29,8 @@ public final record RecMetaErr(String msg, int status) {
 
 final record RouteFlags(boolean isRouteNotFound, boolean isMethodNotAllowed) {
   public static final RouteFlags fromMsg(String msg) {
-    boolean isRouteNotFound = msg.contains("404 NOT_FOUND");
-    boolean isMethodNotAllowed = msg.contains("405 METHOD_NOT_ALLOWED");
+    final boolean isRouteNotFound = msg.contains("404 NOT_FOUND");
+    final boolean isMethodNotAllowed = msg.contains("405 METHOD_NOT_ALLOWED");
     return new RouteFlags(isRouteNotFound, isMethodNotAllowed);
   }
 
@@ -39,7 +39,7 @@ final record RouteFlags(boolean isRouteNotFound, boolean isMethodNotAllowed) {
   }
 
   public final String getRouteErrMsg(ServerWebExchange exc) {
-    String endpoint = exc.getRequest().getPath().value();
+    final String endpoint = exc.getRequest().getPath().value();
     return isRouteNotFound ? String.format("❌ route %s not found 🚦", endpoint)
         : String.format("❌ route %s does not support %s requests 🚦", endpoint,
             exc.getRequest().getMethod().toString());

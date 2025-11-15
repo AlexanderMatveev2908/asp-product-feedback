@@ -29,16 +29,16 @@ public final class FormDataParser extends ParserManager implements WebFilter {
 
     @Override
     public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
-        var api = (Api) exc;
+        final var api = (Api) exc;
 
         return splitParts(api).flatMap(parts -> {
-            CtxParse ctx = new CtxParse();
+            final CtxParse ctx = new CtxParse();
             Arrays.stream(parts).forEach(prt -> handlePart(prt, ctx));
 
             if (ctx.sb.length() > 0)
                 ctx.sb.setLength(ctx.sb.length() - 1);
 
-            Map<String, Object> parsedForm = nestDict(ctx.sb.toString());
+            final Map<String, Object> parsedForm = nestDict(ctx.sb.toString());
             parsedForm.put("images", ctx.images);
             parsedForm.put("videos", ctx.videos);
 
@@ -55,34 +55,35 @@ public final class FormDataParser extends ParserManager implements WebFilter {
     }
 
     private final Mono<String[]> splitParts(Api api) {
-        String contentType = api.getContentType();
+        final String contentType = api.getContentType();
         if (!contentType.startsWith("multipart/form-data"))
             return Mono.empty();
 
-        String boundary = "--" + contentType.split("boundary=")[1];
+        final String boundary = "--" + contentType.split("boundary=")[1];
 
         return api.getRawBd().flatMap(raw -> {
             if (raw.length == 0)
                 return Mono.empty();
 
-            String txtBody = new String(raw, StandardCharsets.ISO_8859_1);
+            final String txtBody = new String(raw, StandardCharsets.ISO_8859_1);
             return Mono.just(txtBody.split(Pattern.quote(boundary)));
         });
     }
 
     private final void handlePart(String prt, CtxParse ctx) {
-        String[] headerAndBody = prt.split("\r\n\r\n", 2);
+        final String[] headerAndBody = prt.split("\r\n\r\n", 2);
         if (headerAndBody.length < 2)
             return;
 
-        CtxPart part = new CtxPart(headerAndBody[0], headerAndBody[1]);
+        final CtxPart part = new CtxPart(headerAndBody[0], headerAndBody[1]);
         if (part.name == null)
             return;
 
         if (part.headers.contains("filename=")) {
             handleAssetPart(part, ctx);
         } else {
-            String val = new String(part.body.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8).trim();
+            final String val = new String(part.body.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8)
+                    .trim();
             ctx.sb.append(URLEncoder.encode(part.name, StandardCharsets.UTF_8)).append("=")
                     .append(URLEncoder.encode(val, StandardCharsets.UTF_8)).append("&");
         }
@@ -92,10 +93,10 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         if (!Set.of("images", "videos").contains(part.name))
             return;
 
-        boolean isImage = part.name.equals("images");
+        final boolean isImage = part.name.equals("images");
         handleAsset(part).ifPresent(asset -> {
 
-            Mono<Void> prm = Mono.<Void>fromRunnable(asset::saveLocally).subscribeOn(Schedulers.boundedElastic());
+            final Mono<Void> prm = Mono.<Void>fromRunnable(asset::saveLocally).subscribeOn(Schedulers.boundedElastic());
 
             ctx.promises.add(prm);
 
@@ -107,21 +108,21 @@ public final class FormDataParser extends ParserManager implements WebFilter {
     }
 
     private static final Optional<AppFile> handleAsset(CtxPart part) {
-        String filename = findPattern("filename", part.headers);
+        final String filename = findPattern("filename", part.headers);
         if (filename == null)
             return Optional.empty();
 
-        Matcher cm = Pattern.compile("Content-Type: (.+)").matcher(part.headers);
-        String contentTypePart = cm.find() ? cm.group(1).trim() : null;
+        final Matcher cm = Pattern.compile("Content-Type: (.+)").matcher(part.headers);
+        final String contentTypePart = cm.find() ? cm.group(1).trim() : null;
         if (contentTypePart == null)
             return Optional.empty();
 
-        byte[] rawFile = part.body.getBytes(StandardCharsets.ISO_8859_1);
+        final byte[] rawFile = part.body.getBytes(StandardCharsets.ISO_8859_1);
         return Optional.of(new AppFile(part.name, filename, contentTypePart, rawFile));
     }
 
     public static final String findPattern(String key, String headers) {
-        Matcher m = Pattern.compile(String.format("%s=\"([^\"]+)\"", Pattern.quote(key))).matcher(headers);
+        final Matcher m = Pattern.compile(String.format("%s=\"([^\"]+)\"", Pattern.quote(key))).matcher(headers);
         return !m.find() ? null : m.group(1);
     }
 }

@@ -35,11 +35,11 @@ public final class CorsMdw implements WebFilter {
 
     @Override
     public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
-        Api api = (Api) exc;
-        ServerHttpResponse res = api.getResponse();
+        final Api api = (Api) exc;
+        final ServerHttpResponse res = api.getResponse();
 
-        String origin = api.getHeader(HttpHeaders.ORIGIN);
-        String allowed = envKeeper.getFrontUrl();
+        final String origin = api.getHeader(HttpHeaders.ORIGIN);
+        final String allowed = envKeeper.getFrontUrl();
 
         if (!origin.isBlank() && !origin.startsWith(allowed))
             return writeForbidden(res, origin);
@@ -58,24 +58,24 @@ public final class CorsMdw implements WebFilter {
         res.setStatusCode(HttpStatus.FORBIDDEN);
         res.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
-        String msg = String.format("❌ %s not allowed ⚔️", origin);
+        final String msg = String.format("❌ %s not allowed ⚔️", origin);
         LibLog.log(msg);
 
-        String body;
+        final String body;
         try {
             body = Jack.mapper.writeValueAsString(Map.of("msg", msg, "status", 403));
         } catch (JsonProcessingException err) {
             throw new ErrAPI("err writing json for cors response");
         }
 
-        DataBuffer buff = res.bufferFactory().wrap(LibPrs.binaryFromUtf8(body));
+        final DataBuffer buff = res.bufferFactory().wrap(LibPrs.binaryFromUtf8(body));
         return res.writeWith(Mono.just(buff));
     }
 
     private final void setCorsHeaders(ServerHttpResponse res, String allowed) {
-        String allowedHdr = "Origin, Content-Type, Accept, Authorization";
+        final String allowedHdr = "Origin, Content-Type, Accept, Authorization";
 
-        HttpHeaders resHdr = res.getHeaders();
+        final HttpHeaders resHdr = res.getHeaders();
         resHdr.set(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, allowedHdr);
         resHdr.set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, allowed);
         resHdr.set(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, PATCH, DELETE, OPTIONS");

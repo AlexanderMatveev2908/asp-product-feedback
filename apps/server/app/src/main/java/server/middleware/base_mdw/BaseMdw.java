@@ -31,7 +31,7 @@ public abstract class BaseMdw implements WebFilter {
 
     @Override
     public final Mono<Void> filter(ServerWebExchange exc, WebFilterChain chain) {
-        var api = (Api) exc;
+        final Api api = (Api) exc;
         return handle(api, chain);
     }
 
@@ -40,7 +40,7 @@ public abstract class BaseMdw implements WebFilter {
     }
 
     private final <T> Mono<T> convertAndCheckForm(Api api, Map<String, Object> arg, Class<T> cls) {
-        T form = LibPrs.tFromMap(arg, cls);
+        final T form = LibPrs.tFromMap(arg, cls);
         return checkForm(api, form).thenReturn(form);
     }
 
@@ -60,13 +60,13 @@ public abstract class BaseMdw implements WebFilter {
     }
 
     protected final <T> Mono<T> checkMultipartForm(Api api, Class<T> cls) {
-        Optional<Map<String, Object>> parsedFormData = api.getParsedForm();
+        final Optional<Map<String, Object>> parsedFormData = api.getParsedForm();
         return Mono.defer(() -> parsedFormData.isPresent() ? Mono.just(parsedFormData.get()) : grabBody(api))
                 .flatMap(mapArg -> convertAndCheckForm(api, mapArg, cls));
     }
 
     protected final <T> Mono<T> checkQueryForm(Api api, Class<T> cls) {
-        Optional<Map<String, Object>> parsedQuery = api.getParsedQuery();
+        final Optional<Map<String, Object>> parsedQuery = api.getParsedQuery();
         return Mono.defer(() -> !parsedQuery.isPresent() ? Mono.error(new ErrAPI("data not provided", 400))
                 : convertAndCheckForm(api, parsedQuery.get(), cls));
     }

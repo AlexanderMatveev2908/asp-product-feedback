@@ -12,7 +12,7 @@ import server.lib.data_structure.prs.sub.F_PrsCases;
 public final class LibPrs extends F_PrsCases {
 
     public static final <T> T tFormJson(String json, Class<T> cls) {
-        Map<String, Object> map = mapFromJson(json);
+        final Map<String, Object> map = mapFromJson(json);
         return tFromMap(map, cls);
     }
 
@@ -26,7 +26,7 @@ public final class LibPrs extends F_PrsCases {
     }
 
     public static final LinkedHashMap<String, Object> linkedMap(Object... kvp) {
-        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        final LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 
         if (kvp.length % 2 != 0)
             throw new ErrAPI("passed odd pairs kv");
@@ -38,12 +38,12 @@ public final class LibPrs extends F_PrsCases {
     }
 
     public static final <T> Map<String, Object> mapFormT(T arg) {
-        Map<String, Object> map = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
 
         if (arg == null)
             return map;
 
-        for (Field field : arg.getClass().getDeclaredFields()) {
+        for (final Field field : arg.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             try {
                 map.put(field.getName(), field.get(arg));

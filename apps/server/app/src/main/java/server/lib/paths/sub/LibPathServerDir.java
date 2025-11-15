@@ -10,9 +10,9 @@ public final class LibPathServerDir {
 
     // ? dev case => normal build with classes bytecode
     private static final Path serverDirDev(Path appDir) {
-        int levelsUp = 5;
-        String up = (".." + File.separator).repeat(levelsUp);
-        Path serverDir = appDir.resolve(up).normalize();
+        final int levelsUp = 5;
+        final String up = (".." + File.separator).repeat(levelsUp);
+        final Path serverDir = appDir.resolve(up).normalize();
 
         return serverDir;
     }
@@ -20,8 +20,8 @@ public final class LibPathServerDir {
     // ? jar case => spring boot JarLauncher create custom classLoader which no
     // ? more points to oroginal JAR path but to a in-memory structure returning /
     private static final Path serverDirJar() {
-        Path appDir = Paths.get(System.getProperty("user.dir"));
-        Path serverDir;
+        final Path appDir = Paths.get(System.getProperty("user.dir"));
+        final Path serverDir;
 
         if (!appDir.endsWith("server"))
             serverDir = appDir.resolve("apps/server").normalize();
@@ -33,7 +33,7 @@ public final class LibPathServerDir {
 
     public static final Path grabDir() {
         try {
-            Path appDir = Paths.get(
+            final Path appDir = Paths.get(
                     LibPathServerDir.class.getProtectionDomain()
                             .getCodeSource()
                             .getLocation()

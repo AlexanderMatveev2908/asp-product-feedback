@@ -7,7 +7,7 @@ import server.paperwork.Reg;
 
 public final class LibShape {
     public static final boolean hasText(Object val) {
-        if (val instanceof String str)
+        if (val instanceof final String str)
             return !str.isBlank();
 
         return false;
@@ -15,7 +15,7 @@ public final class LibShape {
 
     public static final boolean isV4(String arg) {
         try {
-            var res = Reg.isUUID(arg);
+            final boolean res = Reg.isUUID(arg);
             UUID.fromString(arg);
 
             return res;
@@ -25,7 +25,7 @@ public final class LibShape {
     }
 
     public static final boolean isList(Object arg) {
-        if (arg instanceof List<?> argList)
+        if (arg instanceof final List<?> argList)
             return !argList.isEmpty();
 
         return false;
