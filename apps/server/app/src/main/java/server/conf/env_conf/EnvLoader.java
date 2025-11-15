@@ -21,7 +21,7 @@ import server.lib.paths.LibPath;
 public final class EnvLoader implements EnvironmentPostProcessor {
 
     private final Path generateCa(String supabaseCa) {
-        Path certPath = LibPath.CA_FILE;
+        final Path certPath = LibPath.CA_FILE;
         try {
             Files.write(certPath, HexFormat.of().parseHex(supabaseCa));
         } catch (Exception err) {
@@ -34,12 +34,12 @@ public final class EnvLoader implements EnvironmentPostProcessor {
 
     private final String buildReactiveURL(String dbUrl, CtxDbVars ctxDb, Path certPath) {
         // ! remove jdbc which supabase append automatically for java connections
-        URI uri = URI.create(dbUrl.replace("jdbc:", ""));
-        String host = uri.getHost();
-        int port = uri.getPort();
-        String dbName = uri.getPath().replaceFirst("/", "");
+        final URI uri = URI.create(dbUrl.replace("jdbc:", ""));
+        final String host = uri.getHost();
+        final int port = uri.getPort();
+        final String dbName = uri.getPath().replaceFirst("/", "");
 
-        StringBuilder r2dbcUrl = new StringBuilder();
+        final StringBuilder r2dbcUrl = new StringBuilder();
         r2dbcUrl.append("r2dbc:postgresql://")
                 .append(ctxDb.dbUs()).append(":").append(ctxDb.dbPwd()).append("@")
                 .append(host).append(":").append(port).append("/")
@@ -53,13 +53,13 @@ public final class EnvLoader implements EnvironmentPostProcessor {
 
     private final void dbSetup(Dotenv dotenv, Properties props) {
         // ? tokens connections
-        CtxDbVars ctxDb = CtxDbVars.fromDotEnv(dotenv);
+        final CtxDbVars ctxDb = CtxDbVars.fromDotEnv(dotenv);
         // ? generated on boot
-        Path certPath = generateCa(ctxDb.supabaseCa());
+        final Path certPath = generateCa(ctxDb.supabaseCa());
 
         // ? full url
-        String dbUrl = ctxDb.dbUrl() + "?sslmode=verify-full&sslrootcert=" + certPath;
-        String reactiveUrl = buildReactiveURL(dbUrl, ctxDb, certPath);
+        final String dbUrl = ctxDb.dbUrl() + "?sslmode=verify-full&sslrootcert=" + certPath;
+        final String reactiveUrl = buildReactiveURL(dbUrl, ctxDb, certPath);
 
         props.put("spring.r2dbc.url", reactiveUrl);
         props.put("spring.r2dbc.username", ctxDb.dbUs());
@@ -67,7 +67,7 @@ public final class EnvLoader implements EnvironmentPostProcessor {
     }
 
     private final void appSetup(Dotenv dotenv, Properties props, ConfigurableEnvironment env) {
-        Set<DotenvEntry> existingVars = dotenv.entries();
+        final Set<DotenvEntry> existingVars = dotenv.entries();
 
         for (DotenvEntry pair : existingVars)
             props.put(pair.getKey(), pair.getValue());
@@ -77,15 +77,15 @@ public final class EnvLoader implements EnvironmentPostProcessor {
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment env, SpringApplication app) {
-        Path serverDir = LibPath.SERVER_DIR;
+        final Path serverDir = LibPath.SERVER_DIR;
 
-        Dotenv dotenv = Dotenv.configure()
+        final Dotenv dotenv = Dotenv.configure()
                 .directory(serverDir.toString())
                 .filename(".env")
                 .ignoreIfMissing()
                 .load();
 
-        Properties props = new Properties();
+        final Properties props = new Properties();
 
         dbSetup(dotenv, props);
         appSetup(dotenv, props, env);
@@ -99,10 +99,10 @@ final record CtxDbVars(
         String supabaseCa) {
 
     public static CtxDbVars fromDotEnv(Dotenv dotenv) {
-        String dbUrl = dotenv.get("DB_URL");
-        String dbUs = dotenv.get("DB_US");
-        String dbPwd = dotenv.get("DB_PWD");
-        String supabaseCa = dotenv.get("SUPABASE_CA");
+        final String dbUrl = dotenv.get("DB_URL");
+        final String dbUs = dotenv.get("DB_US");
+        final String dbPwd = dotenv.get("DB_PWD");
+        final String supabaseCa = dotenv.get("SUPABASE_CA");
 
         return new CtxDbVars(dbUrl, dbUs, dbPwd, supabaseCa);
     }

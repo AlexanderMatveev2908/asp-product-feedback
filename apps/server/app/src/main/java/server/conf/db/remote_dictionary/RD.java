@@ -1,8 +1,5 @@
 package server.conf.db.remote_dictionary;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
 import io.lettuce.core.RedisClient;
@@ -37,31 +34,6 @@ public final class RD implements RootCls {
                         throw new ErrAPI("rd cnt failed");
                     return res;
                 });
-    }
-
-    public final Mono<Map<String, Object>> stats() {
-        return cmd.info()
-                .map(info -> {
-                    Map<String, Object> parsed = new HashMap<>();
-
-                    String[] lines = info.split("\n");
-                    for (String ln : lines) {
-                        ln = ln.trim();
-                        if (ln.isEmpty() || ln.startsWith("#"))
-                            continue;
-
-                        String[] kv = ln.split(":", 2);
-                        if (kv.length == 2)
-                            parsed.put(kv[0], kv[1]);
-
-                    }
-
-                    for (Map.Entry<String, Object> en : parsed.entrySet())
-                        System.out.println(String.format("📊 %s => %s", en.getKey(), en.getValue().toString()));
-
-                    return parsed;
-                })
-                .onErrorMap(err -> new ErrAPI("rd fetch stats failed"));
     }
 
     public final Mono<Integer> dbSize() {
