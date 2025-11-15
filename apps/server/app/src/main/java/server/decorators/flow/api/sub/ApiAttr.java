@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.springframework.web.server.ServerWebExchange;
 
 import server.decorators.Nullable;
+import server.lib.data_structure.LibShape;
 
 public interface ApiAttr {
   ServerWebExchange getExch();
 
   default <T> void setAttr(String key, T value) {
+    LibShape.yellNone(value);
+
     getExch().getAttributes().put(key, value);
   }
 

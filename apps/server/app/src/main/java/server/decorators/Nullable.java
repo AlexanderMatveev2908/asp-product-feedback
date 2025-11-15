@@ -1,6 +1,7 @@
 package server.decorators;
 
 import lombok.RequiredArgsConstructor;
+import server.lib.data_structure.LibShape;
 
 // ! used only when arg could intentionally can be left as null
 // ! in other places arg must in every case be a non-nullable value
@@ -17,12 +18,12 @@ public final class Nullable<T> {
     return new Nullable<K>(null);
   }
 
-  public final boolean isNull() {
-    return data == null;
+  public final boolean isNone() {
+    return LibShape.isNone(data);
   }
 
   public final boolean isPresent() {
-    return data != null;
+    return LibShape.isPresent(data);
   }
 
   public final <K> Object orElse(K def) {

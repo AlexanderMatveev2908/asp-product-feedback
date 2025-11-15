@@ -4,11 +4,21 @@ import java.util.List;
 import java.util.UUID;
 
 import server.decorators.Nullable;
+import server.decorators.flow.ErrAPI;
 import server.paperwork.Reg;
 
 public final class LibShape {
     public static final <T> boolean isNone(T arg) {
+        return arg == null;
+    }
+
+    public static final <T> boolean isPresent(T arg) {
         return arg != null;
+    }
+
+    public static final <T> void yellNone(T arg) {
+        if (isNone(arg))
+            throw new ErrAPI("expected value T, received none");
     }
 
     public static final boolean hasText(Object val) {

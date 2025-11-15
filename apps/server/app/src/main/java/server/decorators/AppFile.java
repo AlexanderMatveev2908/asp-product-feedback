@@ -37,7 +37,7 @@ public final class AppFile {
 
         this.field = field;
         this.contentType = contentType;
-        this.bts = bts.isNull() ? new byte[0] : bts.get().clone();
+        this.bts = bts.isNone() ? new byte[0] : bts.get().clone();
 
         String ext = "";
         final int idxDot = filename.lastIndexOf('.');
