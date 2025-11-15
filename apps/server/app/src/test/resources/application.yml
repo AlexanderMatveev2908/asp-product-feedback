@@ -20,23 +20,31 @@ server:
     relaxed-query-chars: "[,]"
 
 spring:
-  jackson:
-    mapper:
-      sort-properties-alphabetically: false
-    serialization:
-      order-map-entries-by-keys: false
-
   main:
     banner-mode: off
 
+  # ! this way i can send error for routes not found instead
+  # ! of trying sending static html
   web:
     resources:
       add-mappings: false
 
+  # ! update it or your images/videos may feel for excess of size
   webflux:
     multipart:
       max-in-memory-size: 50MB
       max-disk-usage-per-part: 100MB
+
+  r2dbc:
+    url: ${generated_on_boot}
+    username: ${generated_on_boot}
+    password: ${generated_on_boot}
+    pool:
+      enabled: true
+      initial-size: 0
+      max-size: 20
+      max-acquire-time: 240s
+      validation-query: SELECT 1
 
 logging:
   level:

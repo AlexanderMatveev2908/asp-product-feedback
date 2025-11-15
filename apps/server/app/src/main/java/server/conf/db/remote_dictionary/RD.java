@@ -25,11 +25,11 @@ public final class RD implements RootCls {
         this.cmd = cnt.reactive();
     }
 
-    public RedisReactiveCommands<String, String> getCmd() {
+    public final RedisReactiveCommands<String, String> getCmd() {
         return cmd;
     }
 
-    public Mono<String> checkConnection() {
+    public final Mono<String> checkConnection() {
         return cmd.ping()
                 .onErrorMap(err -> new ErrAPI("rd cnt failed"))
                 .map(res -> {
@@ -39,7 +39,7 @@ public final class RD implements RootCls {
                 });
     }
 
-    public Mono<Map<String, Object>> stats() {
+    public final Mono<Map<String, Object>> stats() {
         return cmd.info()
                 .map(info -> {
                     Map<String, Object> parsed = new HashMap<>();
@@ -64,7 +64,7 @@ public final class RD implements RootCls {
                 .onErrorMap(err -> new ErrAPI("rd fetch stats failed"));
     }
 
-    public Mono<Integer> dbSize() {
+    public final Mono<Integer> dbSize() {
         return cmd.dbsize()
                 .onErrorMap(err -> new ErrAPI("rd fetch db size failed"))
                 .map(size -> {
@@ -72,7 +72,7 @@ public final class RD implements RootCls {
                 });
     }
 
-    public void close() {
+    public final void close() {
         if (cnt != null && cnt.isOpen())
             cnt.close();
 

@@ -20,7 +20,7 @@ import server.lib.paths.LibPath;
 
 public final class EnvLoader implements EnvironmentPostProcessor {
 
-    private Path generateCa(String supabaseCa) {
+    private final Path generateCa(String supabaseCa) {
         Path certPath = LibPath.CA_FILE;
         try {
             Files.write(certPath, HexFormat.of().parseHex(supabaseCa));
@@ -32,7 +32,7 @@ public final class EnvLoader implements EnvironmentPostProcessor {
         return certPath;
     }
 
-    private String buildReactiveURL(String dbUrl, CtxDbVars ctxDb, Path certPath) {
+    private final String buildReactiveURL(String dbUrl, CtxDbVars ctxDb, Path certPath) {
         // ! remove jdbc which supabase append automatically for java connections
         URI uri = URI.create(dbUrl.replace("jdbc:", ""));
         String host = uri.getHost();
@@ -51,7 +51,7 @@ public final class EnvLoader implements EnvironmentPostProcessor {
 
     }
 
-    private void dbSetup(Dotenv dotenv, Properties props) {
+    private final void dbSetup(Dotenv dotenv, Properties props) {
         // ? tokens connections
         CtxDbVars ctxDb = CtxDbVars.fromDotEnv(dotenv);
         // ? generated on boot
@@ -66,7 +66,7 @@ public final class EnvLoader implements EnvironmentPostProcessor {
         props.put("spring.r2dbc.password", ctxDb.dbPwd());
     }
 
-    private void appSetup(Dotenv dotenv, Properties props, ConfigurableEnvironment env) {
+    private final void appSetup(Dotenv dotenv, Properties props, ConfigurableEnvironment env) {
         Set<DotenvEntry> existingVars = dotenv.entries();
 
         for (DotenvEntry pair : existingVars)

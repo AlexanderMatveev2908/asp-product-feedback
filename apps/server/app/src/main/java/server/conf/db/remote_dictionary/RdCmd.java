@@ -22,7 +22,7 @@ public final class RdCmd {
         this.cmd = rd.getCmd();
     }
 
-    public Mono<Integer> delK(String k) {
+    public final Mono<Integer> delK(String k) {
         return cmd.del(k).flatMap(v -> {
             if (v == 0)
                 return Mono.error(new ErrAPI("key not found => " + k, 404));
@@ -31,57 +31,57 @@ public final class RdCmd {
         }).doOnNext(v -> LibLog.log("🔪 deleted " + v + " key"));
     }
 
-    public Mono<String> typeOf(String key) {
+    public final Mono<String> typeOf(String key) {
         return cmd.type(key).switchIfEmpty(Mono.error(new ErrAPI("key not found => " + key, 404)))
                 .doOnNext(type -> LibLog.logKV(key, type));
     }
 
-    public Mono<Boolean> expire(String key, int minutes) {
+    public final Mono<Boolean> expire(String key, int minutes) {
         return cmd.expire(key, Duration.ofMinutes(minutes));
     }
 
-    public Mono<String> setStr(String k, String v) {
+    public final Mono<String> setStr(String k, String v) {
         return cmd.set(k, v);
     }
 
-    public Mono<String> getStr(String k) {
+    public final Mono<String> getStr(String k) {
         return cmd.get(k);
     }
 
-    public Mono<String> setHash(String k, Map<String, String> m) {
+    public final Mono<String> setHash(String k, Map<String, String> m) {
         return cmd.hmset(k, m);
     }
 
-    public Mono<String> getHash(String k, String v) {
+    public final Mono<String> getHash(String k, String v) {
         return cmd.hget(k, v);
     }
 
-    public Mono<Integer> appendList(String k, String... v) {
+    public final Mono<Integer> appendList(String k, String... v) {
         return cmd.rpush(k, v).map(Long::intValue);
     }
 
-    public Mono<List<String>> getList(String k, int start, int end) {
+    public final Mono<List<String>> getList(String k, int start, int end) {
         return cmd.lrange(k, start, end).collectList();
     }
 
-    public Mono<Integer> addToSet(String k, String... v) {
+    public final Mono<Integer> addToSet(String k, String... v) {
         return cmd.sadd(k, v).map(Long::intValue);
     }
 
-    public Mono<List<String>> getSet(String k) {
+    public final Mono<List<String>> getSet(String k) {
         return cmd.smembers(k).collectList();
     }
 
-    public Mono<Integer> addToScoredSet(String k, Map<String, Double> m) {
+    public final Mono<Integer> addToScoredSet(String k, Map<String, Double> m) {
         return Flux.fromIterable(m.entrySet()).flatMap(entry -> cmd.zadd(k, entry.getValue(), entry.getKey())).reduce(0,
                 (acc, curr) -> acc + curr.intValue());
     }
 
-    public Mono<List<ScoredValue<String>>> getScoredSet(String k, int start, int end) {
+    public final Mono<List<ScoredValue<String>>> getScoredSet(String k, int start, int end) {
         return cmd.zrangeWithScores(k, start, end).collectList();
     }
 
-    public Mono<Object> grabAll() {
+    public final Mono<Object> grabAll() {
         return cmd.keys("*").flatMap(key -> cmd.type(key).flatMap(type -> switch (type.toLowerCase()) {
             case "string" -> cmd.get(key).map(val -> Map.entry(key, val));
 
@@ -102,7 +102,7 @@ public final class RdCmd {
         });
     }
 
-    public Mono<String> flushAll() {
+    public final Mono<String> flushAll() {
         return cmd.flushall().map(res -> {
             if (!"OK".equals(res))
                 throw new ErrAPI("rd flush all failed");

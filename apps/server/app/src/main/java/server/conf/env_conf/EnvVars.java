@@ -57,11 +57,11 @@ public final class EnvVars {
     @Resolved
     private String redisUrl;
 
-    public EnvModeT getMode() {
+    public final EnvModeT getMode() {
         return EnvModeT.fromValue(this.envMode);
     }
 
-    public String getFrontUrl() {
+    public final String getFrontUrl() {
         return switch (getMode()) {
             case DEV -> frontUrlDev;
             case TEST -> frontUrlTest;
@@ -69,7 +69,7 @@ public final class EnvVars {
         };
     }
 
-    public String getBackUrl() {
+    public final String getBackUrl() {
         return switch (getMode()) {
             case DEV -> backUrlDev;
             case TEST -> backUrlTest;

@@ -12,7 +12,7 @@ public enum CloudResourceT {
 
     private final String val;
 
-    public static String fromFileField(String field) {
+    public static final String fromFileField(String field) {
         return switch (field) {
             case "images" -> IMAGE.getVal();
             case "videos" -> VIDEO.getVal();
