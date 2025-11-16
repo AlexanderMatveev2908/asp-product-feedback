@@ -12,10 +12,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import reactor.core.publisher.Mono;
+import server.decorators.core.ErrAPI;
 import server.decorators.core.res_api.data_structure.ResApiJson;
 import server.decorators.core.res_api.meta.MetaRes;
 import server.decorators.types.Dict;
 import server.decorators.types.Nullable;
+import server.lib.data_structure.LibShape;
 
 @SuppressFBWarnings({ "EI" })
 @Getter
@@ -55,8 +57,21 @@ public final class ResAPI {
         return this;
     }
 
-    public final ResAPI data(Dict data) {
-        this.data = Nullable.of(data);
+    @SuppressWarnings("unchecked")
+    public final ResAPI data(Object data) {
+        if (LibShape.isNone(data))
+            this.data = Nullable.asNone();
+        else if (data instanceof Nullable<?> inst) {
+            Object inner = inst.orNone();
+            if (inst.isNone() || inner instanceof Dict)
+                this.data = (Nullable<Dict>) inst;
+            else
+                throw new ErrAPI("passed invalid arg to ResApi builder => " + data);
+        } else if (data instanceof Dict inst)
+            this.data = Nullable.of(inst);
+        else
+            throw new ErrAPI("passed invalid arg to ResApi builder => " + data);
+
         return this;
     }
 
@@ -84,7 +99,7 @@ public final class ResAPI {
 
         final String prettyMsg = MetaRes.prettyMsg(msg, status);
 
-        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data.orNone());
+        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data);
 
         return Mono.just(builder.body(myRes));
     }
