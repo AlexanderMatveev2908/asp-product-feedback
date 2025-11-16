@@ -46,7 +46,7 @@ public final class LibPathServerDir {
             } else {
                 throw new ErrAPI("not sure where I am 👻");
             }
-        } catch (Exception err) {
+        } catch (final Exception err) {
             throw new ErrAPI("err extracting server dir");
         }
 

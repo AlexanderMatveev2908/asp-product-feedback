@@ -23,7 +23,7 @@ public class ServerApplication {
 
         try {
             SpringApplication.run(ServerApplication.class, args);
-        } catch (Exception err) {
+        } catch (final Exception err) {
             LibLog.logErr(err);
         }
     }
@@ -36,7 +36,7 @@ public class ServerApplication {
                 lifeSpawn.lifeCheck(e);
 
                 // libDev.main();
-            } catch (Exception err) {
+            } catch (final Exception err) {
                 LibLog.logErr(err);
             }
 

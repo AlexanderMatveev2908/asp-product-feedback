@@ -47,7 +47,7 @@ public final class LibPath {
             if (!Files.exists(LOG_FILE_ERR))
                 Files.createFile(LOG_FILE_ERR);
 
-        } catch (Exception err) {
+        } catch (final Exception err) {
             throw new ErrAPI("err creating required dir/files");
         }
     }

@@ -40,7 +40,7 @@ public class PostFormSvc {
 
       final List<AppFile> arg = (List<AppFile>) pair.getValue();
       for (final AppFile f : arg) {
-        if (!Files.exists(f.getFilePath()))
+        if (!Files.exists(f.getFilePath().orYell()))
           throw new ErrAPI("file does not exist");
 
         promises.add(cloud.upload(f).doFinally(sig -> f.deleteLocally()));

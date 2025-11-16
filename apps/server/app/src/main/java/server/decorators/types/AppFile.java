@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
+import server.conf.cloud.etc.data_structure.CloudResourceT;
 import server.decorators.core.ErrAPI;
 import server.lib.paths.LibPath;
 
@@ -21,35 +22,61 @@ import server.lib.paths.LibPath;
 @SuppressFBWarnings("EI_EXPOSE_REP")
 @Getter
 public final class AppFile {
-    private final String field;
+    private final CloudResourceT field;
     private final String filename;
-    private final String contentType;
-    private final byte[] bts;
-    private final Path filePath;
+    private final Nullable<String> contentType;
+    private final Nullable<byte[]> bts;
+    private final Nullable<Path> filePath;
 
     public AppFile(
-            String field,
+            CloudResourceT field,
             String filename,
-            String contentType,
+            Nullable<String> contentType,
             Nullable<byte[]> bts) {
 
         this.field = field;
         this.contentType = contentType;
-        this.bts = bts.isNone() ? new byte[0] : bts.orYell().clone();
+        this.bts = bts;
+        this.filename = randomFilename(filename);
+        this.filePath = Nullable.of(LibPath.ASSETS_DIR.resolve(this.field.plural()).resolve(this.filename));
+    }
 
-        String ext = "";
-        final int idxDot = filename.lastIndexOf('.');
-        if (idxDot != -1 && idxDot < filename.length() - 1) {
-            ext = filename.substring(idxDot);
-        }
+    // ? this constructor below is used mostly for dev uploads of mock data images
+    // public AppFile(
+    //         String filename,
+    //         String contentType,
+    //         Path filePath) {
+    //     this.field = "images";
+    //     this.filename = randomFilename(filename);
+    //     this.contentType = "";
+    //     this.bts = LibRuntime.inTryBlock(() -> Files.readAllBytes(filePath));
+    //     this.filePath = filePath;
+    // }
 
-        this.filename = UUID.randomUUID().toString() + ext;
-        this.filePath = LibPath.ASSETS_DIR.resolve(this.field).resolve(this.filename);
+    private final String findExt(String arg) {
+        final String ext;
+        final int idxDot = arg.lastIndexOf('.');
+        if (idxDot != -1 && idxDot < arg.length() - 1)
+            ext = arg.substring(idxDot);
+        else
+            throw new ErrAPI("invalid filename");
+
+        return ext;
+    }
+
+    private final String randomFilename(String arg) {
+        String ext = findExt(arg);
+        return UUID.randomUUID().toString() + ext;
     }
 
     public final void saveLocally() {
+        if (filePath.isNone())
+            throw new ErrAPI("tried to save locally without filepath present");
+        if (bts.isNone())
+            throw new ErrAPI("tried to save locally without binary code present");
+
         try {
-            Files.write(this.getFilePath(), this.getBts(),
+            Files.write(this.getFilePath().orYell(), this.getBts().orYell(),
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException err) {
@@ -58,15 +85,22 @@ public final class AppFile {
     }
 
     public final void deleteLocally() {
+
+        if (filePath.isNone())
+            throw new ErrAPI("tried to delete locally without filepath present");
+
         try {
-            Files.deleteIfExists(this.getFilePath());
+            Files.deleteIfExists(this.getFilePath().orYell());
         } catch (IOException err) {
             throw new ErrAPI("err deleting asset locally");
         }
     }
 
     public final ByteArrayResource getResourceFromBts() {
-        return new ByteArrayResource(this.bts) {
+        if (bts.isNone())
+            throw new ErrAPI("tried to create resource from binary without binary present");
+
+        return new ByteArrayResource(this.bts.orYell()) {
             @Override
             public String getFilename() {
                 return filename;
@@ -75,7 +109,10 @@ public final class AppFile {
     }
 
     public final FileSystemResource getResourceFromPath() {
-        return new FileSystemResource(filePath);
+        if (filePath.isNone())
+            throw new ErrAPI("tried to create resource from file path without filepath present");
+
+        return new FileSystemResource(filePath.orYell());
     }
 
     public final Dict getFancyShape() {
@@ -92,7 +129,7 @@ public final class AppFile {
                 if ("bts".equals(f.getName()))
                     fancyMap.put("bytes", "💾 long binary code...");
                 else
-                    fancyMap.put(f.getName(), val);
+                    fancyMap.put(f.getName(), val instanceof Nullable<?> inst ? inst.orNone() : val);
 
             }
         } catch (IllegalAccessException | IllegalArgumentException err) {

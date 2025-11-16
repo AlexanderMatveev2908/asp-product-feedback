@@ -38,7 +38,7 @@ public interface CloudSvcUpload {
 
   private String getFolderName(AppFile file) {
     final String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
-    return appSnakeName + "__" + file.getField();
+    return appSnakeName + "__" + file.getField().plural();
   }
 
   private UploadData extractDataUpload(AppFile file) {
@@ -49,11 +49,12 @@ public interface CloudSvcUpload {
     final String filename = file.getFilename();
     final String publicId = filename.substring(0, filename.lastIndexOf('.'));
 
-    final String assetT = CloudResourceT.fromFileField(file.getField());
-    final AbstractResource fileResource = assetT.equals("image") ? file.getResourceFromBts()
+    final CloudResourceT assetT = file.getField();
+    final AbstractResource fileResource = assetT.equals(CloudResourceT.IMAGE) ? file.getResourceFromBts()
         : file.getResourceFromPath();
 
-    final String url = "/" + assetT + "/upload";
+    // ! cloudinary always use singular names 
+    final String url = "/" + assetT.getVal() + "/upload";
 
     final UploadData data = UploadData.builder()
         .cloudKey(cloudKey)
@@ -77,7 +78,6 @@ public interface CloudSvcUpload {
     form.part("file", dataUpload.getFileResource());
 
     return form;
-
   }
 
   default Mono<CloudAsset> upload(AppFile file) {

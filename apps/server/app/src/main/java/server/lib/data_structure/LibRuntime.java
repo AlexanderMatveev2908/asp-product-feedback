@@ -8,7 +8,7 @@ public final class LibRuntime {
   public static final <T> T inTryBlock(MessySupplier<T> cb) {
     try {
       return cb.get();
-    } catch (Exception err) {
+    } catch (final Exception err) {
       throw new ErrAPI(err.getMessage());
     }
   }
@@ -16,7 +16,7 @@ public final class LibRuntime {
   public static final void inTryBlock(MessyRunnable cb) {
     try {
       cb.run();
-    } catch (Exception err) {
+    } catch (final Exception err) {
       throw new ErrAPI(err.getMessage());
     }
   }

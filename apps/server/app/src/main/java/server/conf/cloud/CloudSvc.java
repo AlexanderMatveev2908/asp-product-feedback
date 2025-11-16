@@ -50,7 +50,7 @@ public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
             final String sig = HexFormat.of().formatHex(digest);
 
             return sig;
-        } catch (Exception err) {
+        } catch (final Exception err) {
             throw new ErrAPI("err creating cloud sign");
         }
     }

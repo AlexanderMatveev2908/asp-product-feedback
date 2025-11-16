@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +16,7 @@ import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import server.conf.cloud.etc.data_structure.CloudResourceT;
 import server.decorators.core.api.Api;
 import server.decorators.types.AppFile;
 import server.decorators.types.Dict;
@@ -93,24 +93,26 @@ public final class FormDataParser extends ParserManager implements WebFilter {
     }
 
     private final void handleAssetPart(CtxPart part, CtxParse ctx) {
-        if (!Set.of("images", "videos").contains(part.name.orYell()))
+        final CloudResourceT resourceT;
+        try {
+            resourceT = CloudResourceT.fromFileField(part.name.orYell());
+        } catch (Exception err) {
             return;
+        }
 
-        final boolean isImage = part.name.orYell().equals("images");
-        handleAsset(part).ifPresent(asset -> {
-
+        handleAsset(part, resourceT).ifPresent(asset -> {
             final Mono<Void> prm = Mono.<Void>fromRunnable(asset::saveLocally).subscribeOn(Schedulers.boundedElastic());
 
             ctx.promises.add(prm);
 
-            if (isImage)
+            if (resourceT.isImage())
                 ctx.images.add(asset);
             else
                 ctx.videos.add(asset);
         });
     }
 
-    private static final Nullable<AppFile> handleAsset(CtxPart part) {
+    private static final Nullable<AppFile> handleAsset(CtxPart part, CloudResourceT resourceT) {
         final Nullable<String> filename = findPattern("filename", part.headers);
         if (filename.isNone())
             return Nullable.asNone();
@@ -122,7 +124,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
 
         final Nullable<byte[]> rawFile = Nullable.of(part.body.getBytes(StandardCharsets.ISO_8859_1));
         return Nullable
-                .of(new AppFile(part.name.orYell(), filename.orYell(), contentTypePart.orYell(), rawFile));
+                .of(new AppFile(resourceT, filename.orYell(), contentTypePart, rawFile));
     }
 
     public static final Nullable<String> findPattern(String key, String headers) {

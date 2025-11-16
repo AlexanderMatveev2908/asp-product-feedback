@@ -18,7 +18,7 @@ public final class LibPrs extends F_PrsCases {
     public static final <T> T tFromDict(Dict dict, Class<T> cls) {
         try {
             return Jack.main.convertValue(dict, cls);
-        } catch (Exception err) {
+        } catch (final Exception err) {
             throw new ErrAPI("invalid data", 400);
         }
     }
