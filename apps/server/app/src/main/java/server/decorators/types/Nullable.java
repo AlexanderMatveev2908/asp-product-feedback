@@ -51,11 +51,11 @@ public final class Nullable<T> {
     return LibShape.hasText(data);
   }
 
-  public final boolean isList() {
+  public final boolean hasListItems() {
     return LibShape.hasListItems(data);
   }
 
-  public final boolean isDict() {
+  public final boolean hasObjKeys() {
     return LibShape.hasObjKeys(data);
   }
 

@@ -13,7 +13,6 @@ import server.decorators.core.api.Api;
 import server.decorators.types.AppFile;
 import server.decorators.types.Dict;
 import server.decorators.types.Nullable;
-import server.lib.data_structure.LibMemory;
 import server.lib.data_structure.LibShape;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.lib_log.LibLog;
@@ -52,7 +51,7 @@ public final class LogMdw implements WebFilter {
     private final Nullable<Object> normalizeEmpty(Object obj) {
         Nullable<?> inst = Nullable.of(obj);
 
-        if (inst.isNone() && !inst.isList() && !inst.isDict())
+        if (inst.isNone() || (!inst.hasText() && !inst.hasListItems() && !inst.hasObjKeys()))
             return Nullable.asNone();
 
         return Nullable.of(obj);
@@ -63,7 +62,7 @@ public final class LogMdw implements WebFilter {
         if (parsedForm.isNone())
             return Nullable.asNone();
 
-        final Dict cpyForm = LibMemory.shallowCpy(parsedForm.orYell());
+        final Dict cpyForm = parsedForm.orYell().cpy();
 
         final Nullable<List<AppFile>> images = Nullable.of((List<AppFile>) cpyForm.get("images"));
         final Nullable<List<AppFile>> videos = Nullable.of((List<AppFile>) cpyForm.get("videos"));

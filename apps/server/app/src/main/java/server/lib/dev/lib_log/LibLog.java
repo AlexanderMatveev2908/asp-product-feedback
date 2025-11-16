@@ -7,8 +7,6 @@ import server.lib.dev.lib_log.sub.C_LibLogErr;
 public final class LibLog extends C_LibLogErr {
 
     public static final void logTtl(Nullable<String> title, Object... args) {
-        wOk(args);
-
         startLog();
         logHeader(title);
 
