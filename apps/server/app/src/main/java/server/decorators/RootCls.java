@@ -8,7 +8,7 @@ import server.lib.data_structure.LibShape;
 
 public interface RootCls {
     default String reflectiveToString() {
-        final StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + "{");
+        final StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + " {");
 
         try {
             Class<?> curr = this.getClass();
@@ -20,6 +20,8 @@ public interface RootCls {
                         continue;
 
                     f.setAccessible(true);
+                    sb.append("\n");
+                    sb.append(" ".repeat(2));
                     sb.append(f.getName()).append("=").append(f.get(this)).append(", ");
                 }
                 curr = curr.getSuperclass();
@@ -32,6 +34,7 @@ public interface RootCls {
         if (sb.lastIndexOf(", ") == sb.length() - 2)
             sb.setLength(sb.length() - 2);
 
+        sb.append("\n");
         sb.append("}");
 
         return sb.toString();
