@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,8 @@ import server.models.users.etc.UserSvc;
 
 @Service
 @RequiredArgsConstructor
-@SuppressFBWarnings({ "EI2", "EI" })
+@SuppressFBWarnings({ "EI2", "EI", "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" })
+@SuppressWarnings({ "unused", "PMD.AvoidInstantiatingObjectsInLoops" })
 public class MockData {
   private final UserSvc userSvc;
   private final FeedSvc feedSvc;

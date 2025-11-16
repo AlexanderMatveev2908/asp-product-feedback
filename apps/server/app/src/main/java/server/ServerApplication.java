@@ -18,6 +18,7 @@ import server.lib.dev.lib_log.LibLog;
 public class ServerApplication {
 
     private final LifeSpawn lifeSpawn;
+    @SuppressWarnings("unused")
     private final LibDev libDev;
 
     public static final void main(String[] args) {
@@ -36,7 +37,7 @@ public class ServerApplication {
             try {
                 lifeSpawn.lifeCheck(e);
 
-                libDev.main();
+                // libDev.main();
             } catch (final Exception err) {
                 LibLog.logErr(err);
             }
