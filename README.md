@@ -314,6 +314,7 @@ erDiagram
   images {
     string public_id
     string url
+    uuid user_id
   }
 
   category_type {

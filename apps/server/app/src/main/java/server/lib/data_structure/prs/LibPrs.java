@@ -1,11 +1,9 @@
 package server.lib.data_structure.prs;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import server.decorators.core.ErrAPI;
+import server.decorators.types.Dict;
 import server.lib.data_structure.Jack;
 import server.lib.data_structure.LibRuntime;
 import server.lib.data_structure.prs.sub.F_PrsCases;
@@ -13,38 +11,26 @@ import server.lib.data_structure.prs.sub.F_PrsCases;
 public final class LibPrs extends F_PrsCases {
 
     public static final <T> T tFromJson(String json, Class<T> cls) {
-        final Map<String, Object> map = mapFromJson(json);
-        return tFromMap(map, cls);
+        final Dict dict = dictFromJson(json);
+        return tFromDict(dict, cls);
     }
 
-    public static final <T> T tFromMap(Map<String, Object> map, Class<T> cls) {
+    public static final <T> T tFromDict(Dict dict, Class<T> cls) {
         try {
-            return Jack.main.convertValue(map, cls);
+            return Jack.main.convertValue(dict, cls);
         } catch (Exception err) {
             throw new ErrAPI("invalid data", 400);
         }
     }
 
-    public static final LinkedHashMap<String, Object> linkedMap(Object... kvp) {
-        final LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-
-        if (kvp.length % 2 != 0)
-            throw new ErrAPI("passed odd pairs kv");
-
-        for (int i = 0; i < kvp.length; i += 2)
-            map.put((String) kvp[i], kvp[i + 1]);
-
-        return map;
-    }
-
-    public static final <T> Map<String, Object> mapFromT(T arg) {
-        final Map<String, Object> map = new HashMap<>();
+    public static final <T> Dict dictFromT(T arg) {
+        final Dict dict = new Dict();
 
         for (final Field field : arg.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            LibRuntime.inTryBlock(() -> map.put(field.getName(), field.get(arg)));
+            LibRuntime.inTryBlock(() -> dict.put(field.getName(), field.get(arg)));
         }
 
-        return map;
+        return dict;
     }
 }

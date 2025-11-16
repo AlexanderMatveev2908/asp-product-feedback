@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 
 import lombok.RequiredArgsConstructor;
-import server.decorators.LifeSpawn;
+import server.decorators.etc.LifeSpawn;
 import server.lib.dev.LibDev;
 import server.lib.dev.lib_log.LibLog;
 

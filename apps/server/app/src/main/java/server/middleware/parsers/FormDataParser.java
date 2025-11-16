@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,9 +17,10 @@ import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
-import server.decorators.AppFile;
-import server.decorators.Nullable;
 import server.decorators.core.api.Api;
+import server.decorators.types.AppFile;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.middleware.parsers.sub.ParserManager;
 
 @Component
@@ -38,10 +38,10 @@ public final class FormDataParser extends ParserManager implements WebFilter {
             if (ctx.sb.length() > 0)
                 ctx.sb.setLength(ctx.sb.length() - 1);
 
-            final Nullable<Map<String, Object>> parsedForm = nestDict(ctx.sb.toString());
+            final Nullable<Dict> parsedForm = nestDict(ctx.sb.toString());
 
             if (parsedForm.isPresent()) {
-                final Map<String, Object> mappedForm = parsedForm.orYell();
+                final Dict mappedForm = parsedForm.orYell();
                 mappedForm.put("images", ctx.images);
                 mappedForm.put("videos", ctx.videos);
                 api.setParsedFormAttr(mappedForm);

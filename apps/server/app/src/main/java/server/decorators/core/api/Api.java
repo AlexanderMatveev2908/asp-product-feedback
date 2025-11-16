@@ -16,10 +16,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
 import server.decorators.core.api.sub.ApiAttr;
 import server.decorators.core.api.sub.ApiInfo;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.Jack;
 
 @SuppressWarnings({ "UseSpecificCatch" })

@@ -2,8 +2,8 @@ package server.middleware.err_mng.etc;
 
 import org.springframework.web.server.ServerWebExchange;
 
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
+import server.decorators.types.Nullable;
 import server.paperwork.Reg;
 
 public final record RecMetaErr(String msg, int status) {

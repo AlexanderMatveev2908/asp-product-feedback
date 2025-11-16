@@ -1,10 +1,7 @@
 package server.decorators.core.res_api;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -15,9 +12,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import reactor.core.publisher.Mono;
-import server.decorators.Nullable;
 import server.decorators.core.res_api.data_structure.ResApiJson;
 import server.decorators.core.res_api.meta.MetaRes;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 
 @SuppressFBWarnings({ "EI" })
 @Getter
@@ -25,14 +23,14 @@ import server.decorators.core.res_api.meta.MetaRes;
 public final class ResAPI {
     private Nullable<String> msg;
     private Integer status;
-    private Nullable<Map<String, Object>> data;
+    private Nullable<Dict> data;
     private final List<ResponseCookie> cookies = new ArrayList<>();
     private final List<ResponseCookie> deleteCookies = new ArrayList<>();
 
-    public ResAPI(int status, String msg, Map<String, Object> data) {
+    public ResAPI(int status, String msg, Dict data) {
         this.status = status;
         this.msg = Nullable.of(msg);
-        this.data = Nullable.of(Collections.unmodifiableMap(new LinkedHashMap<>(data)));
+        this.data = Nullable.of(data);
     }
 
     private ResAPI(int status) {
@@ -57,8 +55,8 @@ public final class ResAPI {
         return this;
     }
 
-    public final ResAPI data(Map<String, Object> data) {
-        this.data = Nullable.of(Collections.unmodifiableMap(new LinkedHashMap<>(data)));
+    public final ResAPI data(Dict data) {
+        this.data = Nullable.of(data);
         return this;
     }
 

@@ -1,4 +1,4 @@
-package server.decorators;
+package server.decorators.types;
 
 @FunctionalInterface
 public interface MessySupplier<T> {

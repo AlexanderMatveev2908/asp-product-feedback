@@ -16,10 +16,11 @@ import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 import server.conf.cloud.CloudSvc;
 import server.conf.cloud.etc.data_structure.CloudAsset;
-import server.decorators.AppFile;
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
+import server.decorators.types.AppFile;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class PostFormSvc {
   private final CloudSvc cloud;
 
   @SuppressWarnings("unchecked")
-  private final Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
+  private final Mono<List<CloudAsset>> reduceUploads(Dict form) {
     final Set<String> assetKeys = Set.of("images", "videos");
     final List<Mono<CloudAsset>> promises = new ArrayList<>();
 
@@ -55,7 +56,7 @@ public class PostFormSvc {
   }
 
   public final Mono<Tuple2<Integer, Integer>> postForm(Api api) {
-    final Nullable<Map<String, Object>> form = api.getParsedForm();
+    final Nullable<Dict> form = api.getParsedForm();
 
     if (form.isNone())
       return Mono.error(new ErrAPI("no form data", 400));

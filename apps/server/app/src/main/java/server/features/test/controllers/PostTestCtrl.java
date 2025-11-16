@@ -1,7 +1,5 @@
 package server.features.test.controllers;
 
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +10,7 @@ import reactor.core.publisher.Mono;
 import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
 import server.decorators.core.res_api.ResAPI;
+import server.decorators.types.Dict;
 import server.features.test.services.PostFormSvc;
 import server.lib.data_structure.LibShape;
 
@@ -21,14 +20,14 @@ public class PostTestCtrl {
     private final PostFormSvc postFormSvc;
 
     public final Mono<ResponseEntity<ResAPI>> postMsg(Api api) {
-        return api.getBd(new TypeReference<Map<String, Object>>() {
+        return api.getBd(new TypeReference<Dict>() {
         }).flatMap(bd -> {
             final var msg = (String) bd.get("msg");
 
             if (!LibShape.hasText(msg))
                 return ResAPI.withStatus(400).msg("missing msg").build();
 
-            return ResAPI.withStatus(200).msg("msg received").data(Map.of("clientMsg", msg)).build();
+            return ResAPI.withStatus(200).msg("msg received").data(Dict.of("clientMsg", msg)).build();
         }).switchIfEmpty(Mono.error(new ErrAPI("missing msg", 400)));
     }
 
@@ -36,7 +35,7 @@ public class PostTestCtrl {
         return postFormSvc.postForm(api).flatMap(tpl -> {
             return ResAPI.withStatus(200).msg(
                     "form parsed • processed • saved locally • uploaded on cloud • deleted locally • deleted from cloud")
-                    .data(Map.of("saved", tpl.getT1(), "deleted", tpl.getT2())).build();
+                    .data(Dict.of("saved", tpl.getT1(), "deleted", tpl.getT2())).build();
         });
     }
 

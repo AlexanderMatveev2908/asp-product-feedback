@@ -1,7 +1,8 @@
 package server.lib.data_structure.prs.sub;
 
 import java.util.HexFormat;
-import java.util.Map;
+
+import server.decorators.types.Dict;
 
 public class C_PrsHex extends B_PrsUtf8 {
   public static final String utf8FromHex(String txtHex) {
@@ -17,11 +18,11 @@ public class C_PrsHex extends B_PrsUtf8 {
     return HexFormat.of().parseHex(arg);
   }
 
-  public static final Map<String, Object> mapFromHex(String arg) {
-    return mapFromJson(utf8FromHex(arg));
+  public static final Dict dictFromHex(String arg) {
+    return dictFromJson(utf8FromHex(arg));
   }
 
-  public static final String hexFromMap(Map<String, Object> arg) {
-    return hexFromBinary(binaryFromMap(arg));
+  public static final String hexFromDict(Dict arg) {
+    return hexFromBinary(binaryFromDict(arg));
   }
 }

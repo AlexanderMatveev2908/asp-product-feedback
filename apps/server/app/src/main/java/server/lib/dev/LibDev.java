@@ -19,7 +19,6 @@ import server.models.users.etc.UserSvc;
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI" })
 public final class LibDev {
-
     private final UserSvc userSvc;
     private final FeedSvc feedSvc;
 
@@ -41,8 +40,7 @@ public final class LibDev {
         userSvc.insert(randomUs)
                 .flatMap(newUser -> feedSvc.insert(randomFeed).map(newFeed -> Tuples.of(newUser, newFeed)))
                 .subscribe(tpl -> {
-                    LibLog.log(tpl.getT1());
-                    LibLog.log(tpl.getT2());
+                    LibLog.log(tpl.getT1(), tpl.getT2());
                 });
     }
 }

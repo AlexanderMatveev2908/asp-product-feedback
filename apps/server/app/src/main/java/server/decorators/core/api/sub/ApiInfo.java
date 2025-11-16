@@ -10,7 +10,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.server.ServerWebExchange;
 
-import server.decorators.Nullable;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.LibShape;
 import server.paperwork.Reg;
 

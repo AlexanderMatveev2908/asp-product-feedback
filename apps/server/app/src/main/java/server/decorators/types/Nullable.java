@@ -1,4 +1,4 @@
-package server.decorators;
+package server.decorators.types;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -52,11 +52,11 @@ public final class Nullable<T> {
   }
 
   public final boolean isList() {
-    return LibShape.isList(data);
+    return LibShape.hasListItems(data);
   }
 
   public final boolean isDict() {
-    return LibShape.isDict(data);
+    return LibShape.hasObjKeys(data);
   }
 
   public final T orNone() {

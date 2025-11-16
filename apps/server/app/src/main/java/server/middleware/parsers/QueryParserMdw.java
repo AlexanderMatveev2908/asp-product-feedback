@@ -1,7 +1,5 @@
 package server.middleware.parsers;
 
-import java.util.Map;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -9,8 +7,9 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
-import server.decorators.Nullable;
 import server.decorators.core.api.Api;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.middleware.parsers.sub.ParserManager;
 
 @Component
@@ -22,7 +21,7 @@ public final class QueryParserMdw extends ParserManager implements WebFilter {
         final Api api = (Api) exc;
 
         final String query = api.getQuery();
-        final Nullable<Map<String, Object>> parsedQuery = nestDict(query);
+        final Nullable<Dict> parsedQuery = nestDict(query);
 
         if (parsedQuery.isPresent())
             api.setParsedQueryAttr(parsedQuery.orYell());

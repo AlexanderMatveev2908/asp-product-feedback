@@ -2,8 +2,8 @@ package server.paperwork;
 
 import java.util.regex.Pattern;
 
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
+import server.decorators.types.Nullable;
 
 public final class Reg {
         public static final String CITY = "^[\\p{L}\\s'\\-]+$";

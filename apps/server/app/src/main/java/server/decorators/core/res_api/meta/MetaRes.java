@@ -2,7 +2,7 @@ package server.decorators.core.res_api.meta;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import server.decorators.Nullable;
+import server.decorators.types.Nullable;
 import server.paperwork.Reg;
 
 @Getter

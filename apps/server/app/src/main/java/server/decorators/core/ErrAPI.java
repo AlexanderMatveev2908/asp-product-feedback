@@ -1,19 +1,18 @@
 package server.decorators.core;
 
-import java.util.Map;
-
 import lombok.Getter;
-import server.decorators.Nullable;
-import server.decorators.RootCls;
+import server.decorators.etc.RootCls;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 
 @Getter
 public final class ErrAPI extends RuntimeException implements RootCls {
 
     private final String msg;
     private final int status;
-    private final Nullable<Map<String, Object>> data;
+    private final Nullable<Dict> data;
 
-    public ErrAPI(String msg, int status, Nullable<Map<String, Object>> data) {
+    public ErrAPI(String msg, int status, Nullable<Dict> data) {
         super("❌ " + msg);
         this.msg = super.getMessage();
         this.status = status;

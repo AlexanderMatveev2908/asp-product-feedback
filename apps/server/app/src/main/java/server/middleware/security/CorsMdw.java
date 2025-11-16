@@ -1,7 +1,5 @@
 package server.middleware.security;
 
-import java.util.Map;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +20,7 @@ import reactor.core.publisher.Mono;
 import server.conf.env_vars.EnvVars;
 import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
+import server.decorators.types.Dict;
 import server.lib.data_structure.Jack;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.lib_log.LibLog;
@@ -63,7 +62,7 @@ public final class CorsMdw implements WebFilter {
 
         final String body;
         try {
-            body = Jack.main.writeValueAsString(Map.of("msg", msg, "status", 403));
+            body = Jack.main.writeValueAsString(Dict.of("msg", msg, "status", 403));
         } catch (JsonProcessingException err) {
             throw new ErrAPI("err writing json for cors response");
         }

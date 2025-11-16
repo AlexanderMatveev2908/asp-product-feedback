@@ -1,7 +1,5 @@
 package server.middleware.err_mng;
 
-import java.util.Map;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,9 +11,10 @@ import org.springframework.web.server.WebExceptionHandler;
 import com.fasterxml.jackson.core.JacksonException;
 
 import reactor.core.publisher.Mono;
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
 import server.decorators.core.res_api.ResAPI;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.Jack;
 import server.lib.dev.lib_log.LibLog;
 import server.middleware.err_mng.etc.RecMetaErr;
@@ -26,7 +25,7 @@ public final class ErrCatcher implements WebExceptionHandler {
 
     private final ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
         RecMetaErr recMetaErr = RecMetaErr.fromErr(exc, err);
-        Nullable<Map<String, Object>> data = (err instanceof final ErrAPI errInst) ? errInst.getData()
+        Nullable<Dict> data = (err instanceof final ErrAPI errInst) ? errInst.getData()
                 : Nullable.asNone();
 
         ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data.orNone());

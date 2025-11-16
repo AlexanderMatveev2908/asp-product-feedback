@@ -1,4 +1,4 @@
-package server.decorators;
+package server.decorators.etc;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

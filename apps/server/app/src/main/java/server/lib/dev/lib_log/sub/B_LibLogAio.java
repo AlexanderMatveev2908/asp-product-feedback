@@ -7,10 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalTime;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import server.decorators.types.Dict;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.paths.LibPath;
 
@@ -24,7 +24,7 @@ public class B_LibLogAio extends A_LibLogBase {
 
         final String json;
         if (arg instanceof final Throwable err)
-          json = LibPrs.jsonFromObj(Map.of("msg", err.getMessage(), "type", err.getClass().getSimpleName(), "time",
+          json = LibPrs.jsonFromObj(Dict.of("msg", err.getMessage(), "type", err.getClass().getSimpleName(), "time",
               LocalTime.now().toString()));
         else
           json = LibPrs.jsonFromObj(arg);

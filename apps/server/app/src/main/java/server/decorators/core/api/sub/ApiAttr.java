@@ -1,10 +1,9 @@
 package server.decorators.core.api.sub;
 
-import java.util.Map;
-
 import org.springframework.web.server.ServerWebExchange;
 
-import server.decorators.Nullable;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.LibShape;
 
 public interface ApiAttr {
@@ -26,22 +25,22 @@ public interface ApiAttr {
   }
 
   // ? parsed query
-  default void setParsedQueryAttr(Map<String, Object> parsed) {
+  default void setParsedQueryAttr(Dict parsed) {
     setAttr("parsedQuery", parsed);
   }
 
-  default Nullable<Map<String, Object>> getParsedQuery() {
-    Map<String, Object> val = getExch().getAttribute("parsedQuery");
+  default Nullable<Dict> getParsedQuery() {
+    Dict val = getExch().getAttribute("parsedQuery");
     return Nullable.of(val);
   }
 
   // ? parsed form
-  default void setParsedFormAttr(Map<String, Object> parsed) {
+  default void setParsedFormAttr(Dict parsed) {
     setAttr("parsedForm", parsed);
   }
 
-  default Nullable<Map<String, Object>> getParsedForm() {
-    Map<String, Object> val = getExch().getAttribute("parsedForm");
+  default Nullable<Dict> getParsedForm() {
+    Dict val = getExch().getAttribute("parsedForm");
     return Nullable.of(val);
   }
 

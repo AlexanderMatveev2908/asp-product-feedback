@@ -1,7 +1,7 @@
 package server.lib.data_structure.prs.sub;
 
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.LibShape;
 
 public class E_PrsPrim extends D_PrsB64 {

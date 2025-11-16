@@ -1,5 +1,7 @@
 package server.models.images;
 
+import java.util.UUID;
+
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -21,6 +23,9 @@ public final class Image extends RootTable {
 
   @Column("url")
   private String url;
+
+  @Column("user_id")
+  private UUID userId;
 
   @Override
   public final String toString() {

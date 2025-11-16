@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
+import server.decorators.types.Nullable;
 import server.paperwork.Reg;
 
 public final class LibShape {
@@ -41,14 +41,14 @@ public final class LibShape {
         }
     }
 
-    public static final boolean isList(Object arg) {
+    public static final boolean hasListItems(Object arg) {
         if (arg instanceof final List<?> list)
             return !list.isEmpty();
 
         return false;
     }
 
-    public static final boolean isDict(Object arg) {
+    public static final boolean hasObjKeys(Object arg) {
         if (arg instanceof Map<?, ?> map)
             return !map.isEmpty();
 

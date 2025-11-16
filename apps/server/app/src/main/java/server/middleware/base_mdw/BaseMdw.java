@@ -1,6 +1,5 @@
 package server.middleware.base_mdw;
 
-import java.util.Map;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -13,9 +12,10 @@ import org.springframework.web.server.WebFilterChain;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import reactor.core.publisher.Mono;
-import server.decorators.Nullable;
 import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.prs.LibPrs;
 import server.middleware.base_mdw.etc.services.FormChecker;
 import server.middleware.base_mdw.etc.services.RateLimitSvc;
@@ -39,13 +39,13 @@ public abstract class BaseMdw implements WebFilter {
         return formCk.check(api, form);
     }
 
-    private final <T> Mono<T> convertAndCheckForm(Api api, Map<String, Object> arg, Class<T> cls) {
-        final T form = LibPrs.tFromMap(arg, cls);
+    private final <T> Mono<T> convertAndCheckForm(Api api, Dict arg, Class<T> cls) {
+        final T form = LibPrs.tFromDict(arg, cls);
         return checkForm(api, form).thenReturn(form);
     }
 
-    private final Mono<Map<String, Object>> grabBody(Api api) {
-        return api.getBd(new TypeReference<Map<String, Object>>() {
+    private final Mono<Dict> grabBody(Api api) {
+        return api.getBd(new TypeReference<Dict>() {
         }).switchIfEmpty(Mono.error(new ErrAPI("data not provided", 400)));
     }
 
@@ -60,14 +60,14 @@ public abstract class BaseMdw implements WebFilter {
     }
 
     protected final <T> Mono<T> checkMultipartForm(Api api, Class<T> cls) {
-        final Nullable<Map<String, Object>> parsedFormData = api.getParsedForm();
+        final Nullable<Dict> parsedFormData = api.getParsedForm();
 
         return Mono.defer(() -> parsedFormData.isPresent() ? Mono.just(parsedFormData.orYell()) : grabBody(api))
                 .flatMap(mapArg -> convertAndCheckForm(api, mapArg, cls));
     }
 
     protected final <T> Mono<T> checkQueryForm(Api api, Class<T> cls) {
-        final Nullable<Map<String, Object>> parsedQuery = api.getParsedQuery();
+        final Nullable<Dict> parsedQuery = api.getParsedQuery();
 
         return Mono.defer(() -> !parsedQuery.isPresent() ? Mono.error(new ErrAPI("data not provided", 400))
                 : convertAndCheckForm(api, parsedQuery.orYell(), cls));

@@ -12,8 +12,8 @@ import server.models.images.Image;
 @Repository
 public interface ImageRepo extends ReactiveCrudRepository<Image, UUID> {
   @Query("""
-      INSERT INTO images (public_id, url)
-      VALUES (:#{#image.publicId}, :#{#image.url})
+      INSERT INTO images (public_id, url, user_id)
+      VALUES (:#{#image.publicId}, :#{#image.url}, :#{#image.userId})
       RETURNING *
       """)
   public Mono<Image> insert(Image image);

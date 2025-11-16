@@ -3,20 +3,19 @@ package server.middleware.parsers.sub;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import server.decorators.Nullable;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.LibShape;
 
 @SuppressWarnings("unchecked")
 public class ParserManager {
-    protected static final Nullable<Map<String, Object>> nestDict(String query) {
+    protected static final Nullable<Dict> nestDict(String query) {
         if (!LibShape.hasText(query))
             return Nullable.asNone();
 
-        final Map<String, Object> dict = new HashMap<>();
+        final Dict dict = new Dict();
 
         for (final String pair : query.split("&")) {
             final String[] kv = pair.split("=", 2);
@@ -34,18 +33,18 @@ public class ParserManager {
     }
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private static final void nestKeyVal(Map<String, Object> dict, String key, Object val) {
+    private static final void nestKeyVal(Dict dict, String key, Object val) {
         final boolean isArrayKey = key.endsWith("[]");
         final String[] parts = key.replace("]", "").split("\\[");
 
-        Map<String, Object> curr = dict;
+        Dict curr = dict;
         int lastIdx = isArrayKey ? parts.length - 2 : parts.length - 1;
         if (lastIdx < 0)
             lastIdx = 0;
 
         for (int i = 0; i < lastIdx; i++) {
             String p = parts[i];
-            Map<String, Object> next = (Map<String, Object>) curr.computeIfAbsent(p, k -> new HashMap<>());
+            Dict next = (Dict) curr.computeIfAbsent(p, k -> new Dict());
             curr = next;
         }
 
@@ -54,7 +53,7 @@ public class ParserManager {
         addVal(curr, lastKey, isArrayKey, val);
     }
 
-    private static final void addVal(Map<String, Object> curr, String lastKey, boolean isArrayKey, Object val) {
+    private static final void addVal(Dict curr, String lastKey, boolean isArrayKey, Object val) {
         final Object existingVal = curr.get(lastKey);
 
         if (existingVal instanceof List)

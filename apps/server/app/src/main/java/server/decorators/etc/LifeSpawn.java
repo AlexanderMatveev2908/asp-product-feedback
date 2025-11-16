@@ -1,4 +1,4 @@
-package server.decorators;
+package server.decorators.etc;
 
 import java.util.List;
 

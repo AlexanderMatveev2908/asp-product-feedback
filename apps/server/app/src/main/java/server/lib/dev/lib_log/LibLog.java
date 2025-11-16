@@ -1,6 +1,6 @@
 package server.lib.dev.lib_log;
 
-import server.decorators.Nullable;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.LibShape;
 import server.lib.dev.lib_log.sub.C_LibLogErr;
 

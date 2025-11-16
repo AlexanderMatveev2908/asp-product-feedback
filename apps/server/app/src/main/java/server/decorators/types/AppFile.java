@@ -1,12 +1,10 @@
-package server.decorators;
+package server.decorators.types;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.core.io.ByteArrayResource;
@@ -80,8 +78,8 @@ public final class AppFile {
         return new FileSystemResource(filePath);
     }
 
-    public final Map<String, Object> getFancyShape() {
-        final Map<String, Object> fancyMap = new LinkedHashMap<>();
+    public final Dict getFancyShape() {
+        final Dict fancyMap = new Dict();
 
         try {
             final Class<?> cls = this.getClass();
