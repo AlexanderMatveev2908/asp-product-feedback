@@ -36,6 +36,6 @@ export type FeedbackT = SqlTableT<{
   category: FeedbackCatT;
   upvotes: number;
   status: FeedbackStatusT;
-  description: Nullable<string>;
+  description: string;
   comments: OrNone<CommentT[]>;
 }>;
