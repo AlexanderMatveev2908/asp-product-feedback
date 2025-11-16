@@ -71,14 +71,9 @@ public interface ApiInfo {
     return getExch().getRequest().getPath().toString().split("\\?", 2)[0];
   }
 
-  default boolean isSamePath(String arg) {
-    String endpoint = getPath();
-
-    return endpoint.equals(arg);
-  }
-
   default boolean isSamePath(String arg, HttpMethod method) {
-    return isSamePath(arg) && getMethod().equals(method);
+    String endpoint = getPath();
+    return endpoint.equals(arg) && getMethod().equals(method);
   }
 
   default boolean isSubPathOf(String arg) {

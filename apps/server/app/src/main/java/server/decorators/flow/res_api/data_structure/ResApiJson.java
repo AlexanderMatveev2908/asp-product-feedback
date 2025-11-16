@@ -14,7 +14,7 @@ public final class ResApiJson extends JsonSerializer<ResAPI> {
     public final void serialize(ResAPI res, JsonGenerator gen, SerializerProvider serializers) throws IOException {
 
         gen.writeStartObject();
-        gen.writeStringField("msg", res.getMsg());
+        gen.writeStringField("msg", res.getMsg().get());
         gen.writeNumberField("status", res.getStatus());
 
         if (res.getData().isNone())

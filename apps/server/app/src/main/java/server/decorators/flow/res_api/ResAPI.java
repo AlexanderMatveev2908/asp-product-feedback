@@ -18,37 +18,29 @@ import reactor.core.publisher.Mono;
 import server.decorators.Nullable;
 import server.decorators.flow.res_api.data_structure.ResApiJson;
 import server.decorators.flow.res_api.meta.MetaRes;
-import server.lib.data_structure.LibShape;
 
 @SuppressFBWarnings({ "EI" })
 @Getter
 @JsonSerialize(using = ResApiJson.class)
 public final class ResAPI {
-    private String msg;
+    private Nullable<String> msg;
     private Integer status;
-    private Map<String, Object> data;
+    private Nullable<Map<String, Object>> data;
     private final List<ResponseCookie> cookies = new ArrayList<>();
     private final List<ResponseCookie> deleteCookies = new ArrayList<>();
 
     public ResAPI(int status, String msg, Map<String, Object> data) {
         this.status = status;
-        this.msg = msg;
-        this.data = LibShape.isNone(data) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
+        this.msg = Nullable.of(msg);
+        this.data = Nullable.of(Collections.unmodifiableMap(new LinkedHashMap<>(data)));
     }
 
     private ResAPI(int status) {
         this.status = status;
     }
 
-    public ResAPI() {
-    }
-
     public static final ResAPI withStatus(int status) {
         return new ResAPI(status);
-    }
-
-    public final Nullable<Map<String, Object>> getData() {
-        return LibShape.isNone(data) ? Nullable.asNone() : Nullable.of(new LinkedHashMap<>(data));
     }
 
     public final List<ResponseCookie> getCookies() {
@@ -61,12 +53,12 @@ public final class ResAPI {
     }
 
     public final ResAPI msg(String msg) {
-        this.msg = msg;
+        this.msg = Nullable.of(msg);
         return this;
     }
 
     public final ResAPI data(Map<String, Object> data) {
-        this.data = LibShape.isNone(data) ? null : Collections.unmodifiableMap(new LinkedHashMap<>(data));
+        this.data = Nullable.of(Collections.unmodifiableMap(new LinkedHashMap<>(data)));
         return this;
     }
 
@@ -94,7 +86,7 @@ public final class ResAPI {
 
         final String prettyMsg = MetaRes.prettyMsg(msg, status);
 
-        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data);
+        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data.get());
 
         return Mono.just(builder.body(myRes));
     }

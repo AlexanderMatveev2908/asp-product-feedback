@@ -3,7 +3,6 @@ package server.decorators.flow.res_api.meta;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import server.decorators.Nullable;
-import server.lib.data_structure.LibShape;
 import server.paperwork.Reg;
 
 @Getter
@@ -31,11 +30,11 @@ public enum MetaRes {
         return Nullable.asNone();
     }
 
-    public static final String prettyMsg(String msg, int status) {
+    public static final String prettyMsg(Nullable<String> msg, int status) {
         final String emj = ActT.emjFromStatus(status);
-        final String safeMsg = LibShape.hasText(msg) ? msg : fromCode(status).get().getMsg();
+        final String safeMsg = msg.isPresent() ? msg.get() : fromCode(status).orElse(MetaRes.ERR_500).getMsg();
 
-        final String prettyMsg = Reg.startsWithEmj(Nullable.of(safeMsg)) ? msg
+        final String prettyMsg = Reg.startsWithEmj(Nullable.of(safeMsg)) ? safeMsg
                 : String.format("%s %s", emj, safeMsg);
 
         return prettyMsg;
