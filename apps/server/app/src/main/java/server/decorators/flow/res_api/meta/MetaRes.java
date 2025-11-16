@@ -32,7 +32,8 @@ public enum MetaRes {
 
     public static final String prettyMsg(Nullable<String> msg, int status) {
         final String emj = ActT.emjFromStatus(status);
-        final String safeMsg = msg.isPresent() ? msg.grab() : fromCode(status).orElse(MetaRes.ERR_500).getMsg();
+        final String safeMsg = msg.orElse(
+                fromCode(status).orElse(MetaRes.ERR_500).getMsg());
 
         final String prettyMsg = Reg.startsWithEmj(Nullable.of(safeMsg)) ? safeMsg
                 : String.format("%s %s", emj, safeMsg);

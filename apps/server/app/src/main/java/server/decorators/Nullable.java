@@ -11,7 +11,7 @@ import server.lib.data_structure.LibShape;
 // ! like an empty string or empty map but never 'null'
 @RequiredArgsConstructor
 public final class Nullable<T> {
-  public final T data;
+  private final T data;
 
   public static final <K> Nullable<K> of(K arg) {
     return new Nullable<K>(arg);
@@ -33,9 +33,9 @@ public final class Nullable<T> {
     return isPresent() ? data : def;
   }
 
-  public final T grabOrYellNone() {
+  public final T orYell() {
     LibShape.yellNone(data);
-    return grab();
+    return data;
   }
 
   public final <K> Nullable<K> map(Function<T, K> cb) {
@@ -47,7 +47,7 @@ public final class Nullable<T> {
       cb.accept(data);
   }
 
-  public final T grab() {
+  public final T orNone() {
     return data;
   }
 }

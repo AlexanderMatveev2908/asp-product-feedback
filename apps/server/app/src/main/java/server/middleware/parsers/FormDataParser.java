@@ -21,7 +21,6 @@ import reactor.core.scheduler.Schedulers;
 import server.decorators.AppFile;
 import server.decorators.Nullable;
 import server.decorators.flow.api.Api;
-import server.lib.data_structure.LibShape;
 import server.middleware.parsers.sub.ParserManager;
 
 @Component
@@ -42,7 +41,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
             final Nullable<Map<String, Object>> parsedForm = nestDict(ctx.sb.toString());
 
             if (parsedForm.isPresent()) {
-                final Map<String, Object> mappedForm = parsedForm.grab();
+                final Map<String, Object> mappedForm = parsedForm.orYell();
                 mappedForm.put("images", ctx.images);
                 mappedForm.put("videos", ctx.videos);
                 api.setParsedFormAttr(mappedForm);
@@ -80,7 +79,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
             return;
 
         final CtxPart part = new CtxPart(headerAndBody[0], headerAndBody[1]);
-        if (LibShape.isNone(part.name))
+        if (part.name.isNone())
             return;
 
         if (part.headers.contains("filename=")) {
@@ -88,13 +87,13 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         } else {
             final String val = new String(part.body.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8)
                     .trim();
-            ctx.sb.append(URLEncoder.encode(part.name, StandardCharsets.UTF_8)).append("=")
+            ctx.sb.append(URLEncoder.encode(part.name.orYell(), StandardCharsets.UTF_8)).append("=")
                     .append(URLEncoder.encode(val, StandardCharsets.UTF_8)).append("&");
         }
     }
 
     private final void handleAssetPart(CtxPart part, CtxParse ctx) {
-        if (!Set.of("images", "videos").contains(part.name))
+        if (!Set.of("images", "videos").contains(part.name.orYell()))
             return;
 
         final boolean isImage = part.name.equals("images");
@@ -112,22 +111,23 @@ public final class FormDataParser extends ParserManager implements WebFilter {
     }
 
     private static final Nullable<AppFile> handleAsset(CtxPart part) {
-        final String filename = findPattern("filename", part.headers);
-        if (LibShape.isNone(filename))
+        final Nullable<String> filename = findPattern("filename", part.headers);
+        if (filename.isNone())
             return Nullable.asNone();
 
         final Matcher cm = Pattern.compile("Content-Type: (.+)").matcher(part.headers);
-        final String contentTypePart = cm.find() ? cm.group(1).trim() : null;
-        if (LibShape.isNone(contentTypePart))
+        final Nullable<String> contentTypePart = cm.find() ? Nullable.of(cm.group(1).trim()) : Nullable.asNone();
+        if (contentTypePart.isNone())
             return Nullable.asNone();
 
         final Nullable<byte[]> rawFile = Nullable.of(part.body.getBytes(StandardCharsets.ISO_8859_1));
-        return Nullable.of(new AppFile(part.name, filename, contentTypePart, rawFile));
+        return Nullable
+                .of(new AppFile(part.name.orYell(), filename.orYell(), contentTypePart.orYell(), rawFile));
     }
 
-    public static final String findPattern(String key, String headers) {
+    public static final Nullable<String> findPattern(String key, String headers) {
         final Matcher m = Pattern.compile(String.format("%s=\"([^\"]+)\"", Pattern.quote(key))).matcher(headers);
-        return !m.find() ? null : m.group(1);
+        return !m.find() ? Nullable.asNone() : Nullable.of(m.group(1));
     }
 }
 
@@ -142,7 +142,7 @@ class CtxParse {
 class CtxPart {
     public final String headers;
     public final String body;
-    public final String name;
+    public final Nullable<String> name;
 
     CtxPart(String headers, String body) {
         this.headers = headers;

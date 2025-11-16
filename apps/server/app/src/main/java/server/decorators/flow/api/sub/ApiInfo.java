@@ -41,11 +41,11 @@ public interface ApiInfo {
     if (vars.isNone())
       return Nullable.asNone();
 
-    String pathId = vars.grab().get(key);
-    if (!Reg.isUUID(Nullable.of(pathId)))
+    Nullable<String> pathId = Nullable.of(vars.orYell().get(key));
+    if (!Reg.isUUID(pathId))
       return Nullable.asNone();
 
-    return Nullable.of(UUID.fromString(pathId));
+    return Nullable.of(UUID.fromString(pathId.orYell()));
   }
 
   default Nullable<UUID> getPathVarId() {

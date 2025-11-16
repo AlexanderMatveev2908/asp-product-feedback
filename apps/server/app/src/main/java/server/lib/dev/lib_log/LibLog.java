@@ -6,11 +6,11 @@ import server.lib.dev.lib_log.sub.C_LibLogErr;
 
 public final class LibLog extends C_LibLogErr {
 
-    public static final void logTtl(String title, Object... args) {
+    public static final void logTtl(Nullable<String> title, Object... args) {
         wOk(args);
 
         startLog();
-        logHeader(Nullable.of(title));
+        logHeader(title);
 
         tab();
 
@@ -22,7 +22,7 @@ public final class LibLog extends C_LibLogErr {
     }
 
     public static final void log(Object... arg) {
-        logTtl(null, arg);
+        logTtl(Nullable.asNone(), arg);
     }
 
     public static final void logKV(String key, Object val) {

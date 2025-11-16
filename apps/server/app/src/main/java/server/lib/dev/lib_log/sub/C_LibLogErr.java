@@ -34,9 +34,9 @@ public class C_LibLogErr extends B_LibLogAio {
     stdOutF("📏 depth => %d%n", depth);
 
     if (last.isPresent()) {
-      stdOutF("💥 last file => 📁 %s%n", last.grab().getFileName());
-      stdOutF("📏 last line => %d%n", last.grab().getLineNumber());
-      stdOutF("👻 last cb name => %s%n", last.grab().getMethodName());
+      stdOutF("💥 last file => 📁 %s%n", last.orYell().getFileName());
+      stdOutF("📏 last line => %d%n", last.orYell().getLineNumber());
+      stdOutF("👻 last cb name => %s%n", last.orYell().getMethodName());
     }
 
     endLog();

@@ -86,7 +86,7 @@ public final class ResAPI {
 
         final String prettyMsg = MetaRes.prettyMsg(msg, status);
 
-        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data.grab());
+        final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data.orNone());
 
         return Mono.just(builder.body(myRes));
     }
