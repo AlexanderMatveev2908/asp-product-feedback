@@ -84,6 +84,8 @@ This file not only configures the server but also declares the environment varia
 
 - **Main runtime** variables are grouped under the top-level key **app**.
 
+- **Database** variables are grouped under the key **spring.r2dbc** and them will be generated automatically on boot from the **app** ones.
+
 - **💡Note**:
   The same variables must also be present in a **kind-secrets.yml** file (not committed to git). This file is required if you want to run the app in a local **Kubernetes cluster** via **Kind**.
   A template for this file looks like:
@@ -237,7 +239,7 @@ Activates dev.conf
 
 ---
 
-##### 💾 Kind config
+##### 🐳 Kind config
 
 Running
 
@@ -274,6 +276,81 @@ The script present in [scripts/kind.zsh](scripts/kind.zsh) will
 - **Server** => available at **[http://localhost:30080](http://localhost:30080)**
 
 If you’ve set up the **Nginx reverse proxy** (see section above), it will automatically route these internal ports behind a single HTTPS entrypoint (port 443).
+
+---
+
+## 🐘 PostgreSQL Tables
+
+```mermaid
+erDiagram
+ root_table ||--||users : extends
+ root_table ||--||images : extends
+ root_table ||--||feedbacks : extends
+ root_table ||--||comments : extends
+ root_table ||--||replies : extends
+
+ feedbacks }o--|| category_type : uses
+ feedbacks }o--|| status_type : uses
+
+ users ||--|| images : has
+ feedbacks ||--}o comments : has
+ users ||--}o comments : has
+ users ||--}o replies : has
+ comments ||--}o replies : has
+
+
+  root_table {
+    uuid id
+    bigint created_at
+    bigint updated_at
+    bigint deleted_at
+  }
+
+  users {
+    string name
+    string username
+  }
+
+  images {
+    string public_id
+    string url
+  }
+
+  category_type {
+    enum ui
+    enum ux
+    enum feature
+    enum enhancement
+    enum bug
+  }
+
+  status_type {
+    enum suggestion
+    enum planned
+    enum in_progress
+    enum live
+  }
+
+  feedbacks {
+    string title
+    string description
+    category_type category
+    status_type status
+  }
+
+  comments {
+    string content
+    uuid user_id
+    uuid feedback_id
+  }
+
+  replies {
+    string content
+    uuid user_id
+    uuid comment_id
+    uuid replying_to
+  }
+```
 
 ---
 
