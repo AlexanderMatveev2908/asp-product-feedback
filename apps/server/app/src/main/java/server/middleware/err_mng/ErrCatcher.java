@@ -29,7 +29,7 @@ public final class ErrCatcher implements WebExceptionHandler {
         Nullable<Map<String, Object>> data = (err instanceof final ErrAPI errInst) ? errInst.getData()
                 : Nullable.asNone();
 
-        ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data.get());
+        ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data.grab());
 
         return apiBody;
     }

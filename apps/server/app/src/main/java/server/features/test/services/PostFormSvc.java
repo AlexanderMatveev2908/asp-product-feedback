@@ -60,7 +60,7 @@ public class PostFormSvc {
     if (form.isNone())
       return Mono.error(new ErrAPI("no form data", 400));
 
-    return reduceUploads(form.get()).zipWhen(saved -> deleteUploads ? reduceDeletions(saved) : Mono.just(List.of(0)))
+    return reduceUploads(form.grab()).zipWhen(saved -> deleteUploads ? reduceDeletions(saved) : Mono.just(List.of(0)))
         .map(tpl -> {
           final List<CloudAsset> saved = tpl.getT1();
           final List<Integer> deleted = tpl.getT2();

@@ -42,7 +42,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
             final Nullable<Map<String, Object>> parsedForm = nestDict(ctx.sb.toString());
 
             if (parsedForm.isPresent()) {
-                final Map<String, Object> mappedForm = parsedForm.get();
+                final Map<String, Object> mappedForm = parsedForm.grab();
                 mappedForm.put("images", ctx.images);
                 mappedForm.put("videos", ctx.videos);
                 api.setParsedFormAttr(mappedForm);

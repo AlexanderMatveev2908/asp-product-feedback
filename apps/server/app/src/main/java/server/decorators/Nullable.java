@@ -33,9 +33,9 @@ public final class Nullable<T> {
     return isPresent() ? data : def;
   }
 
-  public final T yellIfNone() {
+  public final T grabOrYellNone() {
     LibShape.yellNone(data);
-    return get();
+    return grab();
   }
 
   public final <K> Nullable<K> map(Function<T, K> cb) {
@@ -47,7 +47,7 @@ public final class Nullable<T> {
       cb.accept(data);
   }
 
-  public final T get() {
+  public final T grab() {
     return data;
   }
 }

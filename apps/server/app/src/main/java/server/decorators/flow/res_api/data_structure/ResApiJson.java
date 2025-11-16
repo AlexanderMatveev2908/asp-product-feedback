@@ -14,13 +14,14 @@ public final class ResApiJson extends JsonSerializer<ResAPI> {
     public final void serialize(ResAPI res, JsonGenerator gen, SerializerProvider serializers) throws IOException {
 
         gen.writeStartObject();
-        gen.writeStringField("msg", res.getMsg().get());
+        String safeMsg = res.getMsg().grabOrYellNone();
+        gen.writeStringField("msg", safeMsg);
         gen.writeNumberField("status", res.getStatus());
 
         if (res.getData().isNone())
             gen.writeNullField("data");
         else
-            for (final Entry<String, Object> pair : res.getData().get().entrySet())
+            for (final Entry<String, Object> pair : res.getData().grab().entrySet())
                 gen.writeObjectField(pair.getKey(), pair.getValue());
 
         gen.writeEndObject();

@@ -31,18 +31,18 @@ public final class LogMdw implements WebFilter {
         final Map<String, Object> arg = new LinkedHashMap<>();
         arg.put("url", api.getPath());
         arg.put("method", api.getMethod().toString());
-        arg.put("accessToken", normalizeEmpty(api.getHeader("authorization")).get());
-        arg.put("refreshToken", normalizeEmpty(api.getCookie("refreshToken")).get());
-        arg.put("query", normalizeEmpty(api.getQuery()).get());
+        arg.put("accessToken", normalizeEmpty(api.getHeader("authorization")).grab());
+        arg.put("refreshToken", normalizeEmpty(api.getCookie("refreshToken")).grab());
+        arg.put("query", normalizeEmpty(api.getQuery()).grab());
         arg.put("parsedQuery", api.getParsedQuery().orElse(null));
-        arg.put("parsedForm", handleParsedForm(api).get());
+        arg.put("parsedForm", handleParsedForm(api).grab());
 
         return api.getBdStr().defaultIfEmpty("").doOnNext(body -> {
 
             final Nullable<Object> norm = api.getContentType().contains("multipart/form-data") ? Nullable.asNone()
                     : normalizeEmpty(body);
 
-            arg.put("body", LibShape.hasText(norm.get()) ? LibPrs.mapFromJson((String) norm.get()) : norm.get());
+            arg.put("body", LibShape.hasText(norm.grab()) ? LibPrs.mapFromJson((String) norm.grab()) : norm.grab());
 
             LibLog.wOk(arg);
         }).then(chain.filter(api));
@@ -66,16 +66,16 @@ public final class LogMdw implements WebFilter {
         if (parsedForm.isNone())
             return Nullable.asNone();
 
-        final Map<String, Object> cpyForm = LibMemory.cpyMap(parsedForm.get());
+        final Map<String, Object> cpyForm = LibMemory.cpyMap(parsedForm.grab());
 
         final Nullable<List<AppFile>> images = Nullable.of((List<AppFile>) cpyForm.get("images"));
         final Nullable<List<AppFile>> videos = Nullable.of((List<AppFile>) cpyForm.get("videos"));
 
         if (images.isPresent())
-            cpyForm.put("images", images.get().stream().map(AppFile::getFancyShape).toList());
+            cpyForm.put("images", images.grab().stream().map(AppFile::getFancyShape).toList());
 
         if (videos.isPresent())
-            cpyForm.put("videos", videos.get().stream().map(AppFile::getFancyShape).toList());
+            cpyForm.put("videos", videos.grab().stream().map(AppFile::getFancyShape).toList());
 
         return Nullable.of(cpyForm);
     }

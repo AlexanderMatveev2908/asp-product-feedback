@@ -41,7 +41,7 @@ public interface ApiInfo {
     if (vars.isNone())
       return Nullable.asNone();
 
-    String pathId = vars.get().get(key);
+    String pathId = vars.grab().get(key);
     if (!Reg.isUUID(Nullable.of(pathId)))
       return Nullable.asNone();
 

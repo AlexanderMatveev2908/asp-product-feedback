@@ -25,7 +25,7 @@ public final class QueryParserMdw extends ParserManager implements WebFilter {
         final Nullable<Map<String, Object>> parsedQuery = nestDict(query);
 
         if (parsedQuery.isPresent())
-            api.setParsedQueryAttr(parsedQuery.get());
+            api.setParsedQueryAttr(parsedQuery.grab());
 
         return chain.filter(api);
     }

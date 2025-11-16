@@ -62,7 +62,7 @@ public abstract class BaseMdw implements WebFilter {
     protected final <T> Mono<T> checkMultipartForm(Api api, Class<T> cls) {
         final Nullable<Map<String, Object>> parsedFormData = api.getParsedForm();
 
-        return Mono.defer(() -> parsedFormData.isPresent() ? Mono.just(parsedFormData.get()) : grabBody(api))
+        return Mono.defer(() -> parsedFormData.isPresent() ? Mono.just(parsedFormData.grab()) : grabBody(api))
                 .flatMap(mapArg -> convertAndCheckForm(api, mapArg, cls));
     }
 
@@ -70,7 +70,7 @@ public abstract class BaseMdw implements WebFilter {
         final Nullable<Map<String, Object>> parsedQuery = api.getParsedQuery();
 
         return Mono.defer(() -> !parsedQuery.isPresent() ? Mono.error(new ErrAPI("data not provided", 400))
-                : convertAndCheckForm(api, parsedQuery.get(), cls));
+                : convertAndCheckForm(api, parsedQuery.grab(), cls));
     }
 
     // ? path & variables path
@@ -78,7 +78,7 @@ public abstract class BaseMdw implements WebFilter {
         if (!api.hasPathUUID())
             return Mono.error(new ErrAPI("invalid id", 400));
 
-        return Mono.just(api.getPathVarId().get());
+        return Mono.just(api.getPathVarId().grab());
     }
 
     protected final Mono<Void> isTarget(Api api, WebFilterChain chain, String path, HttpMethod method,
