@@ -96,7 +96,7 @@ public final class FormDataParser extends ParserManager implements WebFilter {
         if (!Set.of("images", "videos").contains(part.name.orYell()))
             return;
 
-        final boolean isImage = part.name.equals("images");
+        final boolean isImage = part.name.orYell().equals("images");
         handleAsset(part).ifPresent(asset -> {
 
             final Mono<Void> prm = Mono.<Void>fromRunnable(asset::saveLocally).subscribeOn(Schedulers.boundedElastic());

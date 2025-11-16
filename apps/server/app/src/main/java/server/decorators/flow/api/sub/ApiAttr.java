@@ -17,12 +17,12 @@ public interface ApiAttr {
   }
 
   // ? instance form parsed in mdw and set before svc or ctrl
-  default <T> void setMappedDataAttr(T data) {
-    setAttr("mappedData", data);
+  default <T> void setTypedFormAttr(T data) {
+    setAttr("typedForm", data);
   }
 
-  default <T> Nullable<T> getMappedData() {
-    return getExch().getAttribute("mappedData");
+  default <T> Nullable<T> getTypedForm() {
+    return getExch().getAttribute("typedForm");
   }
 
   // ? parsed query
