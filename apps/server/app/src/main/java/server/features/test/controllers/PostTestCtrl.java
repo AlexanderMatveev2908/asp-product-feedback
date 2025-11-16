@@ -22,7 +22,7 @@ public class PostTestCtrl {
     public final Mono<ResponseEntity<ResAPI>> postMsg(Api api) {
         return api.getBd(new TypeReference<Dict>() {
         }).flatMap(bd -> {
-            final var msg = (String) bd.get("msg");
+            final Object msg = bd.get("msg");
 
             if (!LibShape.hasText(msg))
                 return ResAPI.withStatus(400).msg("missing msg").build();

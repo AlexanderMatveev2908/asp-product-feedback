@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import server.decorators.core.ErrAPI;
 import server.lib.data_structure.LibMemory;
+import server.lib.data_structure.LibShape;
 
 // ? wrote it just because is shorter than writing every time Map<String,Object> for every
 // ? generic map i need when type is not even strictly necessary
@@ -25,6 +26,18 @@ public class Dict extends LinkedHashMap<String, Object> {
       copy.put(e.getKey(), LibMemory.deepCpy(e.getValue()));
 
     return copy;
+  }
+
+  public final String valAsString(String key) {
+    Object rawVal = get(key);
+
+    if (LibShape.isNone(rawVal))
+      throw new ErrAPI("tried to convert None to String");
+
+    if (!(rawVal instanceof String))
+      throw new ErrAPI("val is not a String => " + rawVal.getClass().getSimpleName());
+
+    return (String) rawVal;
   }
 
   public static Dict of(Object... kv) {
