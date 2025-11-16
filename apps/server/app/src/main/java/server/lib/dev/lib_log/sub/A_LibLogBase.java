@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Optional;
 
-import server.lib.data_structure.LibShape;
+import server.decorators.Nullable;
 import server.lib.dev.lib_log.LibLog;
 
 public class A_LibLogBase {
@@ -27,43 +27,41 @@ public class A_LibLogBase {
         return new RecMainLog(time, fileName, thread);
     }
 
-    public static final void limiter() {
-        System.out.println("-".repeat(60));
+    protected static final void limiter() {
+        stdOut("-".repeat(60));
     }
 
-    public static final void startLog() {
-        System.out.println("\n");
+    protected static final void tab() {
+        stdOut("\t");
+    }
+
+    protected static final void startLog() {
+        tab();
         limiter();
     }
 
-    public static final void endLog() {
+    protected static final void endLog() {
         limiter();
-        System.out.println("\n");
+        tab();
     }
 
-    public static final void logHeader(String title) {
+    protected static final void logHeader(Nullable<String> title) {
         final RecMainLog mainInfo = getMainLogInfo();
 
-        System.out.printf("⏰ %s • 🗃️ %s • %s%n", mainInfo.time(), mainInfo.fileName(),
-                LibShape.hasText(title) ? "📌 " + title : "🧵 " + mainInfo.thread());
+        stdOutF("⏰ %s • 🗃️ %s • %s", mainInfo.time(), mainInfo.fileName(),
+                title.isPresent() ? "📌 " + title : "🧵 " + mainInfo.thread());
+        tab();
     }
 
-    public static final void logTtl(String title, Object... args) {
-
-        startLog();
-        logHeader(title);
-
-        System.out.println("\t");
-
-        if (LibShape.isPresent(args))
-            for (final Object v : args)
-                System.out.println(v);
-
-        endLog();
+    public static final void stdOut(Object msg) {
+        System.out.println(msg);
     }
 
-    public static final void log(Object... arg) {
-        logTtl(null, arg);
+    public static final void stdOutF(String msg, Object... args) {
+        System.out.printf(msg, args);
     }
 
+    public static final void stdErr(String msg) {
+        System.err.println("❌ " + msg);
+    }
 }

@@ -10,35 +10,35 @@ public class C_LibLogErr extends B_LibLogAio {
     startLog();
 
     if (LibShape.isNone(err)) {
-      logTtl("⚠️ passed None to logErr ⚠️");
+      stdErr("passed None to logErr");
       return;
     }
 
-    logHeader(null);
+    logHeader(Nullable.asNone());
 
-    System.out.println("\t");
+    tab();
 
     final StackTraceElement[] frames = err.getStackTrace();
 
     for (final StackTraceElement f : frames)
-      System.out.printf("📂 %s => 🔢 %d | 🆎 %s | ☢️ %s%n", f.getFileName(), f.getLineNumber(), f.getMethodName(),
+      stdOutF("📂 %s => 🔢 %d | 🆎 %s | ☢️ %s%n", f.getFileName(), f.getLineNumber(), f.getMethodName(),
           f.toString());
 
     final String msg = err.getMessage();
     final int depth = frames.length;
     final Nullable<StackTraceElement> last = depth > 0 ? Nullable.of(frames[0]) : Nullable.asNone();
 
-    System.out.println("\t");
-    System.out.printf("📝 msg => %s%n", msg);
-    System.out.printf("📏 depth => %d%n", depth);
+    tab();
+
+    stdOutF("📝 msg => %s%n", msg);
+    stdOutF("📏 depth => %d%n", depth);
 
     if (last.isPresent()) {
-      System.out.printf("💥 last file => 📁 %s%n", last.grab().getFileName());
-      System.out.printf("📏 last line => %d%n", last.grab().getLineNumber());
-      System.out.printf("👻 last cb name => %s%n", last.grab().getMethodName());
+      stdOutF("💥 last file => 📁 %s%n", last.grab().getFileName());
+      stdOutF("📏 last line => %d%n", last.grab().getLineNumber());
+      stdOutF("👻 last cb name => %s%n", last.grab().getMethodName());
     }
 
     endLog();
-
   }
 }

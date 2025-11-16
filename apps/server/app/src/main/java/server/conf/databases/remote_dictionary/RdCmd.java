@@ -96,7 +96,7 @@ public final class RdCmd {
 
             default -> Mono.empty();
         })).collectMap(Map.Entry::getKey, Map.Entry::getValue).map(res -> {
-            System.out.println("🗃️ rd cache => ");
+            LibLog.stdOut("🗃️ rd cache => ");
             res.forEach((k, v) -> LibLog.logKV(k, v));
             return res;
         });
