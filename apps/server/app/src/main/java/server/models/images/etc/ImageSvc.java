@@ -12,7 +12,7 @@ import server.models.images.Image;
 @Service
 @SuppressFBWarnings({ "EI2", "EI" })
 @RequiredArgsConstructor
-public class ImageSvc {
+public final class ImageSvc {
   private final ImageRepo imageRepo;
 
   public final Mono<Image> insert(Image image) {

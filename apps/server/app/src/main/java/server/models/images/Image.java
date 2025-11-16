@@ -14,7 +14,7 @@ import server.models.RootTable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("images")
-public class Image extends RootTable {
+public final class Image extends RootTable {
 
   @Column("public_id")
   private String publicId;
@@ -23,7 +23,7 @@ public class Image extends RootTable {
   private String url;
 
   @Override
-  public String toString() {
+  public final String toString() {
     return reflectiveToString();
   }
 }

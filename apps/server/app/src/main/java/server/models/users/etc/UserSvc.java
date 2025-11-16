@@ -12,7 +12,7 @@ import server.models.users.User;
 @Service
 @SuppressFBWarnings({ "EI2", "EI" })
 @RequiredArgsConstructor
-public class UserSvc {
+public final class UserSvc {
   private final UserRepo userRepo;
 
   public final Mono<User> insert(User user) {

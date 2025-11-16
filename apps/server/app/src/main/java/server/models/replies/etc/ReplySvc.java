@@ -12,7 +12,7 @@ import server.models.replies.Reply;
 @Service
 @SuppressFBWarnings({ "EI2", "EI" })
 @RequiredArgsConstructor
-public class ReplySvc {
+public final class ReplySvc {
   private final ReplyRepo replyRepo;
 
   public final Mono<Reply> insert(Reply reply) {

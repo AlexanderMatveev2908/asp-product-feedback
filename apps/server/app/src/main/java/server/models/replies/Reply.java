@@ -16,7 +16,7 @@ import server.models.RootTable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("replies")
-public class Reply extends RootTable {
+public final class Reply extends RootTable {
 
   @Column("user_id")
   private UUID userId;
@@ -31,7 +31,7 @@ public class Reply extends RootTable {
   private String content;
 
   @Override
-  public String toString() {
+  public final String toString() {
     return reflectiveToString();
   }
 }

@@ -14,7 +14,7 @@ import server.models.RootTable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("users")
-public class User extends RootTable {
+public final class User extends RootTable {
 
   @Column("name")
   private String name;
@@ -23,7 +23,7 @@ public class User extends RootTable {
   private String username;
 
   @Override
-  public String toString() {
+  public final String toString() {
     return reflectiveToString();
   }
 }

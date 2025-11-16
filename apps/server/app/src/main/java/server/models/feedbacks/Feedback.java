@@ -16,7 +16,7 @@ import server.models.feedbacks.etc.types.FeedStatT;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("feedbacks")
-public class Feedback extends RootTable {
+public final class Feedback extends RootTable {
 
   @Column("title")
   private String title;
@@ -42,7 +42,7 @@ public class Feedback extends RootTable {
   }
 
   @Override
-  public String toString() {
+  public final String toString() {
     return reflectiveToString();
   }
 

@@ -14,7 +14,7 @@ import server.models.RootTable;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @Table("comments")
-public class Comment extends RootTable {
+public final class Comment extends RootTable {
 
   @Column("content")
   private String content;
@@ -26,7 +26,7 @@ public class Comment extends RootTable {
   private UUID feedbackId;
 
   @Override
-  public String toString() {
+  public final String toString() {
     return reflectiveToString();
   }
 

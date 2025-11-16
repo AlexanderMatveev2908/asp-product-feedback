@@ -12,7 +12,7 @@ import server.models.comments.Comment;
 @Service
 @SuppressFBWarnings({ "EI2", "EI" })
 @RequiredArgsConstructor
-public class CommentSvc {
+public final class CommentSvc {
   private final CommentRepo commentRepo;
 
   public final Mono<Comment> insert(Comment comment) {
