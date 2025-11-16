@@ -26,7 +26,7 @@ END$$;
 CREATE TABLE IF NOT EXISTS feedbacks (
   title VARCHAR(100) NOT NULL,
   description VARCHAR(1000) NOT NULL,
-  upvotes INTEGER NOT NULL,
+  upvotes INTEGER NOT NULL DEFAULT 0,
   category CATEGORY_TYPE NOT NULL,
   status STATUS_TYPE NOT NULL DEFAULT 'suggestion'
 ) INHERITS (root_table);

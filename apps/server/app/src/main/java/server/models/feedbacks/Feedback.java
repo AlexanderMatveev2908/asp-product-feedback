@@ -31,6 +31,14 @@ public class Feedback extends RootTable {
   @Column("upvotes")
   private final int upvotes;
 
+  public Feedback(String title, String description, FeedCatT category, FeedStatT status) {
+    this.title = title;
+    this.description = description;
+    this.upvotes = 0;
+    this.category = category;
+    this.status = status;
+  }
+
   @Override
   public String toString() {
     return reflectiveToString();
