@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS users (
+  name VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL
+) INHERITS (root_table);
+
+ALTER TABLE users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+CREATE TRIGGER trigger_timestamp_users
+BEFORE INSERT OR UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION trigger_timestamp();

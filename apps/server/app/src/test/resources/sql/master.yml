@@ -1,0 +1,112 @@
+databaseChangeLog:
+  - changeSet:
+      id: "001_root_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/001.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/001.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "002_trigger_timestamp_function"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/002.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/002.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "003_users_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/003.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/003.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "004_images_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/004.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/004.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "005_feedbacks_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/005.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/005.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "006_comments_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/006.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/006.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+
+  - changeSet:
+      id: "007_replies_table"
+      author: ninja
+      changes:
+        - sqlFile:
+            path: migrations/up/007.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
+      rollback:
+        - sqlFile:
+            path: migrations/down/007.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: true
