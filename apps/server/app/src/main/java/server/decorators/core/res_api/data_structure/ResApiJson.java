@@ -1,4 +1,4 @@
-package server.decorators.flow.res_api.data_structure;
+package server.decorators.core.res_api.data_structure;
 
 import java.io.IOException;
 import java.util.Map.Entry;
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import server.decorators.flow.res_api.ResAPI;
+import server.decorators.core.res_api.ResAPI;
 
 public final class ResApiJson extends JsonSerializer<ResAPI> {
     @Override

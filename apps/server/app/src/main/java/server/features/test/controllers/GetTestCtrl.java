@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.decorators.flow.api.Api;
-import server.decorators.flow.res_api.ResAPI;
+import server.decorators.core.api.Api;
+import server.decorators.core.res_api.ResAPI;
 
 @Component
 @RequiredArgsConstructor

@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import server.decorators.Nullable;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.paperwork.Reg;
 
 public final class LibShape {

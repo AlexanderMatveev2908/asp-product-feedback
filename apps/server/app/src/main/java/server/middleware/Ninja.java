@@ -7,7 +7,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
-import server.decorators.flow.api.Api;
+import server.decorators.core.api.Api;
 
 // ! without it all app would crash
 // ! most logic base itself on custom methods

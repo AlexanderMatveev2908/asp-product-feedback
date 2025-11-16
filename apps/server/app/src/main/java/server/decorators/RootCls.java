@@ -3,7 +3,7 @@ package server.decorators;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.lib.data_structure.LibShape;
 
 public interface RootCls {

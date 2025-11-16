@@ -1,7 +1,7 @@
 package server.lib.data_structure;
 
 import server.decorators.MessySupplier;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 
 public final class LibRuntime {
   public static final <T> T inTryBlock(MessySupplier<T> cb) {

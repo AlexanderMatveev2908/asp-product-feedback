@@ -1,4 +1,4 @@
-package server.decorators.flow.api.sub;
+package server.decorators.core.api.sub;
 
 import java.util.Map;
 

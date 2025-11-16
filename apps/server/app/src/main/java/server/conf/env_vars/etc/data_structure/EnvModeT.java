@@ -2,7 +2,7 @@ package server.conf.env_vars.etc.data_structure;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 
 @Getter
 @RequiredArgsConstructor

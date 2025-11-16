@@ -8,7 +8,7 @@ import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import reactor.core.publisher.Mono;
 import server.conf.env_vars.EnvVars;
 import server.decorators.RootCls;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.lib.data_structure.LibShape;
 
 @Service

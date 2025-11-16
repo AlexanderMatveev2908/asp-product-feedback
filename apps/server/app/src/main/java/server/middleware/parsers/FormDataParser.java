@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import server.decorators.AppFile;
 import server.decorators.Nullable;
-import server.decorators.flow.api.Api;
+import server.decorators.core.api.Api;
 import server.middleware.parsers.sub.ParserManager;
 
 @Component

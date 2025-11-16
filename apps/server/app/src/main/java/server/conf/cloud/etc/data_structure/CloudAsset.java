@@ -3,7 +3,7 @@ package server.conf.cloud.etc.data_structure;
 import java.util.Map;
 
 import lombok.Data;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 
 @Data
 public final class CloudAsset {

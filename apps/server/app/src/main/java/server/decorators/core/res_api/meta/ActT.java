@@ -1,4 +1,4 @@
-package server.decorators.flow.res_api.meta;
+package server.decorators.core.res_api.meta;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

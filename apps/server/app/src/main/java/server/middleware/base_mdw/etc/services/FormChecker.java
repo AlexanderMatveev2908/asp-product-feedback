@@ -11,8 +11,8 @@ import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import server.decorators.Nullable;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.api.Api;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.api.Api;
 
 @Service
 @RequiredArgsConstructor

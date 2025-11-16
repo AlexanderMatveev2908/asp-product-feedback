@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.lib.paths.LibPath;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.WebFilterChain;
 
 import reactor.core.publisher.Mono;
-import server.decorators.flow.api.Api;
+import server.decorators.core.api.Api;
 import server.middleware.base_mdw.BaseMdw;
 
 @Component

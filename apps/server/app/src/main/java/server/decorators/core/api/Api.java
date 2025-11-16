@@ -1,4 +1,4 @@
-package server.decorators.flow.api;
+package server.decorators.core.api;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +17,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import server.decorators.Nullable;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.api.sub.ApiAttr;
-import server.decorators.flow.api.sub.ApiInfo;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.api.sub.ApiAttr;
+import server.decorators.core.api.sub.ApiInfo;
 import server.lib.data_structure.Jack;
 
 @SuppressWarnings({ "UseSpecificCatch" })

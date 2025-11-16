@@ -1,4 +1,4 @@
-package server.decorators.flow.res_api;
+package server.decorators.core.res_api;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +16,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import reactor.core.publisher.Mono;
 import server.decorators.Nullable;
-import server.decorators.flow.res_api.data_structure.ResApiJson;
-import server.decorators.flow.res_api.meta.MetaRes;
+import server.decorators.core.res_api.data_structure.ResApiJson;
+import server.decorators.core.res_api.meta.MetaRes;
 
 @SuppressFBWarnings({ "EI" })
 @Getter

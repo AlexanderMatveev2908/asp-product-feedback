@@ -9,9 +9,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.api.Api;
-import server.decorators.flow.res_api.ResAPI;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.api.Api;
+import server.decorators.core.res_api.ResAPI;
 import server.features.test.services.PostFormSvc;
 import server.lib.data_structure.LibShape;
 

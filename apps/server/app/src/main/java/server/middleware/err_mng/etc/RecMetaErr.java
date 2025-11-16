@@ -3,7 +3,7 @@ package server.middleware.err_mng.etc;
 import org.springframework.web.server.ServerWebExchange;
 
 import server.decorators.Nullable;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.paperwork.Reg;
 
 public final record RecMetaErr(String msg, int status) {
