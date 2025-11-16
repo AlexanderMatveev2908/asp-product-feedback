@@ -19,7 +19,7 @@ public final class Reg {
         }
 
         private static final boolean checkReg(Nullable<String> arg, String reg) {
-                return arg.isPresent() && Pattern.matches(reg, arg.orYell());
+                return arg.hasText() && Pattern.matches(reg, arg.orYell());
         }
 
         public static final boolean isName(Nullable<String> arg) {

@@ -38,7 +38,6 @@ public class PostTestCtrl {
                     "form parsed • processed • saved locally • uploaded on cloud • deleted locally • deleted from cloud")
                     .data(Map.of("saved", tpl.getT1(), "deleted", tpl.getT2())).build();
         });
-
     }
 
 }

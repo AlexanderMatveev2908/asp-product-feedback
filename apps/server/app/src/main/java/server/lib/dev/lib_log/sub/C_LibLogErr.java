@@ -1,18 +1,12 @@
 package server.lib.dev.lib_log.sub;
 
 import server.decorators.Nullable;
-import server.lib.data_structure.LibShape;
 
 public class C_LibLogErr extends B_LibLogAio {
   public static final void logErr(Throwable err) {
     wErr(err);
 
     startLog();
-
-    if (LibShape.isNone(err)) {
-      stdErr("passed None to logErr");
-      return;
-    }
 
     logHeader(Nullable.asNone());
 

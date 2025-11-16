@@ -1,6 +1,7 @@
 package server.lib.data_structure;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import server.decorators.Nullable;
@@ -41,8 +42,15 @@ public final class LibShape {
     }
 
     public static final boolean isList(Object arg) {
-        if (arg instanceof final List<?> argList)
-            return !argList.isEmpty();
+        if (arg instanceof final List<?> list)
+            return !list.isEmpty();
+
+        return false;
+    }
+
+    public static final boolean isDict(Object arg) {
+        if (arg instanceof Map<?, ?> map)
+            return !map.isEmpty();
 
         return false;
     }

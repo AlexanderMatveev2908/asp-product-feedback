@@ -47,6 +47,18 @@ public final class Nullable<T> {
       cb.accept(data);
   }
 
+  public final boolean hasText() {
+    return LibShape.hasText(data);
+  }
+
+  public final boolean isList() {
+    return LibShape.isList(data);
+  }
+
+  public final boolean isDict() {
+    return LibShape.isDict(data);
+  }
+
   public final T orNone() {
     return data;
   }

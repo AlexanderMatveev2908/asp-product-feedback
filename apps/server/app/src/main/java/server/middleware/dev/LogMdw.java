@@ -51,12 +51,9 @@ public final class LogMdw implements WebFilter {
     }
 
     private final Nullable<Object> normalizeEmpty(Object obj) {
-        if (LibShape.isNone(obj))
-            return Nullable.asNone();
+        Nullable<?> inst = Nullable.of(obj);
 
-        if (obj instanceof final String str && !LibShape.hasText(str))
-            return Nullable.asNone();
-        if (obj instanceof final Map<?, ?> map && map.isEmpty())
+        if (inst.isNone() && !inst.isList() && !inst.isDict())
             return Nullable.asNone();
 
         return Nullable.of(obj);
