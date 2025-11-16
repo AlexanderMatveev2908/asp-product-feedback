@@ -36,22 +36,22 @@ public interface CloudSvcUpload {
     return genSign(params);
   }
 
-  private String getFolderName(AppFile file) {
+  private String getFolderName(AppFile appFile) {
     final String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
-    return appSnakeName + "__" + file.getField().plural();
+    return appSnakeName + "__" + appFile.getField().plural();
   }
 
-  private UploadData extractDataUpload(AppFile file) {
+  private UploadData extractDataUpload(AppFile appFile) {
     final String cloudKey = getEnvKeeper().getCloudKey();
     final String tmsp = String.valueOf(Instant.now().getEpochSecond());
-    final String folder = getFolderName(file);
+    final String folder = getFolderName(appFile);
 
-    final String filename = file.getFilename();
+    final String filename = appFile.getFilename();
     final String publicId = filename.substring(0, filename.lastIndexOf('.'));
 
-    final CloudResourceT assetT = file.getField();
-    final AbstractResource fileResource = assetT.equals(CloudResourceT.IMAGE) ? file.getResourceFromBts()
-        : file.getResourceFromPath();
+    final CloudResourceT assetT = appFile.getField();
+    final AbstractResource fileResource = assetT.isImage() ? appFile.getResourceFromBts()
+        : appFile.getResourceFromPath();
 
     // ! cloudinary always use singular names 
     final String url = "/" + assetT.getVal() + "/upload";
@@ -80,15 +80,15 @@ public interface CloudSvcUpload {
     return form;
   }
 
-  default Mono<CloudAsset> upload(AppFile file) {
-    final UploadData dataUpload = extractDataUpload(file);
+  default Mono<CloudAsset> upload(AppFile appFile) {
+    final UploadData dataUpload = extractDataUpload(appFile);
     final MultipartBodyBuilder form = buildForm(dataUpload);
 
     return getClient().post().uri(dataUpload.getUrl()).contentType(MediaType.MULTIPART_FORM_DATA)
         .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Dict.class)
-        .flatMap(map -> {
+        .map(map -> {
           final CloudAsset asset = CloudAsset.fromMap(map);
-          return Mono.just(asset);
+          return asset;
         });
   }
 

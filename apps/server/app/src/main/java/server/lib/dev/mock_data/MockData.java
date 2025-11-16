@@ -2,6 +2,7 @@ package server.lib.dev.mock_data;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -10,32 +11,53 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import server.conf.cloud.CloudSvc;
+import server.conf.cloud.etc.data_structure.CloudAsset;
 import server.decorators.core.ErrAPI;
+import server.decorators.types.AppFile;
+import server.lib.dev.lib_log.LibLog;
 import server.lib.paths.LibPath;
 import server.models.feedbacks.etc.FeedSvc;
 import server.models.users.etc.UserSvc;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI" })
 public class MockData {
   private final UserSvc userSvc;
   private final FeedSvc feedSvc;
+  private final CloudSvc cloud;
 
-  private static final void uploadImages() {
+  private final Mono<List<CloudAsset>> uploadImages() {
+
     final Path dirUsers = LibPath.IMAGES_DIR.resolve("users");
     if (!Files.isDirectory(dirUsers))
       throw new ErrAPI("thumbnails not found");
+
+    final List<Mono<CloudAsset>> promises = new ArrayList<>();
 
     try (final Stream<Path> stream = Files.list(dirUsers)) {
       final List<Path> images = stream.toList();
 
       for (final Path img : images) {
+        final String filename = img.getFileName().toString();
+        final Path imgPath = dirUsers.resolve(filename);
+        final AppFile appFile = new AppFile(filename, imgPath);
+
+        promises.add(cloud.upload(appFile));
       }
 
+      return Flux.merge(promises).collectList();
     } catch (final Exception err) {
       throw new ErrAPI(err.getMessage());
     }
+  }
+
+  public final void write() {
+    uploadImages().subscribe(list -> {
+      LibLog.wOk(list);
+    });
   }
 }

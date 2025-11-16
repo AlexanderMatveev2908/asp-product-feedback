@@ -1,6 +1,5 @@
 package server.features.test.services;
 
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +38,8 @@ public class PostFormSvc {
         continue;
 
       final List<AppFile> arg = (List<AppFile>) pair.getValue();
-      for (final AppFile f : arg) {
-        if (!Files.exists(f.getFilePath().orYell()))
-          throw new ErrAPI("file does not exist");
-
+      for (final AppFile f : arg)
         promises.add(cloud.upload(f).doFinally(sig -> f.deleteLocally()));
-      }
     }
 
     return Flux.merge(promises).collectList();

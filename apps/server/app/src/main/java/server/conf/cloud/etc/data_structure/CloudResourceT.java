@@ -25,6 +25,6 @@ public enum CloudResourceT {
     }
 
     public final boolean isImage() {
-        return this.equals(IMAGE);
+        return this == IMAGE;
     }
 }
