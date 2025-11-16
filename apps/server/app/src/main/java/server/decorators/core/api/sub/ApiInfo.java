@@ -1,0 +1,125 @@
+package server.decorators.core.api.sub;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.regex.Pattern;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.reactive.HandlerMapping;
+import org.springframework.web.server.ServerWebExchange;
+
+import server.decorators.types.Nullable;
+import server.lib.data_structure.LibShape;
+import server.paperwork.Reg;
+
+public interface ApiInfo {
+
+  ServerWebExchange getExch();
+
+  // ? hdr
+  default String getHeader(String name) {
+    return Nullable.of(getExch().getRequest().getHeaders().getFirst(name)).orElse("");
+  }
+
+  default void addHeader(String k, Object v) {
+    getExch().getResponse().getHeaders().add(k, String.valueOf(v));
+  }
+
+  // ? cookies
+  default String getCookie(String name) {
+    return Nullable.of(getExch().getRequest().getCookies().getFirst(name)).map(cookie -> cookie.getValue())
+        .orElse("");
+  }
+
+  // ? path var available at endpoint level
+  default Nullable<UUID> getPathVarId(String key) {
+    Nullable<Map<String, String>> vars = Nullable
+        .of(getExch().getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
+
+    if (vars.isNone())
+      return Nullable.asNone();
+
+    Nullable<String> pathId = Nullable.of(vars.orYell().get(key));
+    if (!Reg.isUUID(pathId))
+      return Nullable.asNone();
+
+    return Nullable.of(UUID.fromString(pathId.orYell()));
+  }
+
+  default Nullable<UUID> getPathVarId() {
+    final String path = getPath();
+    final String[] parts = path.split("\\/");
+    final int lastIdx = parts.length - 1;
+    final String pathId = parts[lastIdx];
+
+    return LibShape.isV4(pathId) ? Nullable.of(UUID.fromString(pathId)) : Nullable.asNone();
+  }
+
+  default boolean hasPathUUID() {
+    return getPathVarId().isPresent();
+  }
+
+  // ? query
+  default String getQuery() {
+    return Nullable.of(getExch().getRequest().getURI().getQuery()).orElse("");
+  }
+
+  // ? general
+  default String getPath() {
+    return getExch().getRequest().getPath().toString().split("\\?", 2)[0];
+  }
+
+  default boolean isSamePath(String arg, HttpMethod method) {
+    String endpoint = getPath();
+    return endpoint.equals(arg) && getMethod().equals(method);
+  }
+
+  default boolean isSubPathOf(String arg) {
+    return getPath().startsWith(arg);
+  }
+
+  default boolean matchPathAfterCutIdOut(String arg, HttpMethod method) {
+    final String original = getPath();
+    final String[] parts = original.split("\\/", -1);
+    final int lastIdx = parts.length - 1;
+    final String lastPart = parts[lastIdx];
+    final String cut;
+
+    if (lastPart.isBlank())
+      cut = original.replaceFirst("\\/+$", "");
+    else
+      cut = original.replaceFirst("/" + Pattern.quote(lastPart) + "$", "");
+
+    return arg.equals(cut) && getMethod().equals(method);
+  }
+
+  default HttpMethod getMethod() {
+    return getExch().getRequest().getMethod();
+  }
+
+  default String getContentType() {
+    return Nullable.of(getExch().getRequest().getHeaders().getContentType()).map(MediaType::toString)
+        .orElse("");
+  }
+
+  private String getIp() {
+    final ServerHttpRequest req = getExch().getRequest();
+
+    // ? 1 level nesting -> ip+port
+    // ? 2 level nesting -> ip+hostname
+    // ? 3 level nesting -> ip only
+    return Nullable.of(req.getRemoteAddress()).map(addr -> addr.getAddress()).map(inet -> inet.getHostAddress())
+        .orElse("unknown");
+  }
+
+  default String getClientIp() {
+    final String xff = getHeader("x-forwarded-for");
+
+    if (!xff.isBlank())
+      return xff.split(",")[0].trim();
+
+    return getIp();
+  }
+}

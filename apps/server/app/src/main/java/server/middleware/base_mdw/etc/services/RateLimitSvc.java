@@ -14,8 +14,8 @@ import reactor.core.publisher.Mono;
 import server.conf.databases.remote_dictionary.RD;
 import server.conf.env_vars.EnvVars;
 import server.conf.env_vars.etc.data_structure.EnvModeT;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.api.Api;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.api.Api;
 
 @Component
 @SuppressFBWarnings({ "EI2" })

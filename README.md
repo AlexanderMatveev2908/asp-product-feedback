@@ -41,6 +41,8 @@ Together they form a clean, modern **full-stack architecture** 🚀
 - **Spring Boot (WebFlux)** — Reactive, non-blocking backend framework powered by an **event-loop** execution model
 - **Project Reactor** — Core reactive foundation powering **WebFlux** and **Redis** for fully non-blocking data flows
 - **Redis (Lettuce)** — Async/reactive Redis client for caching and real-time data
+- **PostgreSQL + R2DBC** — Asynchronous database access with reactive drivers
+- **Liquibase** — Database migrations, written in raw SQL for full control
 - **Cloudinary (Reactive WebClient)** — Manually integrated using Spring’s WebClient, enabling fully non-blocking image and video uploads
 - **java_pkg_cli** — Custom **Python** CLI utility to automatically add dependencies to both the **TOML catalog** and **Gradle build file**, eliminating repetitive hardcoding and improving consistency in dependency management
 
@@ -81,6 +83,8 @@ All required environment variables are listed in:
 This file not only configures the server but also declares the environment variables required by the application.
 
 - **Main runtime** variables are grouped under the top-level key **app**.
+
+- **Database** variables are grouped under the key **spring.r2dbc** and them will be generated automatically on boot from the **app** ones.
 
 - **💡Note**:
   The same variables must also be present in a **kind-secrets.yml** file (not committed to git). This file is required if you want to run the app in a local **Kubernetes cluster** via **Kind**.
@@ -235,7 +239,7 @@ Activates dev.conf
 
 ---
 
-##### 💾 Kind config
+##### 🐳 Kind config
 
 Running
 
@@ -272,6 +276,82 @@ The script present in [scripts/kind.zsh](scripts/kind.zsh) will
 - **Server** => available at **[http://localhost:30080](http://localhost:30080)**
 
 If you’ve set up the **Nginx reverse proxy** (see section above), it will automatically route these internal ports behind a single HTTPS entrypoint (port 443).
+
+---
+
+## 🐘 PostgreSQL Tables
+
+```mermaid
+erDiagram
+ root_table ||--||users : extends
+ root_table ||--||images : extends
+ root_table ||--||feedbacks : extends
+ root_table ||--||comments : extends
+ root_table ||--||replies : extends
+
+ feedbacks }o--|| category_type : uses
+ feedbacks }o--|| status_type : uses
+
+ users ||--|| images : has
+ feedbacks ||--}o comments : has
+ users ||--}o comments : has
+ users ||--}o replies : has
+ comments ||--}o replies : has
+
+
+  root_table {
+    uuid id
+    bigint created_at
+    bigint updated_at
+    bigint deleted_at
+  }
+
+  users {
+    string name
+    string username
+  }
+
+  images {
+    string public_id
+    string url
+    uuid user_id
+  }
+
+  category_type {
+    enum UI
+    enum UX
+    enum FEATURE
+    enum ENHANCEMENT
+    enum BUG
+  }
+
+  status_type {
+    enum SUGGESTION
+    enum PLANNED
+    enum IN_PROGRESS
+    enum LIVE
+  }
+
+  feedbacks {
+    string title
+    string description
+    category_type category
+    status_type status
+  }
+
+  comments {
+    string content
+    uuid user_id
+    uuid feedback_id
+  }
+
+  replies {
+    string content
+    uuid user_id
+    uuid comment_id
+    uuid replying_to
+  }
+```
 
 ---
 

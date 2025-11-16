@@ -7,24 +7,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalTime;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import server.decorators.types.Dict;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.paths.LibPath;
 
 public class B_LibLogAio extends A_LibLogBase {
   private static final ExecutorService logThread = Executors.newSingleThreadExecutor();
 
-  protected static final void asyncLog(Path p, Object arg) {
+  private static final void asyncLog(Path p, Object arg) {
     logThread.submit(() -> {
       try (BufferedWriter bw = Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
           StandardOpenOption.TRUNCATE_EXISTING)) {
 
         final String json;
         if (arg instanceof final Throwable err)
-          json = LibPrs.jsonFromObj(Map.of("msg", err.getMessage(), "type", err.getClass().getSimpleName(), "time",
+          json = LibPrs.jsonFromObj(Dict.of("msg", err.getMessage(), "type", err.getClass().getSimpleName(), "time",
               LocalTime.now().toString()));
         else
           json = LibPrs.jsonFromObj(arg);
@@ -32,7 +32,7 @@ public class B_LibLogAio extends A_LibLogBase {
         bw.write(json);
         bw.newLine();
       } catch (IOException err) {
-        System.out.println("❌ failed log");
+        stdErr("failed log");
       }
     });
   }

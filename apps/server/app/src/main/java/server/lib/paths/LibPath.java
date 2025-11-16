@@ -3,7 +3,7 @@ package server.lib.paths;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.lib.paths.sub.LibPathServerDir;
 
 public final class LibPath {

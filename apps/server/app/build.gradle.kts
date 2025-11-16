@@ -52,7 +52,6 @@ dependencies {
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
     // ? faker
-    implementation(libs.datafaker)
     testImplementation(libs.datafaker)
     // ? modern types parse
     implementation(libs.jacksonDatatypeJdk8)
@@ -66,6 +65,7 @@ dependencies {
     implementation(libs.r2dbcPool)
     // ? provide ORM SQl style for Java
     implementation(libs.springBootStarterDataR2dbc)
+    implementation(libs.datafaker)
 }
 //_e
 

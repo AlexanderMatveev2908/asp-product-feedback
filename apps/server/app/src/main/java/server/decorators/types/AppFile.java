@@ -1,0 +1,105 @@
+package server.decorators.types;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.UUID;
+
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.FileSystemResource;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import lombok.Getter;
+import server.decorators.core.ErrAPI;
+import server.lib.paths.LibPath;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+@SuppressFBWarnings("EI_EXPOSE_REP")
+@Getter
+public final class AppFile {
+    private final String field;
+    private final String filename;
+    private final String contentType;
+    private final byte[] bts;
+    private final Path filePath;
+
+    public AppFile(
+            String field,
+            String filename,
+            String contentType,
+            Nullable<byte[]> bts) {
+
+        this.field = field;
+        this.contentType = contentType;
+        this.bts = bts.isNone() ? new byte[0] : bts.orYell().clone();
+
+        String ext = "";
+        final int idxDot = filename.lastIndexOf('.');
+        if (idxDot != -1 && idxDot < filename.length() - 1) {
+            ext = filename.substring(idxDot);
+        }
+
+        this.filename = UUID.randomUUID().toString() + ext;
+        this.filePath = LibPath.ASSETS_DIR.resolve(this.field).resolve(this.filename);
+    }
+
+    public final void saveLocally() {
+        try {
+            Files.write(this.getFilePath(), this.getBts(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException err) {
+            throw new ErrAPI("err saving asset locally");
+        }
+    }
+
+    public final void deleteLocally() {
+        try {
+            Files.deleteIfExists(this.getFilePath());
+        } catch (IOException err) {
+            throw new ErrAPI("err deleting asset locally");
+        }
+    }
+
+    public final ByteArrayResource getResourceFromBts() {
+        return new ByteArrayResource(this.bts) {
+            @Override
+            public String getFilename() {
+                return filename;
+            }
+        };
+    }
+
+    public final FileSystemResource getResourceFromPath() {
+        return new FileSystemResource(filePath);
+    }
+
+    public final Dict getFancyShape() {
+        final Dict fancyMap = new Dict();
+
+        try {
+            final Class<?> cls = this.getClass();
+
+            for (final Field f : cls.getDeclaredFields()) {
+                f.setAccessible(true);
+
+                final Object val = f.get(this);
+
+                if ("bts".equals(f.getName()))
+                    fancyMap.put("bytes", "💾 long binary code...");
+                else
+                    fancyMap.put(f.getName(), val);
+
+            }
+        } catch (IllegalAccessException | IllegalArgumentException err) {
+            throw new ErrAPI("err parsing file to fancy shape");
+        }
+
+        return fancyMap;
+    }
+
+}

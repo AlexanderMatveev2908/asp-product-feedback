@@ -1,9 +1,8 @@
 package server.conf.cloud.etc.data_structure;
 
-import java.util.Map;
-
 import lombok.Data;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
+import server.decorators.types.Dict;
 
 @Data
 public final class CloudAsset {
@@ -11,12 +10,12 @@ public final class CloudAsset {
     private final String url;
     private final String resourceType;
 
-    public static final CloudAsset fromMap(Map<?, ?> arg) {
+    public static final CloudAsset fromMap(Dict arg) {
 
         try {
-            final CloudAsset asset = new CloudAsset((String) arg.get("public_id"),
-                    (String) arg.get("secure_url"),
-                    (String) arg.get("resource_type"));
+            final CloudAsset asset = new CloudAsset(arg.valAsString("public_id"),
+                    arg.valAsString("secure_url"),
+                    arg.valAsString("resource_type"));
             return asset;
         } catch (Exception err) {
             throw new ErrAPI("Invalid cloud asset shape");

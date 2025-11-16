@@ -1,7 +1,9 @@
 package server.paperwork;
 
 import java.util.regex.Pattern;
-import server.decorators.flow.ErrAPI;
+
+import server.decorators.core.ErrAPI;
+import server.decorators.types.Nullable;
 
 public final class Reg {
         public static final String CITY = "^[\\p{L}\\s'\\-]+$";
@@ -16,31 +18,31 @@ public final class Reg {
                 throw new ErrAPI("Keep Reg class as static helper");
         }
 
-        private static final boolean checkReg(String arg, String reg) {
-                return arg != null && Pattern.matches(reg, arg);
+        private static final boolean checkReg(Nullable<String> arg, String reg) {
+                return arg.hasText() && Pattern.matches(reg, arg.orYell());
         }
 
-        public static final boolean isName(String arg) {
+        public static final boolean isName(Nullable<String> arg) {
                 return checkReg(arg, NAME);
         }
 
-        public static final boolean isTxt(String arg) {
+        public static final boolean isTxt(Nullable<String> arg) {
                 return checkReg(arg, TXT);
         }
 
-        public static final boolean isInt(String arg) {
+        public static final boolean isInt(Nullable<String> arg) {
                 return checkReg(arg, INT);
         }
 
-        public static final boolean isFloat(String arg) {
+        public static final boolean isFloat(Nullable<String> arg) {
                 return checkReg(arg, FLOAT);
         }
 
-        public static final boolean isUUID(String arg) {
+        public static final boolean isUUID(Nullable<String> arg) {
                 return checkReg(arg, UUID);
         }
 
-        public static final boolean startsWithEmj(String arg) {
+        public static final boolean startsWithEmj(Nullable<String> arg) {
                 return checkReg(arg, EMOJI);
 
         }

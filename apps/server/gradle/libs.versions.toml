@@ -20,11 +20,11 @@ spotbugs = "4.8.6"
 spotbugs-gradle = "6.0.23" 
 spotbugs_annotations = "4.8.3"
 jackson_datatype_jdk8 = "2.17.2"
-datafaker = "2.1.0"
 postgresql = "42.7.3"
 liquibase_core = "4.30.0"
 r2dbc_postgresql = "1.0.5.RELEASE"
 r2dbc_pool = "1.0.2.RELEASE"
+datafaker = "2.1.0"
 
 
 

@@ -8,7 +8,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 
 import lombok.RequiredArgsConstructor;
-import server.decorators.LifeSpawn;
+import server.decorators.etc.LifeSpawn;
+import server.lib.dev.LibDev;
 import server.lib.dev.lib_log.LibLog;
 
 @SpringBootApplication
@@ -17,6 +18,7 @@ import server.lib.dev.lib_log.LibLog;
 public class ServerApplication {
 
     private final LifeSpawn lifeSpawn;
+    private final LibDev libDev;
 
     public static final void main(String[] args) {
 
@@ -33,6 +35,8 @@ public class ServerApplication {
 
             try {
                 lifeSpawn.lifeCheck(e);
+
+                libDev.main();
             } catch (Exception err) {
                 LibLog.logErr(err);
             }

@@ -3,7 +3,9 @@ package server.lib.dev.lib_log.sub;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Optional;
 
+import server.decorators.types.Nullable;
 import server.lib.dev.lib_log.LibLog;
 
 public class A_LibLogBase {
@@ -15,53 +17,51 @@ public class A_LibLogBase {
     private static final RecMainLog getMainLogInfo() {
         final String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
-        final StackTraceElement caller = Arrays.stream(Thread.currentThread().getStackTrace())
+        final Optional<StackTraceElement> caller = Arrays.stream(Thread.currentThread().getStackTrace())
                 .filter(f -> f.getClassName().startsWith(APP_PKG))
-                .filter(f -> !f.getClassName().contains(LibLog.class.getSimpleName())).findFirst().orElse(null);
+                .filter(f -> !f.getClassName().contains(LibLog.class.getSimpleName())).findFirst();
 
-        final String fileName = (caller != null) ? caller.getFileName() : "unknown caller";
+        final String fileName = caller.isPresent() ? caller.get().getFileName() : "unknown caller";
         final String thread = Thread.currentThread().getName();
 
         return new RecMainLog(time, fileName, thread);
     }
 
-    public static final void limiter() {
-        System.out.println("-".repeat(60));
+    protected static final void limiter() {
+        stdOut("-".repeat(60));
     }
 
-    public static final void startLog() {
-        System.out.println("\n");
+    protected static final void tab() {
+        stdOut("\t");
+    }
+
+    protected static final void startLog() {
+        tab();
         limiter();
     }
 
-    public static final void endLog() {
+    protected static final void endLog() {
         limiter();
-        System.out.println("\n");
+        tab();
     }
 
-    public static final void logHeader(String title) {
+    protected static final void logHeader(Nullable<String> title) {
         final RecMainLog mainInfo = getMainLogInfo();
 
-        System.out.printf("⏰ %s • 🗃️ %s • %s%n", mainInfo.time(), mainInfo.fileName(),
-                title != null ? "📌 " + title : "🧵 " + mainInfo.thread());
+        stdOutF("⏰ %s • 🗃️ %s • %s", mainInfo.time(), mainInfo.fileName(),
+                title.isPresent() ? "📌 " + title : "🧵 " + mainInfo.thread());
+        tab();
     }
 
-    public static final void logTtl(String title, Object... arg) {
-
-        startLog();
-        logHeader(title);
-
-        System.out.println("\t");
-
-        if (arg != null)
-            for (final Object v : arg)
-                System.out.println(v);
-
-        endLog();
+    public static final void stdOut(Object msg) {
+        System.out.println(msg);
     }
 
-    public static final void log(Object... arg) {
-        logTtl(null, arg);
+    public static final void stdOutF(String msg, Object... args) {
+        System.out.printf(msg, args);
     }
 
+    public static final void stdErr(String msg) {
+        System.err.println("❌ " + msg);
+    }
 }

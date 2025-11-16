@@ -1,7 +1,5 @@
 package server.middleware.err_mng;
 
-import java.util.Map;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,8 +11,10 @@ import org.springframework.web.server.WebExceptionHandler;
 import com.fasterxml.jackson.core.JacksonException;
 
 import reactor.core.publisher.Mono;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.res_api.ResAPI;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.res_api.ResAPI;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 import server.lib.data_structure.Jack;
 import server.lib.dev.lib_log.LibLog;
 import server.middleware.err_mng.etc.RecMetaErr;
@@ -25,9 +25,10 @@ public final class ErrCatcher implements WebExceptionHandler {
 
     private final ResAPI extractResAPi(ServerWebExchange exc, Throwable err) {
         RecMetaErr recMetaErr = RecMetaErr.fromErr(exc, err);
-        Map<String, Object> data = (err instanceof final ErrAPI errInst) ? errInst.getData() : null;
+        Nullable<Dict> data = (err instanceof final ErrAPI errInst) ? errInst.getData()
+                : Nullable.asNone();
 
-        ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data);
+        ResAPI apiBody = new ResAPI(recMetaErr.status(), recMetaErr.msg(), data.orNone());
 
         return apiBody;
     }
@@ -45,7 +46,7 @@ public final class ErrCatcher implements WebExceptionHandler {
 
         final byte[] bytes;
         try {
-            bytes = Jack.mapper.writeValueAsBytes(apiBody);
+            bytes = Jack.main.writeValueAsBytes(apiBody);
         } catch (JacksonException errOfErr) {
             throw new ErrAPI("err build json for err catcher");
         }

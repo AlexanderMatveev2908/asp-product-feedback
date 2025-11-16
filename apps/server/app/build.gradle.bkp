@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.redis.lettuce)
     // ? checkers
     compileOnly(libs.spotbugsAnnotations)
-    testImplementation(libs.spotbugsAnnotations)
+    testCompileOnly(libs.spotbugsAnnotations)
     // ? tests
     testImplementation(libs.spring.boot.starter.test) {
     exclude(group = "org.junit.vintage")
@@ -62,7 +62,9 @@ dependencies {
     implementation(libs.liquibaseCore)
     // ? reactive database
     implementation(libs.r2dbcPostgresql)
-    // ? manage pool connections & provide ORM SQl style for Java
+    // ? manage pool connections
+    implementation(libs.r2dbcPool)
+    // ? provide ORM SQl style for Java
     implementation(libs.springBootStarterDataR2dbc)
 }
 //_e

@@ -16,7 +16,8 @@ import reactor.core.publisher.Mono;
 import server.conf.cloud.etc.data_structure.CloudAsset;
 import server.conf.cloud.etc.data_structure.CloudResourceT;
 import server.conf.env_vars.EnvVars;
-import server.decorators.AppFile;
+import server.decorators.types.AppFile;
+import server.decorators.types.Dict;
 
 public interface CloudSvcUpload {
 
@@ -84,7 +85,7 @@ public interface CloudSvcUpload {
     final MultipartBodyBuilder form = buildForm(dataUpload);
 
     return getClient().post().uri(dataUpload.getUrl()).contentType(MediaType.MULTIPART_FORM_DATA)
-        .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Map.class)
+        .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Dict.class)
         .flatMap(map -> {
           final CloudAsset asset = CloudAsset.fromMap(map);
           return Mono.just(asset);

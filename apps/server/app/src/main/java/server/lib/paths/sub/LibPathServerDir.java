@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 
 public final class LibPathServerDir {
 

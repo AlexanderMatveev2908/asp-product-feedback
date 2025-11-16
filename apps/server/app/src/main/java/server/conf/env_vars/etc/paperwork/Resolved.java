@@ -14,9 +14,9 @@ import jakarta.validation.Payload;
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Resolved {
-    String message() default "val contains unresolved placeholder";
+    public abstract String message() default "field contains unresolved placeholder";
 
-    Class<?>[] groups() default {};
+    public abstract Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+    public abstract Class<? extends Payload>[] payload() default {};
 }

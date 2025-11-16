@@ -1,0 +1,44 @@
+package server.decorators.core.res_api.meta;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import server.decorators.types.Nullable;
+import server.paperwork.Reg;
+
+@Getter
+@RequiredArgsConstructor
+public enum MetaRes {
+    OK_200(200, "ok"),
+    OK_201(201, "ok 201"),
+
+    ERR_400(400, "bad request"),
+    ERR_401(401, "unauthorized"),
+    ERR_403(403, "forbidden"),
+    ERR_404(404, "not found"),
+    ERR_409(409, "conflict"),
+    ERR_422(422, "unprocessable entity"),
+    ERR_500(500, "A wild slime appeared! Server takes damage of 500 hp ⚔️");
+
+    private final int code;
+    private final String msg;
+
+    public static final Nullable<MetaRes> fromCode(int code) {
+        for (final MetaRes m : values())
+            if (m.code == code)
+                return Nullable.of(m);
+
+        return Nullable.asNone();
+    }
+
+    public static final String prettyMsg(Nullable<String> msg, int status) {
+        final String emj = ActT.emjFromStatus(status);
+        final String safeMsg = msg.orElse(
+                fromCode(status).orElse(MetaRes.ERR_500).getMsg());
+
+        final String prettyMsg = Reg.startsWithEmj(Nullable.of(safeMsg)) ? safeMsg
+                : String.format("%s %s", emj, safeMsg);
+
+        return prettyMsg;
+    }
+
+}

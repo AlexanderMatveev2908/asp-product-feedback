@@ -1,41 +1,38 @@
 package server.lib.dev.lib_log.sub;
 
+import server.decorators.types.Nullable;
+
 public class C_LibLogErr extends B_LibLogAio {
   public static final void logErr(Throwable err) {
     wErr(err);
 
     startLog();
 
-    if (err == null) {
-      logTtl("⚠️ passed null to logErr ⚠️");
-      return;
-    }
+    logHeader(Nullable.asNone());
 
-    logHeader(null);
-
-    System.out.println("\t");
+    tab();
 
     final StackTraceElement[] frames = err.getStackTrace();
 
     for (final StackTraceElement f : frames)
-      System.out.printf("📂 %s => 🔢 %d | 🆎 %s | ☢️ %s%n", f.getFileName(), f.getLineNumber(), f.getMethodName(),
+      stdOutF("📂 %s => 🔢 %d | 🆎 %s | ☢️ %s%n", f.getFileName(), f.getLineNumber(), f.getMethodName(),
           f.toString());
 
     final String msg = err.getMessage();
     final int depth = frames.length;
-    final StackTraceElement last = depth > 0 ? frames[0] : null;
+    final Nullable<StackTraceElement> last = depth > 0 ? Nullable.of(frames[0]) : Nullable.asNone();
 
-    System.out.println("\t");
-    System.out.printf("📝 msg => %s%n", msg);
-    System.out.printf("📏 depth => %d%n", depth);
+    tab();
 
-    if (last != null) {
-      System.out.printf("💥 last file => 📁 %s%n", last.getFileName());
-      System.out.printf("📏 last line => %d%n", last.getLineNumber());
-      System.out.printf("👻 last cb name => %s%n", last.getMethodName());
+    stdOutF("📝 msg => %s%n", msg);
+    stdOutF("📏 depth => %d%n", depth);
+
+    if (last.isPresent()) {
+      stdOutF("💥 last file => 📁 %s%n", last.orYell().getFileName());
+      stdOutF("📏 last line => %d%n", last.orYell().getLineNumber());
+      stdOutF("👻 last cb name => %s%n", last.orYell().getMethodName());
     }
 
     endLog();
-
   }
 }

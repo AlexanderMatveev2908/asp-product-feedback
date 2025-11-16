@@ -5,19 +5,19 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.decorators.flow.api.Api;
-import server.decorators.flow.res_api.ResAPI;
+import server.decorators.core.api.Api;
+import server.decorators.core.res_api.ResAPI;
 
 @Component
 @RequiredArgsConstructor
 public class GetTestCtrl {
 
     public final Mono<ResponseEntity<ResAPI>> getLimited(Api api) {
-        return new ResAPI(200).msg("get request limited 🚦").build();
+        return ResAPI.withStatus(200).msg("get request limited 🚦").build();
     }
 
     public final Mono<ResponseEntity<ResAPI>> getTest(Api api) {
-        return new ResAPI(200).msg("get request received 👻").build();
+        return ResAPI.withStatus(200).msg("get request received 👻").build();
     }
 
 }

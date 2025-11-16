@@ -1,16 +1,15 @@
 package server.middleware.err_mng.etc;
 
-import java.util.Optional;
-
 import org.springframework.web.server.ServerWebExchange;
 
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
+import server.decorators.types.Nullable;
 import server.paperwork.Reg;
 
 public final record RecMetaErr(String msg, int status) {
 
   private static final String getMsgFromErr(Throwable err, String originalMsg) {
-    return Reg.startsWithEmj(originalMsg) ? originalMsg
+    return Reg.startsWithEmj(Nullable.of(originalMsg)) ? originalMsg
         : String.format("%s %s", err instanceof ErrAPI ? "❌" : "💣", originalMsg);
   }
 
@@ -19,7 +18,7 @@ public final record RecMetaErr(String msg, int status) {
   }
 
   public static final RecMetaErr fromErr(ServerWebExchange exc, Throwable err) {
-    final String originalMsg = Optional.ofNullable(err.getMessage()).orElse("");
+    final String originalMsg = Nullable.of(err.getMessage()).orElse("");
     final RouteFlags flags = RouteFlags.fromMsg(originalMsg);
 
     return flags.isRouteIssue() ? new RecMetaErr(flags.getRouteErrMsg(exc), flags.getRouteErrStatus())

@@ -16,18 +16,21 @@ import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 import server.conf.cloud.CloudSvc;
 import server.conf.cloud.etc.data_structure.CloudAsset;
-import server.decorators.AppFile;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.api.Api;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.api.Api;
+import server.decorators.types.AppFile;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 
 @Service
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2" })
 public class PostFormSvc {
+  private static final boolean deleteUploads = true;
   private final CloudSvc cloud;
 
   @SuppressWarnings("unchecked")
-  private final Mono<List<CloudAsset>> reduceUploads(Map<String, Object> form) {
+  private final Mono<List<CloudAsset>> reduceUploads(Dict form) {
     final Set<String> assetKeys = Set.of("images", "videos");
     final List<Mono<CloudAsset>> promises = new ArrayList<>();
 
@@ -53,20 +56,22 @@ public class PostFormSvc {
   }
 
   public final Mono<Tuple2<Integer, Integer>> postForm(Api api) {
-    final var form = api.getParsedForm().orElse(null);
+    final Nullable<Dict> form = api.getParsedForm();
 
-    if (form == null)
+    if (form.isNone())
       return Mono.error(new ErrAPI("no form data", 400));
 
-    return reduceUploads(form).zipWhen(saved -> reduceDeletions(saved)).map(tpl -> {
-      final List<CloudAsset> saved = tpl.getT1();
-      final List<Integer> deleted = tpl.getT2();
+    return reduceUploads(form.orYell())
+        .zipWhen(saved -> deleteUploads ? reduceDeletions(saved) : Mono.just(List.of(0)))
+        .map(tpl -> {
+          final List<CloudAsset> saved = tpl.getT1();
+          final List<Integer> deleted = tpl.getT2();
 
-      final int savedCount = saved.size();
-      final int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
+          final int savedCount = saved.size();
+          final int deletedCount = deleted.stream().mapToInt(Integer::intValue).sum();
 
-      return Tuples.of(savedCount, deletedCount);
-    });
+          return Tuples.of(savedCount, deletedCount);
+        });
   }
 
 }

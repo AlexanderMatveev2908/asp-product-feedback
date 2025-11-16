@@ -10,7 +10,7 @@ import io.lettuce.core.ScoredValue;
 import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import server.decorators.flow.ErrAPI;
+import server.decorators.core.ErrAPI;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.lib_log.LibLog;
 
@@ -96,7 +96,7 @@ public final class RdCmd {
 
             default -> Mono.empty();
         })).collectMap(Map.Entry::getKey, Map.Entry::getValue).map(res -> {
-            System.out.println("🗃️ rd cache => ");
+            LibLog.stdOut("🗃️ rd cache => ");
             res.forEach((k, v) -> LibLog.logKV(k, v));
             return res;
         });

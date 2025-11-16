@@ -10,8 +10,10 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.decorators.flow.ErrAPI;
-import server.decorators.flow.api.Api;
+import server.decorators.core.ErrAPI;
+import server.decorators.core.api.Api;
+import server.decorators.types.Dict;
+import server.decorators.types.Nullable;
 
 @Service
 @RequiredArgsConstructor
@@ -22,12 +24,12 @@ public final class FormChecker {
         final Set<ConstraintViolation<T>> errs = checker.validate(form);
 
         if (errs.isEmpty())
-            return Mono.fromRunnable(() -> api.setMappedDataAttr(form));
+            return Mono.fromRunnable(() -> api.setTypedFormAttr(form));
 
         final List<Map<String, String>> errors = errs.stream()
                 .map(err -> Map.of("field", err.getPropertyPath().toString(), "msg", err.getMessage())).toList();
 
-        return Mono.error(new ErrAPI(errors.get(0).get("msg"), 422, Map.of("errs", errors)));
+        return Mono.error(new ErrAPI(errors.get(0).get("msg"), 422, Nullable.of(Dict.of("errs", errors))));
     }
 
 }
