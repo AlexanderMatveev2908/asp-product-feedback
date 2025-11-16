@@ -317,18 +317,18 @@ erDiagram
   }
 
   category_type {
-    enum ui
-    enum ux
-    enum feature
-    enum enhancement
-    enum bug
+    enum UI
+    enum UX
+    enum FEATURE
+    enum ENHANCEMENT
+    enum BUG
   }
 
   status_type {
-    enum suggestion
-    enum planned
-    enum in_progress
-    enum live
+    enum SUGGESTION
+    enum PLANNED
+    enum IN_PROGRESS
+    enum LIVE
   }
 
   feedbacks {

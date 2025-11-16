@@ -12,7 +12,7 @@ import server.models.feedbacks.Feedback;
 @Service
 @SuppressFBWarnings({ "EI2", "EI" })
 @RequiredArgsConstructor
-public class FeedbackSvc {
+public class FeedSvc {
   private final FeedRepo feedRepo;
 
   public final Mono<Feedback> insert(Feedback feedback) {

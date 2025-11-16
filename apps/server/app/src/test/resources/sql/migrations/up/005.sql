@@ -1,34 +1,35 @@
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'CATEGORY_TYPE') THEN
-        CREATE TYPE CATEGORY_TYPE AS ENUM (
-            'ui',
-            'ux',
-            'feature',
-            'enhancement',
-            'bug'
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'category_type') THEN
+        CREATE TYPE category_type AS ENUM (
+            'UI',
+            'UX',
+            'FEATURE',
+            'ENHANCEMENT',
+            'BUG'
         );
     END IF;
 END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'STATUS_TYPE') THEN
-        CREATE TYPE STATUS_TYPE AS ENUM (
-            'suggestion',
-            'planned',
-            'in_progress',
-            'live'
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'status_type') THEN
+        CREATE TYPE status_type AS ENUM (
+            'SUGGESTION',
+            'PLANNED',
+            'IN_PROGRESS',
+            'LIVE'
         );
     END IF;
 END$$;
+
 
 CREATE TABLE IF NOT EXISTS feedbacks (
   title VARCHAR(100) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   upvotes INTEGER NOT NULL DEFAULT 0,
-  category CATEGORY_TYPE NOT NULL,
-  status STATUS_TYPE NOT NULL DEFAULT 'suggestion'
+  category category_type NOT NULL,
+  status status_type NOT NULL DEFAULT 'suggestion'
 ) INHERITS (root_table);
 
 ALTER TABLE feedbacks

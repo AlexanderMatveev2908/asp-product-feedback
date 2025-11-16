@@ -5,10 +5,14 @@ import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import server.decorators.RootCls;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RootTable implements RootCls {
 
   @Id

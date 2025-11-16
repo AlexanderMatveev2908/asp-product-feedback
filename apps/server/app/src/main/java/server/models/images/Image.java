@@ -3,22 +3,24 @@ package server.models.images;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import server.models.RootTable;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table("images")
 public class Image extends RootTable {
 
   @Column("public_id")
-  private final String publicId;
+  private String publicId;
 
   @Column("url")
-  private final String url;
+  private String url;
 
   @Override
   public String toString() {

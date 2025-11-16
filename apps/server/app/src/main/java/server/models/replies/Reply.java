@@ -5,28 +5,30 @@ import java.util.UUID;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import server.models.RootTable;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table("replies")
 public class Reply extends RootTable {
 
   @Column("user_id")
-  private final UUID userId;
+  private UUID userId;
 
   @Column("replying_to")
-  private final UUID replyingTo;
+  private UUID replyingTo;
 
   @Column("comment_id")
-  private final UUID commentId;
+  private UUID commentId;
 
   @Column("content")
-  private final String content;
+  private String content;
 
   @Override
   public String toString() {

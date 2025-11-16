@@ -3,22 +3,24 @@ package server.models.users;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import server.models.RootTable;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table("users")
 public class User extends RootTable {
 
   @Column("name")
-  private final String name;
+  private String name;
 
   @Column("username")
-  private final String username;
+  private String username;
 
   @Override
   public String toString() {
