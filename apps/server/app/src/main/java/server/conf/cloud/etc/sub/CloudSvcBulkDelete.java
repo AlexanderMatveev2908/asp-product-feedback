@@ -13,6 +13,7 @@ import server.conf.env_vars.EnvVars;
 import server.decorators.core.ErrAPI;
 import server.decorators.types.Dict;
 
+@SuppressWarnings({ "PMD.AvoidInstantiatingObjectsInLoops" })
 public interface CloudSvcBulkDelete extends CloudSvcDelete {
   public abstract String genSign(Map<String, String> params);
 
