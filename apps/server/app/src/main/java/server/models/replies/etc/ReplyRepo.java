@@ -14,7 +14,7 @@ public interface ReplyRepo extends ReactiveCrudRepository<Reply, UUID> {
 
   @Query("""
       INSERT INTO replies (content, user_id, replying_to, comment_id)
-      VALUES (#:{#reply.content}, #:{#reply.userId}, :#{#reply.replyingTo}, #:{#reply.commentId})
+      VALUES (:#{#reply.content}, :#{#reply.userId}, :#{#reply.replyingTo}, :#{#reply.commentId})
       RETURNING *
       """)
   public Mono<Reply> insert(Reply reply);

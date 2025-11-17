@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
@@ -30,8 +31,12 @@ import server.models.feedbacks.etc.FeedSvc;
 import server.models.feedbacks.etc.types.FeedCatT;
 import server.models.images.Image;
 import server.models.images.etc.ImageSvc;
+import server.models.replies.Reply;
+import server.models.replies.etc.ReplySvc;
 import server.models.users.User;
 import server.models.users.etc.UserSvc;
+
+// ? 130/140 seconds required to generate mock data
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +49,7 @@ public class MockData {
   private final ImageSvc imageSvc;
   private final CommentSvc commentSvc;
   private final CloudSvc cloud;
+  private final ReplySvc replySvc;
 
   private final Mono<List<CloudAsset>> uploadImages() {
 
@@ -113,13 +119,65 @@ public class MockData {
 
   }
 
+  private final Mono<List<Reply>> insertReplies(User author, User recipient, Comment comment) {
+    final List<Mono<Reply>> promises = new ArrayList<>();
+
+    for (int i = 0; i < 3; i++) {
+      final Reply reply = new Reply(author.getId(),
+          recipient.getId(), comment.getId(), faker.lorem().maxLengthSentence(500));
+
+      promises.add(replySvc.insert(reply));
+    }
+
+    return Flux.merge(promises).collectList();
+  }
+
+  private final void appendRepliesPromises(Dict curr, Dict next, List<Mono<List<Reply>>> promises) {
+    final User author = curr.casting("user", User.class);
+    final User recipient = next.casting("user", User.class);
+    final List<?> nextComments = next.casting("comments", List.class);
+
+    for (int j = 0; j < nextComments.size(); j++) {
+      final Comment currComment;
+      if (nextComments.get(j) instanceof Comment inst)
+        currComment = inst;
+      else
+        throw new ErrAPI("expected a Comment instance");
+
+      @SuppressWarnings("unchecked")
+      Mono<List<Reply>> currPromises = insertReplies(author, recipient, currComment)
+          .doOnSuccess(generatedReplies -> {
+            if (!(curr.get("replies") instanceof List<?>))
+              curr.put("replies", new ArrayList<List<Reply>>());
+
+            List<List<Reply>> replies = (List<List<Reply>>) curr.casting("replies", List.class);
+            replies.add(generatedReplies);
+          });
+
+      promises.add(currPromises);
+    }
+  }
+
   public final void main() {
     LibLog.logTtl("⏳ start generating mock data");
 
     Mono<List<Dict>> job = uploadImages()
         .flatMapMany(Flux::fromIterable)
         .flatMap(asset -> insertPairUserImg(asset)).flatMap(dict -> insertFeedCommentsPairs(dict))
-        .collectList().cache();
+        .collectList().flatMap(list -> {
+
+          final List<Mono<List<Reply>>> promises = new ArrayList<>();
+          final int n = list.size();
+
+          for (int i = 0; i < n; i++) {
+            final Dict curr = list.get(i);
+            final Dict next = i + 1 >= n ? list.get(0) : list.get(i + 1);
+
+            appendRepliesPromises(curr, next, promises);
+          }
+
+          return Flux.merge(promises).collectList().thenReturn(list);
+        }).cache();
 
     timer(job);
 
