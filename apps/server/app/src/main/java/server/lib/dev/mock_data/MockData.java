@@ -70,7 +70,7 @@ public class MockData {
 
     Mono<List<Dict>> job = uploadImages()
         .flatMapMany(Flux::fromIterable)
-        .flatMap(asset -> {
+        .concatMap(asset -> {
           String randName = faker.name().fullName();
           String asUsername = randName.replaceAll("\\s+", ".").toLowerCase();
 
@@ -88,7 +88,7 @@ public class MockData {
                         "image", createdImage));
               });
         })
-        .collectList();
+        .collectList().cache();
 
     Flux.interval(Duration.ofSeconds(1))
         .takeUntilOther(job)
