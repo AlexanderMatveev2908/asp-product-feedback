@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
+import server.conf.cloud.CloudSvc;
+import server.lib.dev.lib_log.LibLog;
 import server.lib.dev.mock_data.MockData;
 
 @Service
@@ -11,9 +13,17 @@ import server.lib.dev.mock_data.MockData;
 @SuppressFBWarnings({ "EI2", "EI" })
 public final class LibDev {
     private final MockData mock;
+    private final CloudSvc cloud;
 
     public final void main() {
         mock.write();
+    }
+
+    public final void delAssetsCloud() {
+        cloud.delAssetsApp().subscribe(list -> {
+            LibLog.wOk(list);
+            LibLog.log(list);
+        });
     }
 }
 

@@ -28,6 +28,21 @@ public class Dict extends LinkedHashMap<String, Object> {
     return copy;
   }
 
+  @SuppressWarnings("unchecked")
+  public static final Dict castObj(Object obj) {
+    if (LibShape.isNone(obj))
+      throw new ErrAPI("tried to cast None to Dict");
+    if (!(obj instanceof Map<?, ?>))
+      throw new ErrAPI("tried to cast a non Map to Dict");
+
+    try {
+      Map<String, Object> m = (Map<String, Object>) obj;
+      return new Dict(m);
+    } catch (Exception err) {
+      throw new ErrAPI("wrongly casted unknown arg to Map");
+    }
+  }
+
   public final String valAsString(String key) {
     Object rawVal = get(key);
 

@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
-import server.conf.cloud.etc.sub.CloudSvcDelete;
+import server.conf.cloud.etc.sub.CloudSvcBulkDelete;
 import server.conf.cloud.etc.sub.CloudSvcUpload;
 import server.conf.env_vars.EnvVars;
 import server.decorators.core.ErrAPI;
@@ -19,7 +19,7 @@ import server.lib.data_structure.prs.LibPrs;
 @Service
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI" })
-public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
+public final class CloudSvc implements CloudSvcUpload, CloudSvcBulkDelete {
     private final WebClient.Builder webClientBuilder;
     private final EnvVars envKeeper;
 

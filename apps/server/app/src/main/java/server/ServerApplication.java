@@ -38,6 +38,7 @@ public class ServerApplication {
                 lifeSpawn.lifeCheck(e);
 
                 // libDev.main();
+                libDev.delAssetsCloud();
             } catch (final Exception err) {
                 LibLog.logErr(err);
             }
