@@ -55,7 +55,7 @@ public class MockData {
     }
   }
 
-  public final void write() {
+  public final void main() {
     uploadImages().subscribe(list -> {
       LibLog.wOk(list);
     });

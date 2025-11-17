@@ -60,7 +60,7 @@ public interface CloudSvcDelete {
         .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Dict.class)
         .flatMap(map -> {
           final String result = map.get("result").toString();
-          final int count = "ok".equals(result) ? 1 : 0;
+          final int count = "ok".equalsIgnoreCase(result) ? 1 : 0;
           return Mono.just(count);
         });
   }

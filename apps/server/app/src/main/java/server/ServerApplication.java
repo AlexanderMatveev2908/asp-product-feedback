@@ -37,8 +37,8 @@ public class ServerApplication {
             try {
                 lifeSpawn.lifeCheck(e);
 
-                // libDev.main();
-                libDev.delAssetsCloud();
+                // libDev.mockData();
+                // libDev.delAssetsCloud();
             } catch (final Exception err) {
                 LibLog.logErr(err);
             }

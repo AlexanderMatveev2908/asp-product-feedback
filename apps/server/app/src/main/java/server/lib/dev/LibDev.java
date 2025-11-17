@@ -16,7 +16,10 @@ public final class LibDev {
     private final CloudSvc cloud;
 
     public final void main() {
-        mock.write();
+    }
+
+    public final void mockData() {
+        mock.main();
     }
 
     public final void delAssetsCloud() {

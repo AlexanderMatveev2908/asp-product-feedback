@@ -27,6 +27,8 @@ public interface CloudSvcUpload {
 
   public abstract WebClient getClient();
 
+  public abstract String getFolderName(CloudResourceT t);
+
   default String getSignUpload(String tmsp, String folder, String publicId) {
     final Map<String, String> params = new HashMap<>();
     params.put("folder", folder);
@@ -36,15 +38,10 @@ public interface CloudSvcUpload {
     return genSign(params);
   }
 
-  private String getFolderName(AppFile appFile) {
-    final String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
-    return appSnakeName + "__" + appFile.getField().plural();
-  }
-
   private UploadData extractDataUpload(AppFile appFile) {
     final String cloudKey = getEnvKeeper().getCloudKey();
     final String tmsp = String.valueOf(Instant.now().getEpochSecond());
-    final String folder = getFolderName(appFile);
+    final String folder = getFolderName(appFile.getField());
 
     final String filename = appFile.getFilename();
     final String publicId = filename.substring(0, filename.lastIndexOf('.'));

@@ -20,9 +20,7 @@ public interface CloudSvcBulkDelete extends CloudSvcDelete {
 
   public abstract WebClient getClient();
 
-  private String folderName(CloudResourceT t) {
-    return getEnvKeeper().getAppName().replace("-", "_") + "__" + t.plural();
-  }
+  public abstract String getFolderName(CloudResourceT t);
 
   private Mono<Dict> getByPrefix(String prefix, CloudResourceT resourceType) {
     return getClient()
@@ -58,22 +56,28 @@ public interface CloudSvcBulkDelete extends CloudSvcDelete {
     return Flux.merge(promises).reduce(0, (acc, value) -> acc + value);
   }
 
-  default Mono<List<Integer>> delAssetsApp() {
-    final String imgPrefix = folderName(CloudResourceT.IMAGE);
-    final String vidPrefix = folderName(CloudResourceT.VIDEO);
+  private Mono<List<Dict>> fetchAll() {
+    final String imgPrefix = getFolderName(CloudResourceT.IMAGE);
+    final String vidPrefix = getFolderName(CloudResourceT.VIDEO);
 
     final Mono<Dict> imagesPromise = getByPrefix(imgPrefix, CloudResourceT.IMAGE);
     final Mono<Dict> videosPromise = getByPrefix(vidPrefix, CloudResourceT.VIDEO);
 
-    return Flux.concat(imagesPromise, videosPromise).collectList().flatMap(list -> {
-      Dict images = list.get(0);
-      Dict videos = list.get(1);
+    return Flux.concat(imagesPromise, videosPromise).collectList();
+  }
 
-      final Mono<Integer> imagesDeleted = delByPrefix(images);
-      final Mono<Integer> videosDeleted = delByPrefix(videos);
+  private Mono<List<Integer>> deleteAll(List<Dict> list) {
+    Dict images = list.get(0);
+    Dict videos = list.get(1);
 
-      return Flux.concat(imagesDeleted, videosDeleted).collectList();
-    });
+    final Mono<Integer> imagesDeleted = delByPrefix(images);
+    final Mono<Integer> videosDeleted = delByPrefix(videos);
+
+    return Flux.concat(imagesDeleted, videosDeleted).collectList();
+  }
+
+  default Mono<List<Integer>> delAssetsApp() {
+    return fetchAll().flatMap(list -> deleteAll(list));
   }
 
 }

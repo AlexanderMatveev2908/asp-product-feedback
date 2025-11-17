@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
+import server.conf.cloud.etc.data_structure.CloudResourceT;
 import server.conf.cloud.etc.sub.CloudSvcBulkDelete;
 import server.conf.cloud.etc.sub.CloudSvcUpload;
 import server.conf.env_vars.EnvVars;
@@ -26,6 +27,11 @@ public final class CloudSvc implements CloudSvcUpload, CloudSvcBulkDelete {
     // ? expected as abstract
     public final EnvVars getEnvKeeper() {
         return envKeeper;
+    }
+
+    public String getFolderName(CloudResourceT t) {
+        final String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
+        return appSnakeName + "__" + t.plural();
     }
 
     public final WebClient getClient() {
