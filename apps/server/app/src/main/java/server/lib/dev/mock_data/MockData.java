@@ -14,18 +14,26 @@ import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple4;
+import reactor.util.function.Tuples;
 import server.conf.cloud.CloudSvc;
 import server.conf.cloud.etc.data_structure.CloudAsset;
 import server.decorators.core.ErrAPI;
 import server.decorators.types.AppFile;
 import server.decorators.types.Dict;
 import server.decorators.types.Nullable;
+import server.lib.data_structure.LibRand;
 import server.lib.dev.LibFaker;
 import server.lib.dev.lib_log.LibLog;
 import server.lib.paths.LibPath;
+import server.models.comments.Comment;
+import server.models.comments.etc.CommentSvc;
+import server.models.feedbacks.Feedback;
 import server.models.feedbacks.etc.FeedSvc;
+import server.models.feedbacks.etc.types.FeedCatT;
+import server.models.feedbacks.etc.types.FeedStatT;
 import server.models.images.Image;
-import server.models.images.etc.ImageRepo;
+import server.models.images.etc.ImageSvc;
 import server.models.users.User;
 import server.models.users.etc.UserSvc;
 
@@ -37,7 +45,8 @@ public class MockData {
   private static final Faker faker = LibFaker.main();
   private final UserSvc userSvc;
   private final FeedSvc feedSvc;
-  private final ImageRepo imageRepo;
+  private final ImageSvc imageSvc;
+  private final CommentSvc commentSvc;
   private final CloudSvc cloud;
 
   private final Mono<List<CloudAsset>> uploadImages() {
@@ -65,34 +74,58 @@ public class MockData {
     }
   }
 
+  private final Mono<Dict> insertPairUserImg(CloudAsset asset) {
+    final String randName = faker.name().fullName();
+    final String asUsername = randName.replaceAll("\\s+", ".").toLowerCase();
+
+    final User newUser = new User(randName, asUsername);
+
+    return userSvc.insert(newUser)
+        .flatMap(createdUser -> {
+          final Image newImage = new Image(
+              asset.getPublicId(),
+              asset.getUrl(),
+              createdUser.getId());
+          return imageSvc.insert(newImage)
+              .map(createdImage -> Dict.of("user", createdUser, "image", createdImage));
+        });
+  }
+
+  private final Mono<Dict> insertFeedCommentsPairs(Dict dict) {
+    final Feedback feed = new Feedback(faker.lorem().sentence(), faker.lorem().maxLengthSentence(500),
+        LibRand.choiceIn(FeedCatT.values()));
+    return feedSvc.insert(feed).flatMap(createdFeed -> {
+      final List<Mono<Comment>> promises = new ArrayList<>();
+
+      for (int i = 0; i < 3; i++) {
+        final Comment randComment = new Comment(faker.lorem().maxLengthSentence(500),
+            dict.casting("user", User.class).getId(),
+            createdFeed.getId());
+        promises.add(commentSvc.insert(randComment));
+      }
+
+      return Flux.merge(promises).collectList()
+          .map(createdComments -> dict.mergeWith(Dict.of("feedback", createdFeed,
+              "comments", createdComments)));
+    });
+  }
+
+  private final void timer(Mono<?> job) {
+    Flux.interval(Duration.ofSeconds(1))
+        .takeUntilOther(job)
+        .subscribe(sec -> LibLog.stdOut("⏳ generating mock data... " + (sec + 1) + "s"));
+
+  }
+
   public final void main() {
     LibLog.logTtl("⏳ start generating mock data");
 
     Mono<List<Dict>> job = uploadImages()
         .flatMapMany(Flux::fromIterable)
-        .concatMap(asset -> {
-          String randName = faker.name().fullName();
-          String asUsername = randName.replaceAll("\\s+", ".").toLowerCase();
-
-          User newUser = new User(randName, asUsername);
-
-          return userSvc.insert(newUser)
-              .flatMap(createdUser -> {
-                Image newImage = new Image(
-                    asset.getPublicId(),
-                    asset.getUrl(),
-                    createdUser.getId());
-                return imageRepo.insert(newImage)
-                    .map(createdImage -> Dict.of(
-                        "user", createdUser,
-                        "image", createdImage));
-              });
-        })
+        .flatMap(asset -> insertPairUserImg(asset)).flatMap(dict -> insertFeedCommentsPairs(dict))
         .collectList().cache();
 
-    Flux.interval(Duration.ofSeconds(1))
-        .takeUntilOther(job)
-        .subscribe(sec -> LibLog.stdOut("⏳ generating mock data... " + (sec + 1) + "s"));
+    timer(job);
 
     job.subscribe(
         res -> {
