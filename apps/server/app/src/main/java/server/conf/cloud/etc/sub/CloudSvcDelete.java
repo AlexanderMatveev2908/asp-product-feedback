@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import reactor.core.publisher.Mono;
 import server.conf.env_vars.EnvVars;
-import server.lib.dev.lib_log.LibLog;
+import server.decorators.types.Dict;
 
 public interface CloudSvcDelete {
 
@@ -57,11 +57,10 @@ public interface CloudSvcDelete {
     final MultipartBodyBuilder form = buildForm(deleteData);
 
     return getClient().post().uri(deleteData.getUrl()).contentType(MediaType.MULTIPART_FORM_DATA)
-        .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Map.class)
+        .body(BodyInserters.fromMultipartData(form.build())).retrieve().bodyToMono(Dict.class)
         .flatMap(map -> {
           final String result = map.get("result").toString();
-          final int count = "ok".equals(result) ? 1 : 0;
-          LibLog.log(String.format("✂️ deleted %d %s", count, resourceType));
+          final int count = "ok".equalsIgnoreCase(result) ? 1 : 0;
           return Mono.just(count);
         });
   }

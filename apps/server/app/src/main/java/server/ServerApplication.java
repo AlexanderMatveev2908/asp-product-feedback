@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import lombok.RequiredArgsConstructor;
 import server.decorators.etc.LifeSpawn;
+import server.lib.dev.LibDev;
 import server.lib.dev.lib_log.LibLog;
 
 @SpringBootApplication
@@ -17,13 +18,14 @@ import server.lib.dev.lib_log.LibLog;
 public class ServerApplication {
 
     private final LifeSpawn lifeSpawn;
-    // private final LibDev libDev;
+    @SuppressWarnings("unused")
+    private final LibDev libDev;
 
     public static final void main(String[] args) {
 
         try {
             SpringApplication.run(ServerApplication.class, args);
-        } catch (Exception err) {
+        } catch (final Exception err) {
             LibLog.logErr(err);
         }
     }
@@ -35,8 +37,10 @@ public class ServerApplication {
             try {
                 lifeSpawn.lifeCheck(e);
 
-                // libDev.main();
-            } catch (Exception err) {
+                // ? 130/140 seconds required to generate mock data
+                // libDev.mockData();
+                // libDev.delAssetsCloud();
+            } catch (final Exception err) {
                 LibLog.logErr(err);
             }
 

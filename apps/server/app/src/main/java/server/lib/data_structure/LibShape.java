@@ -36,7 +36,7 @@ public final class LibShape {
             UUID.fromString(arg);
 
             return res;
-        } catch (Exception err) {
+        } catch (final Exception err) {
             return false;
         }
     }

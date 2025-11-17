@@ -24,7 +24,7 @@ public final class EnvLoader implements EnvironmentPostProcessor {
         final Path certPath = LibPath.CA_FILE;
         try {
             Files.write(certPath, HexFormat.of().parseHex(supabaseCa));
-        } catch (Exception err) {
+        } catch (final Exception err) {
             LibLog.logErr(err);
             throw new ErrAPI("missing db ca");
         }

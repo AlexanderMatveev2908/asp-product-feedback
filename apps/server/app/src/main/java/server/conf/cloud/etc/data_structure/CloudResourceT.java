@@ -12,11 +12,19 @@ public enum CloudResourceT {
 
     private final String val;
 
-    public static final String fromFileField(String field) {
+    public static final CloudResourceT fromFileField(String field) {
         return switch (field) {
-            case "images" -> IMAGE.getVal();
-            case "videos" -> VIDEO.getVal();
+            case "images" -> IMAGE;
+            case "videos" -> VIDEO;
             default -> throw new ErrAPI("field not supported => " + field);
         };
+    }
+
+    public final String plural() {
+        return val + "s";
+    }
+
+    public final boolean isImage() {
+        return this == IMAGE;
     }
 }

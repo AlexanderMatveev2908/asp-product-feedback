@@ -10,7 +10,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
-import server.conf.cloud.etc.sub.CloudSvcDelete;
+import server.conf.cloud.etc.data_structure.CloudResourceT;
+import server.conf.cloud.etc.sub.CloudSvcBulkDelete;
 import server.conf.cloud.etc.sub.CloudSvcUpload;
 import server.conf.env_vars.EnvVars;
 import server.decorators.core.ErrAPI;
@@ -19,13 +20,18 @@ import server.lib.data_structure.prs.LibPrs;
 @Service
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI" })
-public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
+public final class CloudSvc implements CloudSvcUpload, CloudSvcBulkDelete {
     private final WebClient.Builder webClientBuilder;
     private final EnvVars envKeeper;
 
     // ? expected as abstract
     public final EnvVars getEnvKeeper() {
         return envKeeper;
+    }
+
+    public String getFolderName(CloudResourceT t) {
+        final String appSnakeName = getEnvKeeper().getAppName().replace("-", "_");
+        return appSnakeName + "__" + t.plural();
     }
 
     public final WebClient getClient() {
@@ -50,7 +56,7 @@ public final class CloudSvc implements CloudSvcUpload, CloudSvcDelete {
             final String sig = HexFormat.of().formatHex(digest);
 
             return sig;
-        } catch (Exception err) {
+        } catch (final Exception err) {
             throw new ErrAPI("err creating cloud sign");
         }
     }

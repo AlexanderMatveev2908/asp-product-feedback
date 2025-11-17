@@ -28,6 +28,51 @@ public class Dict extends LinkedHashMap<String, Object> {
     return copy;
   }
 
+  @SuppressWarnings("unchecked")
+  public static final Dict castObj(Object obj) {
+    if (LibShape.isNone(obj))
+      throw new ErrAPI("tried to cast None to Dict");
+    if (!(obj instanceof Map<?, ?>))
+      throw new ErrAPI("tried to cast a non Map to Dict");
+
+    try {
+      Map<String, Object> m = (Map<String, Object>) obj;
+      return new Dict(m);
+    } catch (Exception err) {
+      throw new ErrAPI("wrongly casted unknown arg to Map");
+    }
+  }
+
+  public final <T> T casting(String key, Class<T> cls) {
+    try {
+      Nullable<?> asNullable = Nullable.of(get(key));
+
+      if (asNullable.isNone())
+        throw new ErrAPI("tried to cast None to Class => " + cls.getSimpleName());
+
+      Object val = asNullable.orYell();
+
+      if (!cls.isInstance(val))
+        throw new ErrAPI("tried to cast value to wrong class");
+
+      return cls.cast(val);
+    } catch (Exception err) {
+      throw new ErrAPI("wrongly casted value to => " + cls.getSimpleName());
+    }
+  }
+
+  public final Dict mergeWith(Dict other) {
+    Dict merged = new Dict();
+
+    if (LibShape.isNone(other))
+      throw new ErrAPI("tried to merge a Dict with None");
+
+    merged.putAll(this);
+    merged.putAll(other);
+
+    return merged;
+  }
+
   public final String valAsString(String key) {
     Object rawVal = get(key);
 

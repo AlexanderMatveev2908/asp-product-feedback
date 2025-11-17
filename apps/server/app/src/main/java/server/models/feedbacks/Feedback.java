@@ -33,12 +33,12 @@ public final class Feedback extends RootTable {
   @Column("upvotes")
   private int upvotes;
 
-  public Feedback(String title, String description, FeedCatT category, FeedStatT status) {
+  public Feedback(String title, String description, FeedCatT category) {
     this.title = title;
     this.description = description;
     this.upvotes = 0;
     this.category = category;
-    this.status = status;
+    this.status = FeedStatT.SUGGESTION;
   }
 
   @Override
