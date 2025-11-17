@@ -2,6 +2,7 @@ package server.lib.dev.mock_data;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -67,20 +68,39 @@ public class MockData {
   public final void main() {
     LibLog.logTtl("⏳ start generating mock data");
 
-    uploadImages().flatMapMany(Flux::fromIterable).flatMap(asset -> {
-      String randName = faker.name().fullName();
-      String asUsername = randName.replaceAll("\\s+", ".").toLowerCase();
+    Mono<List<Dict>> job = uploadImages()
+        .flatMapMany(Flux::fromIterable)
+        .flatMap(asset -> {
+          String randName = faker.name().fullName();
+          String asUsername = randName.replaceAll("\\s+", ".").toLowerCase();
 
-      User newUser = new User(randName, asUsername);
-      return userSvc.insert(newUser).flatMap(createdUser -> {
-        Image newImage = new Image(asset.getPublicId(), asset.getUrl(), createdUser.getId());
-        return imageRepo.insert(newImage).map(createdImage -> Dict.of("user", createdUser, "image", createdImage));
-      });
-    }).collectList().subscribe(res -> {
-      LibLog.logTtl("🎉 generated mock data");
-      LibLog.wOk(res);
-    }, err -> {
-      LibLog.logErr(err);
-    });
+          User newUser = new User(randName, asUsername);
+
+          return userSvc.insert(newUser)
+              .flatMap(createdUser -> {
+                Image newImage = new Image(
+                    asset.getPublicId(),
+                    asset.getUrl(),
+                    createdUser.getId());
+                return imageRepo.insert(newImage)
+                    .map(createdImage -> Dict.of(
+                        "user", createdUser,
+                        "image", createdImage));
+              });
+        })
+        .collectList();
+
+    Flux.interval(Duration.ofSeconds(1))
+        .takeUntilOther(job)
+        .subscribe(sec -> LibLog.stdOut("⏳ generating mock data... " + (sec + 1) + "s"));
+
+    job.subscribe(
+        res -> {
+          LibLog.logTtl("🎉 generated mock data");
+          LibLog.wOk(res);
+        },
+        err -> {
+          LibLog.logErr(err);
+        });
   }
 }
