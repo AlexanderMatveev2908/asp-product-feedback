@@ -38,7 +38,7 @@ public class ServerApplication {
                 lifeSpawn.lifeCheck(e);
 
                 // ? 130/140 seconds required to generate mock data
-                libDev.mockData();
+                // libDev.mockData();
                 // libDev.delAssetsCloud();
             } catch (final Exception err) {
                 LibLog.logErr(err);
