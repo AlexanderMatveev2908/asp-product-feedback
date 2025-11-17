@@ -8,7 +8,7 @@ public class C_LibLogErr extends B_LibLogAio {
 
     startLog();
 
-    logHeader(Nullable.asNone());
+    logHeader(null);
 
     tab();
 

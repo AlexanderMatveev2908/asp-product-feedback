@@ -45,11 +45,11 @@ public class A_LibLogBase {
         tab();
     }
 
-    protected static final void logHeader(Nullable<String> title) {
+    protected static final void logHeader(String title) {
         final RecMainLog mainInfo = getMainLogInfo();
 
         stdOutF("⏰ %s • 🗃️ %s • %s", mainInfo.time(), mainInfo.fileName(),
-                title.isPresent() ? "📌 " + title : "🧵 " + mainInfo.thread());
+                Nullable.of(title).isPresent() ? "📌 " + title : "🧵 " + mainInfo.thread());
         tab();
     }
 
