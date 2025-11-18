@@ -36,7 +36,7 @@ import server.models.users.etc.UserSvc;
 @Service
 @Transactional
 @RequiredArgsConstructor
-@SuppressFBWarnings({ "EI2", "EI" })
+@SuppressFBWarnings({ "EI2", "EI", "NP" })
 public class UserRandSvc {
   private final static Faker faker = LibFaker.main();
   private final UserSvc userSvc;

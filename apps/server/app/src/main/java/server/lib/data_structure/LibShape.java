@@ -54,4 +54,17 @@ public final class LibShape {
 
         return false;
     }
+
+    public static final boolean isPrim(Object arg) {
+        if (isNone(arg))
+            return false;
+
+        final Class<?> type = arg.getClass();
+
+        return type.isPrimitive()
+                || arg instanceof String
+                || arg instanceof Number
+                || arg instanceof Boolean
+                || arg instanceof Enum<?>;
+    }
 }

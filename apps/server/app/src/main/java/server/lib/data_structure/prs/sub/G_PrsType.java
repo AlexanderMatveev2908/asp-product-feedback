@@ -32,6 +32,28 @@ public class G_PrsType extends F_PrsCases {
     }
   }
 
+  private static final Object convertArray(Object val, Set<Object> visited) {
+    final int len = Array.getLength(val);
+    final List<Object> list = new ArrayList<>();
+    for (int i = 0; i < len; i++)
+      list.add(convertValue(Array.get(val, i), visited));
+    return list;
+  }
+
+  private static final Object convertCollection(Collection<?> col, Set<Object> visited) {
+    final List<Object> list = new ArrayList<>();
+    for (Object item : col)
+      list.add(convertValue(item, visited));
+    return list;
+  }
+
+  private static final Object convertMap(Map<?, ?> map, Set<Object> visited) {
+    final Dict d = new Dict();
+    for (final Map.Entry<?, ?> pair : map.entrySet())
+      d.put(String.valueOf(pair.getKey()), convertValue(pair.getValue(), visited));
+    return d;
+  }
+
   private static Object convertValue(Object val, Set<Object> visited) {
     if (val == null)
       return null;
@@ -41,34 +63,17 @@ public class G_PrsType extends F_PrsCases {
 
     final Class<?> type = val.getClass();
 
-    if (type.isPrimitive()
-        || val instanceof String
-        || val instanceof Number
-        || val instanceof Boolean
-        || val instanceof Enum<?>)
+    if (LibShape.isPrim(val))
       return val;
 
-    if (type.isArray()) {
-      final int len = Array.getLength(val);
-      final List<Object> list = new ArrayList<>();
-      for (int i = 0; i < len; i++)
-        list.add(convertValue(Array.get(val, i), visited));
-      return list;
-    }
+    if (type.isArray())
+      return convertArray(val, visited);
 
-    if (val instanceof final Collection<?> col) {
-      final List<Object> list = new ArrayList<>();
-      for (Object item : col)
-        list.add(convertValue(item, visited));
-      return list;
-    }
+    if (val instanceof final Collection<?> col)
+      return convertCollection(col, visited);
 
-    if (val instanceof final Map<?, ?> map) {
-      final Dict d = new Dict();
-      for (final Map.Entry<?, ?> pair : map.entrySet())
-        d.put(String.valueOf(pair.getKey()), convertValue(pair.getValue(), visited));
-      return d;
-    }
+    if (val instanceof final Map<?, ?> map)
+      return convertMap(map, visited);
 
     return dictFromT(val, visited);
   }
