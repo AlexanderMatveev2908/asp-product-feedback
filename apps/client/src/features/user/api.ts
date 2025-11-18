@@ -1,12 +1,21 @@
+import { ObsResT } from '@/core/store/api/etc/types';
 import { UseApiSvc } from '@/core/store/api/use_api';
-import { ResApiT } from '@/core/store/api/etc/types';
-import { LibApiArgs } from '@/core/store/api/etc/lib/api_args';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { UserT } from '../feedbacks/etc/types';
+import { LibApiArgs } from '@/core/store/api/etc/lib/api_args';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserApiSvc {
+  private readonly base: string = '/user';
   private readonly api: UseApiSvc = inject(UseApiSvc);
+
+  public getRandomUser(): ObsResT<{ user: UserT }> {
+    return this.api.get(
+      LibApiArgs.withURL(`${this.base}/random`)
+        .toastOnFulfilled()
+        .toastOkMsg('anonymous user generated')
+    );
+  }
 }

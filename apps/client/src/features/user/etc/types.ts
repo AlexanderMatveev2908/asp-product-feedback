@@ -1,6 +1,6 @@
 import { ImageT } from '@/features/feedbacks/etc/types';
 
-export interface User {
+export interface UserT {
   name: string;
   username: string;
   image: ImageT;

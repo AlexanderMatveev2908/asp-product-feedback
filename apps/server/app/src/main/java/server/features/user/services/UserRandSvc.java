@@ -23,6 +23,7 @@ import server.decorators.types.Dict;
 import server.lib.data_structure.LibRand;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.LibFaker;
+import server.lib.dev.lib_log.LibLog;
 import server.lib.paths.LibPath;
 import server.models.images.Image;
 import server.models.images.etc.ImageSvc;
@@ -78,6 +79,13 @@ public class UserRandSvc {
   }
 
   public Mono<Dict> main(Api api) {
-    return newRandomUser().map(tpl -> Dict.of("user", tpl.getT1(), "image", tpl.getT2()));
+    return newRandomUser().map(tpl -> {
+      Dict clientDict = new Dict();
+      clientDict.putAll(Dict.fromT(tpl.getT1()));
+      clientDict.put("image", tpl.getT2());
+
+      LibLog.log(clientDict);
+      return Dict.of("user", clientDict);
+    });
   }
 }

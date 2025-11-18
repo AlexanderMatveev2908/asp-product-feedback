@@ -4,7 +4,7 @@ import { getUserState } from './reducer/selectors';
 import { UserActT } from './reducer/actions';
 import { UseKitSliceSvc } from '@/core/services/use_kit_slice';
 import { Nullable } from '@/common/types/etc';
-import { User } from './etc/types';
+import { UserT } from './etc/types';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,11 @@ export class UserSlice extends UseKitSliceSvc {
     return this.store.selectSignal(getUserState);
   }
 
-  public readonly user: Signal<Nullable<User>> = computed(() => this.userState().user);
+  public readonly user: Signal<Nullable<UserT>> = computed(() => this.userState().user);
 
-  public setUser(user: User): void {
+  public setUser(user: UserT): void {
     this.store.dispatch(UserActT.SET_USER(user));
+    this.useStorage.setItem('user', user);
   }
 
   public reset(): void {

@@ -21,13 +21,10 @@ export type ImageT = SqlTableT<{
   url: string;
 }>;
 
-// ? after Java server build endpoint this dev type will be removed 🛠️
-export type ImageDevT = string;
-
 export type UserT = SqlTableT<{
   name: string;
   username: string;
-  image: ImageT | ImageDevT;
+  image: ImageT;
 }>;
 
 export type ReplyT = SqlTableT<{

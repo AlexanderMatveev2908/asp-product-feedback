@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import server.decorators.core.ErrAPI;
 import server.lib.data_structure.LibMemory;
 import server.lib.data_structure.LibShape;
+import server.lib.data_structure.prs.LibPrs;
 
 // ? wrote it just because is shorter than writing every time Map<String,Object> for every
 // ? generic map i need when type is not even strictly necessary
@@ -41,6 +42,10 @@ public class Dict extends LinkedHashMap<String, Object> {
     } catch (Exception err) {
       throw new ErrAPI("wrongly casted unknown arg to Map");
     }
+  }
+
+  public static final <T> Dict fromT(T obj) {
+    return LibPrs.dictFromT(obj);
   }
 
   public final <T> T casting(String key, Class<T> cls) {
