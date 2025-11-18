@@ -6,12 +6,14 @@ import {
 } from '@/features/sidebar_mobile/reducer/reducer';
 import { toastReducer, ToastStateT } from '@/features/toast/reducer/reducer';
 import { ActionReducerMap } from '@ngrx/store';
+import { userReducer, UserStateT } from '@/features/user/reducer/reducer';
 
 export interface StoreStateT {
   toast: ToastStateT;
   notice: NoticeStateT;
   sidebarMobile: SidebarMobileStateT;
   feedbacks: FeedbacksStateT;
+  user: UserStateT;
 }
 
 export const rootReducer: ActionReducerMap<StoreStateT> = {
@@ -19,4 +21,5 @@ export const rootReducer: ActionReducerMap<StoreStateT> = {
   notice: noticeReducer,
   sidebarMobile: sidebarMobileReducer,
   feedbacks: feedbacksReducer,
+  user: userReducer,
 };

@@ -1,9 +1,20 @@
 import { Nullable, OrNone } from '@/common/types/etc';
 import { SqlTableT } from '@/core/store/api/etc/types';
 
-export type FeedbackCatT = 'ui' | 'ux' | 'feature' | 'enhancement' | 'bug';
+export enum FeedbackCatT {
+  UI = 'UI',
+  UX = 'UX',
+  FEATURE = 'FEATURE',
+  ENHANCEMENT = 'ENHANCEMENT',
+  BUG = 'BUG',
+}
 
-export type FeedbackStatusT = 'suggestion' | 'planned' | 'in_progress' | 'live';
+export enum FeedbackStatusT {
+  SUGGESTION = 'SUGGESTION',
+  PLANNED = 'PLANNED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  LIVE = 'LIVE',
+}
 
 export type ImageT = SqlTableT<{
   publicId: string;
