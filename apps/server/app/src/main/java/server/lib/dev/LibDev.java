@@ -19,7 +19,14 @@ public final class LibDev {
     }
 
     public final void mockData() {
-        mock.main();
+        mock.main().subscribe(
+                res -> {
+                    LibLog.logTtl("🎉 generated mock data");
+                    LibLog.wOk(res);
+                },
+                err -> {
+                    LibLog.logErr(err);
+                });
     }
 
     public final void delAssetsCloud() {

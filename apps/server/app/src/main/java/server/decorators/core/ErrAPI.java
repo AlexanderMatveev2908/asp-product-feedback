@@ -4,6 +4,7 @@ import lombok.Getter;
 import server.decorators.etc.RootCls;
 import server.decorators.types.Dict;
 import server.decorators.types.Nullable;
+import server.paperwork.Reg;
 
 @Getter
 public final class ErrAPI extends RuntimeException implements RootCls {
@@ -13,7 +14,7 @@ public final class ErrAPI extends RuntimeException implements RootCls {
     private final Nullable<Dict> data;
 
     public ErrAPI(String msg, int status, Nullable<Dict> data) {
-        super("❌ " + msg);
+        super(Reg.startsWithEmj(Nullable.of(msg)) ? msg : "❌ " + msg);
         this.msg = super.getMessage();
         this.status = status;
         this.data = data;

@@ -18,7 +18,7 @@ import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
 
 @Component
-@SuppressFBWarnings({ "EI2" })
+@SuppressFBWarnings({ "EI2", "EI" })
 public final class RateLimitSvc {
     private final RedisReactiveCommands<String, String> cmd;
     private final EnvVars envKeeper;

@@ -22,4 +22,8 @@ public final class UserSvc {
   public final Mono<User> byId(UUID id) {
     return userRepo.findById(id);
   }
+
+  public final Mono<User> byUsername(String arg) {
+    return userRepo.byUsername(arg);
+  }
 }

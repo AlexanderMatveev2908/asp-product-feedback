@@ -5,6 +5,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class LibRand {
 
+  public static final int intTill(int max) {
+    return ThreadLocalRandom.current().nextInt(max);
+  }
+
   public static final <T> T choiceIn(List<T> args) {
     // ! nextInt is already exclusive max
     // ! so no need of -1

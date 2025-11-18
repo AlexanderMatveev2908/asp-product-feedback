@@ -33,4 +33,8 @@ public final class LibPrs extends F_PrsCases {
 
         return dict;
     }
+
+    public static final String asUsername(String arg) {
+        return arg.replaceAll("\\s+", ".").toLowerCase();
+    }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import server.decorators.core.ErrAPI;
 import server.decorators.types.AppFile;
 import server.decorators.types.Dict;
 import server.lib.data_structure.LibRand;
+import server.lib.data_structure.LibRuntime;
+import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.LibFaker;
 import server.lib.dev.lib_log.LibLog;
 import server.lib.paths.LibPath;
@@ -37,6 +40,7 @@ import server.models.users.etc.UserSvc;
 
 // ? 130/140 seconds required to generate mock data
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI", "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" })
@@ -50,7 +54,7 @@ public class MockData {
   private final CloudSvc cloud;
   private final ReplySvc replySvc;
 
-  private final Mono<List<CloudAsset>> uploadImages() {
+  private Mono<List<CloudAsset>> uploadImages() {
 
     final Path dirUsers = LibPath.IMAGES_DIR.resolve("users");
     if (!Files.isDirectory(dirUsers))
@@ -75,9 +79,9 @@ public class MockData {
     }
   }
 
-  private final Mono<Dict> insertPairUserImg(CloudAsset asset) {
+  private Mono<Dict> insertPairUserImg(CloudAsset asset) {
     final String randName = faker.name().fullName();
-    final String asUsername = randName.replaceAll("\\s+", ".").toLowerCase();
+    final String asUsername = LibPrs.asUsername(randName);
 
     final User newUser = new User(randName, asUsername);
 
@@ -92,7 +96,7 @@ public class MockData {
         });
   }
 
-  private final Mono<Dict> insertFeedCommentsPairs(Dict dict) {
+  private Mono<Dict> insertFeedCommentsPairs(Dict dict) {
     final Feedback feed = new Feedback(faker.lorem().sentence(), faker.lorem().maxLengthSentence(500),
         LibRand.choiceIn(FeedCatT.values()));
     return feedSvc.insert(feed).flatMap(createdFeed -> {
@@ -111,14 +115,7 @@ public class MockData {
     });
   }
 
-  private final void timer(Mono<?> job) {
-    Flux.interval(Duration.ofSeconds(1))
-        .takeUntilOther(job)
-        .subscribe(sec -> LibLog.stdOut("⏳ generating mock data... " + (sec + 1) + "s"));
-
-  }
-
-  private final Mono<List<Reply>> insertReplies(User author, User recipient, Comment comment) {
+  private Mono<List<Reply>> insertReplies(User author, User recipient, Comment comment) {
     final List<Mono<Reply>> promises = new ArrayList<>();
 
     for (int i = 0; i < 2; i++) {
@@ -131,7 +128,7 @@ public class MockData {
     return Flux.merge(promises).collectList();
   }
 
-  private final void appendRepliesPromises(Dict curr, Dict next, List<Mono<List<Reply>>> promises) {
+  private void appendRepliesPromises(Dict curr, Dict next, List<Mono<List<Reply>>> promises) {
     final User author = curr.casting("user", User.class);
     final User recipient = next.casting("user", User.class);
     final List<?> nextComments = next.casting("comments", List.class);
@@ -157,7 +154,7 @@ public class MockData {
     }
   }
 
-  public final void main() {
+  public Mono<List<Dict>> main() {
     LibLog.logTtl("⏳ start generating mock data");
 
     Mono<List<Dict>> job = uploadImages()
@@ -178,15 +175,8 @@ public class MockData {
           return Flux.merge(promises).collectList().thenReturn(list);
         }).cache();
 
-    timer(job);
+    LibRuntime.timer(job);
 
-    job.subscribe(
-        res -> {
-          LibLog.logTtl("🎉 generated mock data");
-          LibLog.wOk(res);
-        },
-        err -> {
-          LibLog.logErr(err);
-        });
+    return job;
   }
 }

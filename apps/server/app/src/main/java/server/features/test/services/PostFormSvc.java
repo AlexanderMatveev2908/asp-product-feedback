@@ -23,7 +23,7 @@ import server.decorators.types.Nullable;
 
 @Service
 @RequiredArgsConstructor
-@SuppressFBWarnings({ "EI2" })
+@SuppressFBWarnings({ "EI2", "EI" })
 public class PostFormSvc {
   private static final boolean deleteUploads = true;
   private final CloudSvc cloud;
