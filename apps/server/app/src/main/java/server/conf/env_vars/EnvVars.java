@@ -61,6 +61,10 @@ public final class EnvVars {
         return EnvModeT.fromValue(this.envMode);
     }
 
+    public final boolean isProd() {
+        return getMode() == EnvModeT.PROD;
+    }
+
     public final String getFrontUrl() {
         return switch (getMode()) {
             case DEV -> frontUrlDev;

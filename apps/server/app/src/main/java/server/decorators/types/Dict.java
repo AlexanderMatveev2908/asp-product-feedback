@@ -48,6 +48,10 @@ public class Dict extends LinkedHashMap<String, Object> {
     return LibPrs.dictFromT(obj);
   }
 
+  public final <T> T toT(Class<T> cls) {
+    return LibPrs.tFromDict(this, cls);
+  }
+
   public final <T> T casting(String key, Class<T> cls) {
     try {
       Nullable<?> asNullable = Nullable.of(get(key));
