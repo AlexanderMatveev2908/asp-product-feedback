@@ -121,7 +121,7 @@ public class MockData {
   private final Mono<List<Reply>> insertReplies(User author, User recipient, Comment comment) {
     final List<Mono<Reply>> promises = new ArrayList<>();
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       final Reply reply = new Reply(author.getId(),
           recipient.getId(), comment.getId(), faker.lorem().maxLengthSentence(500));
 
