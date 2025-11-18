@@ -1,5 +1,6 @@
 import { Nullable, OrNone } from '@/common/types/etc';
 import { SqlTableT } from '@/core/store/api/etc/types';
+import { UserT } from '@/features/user/etc/types';
 
 export enum FeedbackCatT {
   UI = 'UI',
@@ -19,12 +20,6 @@ export enum FeedbackStatusT {
 export type ImageT = SqlTableT<{
   publicId: string;
   url: string;
-}>;
-
-export type UserT = SqlTableT<{
-  name: string;
-  username: string;
-  image: ImageT;
 }>;
 
 export type ReplyT = SqlTableT<{

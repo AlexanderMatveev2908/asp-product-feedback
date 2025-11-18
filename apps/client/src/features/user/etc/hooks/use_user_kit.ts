@@ -6,6 +6,6 @@ import { UserApiSvc } from '../../api';
   providedIn: 'root',
 })
 export class UseUserKitSvc {
-  public readonly userSlice: UserSlice = inject(UserSlice);
-  public readonly userApi: UserApiSvc = inject(UserApiSvc);
+  public readonly slice: UserSlice = inject(UserSlice);
+  public readonly api: UserApiSvc = inject(UserApiSvc);
 }
