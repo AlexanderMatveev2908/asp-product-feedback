@@ -17,15 +17,14 @@ import server.decorators.core.res_api.data_structure.ResApiJson;
 import server.decorators.core.res_api.meta.MetaRes;
 import server.decorators.types.Dict;
 import server.decorators.types.Nullable;
-import server.lib.data_structure.LibShape;
 
 @SuppressFBWarnings({ "EI" })
 @Getter
 @JsonSerialize(using = ResApiJson.class)
 public final class ResAPI {
-    private Nullable<String> msg;
+    private Nullable<String> msg = Nullable.asNone();
     private Integer status;
-    private Nullable<Dict> data;
+    private Nullable<Dict> data = Nullable.asNone();
     private final List<ResponseCookie> cookies = new ArrayList<>();
     private final List<ResponseCookie> deleteCookies = new ArrayList<>();
 
@@ -59,14 +58,10 @@ public final class ResAPI {
 
     @SuppressWarnings("unchecked")
     public final ResAPI data(Object data) {
-        if (LibShape.isNone(data))
-            this.data = Nullable.asNone();
-        else if (data instanceof Nullable<?> inst) {
+        if (data instanceof Nullable<?> inst) {
             Object inner = inst.orNone();
             if (inst.isNone() || inner instanceof Dict)
                 this.data = (Nullable<Dict>) inst;
-            else
-                throw new ErrAPI("passed invalid arg to ResApi builder => " + data);
         } else if (data instanceof Dict inst)
             this.data = Nullable.of(inst);
         else
@@ -98,7 +93,6 @@ public final class ResAPI {
             return Mono.just(builder.build());
 
         final String prettyMsg = MetaRes.prettyMsg(msg, status);
-
         final ResAPI myRes = ResAPI.withStatus(status).msg(prettyMsg).data(data);
 
         return Mono.just(builder.body(myRes));

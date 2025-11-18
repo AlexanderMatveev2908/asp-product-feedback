@@ -7,23 +7,23 @@ export class ProductsLibShape extends RootUiFkt {
   private static readonly _categories: Omit<PairValLabelTypedT<FeedbackCatT>, 'id'>[] = [
     {
       label: 'Feature',
-      val: 'feature',
+      val: FeedbackCatT.FEATURE,
     },
     {
       label: 'UI',
-      val: 'ui',
+      val: FeedbackCatT.UI,
     },
     {
       label: 'UX',
-      val: 'ux',
+      val: FeedbackCatT.UX,
     },
     {
       label: 'Enhancement',
-      val: 'enhancement',
+      val: FeedbackCatT.ENHANCEMENT,
     },
     {
       label: 'Bug',
-      val: 'bug',
+      val: FeedbackCatT.BUG,
     },
   ];
 
@@ -51,19 +51,19 @@ export class ProductsLibShape extends RootUiFkt {
   private static readonly _statuses: Omit<PairValLabelTypedT<FeedbackStatusT>, 'id'>[] = [
     {
       label: 'Suggestion',
-      val: 'suggestion',
+      val: FeedbackStatusT.SUGGESTION,
     },
     {
       label: 'Planned',
-      val: 'planned',
+      val: FeedbackStatusT.PLANNED,
     },
     {
       label: 'In-Progress',
-      val: 'in_progress',
+      val: FeedbackStatusT.IN_PROGRESS,
     },
     {
       label: 'Live',
-      val: 'live',
+      val: FeedbackStatusT.LIVE,
     },
   ];
 
@@ -72,7 +72,7 @@ export class ProductsLibShape extends RootUiFkt {
   }
   public static statusesFilter(): PairValLabelTypedT<FeedbackStatusT>[] {
     return this.statuses().filter(
-      (v: PairValLabelTypedT<FeedbackStatusT>) => v.val !== 'suggestion'
+      (v: PairValLabelTypedT<FeedbackStatusT>) => v.val !== FeedbackStatusT.SUGGESTION
     );
   }
 

@@ -1,0 +1,18 @@
+@use 'exports/mix' as mix;
+
+.root {
+  @apply w-full flex flex-col gap-14 items-center justify-center min-h-[75%];
+
+  .root__title {
+    @apply flex flex-col items-center gap-3;
+  }
+
+  .root__thumb {
+    @include mix.sqr(200px);
+    @apply rounded-full overflow-hidden border-[3px] border-blue-600;
+
+    .thumb__content {
+      @apply min-w-full min-h-full object-cover;
+    }
+  }
+}

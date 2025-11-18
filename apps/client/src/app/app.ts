@@ -3,13 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { WakeUp } from '@/layout/wake_up/wake-up';
 import { Toast } from '@/layout/toast/toast';
 import { FeedbacksSlice } from '@/features/feedbacks/slice';
-import { mockData } from '@/assets/data';
-import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { UseScrollSvc } from '@/core/services/use_scroll';
+import { PopUser } from '@/features/user/etc/components/pop_user/pop-user';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, WakeUp, Toast],
+  imports: [RouterOutlet, WakeUp, Toast, PopUser],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -19,9 +18,5 @@ export class App implements OnInit {
 
   ngOnInit(): void {
     this.useScroll.main();
-    const fakeLoading: number = 1000;
-    setTimeout(() => {
-      this.productsSlice.setFeedbacks(mockData.productRequests as unknown as FeedbackT[]);
-    }, fakeLoading);
   }
 }

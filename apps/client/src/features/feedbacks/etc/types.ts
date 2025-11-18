@@ -1,22 +1,25 @@
 import { Nullable, OrNone } from '@/common/types/etc';
 import { SqlTableT } from '@/core/store/api/etc/types';
+import { UserT } from '@/features/user/etc/types';
 
-export type FeedbackCatT = 'ui' | 'ux' | 'feature' | 'enhancement' | 'bug';
+export enum FeedbackCatT {
+  UI = 'UI',
+  UX = 'UX',
+  FEATURE = 'FEATURE',
+  ENHANCEMENT = 'ENHANCEMENT',
+  BUG = 'BUG',
+}
 
-export type FeedbackStatusT = 'suggestion' | 'planned' | 'in_progress' | 'live';
+export enum FeedbackStatusT {
+  SUGGESTION = 'SUGGESTION',
+  PLANNED = 'PLANNED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  LIVE = 'LIVE',
+}
 
 export type ImageT = SqlTableT<{
   publicId: string;
   url: string;
-}>;
-
-// ? after Java server build endpoint this dev type will be removed 🛠️
-export type ImageDevT = string;
-
-export type UserT = SqlTableT<{
-  name: string;
-  username: string;
-  image: ImageT | ImageDevT;
 }>;
 
 export type ReplyT = SqlTableT<{

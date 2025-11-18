@@ -17,4 +17,11 @@ public interface UserRepo extends ReactiveCrudRepository<User, UUID> {
       RETURNING *
       """)
   public Mono<User> insert(User user);
+
+  @Query("""
+      SELECT * FROM users
+      WHERE username = :username
+      LIMIT 1
+      """)
+  public Mono<User> byUsername(String username);
 }

@@ -10,9 +10,9 @@ import { Nullable } from '@/common/types/etc';
 import { UseMetaEventDir } from '@/core/directives/use_meta_event';
 import { UsePopHk } from '@/core/hooks/use_pop';
 import { UseStorageSvc } from '@/core/services/use_storage/use_storage';
-import { WakeUpApiSvc } from '@/features/wake_up/api';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { envVars } from '@/environments/environment';
+import { UseWakeKit } from '@/features/wake_up/etc/use_wake_kit';
 
 @Component({
   selector: 'app-wake-up',
@@ -24,7 +24,7 @@ import { envVars } from '@/environments/environment';
 })
 export class WakeUp implements AfterViewInit {
   // ? svc
-  private readonly wakeUpApi: WakeUpApiSvc = inject(WakeUpApiSvc);
+  private readonly useWakeKit: UseWakeKit = inject(UseWakeKit);
   private readonly usePlatform: UsePlatformSvc = inject(UsePlatformSvc);
   private readonly toastSlice: ToastSlice = inject(ToastSlice);
   private readonly useStorage: UseStorageSvc = inject(UseStorageSvc);
@@ -53,7 +53,10 @@ export class WakeUp implements AfterViewInit {
 
     const marginMinutes: number = 15;
     const marginMillis: number = LibPrs.msFromMinutes(marginMinutes);
-    if (now - lastCall < marginMillis) return false;
+    if (now - lastCall < marginMillis) {
+      this.useWakeKit.slice.setAwake();
+      return false;
+    }
 
     return true;
   }
@@ -65,7 +68,7 @@ export class WakeUp implements AfterViewInit {
 
     this.usePlatform
       .whenStable<ResApiT<void>>(
-        this.wakeUpApi.poll().pipe(finalize(() => this.usePopHk.isPop.set(false)))
+        this.useWakeKit.api.poll().pipe(finalize(() => this.usePopHk.isPop.set(false)))
       )
       .subscribe({
         next: (res: ResApiT<void>) => {
@@ -77,6 +80,7 @@ export class WakeUp implements AfterViewInit {
             status: 200,
             eventT: 'OK',
           });
+          this.useWakeKit.slice.setAwake();
         },
         error: (err: ErrApiT<void>) => {
           this.toastSlice.ifNotPresent({

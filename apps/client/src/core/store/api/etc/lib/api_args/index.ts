@@ -55,6 +55,7 @@ export class LibApiArgs<T> {
 
   public toastOkMsg(msg: string): LibApiArgs<T> {
     this.ifOptToastEmpty();
+    this._optToast!.toastOk = true;
     this._optToast!.okMsg = msg;
     return this;
   }
