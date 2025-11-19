@@ -10,6 +10,7 @@ import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { Nullable } from '@/common/types/etc';
 import { UseSsrSvc } from '@/core/services/use_ssr/use_ssr';
 import { PopUser } from '@/layout/pop_user/pop-user';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,22 +19,30 @@ import { PopUser } from '@/layout/pop_user/pop-user';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App extends UseInjCtxHk implements OnInit {
-  private readonly feedKit: UseFeedKit = inject(UseFeedKit);
+  private readonly useFeedKit: UseFeedKit = inject(UseFeedKit);
   private readonly useScroll: UseScrollSvc = inject(UseScrollSvc);
   private readonly useSsr: UseSsrSvc = inject(UseSsrSvc);
 
-  private fetchFeedbacks(saveSrr: boolean): void {
-    this.feedKit.api.fetchAllSSR().subscribe((res: ResApiT<{ feedbacks: FeedbackT[] }>) => {
-      if (saveSrr) this.useSsr.transferState.set(this.useSsr.feedbacksKey, res.feedbacks);
-      this.feedKit.slice.setFeedbacks(res.feedbacks);
+  private getAllFeedbacksSSR(): void {
+    this.usePlatform.onServer(() => {
+      this.useFeedKit.api
+        .getAllFeedbacksSSR()
+        .subscribe((res: ResApiT<{ feedbacks: FeedbackT[] }>) => {
+          this.useSsr.transferState.set(this.useSsr.feedbacksKey, res.feedbacks);
+          this.useFeedKit.slice.setFeedbacks(res.feedbacks);
+        });
     });
   }
-
-  ngOnInit(): void {
-    this.useScroll.main();
-
-    this.usePlatform.onServer(() => this.fetchFeedbacks(true));
-
+  private getAllFeedbacksCSR(): void {
+    this.useFeedKit.slice.setPending(true);
+    this.useFeedKit.api
+      .getAllFeedbacksCSR()
+      .pipe(finalize(() => this.useFeedKit.slice.setPending(false)))
+      .subscribe((res: ResApiT<{ feedbacks: FeedbackT[] }>) => {
+        this.useFeedKit.slice.setFeedbacks(res.feedbacks);
+      });
+  }
+  private setExistingOrFetch(): void {
     this.usePlatform.onClient(() => {
       const serverData: Nullable<FeedbackT[]> = this.useSsr.transferState.get(
         this.useSsr.feedbacksKey,
@@ -41,11 +50,24 @@ export class App extends UseInjCtxHk implements OnInit {
       );
 
       if (serverData) {
-        this.feedKit.slice.setFeedbacks(serverData);
+        this.useFeedKit.slice.setFeedbacks(serverData);
         this.useSsr.transferState.remove(this.useSsr.feedbacksKey);
       } else {
-        this.fetchFeedbacks(false);
+        this.getAllFeedbacksCSR();
       }
+    });
+  }
+
+  ngOnInit(): void {
+    this.useScroll.main();
+
+    this.getAllFeedbacksSSR();
+    this.setExistingOrFetch();
+
+    this.useEffect(() => {
+      const keyRefetch: number = this.useFeedKit.slice.keyRefetch();
+      if (!keyRefetch) return;
+      this.getAllFeedbacksCSR();
     });
   }
 }

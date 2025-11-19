@@ -11,7 +11,10 @@ export class FeedbacksApiSvc {
   private readonly base: string = '/feedbacks';
   private readonly api: UseApiSvc = inject(UseApiSvc);
 
-  public fetchAllSSR(): ObsResT<{ feedbacks: FeedbackT[] }> {
+  public getAllFeedbacksSSR(): ObsResT<{ feedbacks: FeedbackT[] }> {
     return this.api.get(LibApiArgs.withURL(`${this.base}`).noToast());
+  }
+  public getAllFeedbacksCSR(): ObsResT<{ feedbacks: FeedbackT[] }> {
+    return this.api.get(LibApiArgs.withURL(`${this.base}`).toastOnErr());
   }
 }

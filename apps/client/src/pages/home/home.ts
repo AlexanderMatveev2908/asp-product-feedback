@@ -30,5 +30,6 @@ import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/
 export class Home {
   private readonly productsSLice: FeedbacksSlice = inject(FeedbacksSlice);
 
-  public readonly products: Signal<Nullable<FeedbackT[]>> = this.productsSLice.feedbacks;
+  public readonly isPending: Signal<boolean> = this.productsSLice.isPending;
+  public readonly feedbacks: Signal<Nullable<FeedbackT[]>> = this.productsSLice.feedbacks;
 }
