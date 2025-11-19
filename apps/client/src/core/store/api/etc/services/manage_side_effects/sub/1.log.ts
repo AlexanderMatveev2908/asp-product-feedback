@@ -22,7 +22,7 @@ export abstract class _UseSideEffectsMngLogHk extends _UseSideEffectsMngInitHk {
   protected withLog<T>(cb: ObsResT<T>): ObsResT<T> {
     return cb.pipe(
       tap({
-        next: (res: ResApiT<T>) => this._log(res, '✅'),
+        next: (res: ResApiT<T>) => this.usePlatform.onClient(() => this._log(res, '✅')),
         error: (err: ErrApiT<T>) => this._log(err, '❌'),
       })
     );

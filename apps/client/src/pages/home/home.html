@@ -11,12 +11,12 @@
   />
 </div>
 
-<app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="!products()" [minH]="'85vh'">
+<app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="isPending()" [minH]="'85vh'">
   <ng-template #contentRef>
     <div class="root">
-      @if(products()) {
+      @if(feedbacks()) {
       <!--  -->
-      @for(p of products(); track p.id){
+      @for(p of feedbacks(); track p.id){
       <app-feedback-item [item]="p" [withHeader]="false" />
       }
       <!--  -->

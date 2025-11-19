@@ -35,9 +35,9 @@ export class NoticeSlice extends UseKitSliceSvc {
     this.useStorage.setItem('notice', { ...rst, tmpt: template });
   }
 
-  public readonly setNotice: (arg: PartialNotice) => void = (arg: PartialNotice) => {
+  public setNotice(arg: PartialNotice): void {
     this._noticeState = arg;
-  };
+  }
 
   public set mailNoticeMsg(arg: string) {
     this._noticeState = {
