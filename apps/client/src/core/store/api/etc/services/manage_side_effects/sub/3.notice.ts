@@ -44,11 +44,12 @@ export abstract class _UseSideEffectsMngNoticeHk extends _UseSideEffectsMngToast
       catchError((err: ErrApiT<T>) => {
         if (this.ignoreErr(options, err)) return throwError(() => err);
 
-        this.noticeSlice.notice = {
+        this.noticeSlice.setNotice({
           eventT: 'ERR',
           msg: err?.error?.msg ?? this.DEF_CLIENT_ERR_MSG,
           status: err?.status ?? 0,
-        };
+          tmpt: 'home',
+        });
 
         const navigation: Promise<boolean> = this.useNav.replace('/notice', { from: 'err' });
 
