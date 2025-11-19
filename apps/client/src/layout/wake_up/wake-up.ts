@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Popup } from '../popup/popup';
 import { PopupStaticPropsT } from '../popup/etc/types';
 import { SpinBtn } from '@/common/components/spins/spin_btn/spin-btn';
@@ -13,6 +13,8 @@ import { UseStorageSvc } from '@/core/services/use_storage/use_storage';
 import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { envVars } from '@/environments/environment';
 import { UseWakeKit } from '@/features/wake_up/etc/use_wake_kit';
+import { UseSsrSvc } from '@/core/services/use_ssr/use_ssr';
+import { LibShape } from '@/core/lib/data_structure/shape';
 
 @Component({
   selector: 'app-wake-up',
@@ -22,12 +24,13 @@ import { UseWakeKit } from '@/features/wake_up/etc/use_wake_kit';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsePopHk],
 })
-export class WakeUp implements AfterViewInit {
+export class WakeUp implements OnInit, AfterViewInit {
   // ? svc
   private readonly useWakeKit: UseWakeKit = inject(UseWakeKit);
   private readonly usePlatform: UsePlatformSvc = inject(UsePlatformSvc);
   private readonly toastSlice: ToastSlice = inject(ToastSlice);
   private readonly useStorage: UseStorageSvc = inject(UseStorageSvc);
+  private readonly useSsr: UseSsrSvc = inject(UseSsrSvc);
 
   // ? hooks
   public readonly usePopHk: UsePopHk = inject(UsePopHk);
@@ -43,12 +46,11 @@ export class WakeUp implements AfterViewInit {
   public readonly backURL: string = envVars.backURL;
 
   // ? cbs
-  private pollIf(): boolean {
-    if (this.usePlatform.isServer) return false;
+  private canClientPoll(): boolean {
+    if (this.usePlatform.isServer || this.useWakeKit.slice.awake()) return false;
 
-    const tmsp: Nullable<string> = this.useStorage.getItem('wakeUp') ?? '0';
-    const lastCall: number = isNaN(+tmsp) ? 0 : +tmsp;
-
+    const tmsp: Nullable<string> = this.useStorage.getItem('wakeUp');
+    const lastCall: number = LibShape.isInt(tmsp) ? +tmsp! : 0;
     const now: number = Date.now();
 
     const marginMinutes: number = 15;
@@ -61,8 +63,28 @@ export class WakeUp implements AfterViewInit {
     return true;
   }
 
+  ngOnInit(): void {
+    this.usePlatform.onServer(() =>
+      this.useWakeKit.api.poll().subscribe((_: ResApiT<void>) => {
+        this.useSsr.transferState.set(this.useSsr.wakeUpKey, true);
+        this.useWakeKit.slice.awake();
+      })
+    );
+
+    this.usePlatform.onClient(() => {
+      const isAwake: boolean = this.useSsr.transferState.get(this.useSsr.wakeUpKey, false);
+
+      if (!isAwake) return;
+
+      this.useWakeKit.slice.awake();
+      this.useStorage.setItem('wakeUp', Date.now());
+      this.useSsr.transferState.remove(this.useSsr.wakeUpKey);
+    });
+  }
+
   ngAfterViewInit(): void {
-    if (!this.pollIf()) return;
+    const canPoll: boolean = this.canClientPoll();
+    if (!canPoll) return;
 
     this.usePopHk.isPop.set(true);
 

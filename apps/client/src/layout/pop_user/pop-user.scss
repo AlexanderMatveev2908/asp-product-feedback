@@ -1,7 +1,7 @@
 @use 'exports/mix' as mix;
 
 .root {
-  @apply w-full flex flex-col gap-14 items-center justify-center min-h-[75%];
+  @apply w-full flex flex-col gap-14 items-center justify-center min-h-[75%] px-6;
 
   .root__title {
     @apply flex flex-col items-center gap-3;
