@@ -67,4 +67,5 @@ public final class LibShape {
                 || arg instanceof Boolean
                 || arg instanceof Enum<?>;
     }
+
 }

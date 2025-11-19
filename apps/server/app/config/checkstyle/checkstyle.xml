@@ -11,6 +11,7 @@
     <property name="severity" value="error"/>
 
     <module name="TreeWalker">
+        <module name="SuppressionCommentFilter"/>
 
         <module name="IllegalImport"/> <!-- ! imports with something.*  -->
         <module name="UnusedImports"/> <!-- ! unused imports -->

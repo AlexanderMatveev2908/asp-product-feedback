@@ -48,6 +48,10 @@ public class Dict extends LinkedHashMap<String, Object> {
     return LibPrs.dictFromT(obj);
   }
 
+  public static final Dict fromRow(Map<String, Object> row) {
+    return LibPrs.dictFromRow(row);
+  }
+
   public final <T> T toT(Class<T> cls) {
     return LibPrs.tFromDict(this, cls);
   }
