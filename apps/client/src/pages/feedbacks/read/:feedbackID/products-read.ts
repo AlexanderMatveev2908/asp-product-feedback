@@ -35,7 +35,7 @@ export class ProductsRead extends UseInjCtxHk implements OnInit {
 
   ngOnInit(): void {
     const vars: Nullable<Params> = this.useNav.path_variables();
-    const productID: Nullable<string> = vars?.['productID'];
+    const productID: Nullable<string> = vars?.['feedbackID'];
 
     this.useEffect(() => {
       const products: Nullable<FeedbackT[]> = this.productsSLice.feedbacks();

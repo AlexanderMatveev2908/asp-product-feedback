@@ -4,7 +4,7 @@ import { Notice } from '@/pages/notice/notice';
 import { ProductsLayout } from '@/pages/feedbacks/layout/products-layout';
 import { ProductsPost } from '@/pages/feedbacks/post/products-post';
 import { ProductsPut } from '@/pages/feedbacks/put/products-put';
-import { ProductsRead } from '@/pages/feedbacks/read/:productID/products-read';
+import { ProductsRead } from '@/pages/feedbacks/read/:feedbackID/products-read';
 import { ProductsRoadmap } from '@/pages/feedbacks/read/roadmap/products-roadmap';
 import { Routes } from '@angular/router';
 
@@ -34,7 +34,7 @@ export const routes: Routes = [
         component: ProductsRoadmap,
       },
       {
-        path: 'read/:productID',
+        path: 'read/:feedbackID',
         component: ProductsRead,
       },
     ],
