@@ -11,6 +11,8 @@ import reactor.core.publisher.Mono;
 import server.conf.databases.relational_database.SqlCmd;
 import server.decorators.core.api.Api;
 import server.decorators.types.Dict;
+import server.lib.data_structure.LibSql;
+import server.models.comments.Comment;
 
 @Service
 @Transactional
@@ -22,19 +24,21 @@ public class FeedReadAllSvc {
   private Mono<List<Dict>> query() {
     return sqlCmd.trxLowLevel(client -> {
       StringBuilder sql = new StringBuilder();
-      sql.append("""
+      sql.append(String.format("""
           SELECT f.*,
             (
               SELECT COALESCE(
                 JSON_AGG(
-                  ROW_TO_JSON(c) ORDER BY c.created_at DESC
+                  JSON_BUILD_OBJECT(
+                    %s
+                  ) ORDER BY c.created_at DESC
                 ),
                 '[]'
               ) FROM comments c
                   WHERE c.feedback_id = f.id
             ) comments
             FROM feedbacks f
-          """);
+          """, LibSql.rowKeyValPairs(Comment.class, "c")));
 
       return client.sql(sql.toString()).fetch().all().map(row -> Dict.fromRow(row)).collectList();
     });
