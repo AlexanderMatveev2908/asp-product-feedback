@@ -18,7 +18,7 @@ public class FeedbacksMdw extends BaseMdw {
   @Override
   public Mono<Void> handle(Api api, WebFilterChain chain) {
     return isTarget(api, chain, "/feedbacks", HttpMethod.GET, () -> {
-      return limit(api, 50, 15).then(chain.filter(api));
+      return limit(api, 40, 15).then(chain.filter(api));
     });
   }
 }

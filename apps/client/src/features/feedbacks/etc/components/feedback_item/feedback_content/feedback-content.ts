@@ -6,13 +6,13 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { FeedbackT } from '../../types';
-import { ProductsLibShape } from '../../lib_shape';
 import { Nullable, SvgT } from '@/common/types/etc';
 import { BtnVotes } from '@/common/components/btns/btn_votes/btn-votes';
 import { NgComponentOutlet } from '@angular/common';
 import { SvgAdvIconComments } from '@/common/components/svgs/advanced/icon-comments/icon-comments';
 import { RouterLink } from '@angular/router';
+import { ProductsLibShape } from '../../../lib_shape';
+import { FeedbackT } from '../../../types';
 
 @Component({
   selector: 'app-feedback-content',

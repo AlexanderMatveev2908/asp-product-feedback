@@ -17,7 +17,7 @@
       @if(products()) {
       <!--  -->
       @for(p of products(); track p.id){
-      <app-base-feedback-item [item]="p" />
+      <app-feedback-item [item]="p" [withHeader]="false" />
       }
       <!--  -->
       }@else{

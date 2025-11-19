@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { FeedbacksSlice } from '../../slice';
-import { ProductsApiSvc } from '../../api';
+import { FeedbacksApiSvc } from '../../api';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UseProductsKitSvc {
+export class UseFeedKit {
   public readonly slice: FeedbacksSlice = inject(FeedbacksSlice);
-  public readonly api: ProductsApiSvc = inject(ProductsApiSvc);
+  public readonly api: FeedbacksApiSvc = inject(FeedbacksApiSvc);
 }

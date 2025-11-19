@@ -9,17 +9,19 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { FeedbackContent } from '@/features/feedbacks/etc/components/feedback_content/feedback-content';
+import { HeaderFeedback } from './header_feedback/header-feedback';
+import { FeedbackContent } from './feedback_content/feedback-content';
 
 @Component({
   selector: 'app-feedback-item',
-  imports: [FeedbackContent],
+  imports: [FeedbackContent, HeaderFeedback],
   templateUrl: './feedback-item.html',
   styleUrl: './feedback-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackItem {
   public readonly item: InputSignal<FeedbackT> = input.required();
+  public readonly withHeader: InputSignal<boolean> = input.required();
 
   public readonly statusLabel: Signal<Nullable<string>> = computed(() =>
     ProductsLibShape.statusLabelByVal(this.item().status)

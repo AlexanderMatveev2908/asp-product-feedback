@@ -7,13 +7,13 @@ import {
   Signal,
 } from '@angular/core';
 import { NoticeSlice } from '@/features/notice/slice';
-import { NoticeWithoutCb } from '@/features/notice/reducer/reducer';
 import { AppEventT, Nullable } from '@/common/types/etc';
 import { CsrNoticeWrapper } from '@/common/components/hoc/page/csr_notice_wrapper/csr-notice-wrapper';
 import { UseStorageSvc } from '@/core/services/use_storage/use_storage';
 import { NoticeWrapperPropsT } from '@/common/components/hoc/page/csr_notice_wrapper/etc/types';
 import { UseMetaEventDir } from '@/core/directives/use_meta_event';
 import { UseNavSvc } from '@/core/services/use_nav/index';
+import { NoticeStateT } from '@/features/notice/reducer/reducer';
 
 @Component({
   selector: 'app-notice',
@@ -38,9 +38,9 @@ export class Notice implements OnInit {
 
   ngOnInit(): void {
     this.useNav.usePlatform.onClient(() => {
-      const stored: Nullable<NoticeWithoutCb> = this.useStorage.getItem('notice');
+      const stored: Nullable<Omit<NoticeStateT, 'cb'>> = this.useStorage.getItem('notice');
 
-      if (stored) this.noticeSlice.notice = stored;
+      if (stored) this.noticeSlice.setNotice(stored);
     });
 
     this.useNav.pushOutIfNotFrom('/notice');

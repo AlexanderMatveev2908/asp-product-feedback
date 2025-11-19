@@ -6,7 +6,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server,
   },
   {
-    path: 'feedbacks/read/:productID',
+    path: 'feedbacks/read/:feedbackID',
     renderMode: RenderMode.Server,
   },
   {

@@ -4,6 +4,7 @@ import { NoticeStateT, NoticeTmptT } from './reducer/reducer';
 import { NoticeActT } from './reducer/actions';
 import { Nullable } from '@/common/types/etc';
 import { UseKitSliceSvc } from '@/core/services/use_kit_slice';
+import { PartialNotice } from './etc/types';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,10 @@ export class NoticeSlice extends UseKitSliceSvc {
   }
 
   private set _noticeState(
-    arg: Omit<NoticeStateT, 'cb' | 'tmpt'> & { cb?: () => void; tmpt?: NoticeTmptT }
+    arg: Omit<NoticeStateT, 'cb' | 'tmpt'> & {
+      cb?: Nullable<() => void>;
+      tmpt?: Nullable<NoticeTmptT>;
+    }
   ) {
     const { cb, tmpt, ...rst } = arg;
 
@@ -31,9 +35,9 @@ export class NoticeSlice extends UseKitSliceSvc {
     this.useStorage.setItem('notice', { ...rst, tmpt: template });
   }
 
-  public set notice(arg: Omit<NoticeStateT, 'cb' | 'tmpt'>) {
+  public readonly setNotice: (arg: PartialNotice) => void = (arg: PartialNotice) => {
     this._noticeState = arg;
-  }
+  };
 
   public set mailNoticeMsg(arg: string) {
     this._noticeState = {

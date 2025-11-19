@@ -26,6 +26,10 @@ export class UsePlatformSvc {
     return this.isServer ? null : arg();
   }
 
+  public onServer<T>(arg: () => T): Nullable<T> {
+    return this.isClient ? null : arg();
+  }
+
   private isStable(): Observable<boolean> {
     return this.appRef.isStable.pipe(filter(Boolean), take(1));
   }

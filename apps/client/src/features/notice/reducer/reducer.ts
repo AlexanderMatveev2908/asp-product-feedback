@@ -3,7 +3,6 @@ import { NoticeActT } from './actions';
 import { AppPayloadEventT, Nullable } from '@/common/types/etc';
 
 export type NoticeTmptT = 'mail' | 'home';
-export type NoticeWithoutCb = Omit<NoticeStateT, 'cb'>;
 
 export interface NoticeStateT extends AppPayloadEventT {
   cb: Nullable<() => void>;

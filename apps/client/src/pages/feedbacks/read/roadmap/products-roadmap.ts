@@ -7,7 +7,7 @@ import { PairValLabelTypedT } from '@/common/types/forms';
 import { FeedbackStatusT, FeedbackT } from '@/features/feedbacks/etc/types';
 import { ProductsLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { FeedbacksSlice } from '@/features/feedbacks/slice';
-import { FeedbackItem } from './feedback_item/feedback-item';
+import { FeedbackItem } from '../../../../features/feedbacks/etc/components/feedback_item/feedback-item';
 
 @Component({
   selector: 'app-products-roadmap',
