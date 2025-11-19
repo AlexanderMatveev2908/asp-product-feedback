@@ -13,7 +13,6 @@ import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { FeedbacksSlice } from '@/features/feedbacks/slice';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
-import { LibPrs } from '@/core/lib/data_structure/prs/prs';
 import { ApiStatusT } from '@/core/store/api/etc/types';
 import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
 import { BaseFeedbackItem } from '@/features/feedbacks/etc/components/base_feedback_item/base-feedback-item';
@@ -37,14 +36,13 @@ export class ProductsRead extends UseInjCtxHk implements OnInit {
   ngOnInit(): void {
     const vars: Nullable<Params> = this.useNav.path_variables();
     const productID: Nullable<string> = vars?.['productID'];
-    const devID: Nullable<number> = LibPrs.asInt(productID);
 
     this.useEffect(() => {
       const products: Nullable<FeedbackT[]> = this.productsSLice.feedbacks();
       if (!products) return;
 
       const found: Nullable<FeedbackT> =
-        products.find((p: FeedbackT) => (p.id as unknown as number) === devID) ?? null;
+        products.find((p: FeedbackT) => p.id === productID) ?? null;
 
       if (!found)
         this.useNav.pushNotice({

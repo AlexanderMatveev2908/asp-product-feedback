@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  InputSignal,
-  Signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
 import { CommentT, ReplyT } from '../../types';
 
 @Component({
@@ -17,8 +10,4 @@ import { CommentT, ReplyT } from '../../types';
 })
 export class HeaderComment {
   public readonly comment: InputSignal<CommentT | ReplyT> = input.required();
-
-  public readonly devImage: Signal<string> = computed(
-    () => `/images/users/${this.comment().user.image}`
-  );
 }
