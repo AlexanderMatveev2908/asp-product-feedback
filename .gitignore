@@ -83,7 +83,6 @@ apps/client/src/environments/
 
 # ? ASSETS
 uploads/
-apps/server/assets/
 
 # ? TESTS
 playwright-report/
