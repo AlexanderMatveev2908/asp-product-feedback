@@ -3,12 +3,12 @@ import { Popup } from '@/layout/popup/popup';
 import { PopupStaticPropsT } from '@/layout/popup/etc/types';
 import { UsePopHk } from '@/core/hooks/use_pop';
 import { UseStorageSvc } from '@/core/services/use_storage/use_storage';
-import { UseUserKitSvc } from '../../services/use_user_kit';
 import { ResApiT } from '@/core/store/api/etc/types';
 import { Nullable } from '@/common/types/etc';
-import { UserT } from '../../types';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { WakeUpSlice } from '@/features/wake_up/slice';
+import { UseUserKitSvc } from '@/features/user/etc/services/use_user_kit';
+import { UserT } from '@/features/user/etc/types';
 
 @Component({
   selector: 'app-pop-user',

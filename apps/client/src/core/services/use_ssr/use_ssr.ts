@@ -10,4 +10,5 @@ export class UseSsrSvc {
   public readonly feedbacksKey: StateKey<FeedbackT[]> = makeStateKey<FeedbackT[]>(
     SsrKeyT.FEEDBACKS
   );
+  public readonly wakeUpKey: StateKey<boolean> = makeStateKey<boolean>(SsrKeyT.WAKE_UP);
 }

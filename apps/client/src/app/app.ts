@@ -3,13 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { WakeUp } from '@/layout/wake_up/wake-up';
 import { Toast } from '@/layout/toast/toast';
 import { UseScrollSvc } from '@/core/services/use_scroll';
-import { PopUser } from '@/features/user/etc/components/pop_user/pop-user';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { UseFeedKit } from '@/features/feedbacks/etc/services/use_feed_kit';
 import { ResApiT } from '@/core/store/api/etc/types';
 import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { Nullable } from '@/common/types/etc';
 import { UseSsrSvc } from '@/core/services/use_ssr/use_ssr';
+import { PopUser } from '@/layout/pop_user/pop-user';
 
 @Component({
   selector: 'app-root',
