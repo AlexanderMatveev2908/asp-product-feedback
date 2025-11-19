@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import server.decorators.core.api.Api;
 import server.decorators.core.res_api.ResAPI;
-import server.features.feedbacks.services.FeedReadAllSvc;
+import server.features.feedbacks.services.read_all.FeedReadAllSvc;
 
 @SuppressFBWarnings({ "EI2" })
 @Component

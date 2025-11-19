@@ -2,7 +2,6 @@ package server.features.feedbacks;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ import server.decorators.core.res_api.ResAPI;
 @SuppressFBWarnings({ "EI2", "EI" })
 @RouterAPI("/api/v1/feedbacks")
 @RequiredArgsConstructor
-@SuppressWarnings({ "unused", })
+@SuppressWarnings({ "unused" })
 public class FeedbacksRouter {
   private final GetFeedbacks getCtrl;
   private final PostFeedbacks postCtrl;
