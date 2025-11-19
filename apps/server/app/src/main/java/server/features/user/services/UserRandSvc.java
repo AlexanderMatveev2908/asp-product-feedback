@@ -1,10 +1,6 @@
 package server.features.user.services;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Stream;
-
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -20,14 +16,13 @@ import reactor.util.function.Tuples;
 import server.conf.cloud.CloudSvc;
 import server.conf.cloud.etc.data_structure.CloudAsset;
 import server.conf.env_vars.EnvVars;
-import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
 import server.decorators.types.AppFile;
 import server.decorators.types.Dict;
 import server.lib.data_structure.LibRand;
+import server.lib.data_structure.LibRuntime;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.LibFaker;
-import server.lib.paths.LibPath;
 import server.models.images.Image;
 import server.models.images.etc.ImageSvc;
 import server.models.users.User;
@@ -55,18 +50,18 @@ public class UserRandSvc {
   }
 
   private Mono<CloudAsset> uploadThumb() {
-    final Path pathRandomThumbs = LibPath.IMAGES_DIR.resolve("users_random");
 
-    try (Stream<Path> stream = Files.list(pathRandomThumbs)) {
-      final List<Path> images = stream.toList();
-      final int idx = LibRand.intTill(images.size());
-      final Path chosen = images.get(idx);
-      final AppFile asAppFile = new AppFile(chosen.getFileName().toString(), chosen);
+    return LibRuntime.inTryBlock(() -> {
+      int idx = LibRand.intTill(10);
+      String filename = idx + ".jpg";
 
-      return cloud.upload(asAppFile);
-    } catch (Exception err) {
-      throw new ErrAPI(err.getMessage());
-    }
+      ClassPathResource abstractFile = new ClassPathResource("/assets/users_random/" + filename);
+      byte[] binary = abstractFile.getContentAsByteArray();
+
+      AppFile appFile = new AppFile(filename, binary);
+
+      return cloud.upload(appFile);
+    });
   }
 
   private Mono<Image> insertImage(User user, CloudAsset uploaded) {

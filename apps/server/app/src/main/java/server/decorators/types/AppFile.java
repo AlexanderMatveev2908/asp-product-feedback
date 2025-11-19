@@ -53,6 +53,14 @@ public final class AppFile {
         this.filePath = Nullable.of(filePath);
     }
 
+    public AppFile(String filename, byte[] bts) {
+        this.field = CloudResourceT.IMAGE;
+        this.filename = randomFilename(filename);
+        this.contentType = Nullable.asNone();
+        this.bts = Nullable.of(bts);
+        this.filePath = Nullable.asNone();
+    }
+
     private final String findExt(String arg) {
         final String ext;
         final int idxDot = arg.lastIndexOf('.');

@@ -76,7 +76,6 @@ apps/*/out/
 
 # ? ASSETS
 uploads/
-apps/server/assets/
 
 # ? TESTS
 playwright-report/
