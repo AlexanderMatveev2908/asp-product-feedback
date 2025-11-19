@@ -3,7 +3,7 @@ import { Popup } from '@/layout/popup/popup';
 import { PopupStaticPropsT } from '@/layout/popup/etc/types';
 import { UsePopHk } from '@/core/hooks/use_pop';
 import { UseStorageSvc } from '@/core/services/use_storage/use_storage';
-import { UseUserKitSvc } from '../../hooks/use_user_kit';
+import { UseUserKitSvc } from '../../services/use_user_kit';
 import { ResApiT } from '@/core/store/api/etc/types';
 import { Nullable } from '@/common/types/etc';
 import { UserT } from '../../types';
