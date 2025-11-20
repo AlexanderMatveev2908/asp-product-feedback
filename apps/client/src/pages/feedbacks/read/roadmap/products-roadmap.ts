@@ -55,12 +55,12 @@ export class ProductsRoadmap {
     }
   });
 
-  public twdLabel(v: FeedbackStatusT): string {
-    return this.useRoadCtx.currStatus() === v ? 'opacity-1' : 'opacity-[0.4]';
-  }
-
   public bgHeaderLine(): string {
     const clr: string = FeedLibShape.clrByStatus(this.useRoadCtx.currStatus());
     return clr;
+  }
+
+  public twdLabel(v: FeedbackStatusT): string {
+    return this.useRoadCtx.currStatus() === v ? 'opacity-1' : 'opacity-[0.4]';
   }
 }
