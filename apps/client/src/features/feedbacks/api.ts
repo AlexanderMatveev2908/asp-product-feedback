@@ -17,4 +17,8 @@ export class FeedbacksApiSvc {
   public getAllFeedbacksCSR(): ObsResT<{ feedbacks: FeedbackT[] }> {
     return this.api.get(LibApiArgs.withURL(`${this.base}`).toastOnErr());
   }
+
+  public like(feedbackId: string): ObsResT<void> {
+    return this.api.patch(LibApiArgs.withURL(`${this.base}/like/${feedbackId}`).toastOnFulfilled());
+  }
 }
