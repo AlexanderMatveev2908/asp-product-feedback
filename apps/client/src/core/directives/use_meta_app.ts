@@ -1,8 +1,4 @@
-import {
-  AppBtnClrVarT,
-  AppBtnUiFkt,
-  AppBtnVarT,
-} from '@/common/components/btns/btn__main/etc/ui_fkt';
+import { AppBtnClrVarT, AppBtnUiFkt, AppBtnVarT } from '@/core/lib/css/app_vars';
 import { computed, Directive, input, InputSignal, Signal } from '@angular/core';
 
 @Directive({
