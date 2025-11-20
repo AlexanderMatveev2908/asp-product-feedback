@@ -5,7 +5,8 @@ import { SvgStrokeIconArrowUp } from '../../svgs/stroke/icon-arrow-up/icon-arrow
 import { UseFeedKit } from '@/features/feedbacks/etc/services/use_feed_kit';
 import { UseBtnFocusHk } from '@/core/hooks/use_btn_focus';
 import { catchError, throwError } from 'rxjs';
-import { ErrApiT } from '@/core/store/api/etc/types';
+import { ErrApiT, ResApiT } from '@/core/store/api/etc/types';
+import { ToastSlice } from '@/features/toast/slice';
 
 @Component({
   selector: 'app-btn-votes',
@@ -17,6 +18,7 @@ import { ErrApiT } from '@/core/store/api/etc/types';
 })
 export class BtnVotes {
   private readonly useFeedKit: UseFeedKit = inject(UseFeedKit);
+  private readonly toastSlice: ToastSlice = inject(ToastSlice);
 
   public readonly upvotes: InputSignal<number> = input.required();
   public readonly feedbackId: InputSignal<string> = input.required();
@@ -36,7 +38,13 @@ export class BtnVotes {
           return throwError(() => err);
         })
       )
-      .subscribe();
+      .subscribe((_: ResApiT<void>) => {
+        this.toastSlice.ifNotPresent({
+          msg: 'upvote added',
+          eventT: 'OK',
+          status: 200,
+        });
+      });
   }
 
   // ? statics

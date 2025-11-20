@@ -19,6 +19,6 @@ export class FeedbacksApiSvc {
   }
 
   public like(feedbackId: string): ObsResT<void> {
-    return this.api.patch(LibApiArgs.withURL(`${this.base}/like/${feedbackId}`).toastOnFulfilled());
+    return this.api.patch(LibApiArgs.withURL(`${this.base}/like/${feedbackId}`).toastOnErr());
   }
 }
