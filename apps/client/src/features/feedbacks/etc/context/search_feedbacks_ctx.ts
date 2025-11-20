@@ -20,6 +20,32 @@ export class SearchFeedbacksCtx extends UseInjCtxHk {
     return filters.some((str: string) => str === v);
   }
 
+  public onCatChange(v: string): void {
+    // ? form is setup in nInit
+    // ? if it is undefined means is too early to click stuff in page
+    // ? so just wait and leave angular do with calm his job
+    const existing: OrNone<string[]> = this.formData?.()?.category;
+    if (!existing) return;
+
+    if (v === 'ALL') {
+      this.form.patchValue({ category: ['ALL'] });
+      return;
+    }
+
+    if (existing.some((str: string) => str === v)) {
+      const filtered: string[] = existing.filter((str: string) => str !== v);
+      this.form.patchValue({
+        category: !filtered.length ? ['ALL'] : filtered,
+      });
+    } else {
+      this.form.patchValue({
+        category: [...existing.filter((str: string) => str !== 'ALL'), v],
+      });
+    }
+
+    this.form.updateValueAndValidity();
+  }
+
   public setupForm(): void {
     this.inCtx(() => {
       this.formData = toSignal(this.form.valueChanges, {

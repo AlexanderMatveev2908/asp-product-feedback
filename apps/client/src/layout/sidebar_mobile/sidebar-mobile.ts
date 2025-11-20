@@ -48,6 +48,9 @@ export class SidebarMobile implements OnInit {
 
   // ? listeners
   public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
+  public onCatChange(v: string): void {
+    this.searchCtx.onCatChange(v);
+  }
 
   // ? static
   public readonly filtersFeedback: PairValLabelT[] = FeedLibShape.categoriesPlusAll();
