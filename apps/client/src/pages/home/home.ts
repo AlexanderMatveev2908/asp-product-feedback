@@ -17,7 +17,7 @@ import { SidebarMobile } from '@/layout/sidebar_mobile/sidebar-mobile';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { LinkMain } from '@/common/components/links/link_main/link-main';
 import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/feedback-item';
-import { SearchFeedbacksCtx } from '@/features/feedbacks/etc/context/search_feedbacks_ctx';
+import { SearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
 
 @Component({
   selector: 'app-home',

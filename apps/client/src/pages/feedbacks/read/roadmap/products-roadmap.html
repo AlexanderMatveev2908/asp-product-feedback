@@ -17,32 +17,29 @@
   <ng-template #contentRef>
     <div class="root">
       <div class="root__header">
-        @for(s of statuses; track s.id; let idx = $index){
-        <div class="header__status">
-          <span
-            class="txt__bd__sm__bold text-blue__dark__1 text-center"
-            [style.opacity]="idx === 1 ? '1' : '0.4'"
+        @for(s of statuses(); track s.id; let idx = $index){
+        <button (click)="useRoadCtx.onStatusChange(s.val)" class="header__status">
+          <span class="txt__bd__sm__bold" [ngClass]="twdLabel(s.val)">
+            {{ s.label }} ({{ s.count }})</span
           >
-            {{ s.label }} (3)</span
-          >
-        </div>
+        </button>
 
         }
 
-        <div class="header__line"></div>
+        <div class="header__line" [ngClass]="[twdHeaderLine()]" [style.--bg]="bgHeaderLine()"></div>
       </div>
 
       <div class="root__content">
         <div class="content__header">
-          <span class="txt__hd__md text-blue__dark__1">In-Progress (3)</span>
+          <span class="txt__hd__md text-blue__dark__1">{{ currLabel() }}</span>
 
           <span class="txt__bd__sm__reg text-blue__dark__0">
-            Features currently being developed
+            {{ currDescription() }}
           </span>
         </div>
 
         <div class="content__cards">
-          @for(p of filtered(); track p.id){
+          @for(p of useRoadCtx.filteredFeedbacks(); track p.id){
           <app-feedback-item [item]="p" [withHeader]="true" />
           }
         </div>

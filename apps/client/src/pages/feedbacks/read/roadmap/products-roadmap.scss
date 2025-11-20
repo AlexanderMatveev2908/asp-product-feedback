@@ -15,11 +15,17 @@
 
     .header__status {
       @apply w-full flex justify-center;
+
+      span {
+        @apply text-blue__dark__1 text-center transition-all duration-300;
+      }
     }
+
     .header__line {
-      left: calc(50%);
+      transition: 0.4s;
       width: 125px;
-      @apply absolute bottom-0 h-[4px] bg-purple__prm -translate-x-1/2;
+      background: var(--bg);
+      @apply absolute bottom-0 h-[4px] left-0;
     }
   }
 

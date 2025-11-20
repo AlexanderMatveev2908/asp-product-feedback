@@ -1,7 +1,8 @@
 import { PairValLabelTypedT } from '@/common/types/forms';
 import { FeedbackCatT, FeedbackStatusT } from './types';
 import { RootUiFkt } from '@/core/ui_fkt/root';
-import { Nullable, WithoutId } from '@/common/types/etc';
+import { Nullable, OrNone, WithoutId } from '@/common/types/etc';
+import { ErrApp } from '@/core/lib/etc/err';
 
 export class FeedLibShape extends RootUiFkt {
   private static readonly _categories: WithoutId<PairValLabelTypedT<FeedbackCatT>>[] = [
@@ -60,34 +61,59 @@ export class FeedLibShape extends RootUiFkt {
     {
       label: 'Planned',
       val: FeedbackStatusT.PLANNED,
-      twdClr: 'bg-orange__prm',
+      twdClr: 'var(--orange__prm)',
     },
     {
       label: 'In-Progress',
       val: FeedbackStatusT.IN_PROGRESS,
-      twdClr: 'bg-purple__prm',
+      twdClr: 'var(--purple__prm)',
     },
     {
       label: 'Live',
       val: FeedbackStatusT.LIVE,
-      twdClr: 'bg-blue__light__0',
+      twdClr: 'var(--blue__light__0)',
     },
   ];
+
+  public static clrByStatus(v: FeedbackStatusT): string {
+    const found: OrNone<string> = this._statuses.find(
+      (el: WithoutId<FilterRoadmapT>) => el.val === v
+    )?.twdClr;
+
+    if (!found) throw new ErrApp('404 • status not found, passed invalid argument');
+
+    return found;
+  }
 
   public static statuses(): FilterRoadmapT[] {
     return this.listWithIDs(this._statuses);
   }
-  public static statusesFilter(): FilterRoadmapT[] {
+  public static statusesAsFilters(): FilterRoadmapT[] {
     return this.statuses().filter(
       (v: PairValLabelTypedT<FeedbackStatusT>) => v.val !== FeedbackStatusT.SUGGESTION
     );
   }
 
-  public static statusLabelByVal(arg: string): Nullable<string> {
+  public static statusLabelByVal(arg: string): string {
     return (
       this._statuses.find((el: WithoutId<PairValLabelTypedT<FeedbackStatusT>>) => el.val === arg)
-        ?.label ?? null
+        ?.label ?? ''
     );
+  }
+
+  public static descriptionStatusByVal(v: FeedbackStatusT): string {
+    switch (v) {
+      case FeedbackStatusT.PLANNED:
+        return 'Ideas prioritized for research';
+      case FeedbackStatusT.IN_PROGRESS:
+        return 'Currently being developed';
+      case FeedbackStatusT.LIVE:
+        return 'Released features';
+      case FeedbackStatusT.SUGGESTION:
+        throw new ErrApp('not supposed to be asked');
+      default:
+        throw new ErrApp('passed invalid argument to get description');
+    }
   }
 }
 
