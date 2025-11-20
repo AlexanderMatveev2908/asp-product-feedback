@@ -1,0 +1,46 @@
+@use 'exports/mix' as mix;
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.root {
+  @include mix.sqr(var(--size));
+  border-radius: var(--radius);
+  @apply relative overflow-hidden;
+
+  .root__pending {
+    background: linear-gradient(
+      90deg,
+      var(--neutral__950) 0%,
+      var(--neutral__700) 50%,
+      var(--neutral__950) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+
+    @apply min-w-full min-h-full;
+  }
+
+  .root__content {
+    @apply min-h-full min-w-full object-cover;
+  }
+
+  .root__error {
+    @apply min-h-full min-w-full flex flex-col justify-center items-center gap-2 border-4 border-red-600;
+
+    .error__svg {
+      @apply text-red-600;
+      @include mix.sqr(calc(var(--size) / 1.5));
+    }
+
+    span {
+      @apply text-red-600;
+    }
+  }
+}

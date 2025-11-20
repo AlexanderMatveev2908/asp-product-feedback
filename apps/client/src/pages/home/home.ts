@@ -18,8 +18,11 @@ import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { LinkMain } from '@/common/components/links/link_main/link-main';
 import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/feedback-item';
 import { UseSearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
-import { LibShape } from '@/core/lib/data_structure/shape';
 import { LibSort } from '@/core/lib/data_structure/sort';
+import {
+  KeySortT,
+  SearchFeedbacksFormT,
+} from '@/features/feedbacks/etc/forms/search_feedbacks/form_mng';
 
 @Component({
   selector: 'app-home',
@@ -52,16 +55,21 @@ export class Home implements OnInit {
   }
 
   private sortFiltered(arg: FeedbackT[]): FeedbackT[] {
-    const upvotesSort: OrNone<SortValT> = this.useSearchCtx.formData?.()
-      ?.upvotesSort as OrNone<SortValT>;
-    const commentsSort: OrNone<SortValT> = this.useSearchCtx.formData?.()
-      ?.commentsSort as OrNone<SortValT>;
-    if ([upvotesSort, commentsSort].some((arg: OrNone<string>) => LibShape.isNone(arg))) return arg;
+    const data: OrNone<SearchFeedbacksFormT> = this.useSearchCtx.formData?.();
+    if (!data) return arg;
 
-    return LibSort.sortByMany(arg, [
-      { key: 'upvotes', order: upvotesSort! },
-      { key: 'commentsCount', order: commentsSort! },
-    ]);
+    const pairs: Record<KeySortT, keyof FeedbackT> = {
+      upvotesSort: 'upvotes',
+      commentsSort: 'commentsCount',
+    };
+
+    for (const key in pairs) {
+      const formVal: unknown = data[key as keyof typeof data];
+      if (formVal)
+        return LibSort.sortBy(arg, pairs[key as keyof typeof pairs], formVal as SortValT);
+    }
+
+    return arg;
   }
 
   // ? derived

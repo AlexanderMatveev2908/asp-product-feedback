@@ -62,6 +62,10 @@ export class MainDrop implements OnInit {
       : '-translate-y-[50px] pointer-events-none'
   );
 
+  public readonly currLabel: Signal<string> = computed(() =>
+    SortersUiFkt.labelByExistingSortVals(this.useSearchCtx.formData?.())
+  );
+
   ngOnInit(): void {
     this.useSearchCtx.setupForm();
   }
