@@ -4,7 +4,11 @@
   <div class="root__block_a">
     <div class="block_a__content">
       @for (f of filtersFeedback; track f.id){
-      <button class="content__filter">
+      <button
+        class="content__filter"
+        [style.--bg]="bgFilter(f.val)"
+        [style.--clr]="clrFilter(f.val)"
+      >
         <span class="txt__bd__sm__semi">{{ f.label }}</span>
       </button>
       }

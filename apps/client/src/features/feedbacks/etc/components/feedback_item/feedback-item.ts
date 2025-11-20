@@ -1,5 +1,5 @@
 import { Nullable } from '@/common/types/etc';
-import { ProductsLibShape } from '@/features/feedbacks/etc/lib_shape';
+import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { FeedbackT } from '@/features/feedbacks/etc/types';
 import {
   ChangeDetectionStrategy,
@@ -24,6 +24,6 @@ export class FeedbackItem {
   public readonly withHeader: InputSignal<boolean> = input.required();
 
   public readonly statusLabel: Signal<Nullable<string>> = computed(() =>
-    ProductsLibShape.statusLabelByVal(this.item().status)
+    FeedLibShape.statusLabelByVal(this.item().status)
   );
 }

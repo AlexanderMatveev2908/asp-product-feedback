@@ -14,6 +14,8 @@ export type WithIdT<T> = T & {
   id: string;
 };
 
+export type WithoutId<T> = Omit<T, 'id'>;
+
 export type TimerIdT = Nullable<NodeJS.Timeout>;
 
 export type Dict = Record<string, unknown>;

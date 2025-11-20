@@ -1,5 +1,6 @@
 import { PairValLabelT } from '@/common/types/forms';
 import { RootUiFkt } from '../root';
+import { WithoutId } from '@/common/types/etc';
 
 export type ValSortT = 'ASC' | 'DESC';
 
@@ -9,7 +10,7 @@ export interface SorterT extends Omit<PairValLabelT, 'val'> {
 }
 
 export class SortersUiFkt extends RootUiFkt {
-  private static readonly _sorters: Omit<SorterT, 'id'>[] = [
+  private static readonly _sorters: WithoutId<SorterT>[] = [
     {
       field: 'upvotes',
       label: 'Most Upvotes',

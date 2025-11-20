@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { Reg } from '@/core/paperwork/reg';
 import z, { ZodObject, ZodString } from 'zod';
-import { ProductsLibShape } from '../../../lib_shape';
+import { FeedLibShape } from '../../../lib_shape';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
 
@@ -28,7 +28,7 @@ export class FeedbackFormMng extends RootFormMng {
       .string()
       .min(1, 'Category required')
       .refine(
-        (v: string) => (!v ? true : ProductsLibShape.includedByCategories(v)),
+        (v: string) => (!v ? true : FeedLibShape.includedByCategories(v)),
         'Invalid category'
       ),
     content: z
@@ -45,7 +45,7 @@ export class FeedbackFormMng extends RootFormMng {
   }>(
     {
       title: new FormControl('', { nonNullable: true }),
-      category: new FormControl(ProductsLibShape.defCat(), { nonNullable: true }),
+      category: new FormControl(FeedLibShape.defCat(), { nonNullable: true }),
       content: new FormControl('', { nonNullable: true }),
     },
     {
@@ -56,7 +56,7 @@ export class FeedbackFormMng extends RootFormMng {
   public static defPostForm(): FeedbackFormPostT {
     return {
       title: '',
-      category: ProductsLibShape.defCat(),
+      category: FeedLibShape.defCat(),
       content: '',
     };
   }
