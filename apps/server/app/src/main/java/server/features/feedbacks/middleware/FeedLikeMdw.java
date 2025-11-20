@@ -22,7 +22,7 @@ public class FeedLikeMdw extends BaseMdw {
   @Override
   public Mono<Void> handle(Api api, WebFilterChain chain) {
     return matchPathAfterCutIdOut(api, chain, "/feedbacks/like", HttpMethod.PATCH, () -> {
-      return limit(api, 20, 15).then(withPathId(api).flatMap(id -> {
+      return limit(api, 30, 15).then(withPathId(api).flatMap(id -> {
         return feedSvc.byId(id).switchIfEmpty(
             Mono.error(new ErrAPI("feedback not found", 404))).flatMap(found -> {
               api.setTypedDataAttr(found);

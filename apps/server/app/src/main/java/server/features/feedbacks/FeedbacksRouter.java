@@ -3,6 +3,7 @@ package server.features.feedbacks;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,11 @@ public class FeedbacksRouter {
   @PatchMapping("/like/{feedbackId}")
   public final Mono<ResponseEntity<ResAPI>> likeFeedback(Api api) {
     return patchCtrl.likeFeedback(api);
+  }
+
+  @PostMapping
+  public final Mono<ResponseEntity<ResAPI>> postFeedback(Api api) {
+    return postCtrl.postFeedback(api);
   }
 
 }
