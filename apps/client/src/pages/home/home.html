@@ -16,7 +16,7 @@
     <div class="root">
       @if(feedbacks()) {
       <!--  -->
-      @for(p of feedbacks(); track p.id){
+      @for(p of filtered(); track p.id){
       <app-feedback-item [item]="p" [withHeader]="false" />
       }
       <!--  -->
