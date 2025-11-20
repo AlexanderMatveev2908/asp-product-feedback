@@ -55,8 +55,14 @@ export class UseSearchFeedbacksCtx extends UseInjCtxHk {
     const existing: OrNone<string> = this.formData?.()?.[key];
     if (LibShape.isNone(existing)) return;
 
+    const other: Record<KeySortT, KeySortT> = {
+      commentsSort: 'upvotesSort',
+      upvotesSort: 'commentsSort',
+    };
+
     this.form.patchValue({
       [key]: val === existing ? '' : val,
+      [other[key]]: '',
     });
 
     this.form.updateValueAndValidity();
