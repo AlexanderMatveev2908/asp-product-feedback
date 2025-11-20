@@ -14,7 +14,7 @@ import { NgClass } from '@angular/common';
 import { PairValLabelT } from '@/common/types/forms';
 import { ElDomT, RefDomT } from '@/common/types/dom';
 import { RouterLink } from '@angular/router';
-import { SearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
+import { UseSearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
 import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx';
 
@@ -27,7 +27,7 @@ import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx'
 })
 export class SidebarMobile implements OnInit {
   private readonly sideSlice: SidebarMobileSlice = inject(SidebarMobileSlice);
-  private readonly searchCtx: SearchFeedbacksCtx = inject(SearchFeedbacksCtx);
+  private readonly useSearchCtx: UseSearchFeedbacksCtx = inject(UseSearchFeedbacksCtx);
 
   public readonly useRoadCtx: UseRoadmapCtx = inject(UseRoadmapCtx);
 
@@ -43,23 +43,23 @@ export class SidebarMobile implements OnInit {
   );
 
   public bgFilter(v: string): string {
-    return this.searchCtx.isCatChosen(v) ? 'var(--blue__prm)' : 'var(--gray__0)';
+    return this.useSearchCtx.isCatChosen(v) ? 'var(--blue__prm)' : 'var(--gray__0)';
   }
   public clrFilter(v: string): string {
-    return this.searchCtx.isCatChosen(v) ? '#fff' : 'var(--blue__prm)';
+    return this.useSearchCtx.isCatChosen(v) ? '#fff' : 'var(--blue__prm)';
   }
 
   // ? listeners
   public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
   public onCatChange(v: string): void {
-    this.searchCtx.onCatChange(v);
+    this.useSearchCtx.onCatChange(v);
   }
 
   // ? static
   public readonly filtersFeedback: PairValLabelT[] = FeedLibShape.categoriesPlusAll();
 
   ngOnInit(): void {
-    this.searchCtx.setupForm();
+    this.useSearchCtx.setupForm();
   }
 
   @HostListener('document:mousedown', ['$event'])

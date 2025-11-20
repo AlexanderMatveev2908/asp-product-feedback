@@ -5,6 +5,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class LibRand {
 
+  public static final boolean trueOrFalse() {
+    return ThreadLocalRandom.current().nextBoolean();
+  }
+
   public static final int intTill(int max) {
     return ThreadLocalRandom.current().nextInt(max);
   }

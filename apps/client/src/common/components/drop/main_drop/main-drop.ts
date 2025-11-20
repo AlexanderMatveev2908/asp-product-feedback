@@ -1,4 +1,4 @@
-import { SvgT } from '@/common/types/etc';
+import { SortValT, SvgT } from '@/common/types/etc';
 import { NgClass, NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -6,6 +6,7 @@ import {
   computed,
   HostListener,
   inject,
+  OnInit,
   Signal,
   ViewChild,
 } from '@angular/core';
@@ -14,6 +15,8 @@ import { SortersUiFkt, SorterT } from '@/core/ui_fkt/etc/sorters';
 import { SvgStrokeIconCheck } from '../../svgs/stroke/icon-check/icon-check';
 import { UseDropHk } from '@/core/hooks/use_drop';
 import { ElDomT, RefDomT } from '@/common/types/dom';
+import { UseSearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
+import { KeySortT } from '@/features/feedbacks/etc/forms/search_feedbacks/form_mng';
 
 @Component({
   selector: 'app-main-drop',
@@ -23,9 +26,11 @@ import { ElDomT, RefDomT } from '@/common/types/dom';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UseDropHk],
 })
-export class MainDrop {
+export class MainDrop implements OnInit {
   // ? svc
   public readonly useDrop: UseDropHk = inject(UseDropHk);
+
+  private readonly useSearchCtx: UseSearchFeedbacksCtx = inject(UseSearchFeedbacksCtx);
 
   // ? static
   public readonly Chevron: SvgT = SvgStrokeIconArrowDown;
@@ -38,6 +43,15 @@ export class MainDrop {
     this.useDrop.isOpen.set(!this.useDrop.isOpen());
   }
 
+  public onSortChange(key: KeySortT, v: SortValT): void {
+    this.useSearchCtx.onSortChange(key, v);
+    this.useDrop.isOpen.set(false);
+  }
+
+  public isChosen(key: KeySortT, val: SortValT): boolean {
+    return this.useSearchCtx.isSortChosen(key, val);
+  }
+
   @ViewChild('dropRef')
   private readonly dropRef: RefDomT;
 
@@ -47,6 +61,10 @@ export class MainDrop {
       ? 'translate-y-0 pointer-events-auto'
       : '-translate-y-[50px] pointer-events-none'
   );
+
+  ngOnInit(): void {
+    this.useSearchCtx.setupForm();
+  }
 
   @HostListener('document:mousedown', ['$event'])
   public onMouseDown(e: Event): void {
