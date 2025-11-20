@@ -4,4 +4,20 @@
   .root__svg {
     @apply w-[10px] h-[10px];
   }
+
+  span {
+    color: var(--clr);
+    @apply relative;
+
+    &::after {
+      background: var(--clr);
+      @apply absolute content-[''] top-full h-[1px] w-full left-0 scale-0 transition-all duration-300;
+    }
+
+    &:hover {
+      &::after {
+        @apply scale-100;
+      }
+    }
+  }
 }

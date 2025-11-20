@@ -10,7 +10,7 @@
 
   <span
     class="txt__bd__sm__bold"
-    [ngClass]="version() === 'a' ? 'text-blue__dark__0' : 'text-white'"
+    [style.--clr]="version() === 'a' ? 'var(--blue__dark__0)' : 'white'"
     >Go Back</span
   >
 </a>
