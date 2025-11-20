@@ -1,7 +1,17 @@
-<button class="root" (mousedown)="onFocus()" (mouseup)="onBlur()">
+<button
+  class="root"
+  (click)="optimisticLike()"
+  (mousedown)="useBtnFocus.onFocus()"
+  (mouseup)="useBtnFocus.onBlur()"
+  (mouseout)="useBtnFocus.onBlur()"
+  (blur)="useBtnFocus.onBlur()"
+>
   <div class="root__svg">
     <ng-content
-      *ngComponentOutlet="Chevron; inputs: { fill: isFocused() ? 'var(--blue__prm)' : 'white' }"
+      *ngComponentOutlet="
+        Chevron;
+        inputs: { fill: useBtnFocus.isFocused() ? 'var(--blue__prm)' : 'white' }
+      "
     />
   </div>
 

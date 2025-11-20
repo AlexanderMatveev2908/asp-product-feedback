@@ -17,7 +17,7 @@
     </div>
 
     <div class="footer__counts">
-      <app-btn-votes [upvotes]="item().upvotes" />
+      <app-btn-votes [upvotes]="item().upvotes" [feedbackId]="item().id" />
 
       <a [routerLink]="path()" class="counts__comments">
         <div class="comments__svg">
