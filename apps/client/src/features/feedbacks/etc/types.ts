@@ -41,4 +41,5 @@ export type FeedbackT = SqlTableT<{
   status: FeedbackStatusT;
   description: string;
   comments: OrNone<CommentT[]>;
+  commentsCount: number;
 }>;

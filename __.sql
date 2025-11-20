@@ -78,5 +78,14 @@ SELECT f.*,
       ) c_agg
     )
     ,'[]'::JSON
-  ) comments
-FROM feedbacks f;
+  ) comments,
+  COALESCE(
+    (
+    SELECT COUNT(c.id)
+    FROM comments c
+      WHERE c.feedback_id = f.id
+    )
+    ,0
+  ) AS "commentsCount"
+FROM feedbacks f
+ORDER BY f.created_at DESC;

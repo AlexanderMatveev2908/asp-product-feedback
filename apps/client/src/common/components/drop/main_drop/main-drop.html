@@ -17,14 +17,20 @@
 
   <div class="root__drop" [ngClass]="twd()" [style.opacity]="useDrop.isOpen() ? '1' : '0'">
     @for(s of options; track s.id; let idx = $index){
-    <button class="drop__opt" [style.--border]="idx === options.length - 1 ? 'none' : '1px solid'">
+    <button
+      (click)="onSortChange(s.field, s.val)"
+      class="drop__opt"
+      [style.--border]="idx === options.length - 1 ? 'none' : '1px solid'"
+    >
       <span class="txt__bd__lg__reg">
         {{ s.label }}
       </span>
 
+      @if(isChosen(s.field, s.val)){
       <div class="drop_opt__svg">
         <ng-container *ngComponentOutlet="Check; inputs: { fill: 'white' }" />
       </div>
+      }
     </button>
     }
   </div>

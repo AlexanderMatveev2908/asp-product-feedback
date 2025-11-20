@@ -1,35 +1,34 @@
 import { PairValLabelT } from '@/common/types/forms';
 import { RootUiFkt } from '../root';
-import { WithoutId } from '@/common/types/etc';
-
-export type ValSortT = 'ASC' | 'DESC';
+import { SortValT, WithoutId } from '@/common/types/etc';
+import { KeySortT } from '@/features/feedbacks/etc/forms/search_feedbacks/form_mng';
 
 export interface SorterT extends Omit<PairValLabelT, 'val'> {
-  field: string;
-  val: ValSortT;
+  field: KeySortT;
+  val: SortValT;
 }
 
 export class SortersUiFkt extends RootUiFkt {
   private static readonly _sorters: WithoutId<SorterT>[] = [
     {
-      field: 'upvotes',
+      field: 'upvotesSort',
       label: 'Most Upvotes',
-      val: 'ASC',
+      val: SortValT.DESC,
     },
     {
-      field: 'upvotes',
+      field: 'upvotesSort',
       label: 'Least Upvotes',
-      val: 'DESC',
+      val: SortValT.ASC,
     },
     {
-      field: 'comments',
+      field: 'commentsSort',
       label: 'Most Comments',
-      val: 'ASC',
+      val: SortValT.DESC,
     },
     {
-      field: 'comments',
+      field: 'commentsSort',
       label: 'Least Comments',
-      val: 'DESC',
+      val: SortValT.ASC,
     },
   ];
 

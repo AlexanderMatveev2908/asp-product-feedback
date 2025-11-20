@@ -100,13 +100,15 @@ public class MockData {
         LibRand.choiceIn(FeedCatT.values()));
     return feedSvc.insert(feed).flatMap(createdFeed -> {
       final List<Mono<Comment>> promises = new ArrayList<>();
+      final boolean insertOrNot = LibRand.trueOrFalse();
 
-      for (int i = 0; i < 3; i++) {
-        final Comment randComment = new Comment(faker.lorem().maxLengthSentence(500),
-            dict.casting("user", User.class).getId(),
-            createdFeed.getId());
-        promises.add(commentSvc.insert(randComment));
-      }
+      if (insertOrNot)
+        for (int i = 0; i < 2; i++) {
+          final Comment randComment = new Comment(faker.lorem().maxLengthSentence(500),
+              dict.casting("user", User.class).getId(),
+              createdFeed.getId());
+          promises.add(commentSvc.insert(randComment));
+        }
 
       return Flux.merge(promises).collectList()
           .map(createdComments -> dict.mergeWith(Dict.of("feedback", createdFeed,
@@ -116,13 +118,15 @@ public class MockData {
 
   private Mono<List<Reply>> insertReplies(User author, User recipient, Comment comment) {
     final List<Mono<Reply>> promises = new ArrayList<>();
+    final boolean insertOrNot = LibRand.trueOrFalse();
 
-    for (int i = 0; i < 2; i++) {
-      final Reply reply = new Reply(author.getId(),
-          recipient.getId(), comment.getId(), faker.lorem().maxLengthSentence(500));
+    if (insertOrNot)
+      for (int i = 0; i < 2; i++) {
+        final Reply reply = new Reply(author.getId(),
+            recipient.getId(), comment.getId(), faker.lorem().maxLengthSentence(500));
 
-      promises.add(replySvc.insert(reply));
-    }
+        promises.add(replySvc.insert(reply));
+      }
 
     return Flux.merge(promises).collectList();
   }

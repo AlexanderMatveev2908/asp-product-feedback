@@ -21,7 +21,7 @@ export class LibMemory {
     const obj: Dict = {};
 
     for (const k in arg)
-      if (Object.prototype.hasOwnProperty.call(arg, k)) obj[k] = this.cpy(obj[k]);
+      if (Object.prototype.hasOwnProperty.call(arg, k)) obj[k] = this.cpy(arg[k]);
 
     return obj as T;
   }
