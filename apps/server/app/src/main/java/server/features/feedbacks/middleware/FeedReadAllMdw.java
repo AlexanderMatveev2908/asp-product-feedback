@@ -13,12 +13,12 @@ import org.springframework.http.HttpMethod;
 @SuppressFBWarnings({ "EI2", "EI" })
 @Component
 @RequiredArgsConstructor
-public class FeedbacksMdw extends BaseMdw {
+public class FeedReadAllMdw extends BaseMdw {
 
   @Override
   public Mono<Void> handle(Api api, WebFilterChain chain) {
     return isTarget(api, chain, "/feedbacks", HttpMethod.GET, () -> {
-      return limit(api, 40, 15).then(chain.filter(api));
+      return limit(api, 30, 15).then(chain.filter(api));
     });
   }
 }
