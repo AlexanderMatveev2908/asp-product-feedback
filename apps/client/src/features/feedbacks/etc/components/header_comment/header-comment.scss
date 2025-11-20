@@ -6,15 +6,6 @@
   .root__left {
     @apply flex items-center gap-[16px];
 
-    .left__img {
-      @apply rounded-full overflow-hidden;
-      @include mix.sqr(40px);
-
-      img {
-        @apply object-cover min-w-full min-h-full;
-      }
-    }
-
     .left__labels {
       @apply flex flex-col;
     }

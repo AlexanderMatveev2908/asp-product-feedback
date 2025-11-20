@@ -21,6 +21,7 @@ import {
 export class ImgLoader {
   public readonly size: InputSignal<string> = input.required();
   public readonly src: InputSignal<string> = input.required();
+  public readonly radius: InputSignal<string> = input.required();
 
   public readonly isPending: WritableSignal<boolean> = signal(true);
   public readonly isError: WritableSignal<boolean> = signal(false);

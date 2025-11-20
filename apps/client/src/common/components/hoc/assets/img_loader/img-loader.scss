@@ -11,7 +11,8 @@
 
 .root {
   @include mix.sqr(var(--size));
-  @apply relative rounded-[10px] overflow-hidden;
+  border-radius: var(--radius);
+  @apply relative overflow-hidden;
 
   .root__pending {
     background: linear-gradient(
