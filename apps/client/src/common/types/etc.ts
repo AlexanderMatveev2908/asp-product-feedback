@@ -31,3 +31,8 @@ export interface AppPayloadEventT {
 export interface BoolPayloadT {
   v: boolean;
 }
+
+export enum SortValT {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
