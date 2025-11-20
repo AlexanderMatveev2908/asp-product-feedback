@@ -15,7 +15,8 @@ import { PairValLabelT } from '@/common/types/forms';
 import { ElDomT, RefDomT } from '@/common/types/dom';
 import { RouterLink } from '@angular/router';
 import { SearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
-import { FeedLibShape, FilterRoadmapT } from '@/features/feedbacks/etc/lib_shape';
+import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
+import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx';
 
 @Component({
   selector: 'app-sidebar-mobile',
@@ -27,6 +28,8 @@ import { FeedLibShape, FilterRoadmapT } from '@/features/feedbacks/etc/lib_shape
 export class SidebarMobile implements OnInit {
   private readonly sideSlice: SidebarMobileSlice = inject(SidebarMobileSlice);
   private readonly searchCtx: SearchFeedbacksCtx = inject(SearchFeedbacksCtx);
+
+  public readonly useRoadCtx: UseRoadmapCtx = inject(UseRoadmapCtx);
 
   @ViewChild('sideRef')
   private readonly sideRef: RefDomT;
@@ -54,7 +57,6 @@ export class SidebarMobile implements OnInit {
 
   // ? static
   public readonly filtersFeedback: PairValLabelT[] = FeedLibShape.categoriesPlusAll();
-  public readonly filtersRoadmap: FilterRoadmapT[] = FeedLibShape.statusesAsFilters();
 
   ngOnInit(): void {
     this.searchCtx.setupForm();

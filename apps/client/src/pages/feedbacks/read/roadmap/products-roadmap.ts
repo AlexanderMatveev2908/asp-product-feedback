@@ -3,7 +3,6 @@ import { LinkBack } from '@/common/components/links/link_back/link-back';
 import { LinkMain } from '@/common/components/links/link_main/link-main';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
-import { PairValLabelTypedT } from '@/common/types/forms';
 import { FeedbackStatusT } from '@/features/feedbacks/etc/types';
 import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { FeedbackItem } from '../../../../features/feedbacks/etc/components/feedback_item/feedback-item';
@@ -20,15 +19,6 @@ import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx'
 })
 export class ProductsRoadmap {
   public readonly useRoadCtx: UseRoadmapCtx = inject(UseRoadmapCtx);
-
-  // ? statics
-  public readonly statuses: Signal<(PairValLabelTypedT<FeedbackStatusT> & { count: number })[]> =
-    computed(() =>
-      FeedLibShape.statusesAsFilters().map((s: PairValLabelTypedT<FeedbackStatusT>) => ({
-        ...s,
-        count: this.useRoadCtx.countOf(s.val),
-      }))
-    );
 
   // ? derived
   public readonly currLabel: Signal<string> = computed(

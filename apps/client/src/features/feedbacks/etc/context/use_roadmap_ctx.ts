@@ -2,6 +2,7 @@ import { computed, inject, Injectable, Signal, signal, WritableSignal } from '@a
 import { FeedbacksSlice } from '../../slice';
 import { FeedbackStatusT, FeedbackT } from '../types';
 import { Nullable } from '@/common/types/etc';
+import { FeedLibShape, FilterRoadmapT } from '../lib_shape';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,13 @@ export class UseRoadmapCtx {
 
     return data.filter((f: FeedbackT) => f.status === this.currStatus());
   });
+
+  public readonly statusesWithCount: Signal<(FilterRoadmapT & { count: number })[]> = computed(() =>
+    FeedLibShape.statusesAsFilters().map((s: FilterRoadmapT) => ({
+      ...s,
+      count: this.countOf(s.val),
+    }))
+  );
 
   // ? helpers
   public countOf(v: FeedbackStatusT): number {

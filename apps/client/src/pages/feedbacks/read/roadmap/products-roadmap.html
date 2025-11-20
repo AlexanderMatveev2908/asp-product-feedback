@@ -17,7 +17,7 @@
   <ng-template #contentRef>
     <div class="root">
       <div class="root__header">
-        @for(s of statuses(); track s.id; let idx = $index){
+        @for(s of useRoadCtx.statusesWithCount(); track s.id; let idx = $index){
         <button (click)="useRoadCtx.onStatusChange(s.val)" class="header__status">
           <span class="txt__bd__sm__bold" [ngClass]="twdLabel(s.val)">
             {{ s.label }} ({{ s.count }})</span
