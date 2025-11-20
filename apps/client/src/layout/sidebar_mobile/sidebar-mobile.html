@@ -24,15 +24,15 @@
       </a>
     </div>
     <div class="block_b__content">
-      @for(f of filtersRoadmap; track f.id){
+      @for(f of useRoadCtx.statusesWithCount(); track f.id){
       <div class="content__filter">
         <div class="filter__label">
-          <div class="label__circle" [ngClass]="f.twdClr"></div>
+          <div class="label__circle" [style.--bg]="f.twdClr"></div>
 
           <span class="txt__bd__lg__reg">{{ f.label }}</span>
         </div>
 
-        <span class="txt__bd__lg__bold"> 2 </span>
+        <span class="txt__bd__lg__bold"> {{ f.count }} </span>
       </div>
       }
     </div>
