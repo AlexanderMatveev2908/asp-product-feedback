@@ -34,7 +34,7 @@ public interface ApiInfo {
   }
 
   // ? path var available at endpoint level
-  default Nullable<UUID> getPathVarId(String key) {
+  default Nullable<UUID> getPathVarIdInRoute(String key) {
     Nullable<Map<String, String>> vars = Nullable
         .of(getExch().getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
 

@@ -13,7 +13,7 @@ import org.springframework.http.HttpMethod;
 @SuppressFBWarnings({ "EI2", "EI" })
 @Component
 @RequiredArgsConstructor
-public class FeedbacksMdw extends BaseMdw {
+public class FeedReadAllMdw extends BaseMdw {
 
   @Override
   public Mono<Void> handle(Api api, WebFilterChain chain) {

@@ -76,7 +76,7 @@ public abstract class BaseMdw implements WebFilter {
     // ? path & variables path
     protected final Mono<UUID> withPathId(Api api) {
         if (!api.hasPathUUID())
-            return Mono.error(new ErrAPI("invalid id", 400));
+            return Mono.error(new ErrAPI("id missing or invalid", 400));
 
         return Mono.just(api.getPathVarId().orYell());
     }
