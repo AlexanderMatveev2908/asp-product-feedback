@@ -53,7 +53,7 @@ public class MockData {
   private final CloudSvc cloud;
   private final ReplySvc replySvc;
 
-  private Mono<List<CloudAsset>> uploadImages() {
+  private final Mono<List<CloudAsset>> uploadImages() {
 
     final Path dirUsers = LibPath.IMAGES_DIR.resolve("users");
     if (!Files.isDirectory(dirUsers))

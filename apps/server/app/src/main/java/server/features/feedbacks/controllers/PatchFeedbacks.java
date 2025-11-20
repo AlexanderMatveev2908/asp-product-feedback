@@ -17,6 +17,6 @@ public class PatchFeedbacks {
   private final FeedLikeSvc feedSvc;
 
   public Mono<ResponseEntity<ResAPI>> likeFeedback(Api api) {
-    return feedSvc.main(api).flatMap(dict -> ResAPI.withStatus(200).data(dict).build());
+    return feedSvc.main(api).flatMap(bool -> ResAPI.withStatus(200).msg("upvote added").build());
   }
 }

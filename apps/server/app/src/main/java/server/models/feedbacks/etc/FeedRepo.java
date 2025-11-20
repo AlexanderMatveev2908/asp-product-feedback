@@ -18,4 +18,12 @@ public interface FeedRepo extends ReactiveCrudRepository<Feedback, UUID> {
       RETURNING *
       """)
   public Mono<Feedback> insert(Feedback feedback);
+
+  @Query("""
+      UPDATE feedbacks
+      SET upvotes = upvotes + 1
+        WHERE id = :feedbackId
+        RETURNING TRUE
+      """)
+  public Mono<Boolean> like(UUID feedbackId);
 }

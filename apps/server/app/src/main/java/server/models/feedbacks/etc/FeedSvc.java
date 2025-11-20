@@ -22,4 +22,8 @@ public final class FeedSvc {
   public final Mono<Feedback> byId(UUID id) {
     return feedRepo.findById(id);
   }
+
+  public final Mono<Boolean> like(UUID feedbackId) {
+    return feedRepo.like(feedbackId);
+  }
 }
