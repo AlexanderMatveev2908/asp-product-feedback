@@ -1,10 +1,10 @@
 import { PairValLabelTypedT } from '@/common/types/forms';
 import { FeedbackCatT, FeedbackStatusT } from './types';
 import { RootUiFkt } from '@/core/ui_fkt/root';
-import { Nullable } from '@/common/types/etc';
+import { Nullable, WithoutId } from '@/common/types/etc';
 
-export class ProductsLibShape extends RootUiFkt {
-  private static readonly _categories: Omit<PairValLabelTypedT<FeedbackCatT>, 'id'>[] = [
+export class FeedLibShape extends RootUiFkt {
+  private static readonly _categories: WithoutId<PairValLabelTypedT<FeedbackCatT>>[] = [
     {
       label: 'Feature',
       val: FeedbackCatT.FEATURE,
@@ -30,10 +30,13 @@ export class ProductsLibShape extends RootUiFkt {
   public static categories(): PairValLabelTypedT<FeedbackCatT>[] {
     return this.listWithIDs(this._categories);
   }
+  public static categoriesPlusAll(): PairValLabelTypedT<FeedbackCatT | string>[] {
+    return [this.withID({ label: 'All', val: 'ALL' }), ...this.categories()];
+  }
 
   public static catLabelByVal(arg: string): Nullable<string> {
     return (
-      this._categories.find((el: Omit<PairValLabelTypedT<FeedbackCatT>, 'id'>) => el.val === arg)
+      this._categories.find((el: WithoutId<PairValLabelTypedT<FeedbackCatT>>) => el.val === arg)
         ?.label ?? null
     );
   }
@@ -44,33 +47,37 @@ export class ProductsLibShape extends RootUiFkt {
 
   public static includedByCategories(arg: string): boolean {
     return this._categories.some(
-      (pair: Omit<PairValLabelTypedT<FeedbackCatT>, 'id'>) => pair.val === arg
+      (pair: WithoutId<PairValLabelTypedT<FeedbackCatT>>) => pair.val === arg
     );
   }
 
-  private static readonly _statuses: Omit<PairValLabelTypedT<FeedbackStatusT>, 'id'>[] = [
+  private static readonly _statuses: WithoutId<FilterRoadmapT>[] = [
     {
       label: 'Suggestion',
       val: FeedbackStatusT.SUGGESTION,
+      twdClr: '',
     },
     {
       label: 'Planned',
       val: FeedbackStatusT.PLANNED,
+      twdClr: 'bg-orange__prm',
     },
     {
       label: 'In-Progress',
       val: FeedbackStatusT.IN_PROGRESS,
+      twdClr: 'bg-purple__prm',
     },
     {
       label: 'Live',
       val: FeedbackStatusT.LIVE,
+      twdClr: 'bg-blue__light__0',
     },
   ];
 
-  public static statuses(): PairValLabelTypedT<FeedbackStatusT>[] {
+  public static statuses(): FilterRoadmapT[] {
     return this.listWithIDs(this._statuses);
   }
-  public static statusesFilter(): PairValLabelTypedT<FeedbackStatusT>[] {
+  public static statusesFilter(): FilterRoadmapT[] {
     return this.statuses().filter(
       (v: PairValLabelTypedT<FeedbackStatusT>) => v.val !== FeedbackStatusT.SUGGESTION
     );
@@ -78,8 +85,10 @@ export class ProductsLibShape extends RootUiFkt {
 
   public static statusLabelByVal(arg: string): Nullable<string> {
     return (
-      this._statuses.find((el: Omit<PairValLabelTypedT<FeedbackStatusT>, 'id'>) => el.val === arg)
+      this._statuses.find((el: WithoutId<PairValLabelTypedT<FeedbackStatusT>>) => el.val === arg)
         ?.label ?? null
     );
   }
 }
+
+export type FilterRoadmapT = PairValLabelTypedT<FeedbackStatusT> & { twdClr: string };

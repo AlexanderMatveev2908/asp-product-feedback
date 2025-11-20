@@ -1,3 +1,5 @@
+@use 'exports/mix' as mix;
+
 .root {
   height: calc(100% - 72px);
   min-height: calc(100% - 72px);
@@ -14,10 +16,12 @@
       @apply flex flex-wrap items-center gap-x-[8px] gap-y-[14px];
 
       .content__filter {
-        @apply bg-gray__0 rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
+        background: var(--bg);
+        @include mix.app__btn__scl(1.2);
+        @apply rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
 
         span {
-          @apply text-blue__prm;
+          color: var(--clr);
         }
       }
     }

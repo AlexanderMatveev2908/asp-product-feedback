@@ -5,7 +5,7 @@ import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { PairValLabelTypedT } from '@/common/types/forms';
 import { FeedbackStatusT, FeedbackT } from '@/features/feedbacks/etc/types';
-import { ProductsLibShape } from '@/features/feedbacks/etc/lib_shape';
+import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { FeedbacksSlice } from '@/features/feedbacks/slice';
 import { FeedbackItem } from '../../../../features/feedbacks/etc/components/feedback_item/feedback-item';
 
@@ -19,8 +19,7 @@ import { FeedbackItem } from '../../../../features/feedbacks/etc/components/feed
 export class ProductsRoadmap {
   private readonly productsSlice: FeedbacksSlice = inject(FeedbacksSlice);
 
-  public readonly statuses: PairValLabelTypedT<FeedbackStatusT>[] =
-    ProductsLibShape.statusesFilter();
+  public readonly statuses: PairValLabelTypedT<FeedbackStatusT>[] = FeedLibShape.statusesFilter();
 
   public readonly filtered: Signal<FeedbackT[]> = computed(() => {
     const data: FeedbackT[] = this.productsSlice.feedbacks() ?? [];

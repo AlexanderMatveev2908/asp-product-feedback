@@ -11,7 +11,7 @@ import { BtnVotes } from '@/common/components/btns/btn_votes/btn-votes';
 import { NgComponentOutlet } from '@angular/common';
 import { SvgAdvIconComments } from '@/common/components/svgs/advanced/icon-comments/icon-comments';
 import { RouterLink } from '@angular/router';
-import { ProductsLibShape } from '../../../lib_shape';
+import { FeedLibShape } from '../../../lib_shape';
 import { FeedbackT } from '../../../types';
 
 @Component({
@@ -31,6 +31,6 @@ export class FeedbackContent {
   public readonly path: Signal<string> = computed(() => `/feedbacks/read/${this.item()?.id}`);
 
   public readonly catLabel: Signal<Nullable<string>> = computed(() =>
-    ProductsLibShape.catLabelByVal(this.item().category)
+    FeedLibShape.catLabelByVal(this.item().category)
   );
 }

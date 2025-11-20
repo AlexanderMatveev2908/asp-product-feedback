@@ -1,6 +1,6 @@
 import { CheckFieldT, TxtFieldT } from '@/common/types/forms';
 import { FormsUiFkt } from '@/core/ui_fkt/forms/forms';
-import { ProductsLibShape } from '../../../lib_shape';
+import { FeedLibShape } from '../../../lib_shape';
 
 export interface FeedbackFormFields {
   title: TxtFieldT;
@@ -26,7 +26,7 @@ export class FeedbackFormUiFkt extends FormsUiFkt {
       label: 'Category',
       comment: 'Choose a category for your feedback',
       type: 'radio',
-      options: ProductsLibShape.categories(),
+      options: FeedLibShape.categories(),
     });
   }
 
@@ -36,7 +36,7 @@ export class FeedbackFormUiFkt extends FormsUiFkt {
       label: 'Update Status',
       comment: 'Change feature state',
       type: 'radio',
-      options: ProductsLibShape.statuses(),
+      options: FeedLibShape.statuses(),
     });
   }
 
