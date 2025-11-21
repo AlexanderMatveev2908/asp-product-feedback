@@ -3,7 +3,7 @@ import { UseApiSvc } from '@/core/store/api/use_api';
 import { inject, Injectable } from '@angular/core';
 import { FeedbackT } from './etc/types';
 import { LibApiArgs } from '@/core/store/api/etc/lib/api_args';
-import { FeedFormPostT } from './etc/forms/feedback_form/etc/form_mng';
+import { FeedFormPostT, FeedFormPutT } from './etc/forms/feedback_form/etc/form_mng';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +25,11 @@ export class FeedbacksApiSvc {
 
   public post(data: FeedFormPostT): ObsResT<{ feedback: FeedbackT }> {
     return this.api.post(LibApiArgs.withURL(`${this.base}`).body(data).toastOnFulfilled());
+  }
+
+  public put(data: FeedFormPutT, feedbackId: string): ObsResT<{ feedback: FeedbackT }> {
+    return this.api.put(
+      LibApiArgs.withURL(`${this.base}/${feedbackId}`).body(data).toastOnFulfilled()
+    );
   }
 }

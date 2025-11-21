@@ -41,6 +41,8 @@
         [onClick]="resetPreFilled"
         [isDisabled]="useApiTrack.isPending()"
       />
+
+      @if(!isFormTypePost()){
       <app-btn-main
         appUseMetaApp
         [label]="'Delete'"
@@ -48,7 +50,7 @@
         [minW]="'100%'"
         [btnT]="'button'"
         [isDisabled]="useApiTrack.isPending()"
-      />
+      />}
     </div>
   </form>
 </div>
