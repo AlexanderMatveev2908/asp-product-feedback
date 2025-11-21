@@ -61,7 +61,7 @@ export class FeedbackForm {
     this.isFormTypePost() ? SvgAdvIconNewFeedback : SvgAdvIconEditFeedback
   );
   public readonly currTitle: Signal<string> = computed(() =>
-    this.isFormTypePost() ? 'Create New Feedback' : 'Editing ...'
+    this.isFormTypePost() ? 'Create New Feedback' : `Editing '${this.existingItem()?.title}'`
   );
 
   public readonly fields: FeedbackFormFields = FeedbackFormUiFkt.formFields();
