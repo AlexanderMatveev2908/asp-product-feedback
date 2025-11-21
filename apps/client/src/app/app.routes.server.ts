@@ -18,7 +18,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client,
   },
   {
-    path: 'feedbacks/put',
+    path: 'feedbacks/put/:feedbackID',
     renderMode: RenderMode.Client,
   },
   {

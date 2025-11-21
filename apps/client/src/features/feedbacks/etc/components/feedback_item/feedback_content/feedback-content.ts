@@ -28,7 +28,10 @@ export class FeedbackContent {
   public readonly Comment: SvgT = SvgAdvIconComments;
 
   // ? derived
-  public readonly path: Signal<string> = computed(() => `/feedbacks/read/${this.item()?.id}`);
+  public readonly pathComments: Signal<string> = computed(
+    () => `/feedbacks/read/${this.item()?.id}`
+  );
+  public readonly pathPut: Signal<string> = computed(() => `/feedbacks/put/${this.item().id}`);
 
   public readonly catLabel: Signal<Nullable<string>> = computed(() =>
     FeedLibShape.catLabelByVal(this.item().category)

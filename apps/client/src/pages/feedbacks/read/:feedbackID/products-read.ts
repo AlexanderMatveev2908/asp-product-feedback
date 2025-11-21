@@ -1,24 +1,14 @@
-import { Nullable } from '@/common/types/etc';
-import { UseNavSvc } from '@/core/services/use_nav/index';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import { Params } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, OnInit, Signal } from '@angular/core';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
-import { FeedbackT } from '@/features/feedbacks/etc/types';
-import { FeedbacksSlice } from '@/features/feedbacks/slice';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
-import { ApiStatusT } from '@/core/store/api/etc/types';
 import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { LinkBack } from '@/common/components/links/link_back/link-back';
 import { CommentItem } from './comment_item/comment-item';
 import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/feedback-item';
+import { UseFindFeedByParams } from '@/core/hooks/use_find_feed_by_params';
+import { FeedbackT } from '@/features/feedbacks/etc/types';
+import { Nullable } from '@/common/types/etc';
 
 @Component({
   selector: 'app-products-read',
@@ -26,33 +16,14 @@ import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/
   templateUrl: './products-read.html',
   styleUrl: './products-read.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [UseFindFeedByParams],
 })
 export class ProductsRead extends UseInjCtxHk implements OnInit {
-  private readonly useNav: UseNavSvc = inject(UseNavSvc);
-  private readonly productsSLice: FeedbacksSlice = inject(FeedbacksSlice);
+  private readonly useFindFeedByParams: UseFindFeedByParams = inject(UseFindFeedByParams);
 
-  public readonly item: WritableSignal<Nullable<FeedbackT>> = signal(null);
+  public readonly found: Signal<Nullable<FeedbackT>> = this.useFindFeedByParams.found;
 
   ngOnInit(): void {
-    const vars: Nullable<Params> = this.useNav.path_variables();
-    const productID: Nullable<string> = vars?.['feedbackID'];
-
-    this.useEffect(() => {
-      const products: Nullable<FeedbackT[]> = this.productsSLice.feedbacks();
-      if (!products) return;
-
-      const found: Nullable<FeedbackT> =
-        products.find((p: FeedbackT) => p.id === productID) ?? null;
-
-      if (!found)
-        this.useNav.pushNotice({
-          eventT: 'ERR',
-          msg: 'Product not found',
-          status: ApiStatusT.NOT_FOUND,
-          tmpt: 'home',
-        });
-
-      this.item.set(found);
-    });
+    this.useFindFeedByParams.main();
   }
 }

@@ -26,13 +26,13 @@ export abstract class _UsePathHk extends UseInjCtxHk {
   private readonly _goingTo: WritableSignal<Nullable<string>> = signal(null);
   private readonly _meta: WritableSignal<Nullable<MetaNavT>> = signal(null);
   private readonly _query: WritableSignal<Nullable<Params>> = signal(null);
-  private readonly _path_variables: WritableSignal<Nullable<Params>> = signal(null);
+  private readonly _pathVariables: WritableSignal<Nullable<Params>> = signal(null);
 
   public readonly meta: Signal<Nullable<MetaNavT>> = this._meta.asReadonly();
   public readonly currPath: Signal<Nullable<string>> = this._currPath.asReadonly();
   public readonly goingTo: Signal<Nullable<string>> = this._currPath.asReadonly();
   public readonly query: Signal<Nullable<Params>> = this._query.asReadonly();
-  public readonly path_variables: Signal<Nullable<Params>> = this._path_variables.asReadonly();
+  public readonly pathVariables: Signal<Nullable<Params>> = this._pathVariables.asReadonly();
 
   private findDeepestRoute(snapshot: ActivatedRouteSnapshot): ActivatedRouteSnapshot {
     let snap: ActivatedRouteSnapshot = snapshot;
@@ -63,7 +63,7 @@ export abstract class _UsePathHk extends UseInjCtxHk {
         const deepestSnap: ActivatedRouteSnapshot = this.findDeepestRoute(snapshot);
         const params: Params = deepestSnap.params;
 
-        this._path_variables.set(LibShape.hasObjData(params) ? params : null);
+        this._pathVariables.set(LibShape.hasObjData(params) ? params : null);
       });
   }
 

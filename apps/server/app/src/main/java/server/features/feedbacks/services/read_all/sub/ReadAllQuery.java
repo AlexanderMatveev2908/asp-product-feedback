@@ -4,7 +4,7 @@ package server.features.feedbacks.services.read_all.sub;
 // @formatter:off
 public class ReadAllQuery {
   public static final String getQuery() {
-    StringBuilder sb = new StringBuilder();
+    final StringBuilder sb = new StringBuilder();
     sb.append("""
 SELECT f.*,
   COALESCE(

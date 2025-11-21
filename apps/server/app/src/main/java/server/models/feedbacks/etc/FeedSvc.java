@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+import server.features.feedbacks.paperwork.PutFeedFormT;
 import server.models.feedbacks.Feedback;
 
 @Service
@@ -25,5 +26,10 @@ public final class FeedSvc {
 
   public final Mono<Boolean> like(UUID feedbackId) {
     return feedRepo.like(feedbackId);
+  }
+
+  public final Mono<Feedback> update(
+      PutFeedFormT form, UUID feedbackId) {
+    return feedRepo.update(form, feedbackId);
   }
 }

@@ -1,5 +1,5 @@
 <div class="root">
-  <div class="root__body">
+  <a [routerLink]="pathPut()" class="root__body">
     <span class="txt__bd__sm__bold text-blue__dark__1">
       {{ item().title }}
     </span>
@@ -7,7 +7,7 @@
     <span class="txt__bd__sm__reg text-blue__dark__0">
       {{ item().description }}
     </span>
-  </div>
+  </a>
 
   <div class="root__footer">
     <div class="footer__cat">
@@ -19,7 +19,7 @@
     <div class="footer__counts">
       <app-btn-votes [upvotes]="item().upvotes" [feedbackId]="item().id" />
 
-      <a [routerLink]="path()" class="counts__comments">
+      <a [routerLink]="pathComments()" class="counts__comments">
         <div class="comments__svg">
           <ng-content *ngComponentOutlet="Comment" />
         </div>
