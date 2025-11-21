@@ -2,8 +2,8 @@
   <ng-template #contentRef>
     <div class="root">
       <div class="root__header">
-        <app-link-back [version]="'a'" />
-        <app-btn-main appUseMetaApp [label]="'Edit Feedback'" varT="blue" />
+        <app-link-back [version]="'a'" [where]="'/'" />
+        <app-link-main appUseMetaApp [label]="'Edit Feedback'" varT="blue" [path]="pathEdit()" />
       </div>
 
       @if(found()){

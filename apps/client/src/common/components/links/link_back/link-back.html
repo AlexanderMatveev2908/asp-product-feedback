@@ -1,4 +1,4 @@
-<a [routerLink]="'/'" class="root">
+<a [routerLink]="where()" class="root">
   <div class="root__svg" [ngClass]="version() === 'a' ? 'text-blue__prm' : 'text-[#CDD2EE]'">
     <ng-content
       *ngComponentOutlet="
