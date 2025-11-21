@@ -17,6 +17,8 @@ import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { Nullable } from '@/common/types/etc';
 import { LinkMain } from '@/common/components/links/link_main/link-main';
 import { CommentForm } from '@/features/feedbacks/etc/forms/comment_form/comment-form';
+import { CommentFormT } from '@/features/feedbacks/etc/forms/comment_form/etc/form_mng';
+import { from, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products-read',
@@ -29,9 +31,14 @@ import { CommentForm } from '@/features/feedbacks/etc/forms/comment_form/comment
 export class ProductsRead extends UseInjCtxHk implements OnInit {
   private readonly useFindFeedByParams: UseFindFeedByParams = inject(UseFindFeedByParams);
 
+  // ? derived
   public readonly found: Signal<Nullable<FeedbackT>> = this.useFindFeedByParams.found;
-
   public readonly pathEdit: Signal<string> = computed(() => `/feedbacks/put/${this.found()?.id}`);
+
+  public readonly strategy: (data: CommentFormT) => Observable<unknown> = (data: CommentFormT) => {
+    console.log(data);
+    return from(['aaa']);
+  };
 
   ngOnInit(): void {
     this.useFindFeedByParams.main();

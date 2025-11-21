@@ -1,13 +1,13 @@
 <div class="root">
   <span class="text-blue__dark__1 txt__hd__md">Add Comment</span>
 
-  <form class="root__content">
+  <form class="root__content" [formGroup]="form" (ngSubmit)="onSubmit()">
     <app-form-field-txt appUseFormField [f]="field" [ctrl]="ctrl" />
 
     <div class="content__footer">
-      <span class="text-blue__dark__0 txt__bd__sm__reg">250 Characters left</span>
+      <span class="text-blue__dark__0 txt__bd__sm__reg">{{ charsLeft() }} Characters left</span>
 
-      <app-btn-main appUseMetaApp [varT]="'purple'" [label]="'Post Comment'" />
+      <app-btn-main appUseMetaApp [varT]="'purple'" [label]="'Post Comment'" [btnT]="'submit'" />
     </div>
   </form>
 </div>

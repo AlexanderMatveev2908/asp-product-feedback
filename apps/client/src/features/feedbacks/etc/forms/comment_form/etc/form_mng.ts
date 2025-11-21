@@ -24,6 +24,12 @@ export class CommentFormMng extends RootFormMng {
         validators: this.validate(this.schema),
       }
     );
+
+  public static defFormData(): CommentFormT {
+    return {
+      content: '',
+    };
+  }
 }
 
 export type CommentFormT = z.infer<typeof CommentFormMng.schema>;
