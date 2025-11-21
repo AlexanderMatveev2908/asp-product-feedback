@@ -36,7 +36,7 @@ export class FeedbacksPut extends UseInjCtxHk implements OnInit {
   ) => {
     const castedData: FeedFormPutT = data as FeedFormPutT;
 
-    return this.useFeedKit.api.put(castedData, this.found()?.id as string).pipe(
+    return this.useFeedKit.api.putFeed(castedData, this.found()?.id as string).pipe(
       tap((_: ResApiT<{ feedback: FeedbackT }>) => {
         // ! is impossible to update a feed if they do not exists
         // ! so I think is fine to assert here
@@ -66,7 +66,7 @@ export class FeedbacksPut extends UseInjCtxHk implements OnInit {
   public readonly delStrategy: () => Observable<unknown> = () => {
     const castedId: string = this.found()?.id as string;
 
-    return this.useFeedKit.api.delete(castedId).pipe(
+    return this.useFeedKit.api.delFeed(castedId).pipe(
       tap((_: ResApiT<void>) => {
         const existing: FeedbackT[] = this.useFeedKit.slice.feedbacks() as FeedbackT[];
         this.useFeedKit.slice.setFeedbacks(existing.filter((f: FeedbackT) => f.id !== castedId));

@@ -30,7 +30,7 @@ export class BtnVotes {
   public optimisticLike(): void {
     this.useFeedKit.slice.optimisticLike(this.feedbackId());
     this.useFeedKit.api
-      .like(this.feedbackId())
+      .likeFeed(this.feedbackId())
       .pipe(
         catchError((err: ErrApiT<void>) => {
           this.useFeedKit.slice.rollbackLike();
