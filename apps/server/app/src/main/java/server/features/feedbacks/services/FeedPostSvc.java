@@ -8,14 +8,22 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import server.decorators.core.api.Api;
 import server.decorators.types.Dict;
+import server.features.feedbacks.paperwork.PostFeedFormT;
+import server.models.feedbacks.Feedback;
+import server.models.feedbacks.etc.FeedSvc;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI" })
 public class FeedPostSvc {
-  public Mono<Dict> main(Api api) {
+  private final FeedSvc feedSvc;
 
-    return Mono.just(Dict.of("feedback", api.getTypedData()));
+  public Mono<Dict> main(Api api) {
+    PostFeedFormT form = (PostFeedFormT) api.getTypedData().orYell();
+    Feedback newFeed = new Feedback(form.getTitle(), form.getContent(), form.getCategory());
+
+    return feedSvc.insert(newFeed).map(created -> Dict.fromT(created));
+
   }
 }
