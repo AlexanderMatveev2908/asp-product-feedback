@@ -1,7 +1,7 @@
 <app-page-wrapper [waitClient]="true" [eventT]="'INFO'" [isPending]="!found()">
   <ng-template #contentRef>
     <div class="root">
-      <app-link-back [version]="'a'" />
+      <app-link-back [version]="'a'" [where]="`/feedbacks/read/${found()?.id}`" />
 
       <app-feedback-form
         [strategy]="putStrategy"

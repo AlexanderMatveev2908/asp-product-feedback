@@ -15,4 +15,6 @@ import { LinkBackVersionT } from './etc/types';
 export class LinkBack {
   public readonly version: InputSignal<LinkBackVersionT> = input.required();
   public readonly Chevron: SvgT = SvgStrokeIconArrowLeft;
+
+  public readonly where: InputSignal<string> = input.required();
 }
