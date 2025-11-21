@@ -63,6 +63,19 @@ export class ProductsPut extends UseInjCtxHk implements OnInit {
     );
   };
 
+  public readonly delStrategy: () => Observable<unknown> = () => {
+    const castedId: string = this.found()?.id as string;
+
+    return this.useFeedKit.api.delete(castedId).pipe(
+      tap((_: ResApiT<void>) => {
+        const existing: FeedbackT[] = this.useFeedKit.slice.feedbacks() as FeedbackT[];
+        this.useFeedKit.slice.setFeedbacks(existing.filter((f: FeedbackT) => f.id !== castedId));
+
+        void this.useNav.replace('/');
+      })
+    );
+  };
+
   ngOnInit(): void {
     this.useFindFeedByParams.main();
   }

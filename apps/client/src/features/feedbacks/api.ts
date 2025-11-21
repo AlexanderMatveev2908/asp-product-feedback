@@ -20,16 +20,36 @@ export class FeedbacksApiSvc {
   }
 
   public like(feedbackId: string): ObsResT<void> {
-    return this.api.patch(LibApiArgs.withURL(`${this.base}/like/${feedbackId}`).toastOnFulfilled());
+    return this.api.patch(
+      LibApiArgs.withURL(`${this.base}/like/${feedbackId}`)
+        .toastOnFulfilled()
+        .toastOkMsg('added upvote')
+    );
   }
 
   public post(data: FeedFormPostT): ObsResT<{ feedback: FeedbackT }> {
-    return this.api.post(LibApiArgs.withURL(`${this.base}`).body(data).toastOnFulfilled());
+    return this.api.post(
+      LibApiArgs.withURL(`${this.base}`)
+        .body(data)
+        .toastOnFulfilled()
+        .toastOkMsg('created feedback')
+    );
   }
 
   public put(data: FeedFormPutT, feedbackId: string): ObsResT<{ feedback: FeedbackT }> {
     return this.api.put(
-      LibApiArgs.withURL(`${this.base}/${feedbackId}`).body(data).toastOnFulfilled()
+      LibApiArgs.withURL(`${this.base}/${feedbackId}`)
+        .body(data)
+        .toastOnFulfilled()
+        .toastOkMsg('updated feedback')
+    );
+  }
+
+  public delete(feedbackId: string): ObsResT<void> {
+    return this.api.delete(
+      LibApiArgs.withURL(`${this.base}/${feedbackId}`)
+        .toastOnFulfilled()
+        .toastOkMsg('deleted feedback')
     );
   }
 }

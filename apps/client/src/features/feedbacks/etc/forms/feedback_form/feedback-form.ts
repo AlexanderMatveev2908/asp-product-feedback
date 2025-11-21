@@ -26,6 +26,8 @@ import { Observable, tap } from 'rxjs';
 import { UseApiTrackerHk } from '@/core/store/api/etc/hooks/use_tracker';
 import { FeedbackT } from '../../types';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
+import { ErrApp } from '@/core/lib/etc/err';
+import { FeedbackFormTokens } from './etc/tokens';
 
 @Component({
   selector: 'app-feedback-form',
@@ -41,21 +43,31 @@ import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
   templateUrl: './feedback-form.html',
   styleUrl: './feedback-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UseApiTrackerHk],
+  providers: [
+    { provide: FeedbackFormTokens.FORM_TRACKER, useClass: UseApiTrackerHk },
+    { provide: FeedbackFormTokens.DEL_TRACKER, useClass: UseApiTrackerHk },
+  ],
 })
 export class FeedbackForm extends UseInjCtxHk implements OnInit {
   // ? props
   public readonly strategy: InputSignal<(data: FeedFormPostT) => Observable<unknown>> =
     input.required();
   public readonly existingItem: InputSignal<Nullable<FeedbackT>> = input<Nullable<FeedbackT>>(null);
+  public readonly delStrategy: InputSignal<Nullable<() => Observable<unknown>>> =
+    input<Nullable<() => Observable<unknown>>>(null);
 
   // ? svc
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
 
   // ? hooks
-  public readonly useApiTrack: UseApiTrackerHk = inject(UseApiTrackerHk);
+  public readonly useTrackFormPending: UseApiTrackerHk = inject(FeedbackFormTokens.FORM_TRACKER);
+  public readonly useTrackDelPending: UseApiTrackerHk = inject(FeedbackFormTokens.DEL_TRACKER);
 
   // ? derived
+  public readonly someonePending: Signal<boolean> = computed(
+    () => this.useTrackDelPending.isPending() || this.useTrackFormPending.isPending()
+  );
+
   public readonly isFormTypePost: Signal<boolean> = computed(
     () => !!this.useNav.currPath()?.includes('post')
   );
@@ -86,14 +98,15 @@ export class FeedbackForm extends UseInjCtxHk implements OnInit {
     return this.currForm().get(formKey) as FormControl;
   }
 
-  // ? listeners
+  // | === listeners ===
+  // ? form related
   public onSubmit(): void {
     if (!this.currForm().valid) {
       RootFormMng.onSubmitFailed(this.currForm());
       return;
     }
 
-    this.useApiTrack
+    this.useTrackFormPending
       .track(this.strategy()(this.currForm().value))
       .pipe(tap((_: unknown) => this.resetEmpty()))
       .subscribe();
@@ -109,6 +122,15 @@ export class FeedbackForm extends UseInjCtxHk implements OnInit {
   public resetPreFilled: () => void = () =>
     RootFormMng.reset(this.currForm(), this.preFilledData());
 
+  // ? deleting
+  public readonly delFeed: () => void = () => {
+    const strategy: Nullable<() => Observable<unknown>> = this.delStrategy();
+    if (!strategy) throw new ErrApp('expected a callable');
+
+    this.useTrackDelPending.track(strategy()).subscribe();
+  };
+
+  // ? ng lifecycle
   ngOnInit(): void {
     this.useEffect(() => {
       const found: Nullable<FeedbackT> = this.existingItem();
