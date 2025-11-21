@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS replies (
   content VARCHAR(1000) NOT NULL,
-  user_id UUID NOT NULL REFERENCES users(id),
-  replying_to UUID NOT NULL REFERENCES users(id),
-  comment_id UUID NOT NULL REFERENCES comments(id)
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  replying_to UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  comment_id UUID NOT NULL REFERENCES comments(id) ON DELETE CASCADE
   ) INHERITS (root_table);
 
 ALTER TABLE replies

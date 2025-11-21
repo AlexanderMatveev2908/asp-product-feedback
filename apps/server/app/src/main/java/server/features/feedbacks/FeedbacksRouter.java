@@ -1,6 +1,7 @@
 package server.features.feedbacks;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,11 @@ public class FeedbacksRouter {
   @PutMapping("/{feedbackId}")
   public final Mono<ResponseEntity<ResAPI>> putFeedback(Api api) {
     return putCtrl.putFeedback(api);
+  }
+
+  @DeleteMapping("/{feedbackId}")
+  public final Mono<ResponseEntity<ResAPI>> delByById(Api api) {
+    return delCtrl.delByById(api);
   }
 
 }

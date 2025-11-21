@@ -38,4 +38,11 @@ public interface FeedRepo extends ReactiveCrudRepository<Feedback, UUID> {
       RETURNING *
       """)
   public Mono<Feedback> update(PutFeedFormT form, UUID feedbackId);
+
+  @Query("""
+      DELETE FROM feedbacks
+      WHERE id = :feedbackId
+      RETURNING 1
+      """)
+  public Mono<Integer> delById(UUID feedbackId);
 }
