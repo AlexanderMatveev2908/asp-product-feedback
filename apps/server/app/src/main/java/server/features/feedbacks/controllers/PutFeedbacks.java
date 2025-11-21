@@ -9,12 +9,12 @@ import reactor.core.publisher.Mono;
 import server.decorators.core.api.Api;
 import server.decorators.core.res_api.ResAPI;
 
-@SuppressFBWarnings({ "EI2" }) 
-@Component 
+@SuppressFBWarnings({ "EI2" })
+@Component
 @RequiredArgsConstructor
 public class PutFeedbacks {
 
-  public Mono<ResponseEntity<ResAPI>> example(Api api) {
+  public final Mono<ResponseEntity<ResAPI>> example(Api api) {
     return ResAPI.withStatus(200).msg("Put Feedbacks endpoint").build();
   }
 }

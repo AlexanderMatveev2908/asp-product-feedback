@@ -20,7 +20,7 @@ public class FeedLikeMdw extends BaseMdw {
   private final FeedSvc feedSvc;
 
   @Override
-  public Mono<Void> handle(Api api, WebFilterChain chain) {
+  public final Mono<Void> handle(Api api, WebFilterChain chain) {
     return matchPathAfterCutIdOut(api, chain, "/feedbacks/like", HttpMethod.PATCH, () -> {
       return limit(api, 30, 15).then(withPathId(api).flatMap(id -> {
         return feedSvc.byId(id).switchIfEmpty(

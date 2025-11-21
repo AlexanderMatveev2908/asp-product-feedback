@@ -13,7 +13,6 @@ import server.decorators.core.api.Api;
 import server.decorators.types.AppFile;
 import server.decorators.types.Dict;
 import server.decorators.types.Nullable;
-import server.lib.data_structure.LibShape;
 import server.lib.data_structure.prs.LibPrs;
 import server.lib.dev.lib_log.LibLog;
 
@@ -39,9 +38,14 @@ public final class LogMdw implements WebFilter {
 
             final Nullable<Object> norm = api.getContentType().contains("multipart/form-data") ? Nullable.asNone()
                     : normalizeEmpty(body);
-
-            arg.put("body", LibShape.hasText(norm.orNone()) ? LibPrs.dictFromJson((String) norm.orYell())
-                    : norm.orNone());
+            try {
+                arg.put("body", norm.isPresent() ? LibPrs.dictFromJson((String) norm.orYell())
+                        : norm.orNone());
+            } catch (Exception err) {
+                LibLog.stdErr("invalid body");
+                arg.put("body", "👻 invalid client body");
+                arg.put("wrongBody", norm.orNone());
+            }
 
             LibLog.wOk(arg);
         }).then(chain.filter(api));

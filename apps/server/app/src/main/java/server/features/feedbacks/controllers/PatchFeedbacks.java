@@ -16,7 +16,7 @@ import server.features.feedbacks.services.FeedLikeSvc;
 public class PatchFeedbacks {
   private final FeedLikeSvc feedSvc;
 
-  public Mono<ResponseEntity<ResAPI>> likeFeedback(Api api) {
+  public final Mono<ResponseEntity<ResAPI>> likeFeedback(Api api) {
     return feedSvc.main(api).flatMap(bool -> ResAPI.withStatus(200).msg("upvote added").build());
   }
 }
