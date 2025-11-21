@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,11 @@ public class FeedbacksRouter {
   @PostMapping
   public final Mono<ResponseEntity<ResAPI>> postFeedback(Api api) {
     return postCtrl.postFeedback(api);
+  }
+
+  @PutMapping("/{feedbackId}")
+  public final Mono<ResponseEntity<ResAPI>> putFeedback(Api api) {
+    return putCtrl.putFeedback(api);
   }
 
 }

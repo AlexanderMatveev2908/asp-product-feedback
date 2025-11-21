@@ -20,8 +20,8 @@ public class FeedPostSvc {
   private final FeedSvc feedSvc;
 
   public Mono<Dict> main(Api api) {
-    PostFeedFormT form = (PostFeedFormT) api.getTypedData().orYell();
-    Feedback newFeed = new Feedback(form.getTitle(), form.getContent(), form.getCategory());
+    final PostFeedFormT form = (PostFeedFormT) api.getTypedData().orYell();
+    final Feedback newFeed = new Feedback(form.getTitle(), form.getContent(), form.getCategory());
 
     return feedSvc.insert(newFeed).map(created -> Dict.of("feedback", created));
 

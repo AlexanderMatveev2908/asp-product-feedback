@@ -7,6 +7,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
 import reactor.core.publisher.Mono;
+import server.features.feedbacks.paperwork.PutFeedFormT;
 import server.models.feedbacks.Feedback;
 
 @Repository
@@ -14,7 +15,7 @@ public interface FeedRepo extends ReactiveCrudRepository<Feedback, UUID> {
 
   @Query("""
       INSERT INTO feedbacks (title, description, category)
-      VALUES (:#{#feedback.title}, :#{#feedback.description}, CAST(:#{#feedback.category.getVal()} AS category_type))
+      VALUES (:#{#feedback.title}, :#{#feedback.description}, CAST(:#{#feedback.category} AS category_type))
       RETURNING *
       """)
   public Mono<Feedback> insert(Feedback feedback);
@@ -26,4 +27,15 @@ public interface FeedRepo extends ReactiveCrudRepository<Feedback, UUID> {
         RETURNING TRUE
       """)
   public Mono<Boolean> like(UUID feedbackId);
+
+  @Query("""
+      UPDATE feedbacks
+      SET title = :#{#form.title},
+        category = CAST(:#{#form.category} AS category_type),
+        status = CAST(:#{#form.status} AS status_type),
+        description = :#{#form.content}
+      WHERE id = :feedbackId
+      RETURNING *
+      """)
+  public Mono<Feedback> update(PutFeedFormT form, UUID feedbackId);
 }
