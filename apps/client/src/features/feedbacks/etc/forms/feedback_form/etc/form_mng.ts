@@ -36,7 +36,7 @@ export class FeedbackFormMng extends RootFormMng {
     content: z
       .string()
       .min(1, 'Content required')
-      .max(1000, 'Max length exceeded')
+      .max(250, 'Max length exceeded')
       .regex(Reg.TXT, 'Invalid content'),
   });
 

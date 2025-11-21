@@ -26,7 +26,7 @@ END$$;
 
 CREATE TABLE IF NOT EXISTS feedbacks (
   title VARCHAR(100) NOT NULL,
-  description VARCHAR(1000) NOT NULL,
+  description VARCHAR(250) NOT NULL,
   upvotes INTEGER NOT NULL DEFAULT 0,
   category category_type NOT NULL,
   status status_type NOT NULL DEFAULT 'SUGGESTION'
