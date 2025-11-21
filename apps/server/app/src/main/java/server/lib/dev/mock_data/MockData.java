@@ -96,7 +96,7 @@ public class MockData {
   }
 
   private Mono<Dict> insertFeedCommentsPairs(Dict dict) {
-    final Feedback feed = new Feedback(faker.lorem().sentence(), faker.lorem().maxLengthSentence(250),
+    final Feedback feed = new Feedback(faker.lorem().maxLengthSentence(100), faker.lorem().maxLengthSentence(250),
         LibRand.choiceIn(FeedCatT.values()));
     return feedSvc.insert(feed).flatMap(createdFeed -> {
       final List<Mono<Comment>> promises = new ArrayList<>();
