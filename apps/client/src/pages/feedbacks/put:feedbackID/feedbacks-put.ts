@@ -16,14 +16,14 @@ import { ResApiT } from '@/core/store/api/etc/types';
 import { UseNavSvc } from '@/core/services/use_nav';
 
 @Component({
-  selector: 'app-products-put',
+  selector: 'app-feedbacks-put',
   imports: [PageWrapper, LinkBack, FeedbackForm],
-  templateUrl: './products-put.html',
-  styleUrl: './products-put.scss',
+  templateUrl: './feedbacks-put.html',
+  styleUrl: './feedbacks-put.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UseFindFeedByParams],
 })
-export class ProductsPut extends UseInjCtxHk implements OnInit {
+export class FeedbacksPut extends UseInjCtxHk implements OnInit {
   private readonly useFeedKit: UseFeedKit = inject(UseFeedKit);
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
 
@@ -36,7 +36,7 @@ export class ProductsPut extends UseInjCtxHk implements OnInit {
   ) => {
     const castedData: FeedFormPutT = data as FeedFormPutT;
 
-    return this.useFeedKit.api.put(castedData, this.found()?.id as string).pipe(
+    return this.useFeedKit.api.putFeed(castedData, this.found()?.id as string).pipe(
       tap((_: ResApiT<{ feedback: FeedbackT }>) => {
         // ! is impossible to update a feed if they do not exists
         // ! so I think is fine to assert here
@@ -66,7 +66,7 @@ export class ProductsPut extends UseInjCtxHk implements OnInit {
   public readonly delStrategy: () => Observable<unknown> = () => {
     const castedId: string = this.found()?.id as string;
 
-    return this.useFeedKit.api.delete(castedId).pipe(
+    return this.useFeedKit.api.delFeed(castedId).pipe(
       tap((_: ResApiT<void>) => {
         const existing: FeedbackT[] = this.useFeedKit.slice.feedbacks() as FeedbackT[];
         this.useFeedKit.slice.setFeedbacks(existing.filter((f: FeedbackT) => f.id !== castedId));

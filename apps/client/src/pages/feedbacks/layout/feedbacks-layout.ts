@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-products-layout',
+  selector: 'app-feedbacks-layout',
   imports: [RouterOutlet],
-  templateUrl: './products-layout.html',
-  styleUrl: './products-layout.scss',
+  templateUrl: './feedbacks-layout.html',
+  styleUrl: './feedbacks-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsLayout {}
+export class FeedbacksLayout {}

@@ -10,23 +10,23 @@ import { FeedbackT } from '@/features/feedbacks/etc/types';
 import { UseNavSvc } from '@/core/services/use_nav';
 
 @Component({
-  selector: 'app-products-post',
+  selector: 'app-feedbacks-post',
   imports: [PageWrapper, LinkBack, FeedbackForm],
-  templateUrl: './products-post.html',
-  styleUrl: './products-post.scss',
+  templateUrl: './feedbacks-post.html',
+  styleUrl: './feedbacks-post.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsPost {
+export class FeedbacksPost {
   private readonly useFeedKit: UseFeedKit = inject(UseFeedKit);
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
 
   public readonly postStrategy: (data: FeedFormPostT) => Observable<unknown> = (
     data: FeedFormPostT
   ) =>
-    this.useFeedKit.api.post(data).pipe(
-      tap((_: ResApiT<{ feedback: FeedbackT }>) => {
-        this.useFeedKit.slice.refetch();
-
+    this.useFeedKit.api.postFeed(data).pipe(
+      tap((res: ResApiT<{ feedback: FeedbackT }>) => {
+        const existing: FeedbackT[] = this.useFeedKit.slice.feedbacks() as FeedbackT[];
+        this.useFeedKit.slice.setFeedbacks([{ ...res.feedback, comments: [] }, ...existing]);
         void this.useNav.replace('/');
       })
     );
