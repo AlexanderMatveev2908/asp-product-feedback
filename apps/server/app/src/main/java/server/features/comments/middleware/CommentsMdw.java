@@ -6,11 +6,13 @@ import org.springframework.web.server.WebFilterChain;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
 import server.features.comments.paperwork.CommentFormT;
 import server.features.feedbacks.middleware.shared.FeedFinderMdw;
 import server.middleware.base_mdw.BaseMdw;
 import server.models.feedbacks.etc.FeedSvc;
+import server.models.users.etc.UserSvc;
 
 import org.springframework.http.HttpMethod;
 
@@ -19,6 +21,7 @@ import org.springframework.http.HttpMethod;
 @RequiredArgsConstructor
 public final class CommentsMdw extends BaseMdw implements FeedFinderMdw {
   private final FeedSvc feedSvc;
+  private final UserSvc userSvc;
 
   public FeedSvc getFeedSvc() {
     return feedSvc;
@@ -27,7 +30,9 @@ public final class CommentsMdw extends BaseMdw implements FeedFinderMdw {
   @Override
   public final Mono<Void> handle(Api api, WebFilterChain chain) {
     return matchPathAfterCutIdOut(api, chain, "/comments", HttpMethod.POST, () -> {
-      return limit(api, 10, 15).then(throwOn404(withPathId(api))).then(checkBodyForm(api, CommentFormT.class))
+      return limit(api, 10, 15).then(throwOn404(withPathId(api)))
+          .then(checkBodyForm(api, CommentFormT.class).flatMap(typedForm -> userSvc.byId(typedForm.getUserId())
+              .switchIfEmpty(Mono.error(new ErrAPI("user not found", 404)))))
           .then(chain.filter(api));
     });
   }
