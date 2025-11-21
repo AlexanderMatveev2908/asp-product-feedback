@@ -1,6 +1,7 @@
 <div class="root">
-  <app-form-header-field [f]="f()" />
-
+  @if(f().comment && f().label){ <app-form-header-field [f]="f()" />
+  }
+  <!--  -->
   <div class="root__content">
     @if(f().type === 'textarea'){
     <textarea
