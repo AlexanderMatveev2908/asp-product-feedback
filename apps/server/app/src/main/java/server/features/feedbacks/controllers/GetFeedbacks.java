@@ -17,7 +17,7 @@ public class GetFeedbacks {
 
   private final FeedReadAllSvc readSvc;
 
-  public Mono<ResponseEntity<ResAPI>> readAllFeedbacks(Api api) {
+  public final Mono<ResponseEntity<ResAPI>> readAllFeedbacks(Api api) {
     return readSvc.main(api).flatMap(dict -> ResAPI.withStatus(200).data(dict).build());
   }
 }

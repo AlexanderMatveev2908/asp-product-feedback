@@ -16,9 +16,9 @@ import org.springframework.http.HttpMethod;
 public class FeedReadAllMdw extends BaseMdw {
 
   @Override
-  public Mono<Void> handle(Api api, WebFilterChain chain) {
+  public final Mono<Void> handle(Api api, WebFilterChain chain) {
     return isTarget(api, chain, "/feedbacks", HttpMethod.GET, () -> {
-      return limit(api, 30, 15).then(chain.filter(api));
+      return limit(api, 50, 15).then(chain.filter(api));
     });
   }
 }

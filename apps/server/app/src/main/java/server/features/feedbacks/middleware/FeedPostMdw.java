@@ -5,30 +5,21 @@ import org.springframework.web.server.WebFilterChain;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import server.decorators.core.ErrAPI;
 import server.decorators.core.api.Api;
+import server.features.feedbacks.paperwork.PostFeedFormT;
 import server.middleware.base_mdw.BaseMdw;
-import server.models.feedbacks.etc.FeedSvc;
-
 import org.springframework.http.HttpMethod;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @Component
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2" })
-public class FeedLikeMdw extends BaseMdw {
-  private final FeedSvc feedSvc;
+public class FeedPostMdw extends BaseMdw {
 
   @Override
   public final Mono<Void> handle(Api api, WebFilterChain chain) {
-    return matchPathAfterCutIdOut(api, chain, "/feedbacks/like", HttpMethod.PATCH, () -> {
-      return limit(api, 30, 15).then(withPathId(api).flatMap(id -> {
-        return feedSvc.byId(id).switchIfEmpty(
-            Mono.error(new ErrAPI("feedback not found", 404))).flatMap(found -> {
-              api.setTypedDataAttr(found);
-              return chain.filter(api);
-            });
-      }));
+    return isTarget(api, chain, "/feedbacks", HttpMethod.POST, () -> {
+      return limit(api, 10, 15).then(checkBodyForm(api, PostFeedFormT.class).then(chain.filter(api)));
     });
   }
 }

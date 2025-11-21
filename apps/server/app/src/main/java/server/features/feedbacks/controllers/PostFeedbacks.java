@@ -8,13 +8,15 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import server.decorators.core.api.Api;
 import server.decorators.core.res_api.ResAPI;
+import server.features.feedbacks.services.FeedPostSvc;
 
-@SuppressFBWarnings({ "EI2" }) 
-@Component 
+@SuppressFBWarnings({ "EI2" })
+@Component
 @RequiredArgsConstructor
 public class PostFeedbacks {
+  private final FeedPostSvc feedPostSvc;
 
-  public Mono<ResponseEntity<ResAPI>> example(Api api) {
-    return ResAPI.withStatus(200).msg("Post Feedbacks endpoint").build();
+  public final Mono<ResponseEntity<ResAPI>> postFeedback(Api api) {
+    return feedPostSvc.main(api).flatMap(dict -> ResAPI.withStatus(200).data(dict).build());
   }
 }
