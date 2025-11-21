@@ -10,7 +10,7 @@ import server.decorators.core.api.Api;
 import server.decorators.core.res_api.ResAPI;
 import server.features.comments.services.PostCommentSvc;
 
-@SuppressFBWarnings({ "EI2" })
+@SuppressFBWarnings({ "EI2", "EI" })
 @Component
 @RequiredArgsConstructor
 public final class PostComments {
