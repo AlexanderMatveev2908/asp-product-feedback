@@ -32,4 +32,8 @@ public final class FeedSvc {
       PutFeedFormT form, UUID feedbackId) {
     return feedRepo.update(form, feedbackId);
   }
+
+  public final Mono<Integer> delById(UUID feedbackId) {
+    return feedRepo.delById(feedbackId);
+  }
 }

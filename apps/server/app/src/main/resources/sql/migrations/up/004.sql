@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS images (
   public_id TEXT NOT NULL,
   url TEXT NOT NULL,
-  user_id UUID NOT NULL UNIQUE REFERENCES users(id)
+  user_id UUID NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE
 ) INHERITS (root_table);
 
 ALTER TABLE images
