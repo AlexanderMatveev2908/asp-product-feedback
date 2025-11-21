@@ -16,7 +16,7 @@ public class PostFeedFormT {
   @Size(max = 100, message = "max length exceeded")
   private String title;
 
-  @NotNull
+  @NotNull(message = "category required")
   @EnumMatch(enumTarget = FeedCatT.class, message = "category invalid")
   private FeedCatT category;
 
