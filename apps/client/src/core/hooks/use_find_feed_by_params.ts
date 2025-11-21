@@ -13,7 +13,7 @@ export class UseFindFeedByParams extends UseInjCtxHk {
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
   private readonly feedbacksSlice: FeedbacksSlice = inject(FeedbacksSlice);
 
-  public readonly item: WritableSignal<Nullable<FeedbackT>> = signal(null);
+  public readonly found: WritableSignal<Nullable<FeedbackT>> = signal(null);
 
   public main(): void {
     this.useEffect(() => {
@@ -41,7 +41,7 @@ export class UseFindFeedByParams extends UseInjCtxHk {
           tmpt: 'home',
         });
 
-      this.item.set(found);
+      this.found.set(found);
     });
   }
 }

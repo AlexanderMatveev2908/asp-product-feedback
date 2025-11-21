@@ -1,4 +1,4 @@
-<app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="!useFindFeedByParams.item()">
+<app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="!found()">
   <ng-template #contentRef>
     <div class="root">
       <div class="root__header">
@@ -6,22 +6,19 @@
         <app-btn-main appUseMetaApp [label]="'Edit Feedback'" varT="blue" />
       </div>
 
-      @if(useFindFeedByParams.item()){
-      <app-feedback-item [item]="useFindFeedByParams.item()!" [withHeader]="false" />}
+      @if(found()){
+      <app-feedback-item [item]="found()!" [withHeader]="false" />}
 
       <div class="root__comments">
         <div class="comments__title">
           <span class="txt__hd__md text-blue__dark__1"
-            >{{ useFindFeedByParams.item()?.comments?.length ?? 0 }} Comments</span
+            >{{ found()?.comments?.length ?? 0 }} Comments</span
           >
         </div>
 
         <div class="comments__content">
-          @for(c of useFindFeedByParams.item()?.comments; track c.id; let idx = $index){
-          <app-comment-item
-            [comment]="c"
-            [isLast]="idx === (useFindFeedByParams.item()?.comments?.length ?? 0) - 1"
-          />
+          @for(c of found()?.comments; track c.id; let idx = $index){
+          <app-comment-item [comment]="c" [isLast]="idx === (found()?.comments?.length ?? 0) - 1" />
           }
         </div>
       </div>

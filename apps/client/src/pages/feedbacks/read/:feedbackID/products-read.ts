@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, Signal } from '@angular/core';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
@@ -7,6 +7,8 @@ import { LinkBack } from '@/common/components/links/link_back/link-back';
 import { CommentItem } from './comment_item/comment-item';
 import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/feedback-item';
 import { UseFindFeedByParams } from '@/core/hooks/use_find_feed_by_params';
+import { FeedbackT } from '@/features/feedbacks/etc/types';
+import { Nullable } from '@/common/types/etc';
 
 @Component({
   selector: 'app-products-read',
@@ -17,7 +19,9 @@ import { UseFindFeedByParams } from '@/core/hooks/use_find_feed_by_params';
   providers: [UseFindFeedByParams],
 })
 export class ProductsRead extends UseInjCtxHk implements OnInit {
-  public readonly useFindFeedByParams: UseFindFeedByParams = inject(UseFindFeedByParams);
+  private readonly useFindFeedByParams: UseFindFeedByParams = inject(UseFindFeedByParams);
+
+  public readonly found: Signal<Nullable<FeedbackT>> = this.useFindFeedByParams.found;
 
   ngOnInit(): void {
     this.useFindFeedByParams.main();

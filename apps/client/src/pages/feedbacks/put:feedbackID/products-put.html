@@ -3,7 +3,7 @@
     <div class="root">
       <app-link-back [version]="'a'" />
 
-      <app-feedback-form [strategy]="putStrategy" [existingItem]="useFindFeedByParams.item()" />
+      <app-feedback-form [strategy]="putStrategy" [existingItem]="found()" />
     </div>
   </ng-template>
 </app-page-wrapper>
