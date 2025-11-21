@@ -16,14 +16,14 @@ import { ResApiT } from '@/core/store/api/etc/types';
 import { UseNavSvc } from '@/core/services/use_nav';
 
 @Component({
-  selector: 'app-products-put',
+  selector: 'app-feedbacks-put',
   imports: [PageWrapper, LinkBack, FeedbackForm],
-  templateUrl: './products-put.html',
-  styleUrl: './products-put.scss',
+  templateUrl: './feedbacks-put.html',
+  styleUrl: './feedbacks-put.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UseFindFeedByParams],
 })
-export class ProductsPut extends UseInjCtxHk implements OnInit {
+export class FeedbacksPut extends UseInjCtxHk implements OnInit {
   private readonly useFeedKit: UseFeedKit = inject(UseFeedKit);
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
 

@@ -11,13 +11,13 @@ import { NgClass } from '@angular/common';
 import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx';
 
 @Component({
-  selector: 'app-products-roadmap',
+  selector: 'app-feedbacks-roadmap',
   imports: [LinkBack, LinkMain, UseMetaAppDir, PageWrapper, FeedbackItem, NgClass],
-  templateUrl: './products-roadmap.html',
-  styleUrl: './products-roadmap.scss',
+  templateUrl: './feedbacks-roadmap.html',
+  styleUrl: './feedbacks-roadmap.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsRoadmap {
+export class FeedbacksRoadmap {
   public readonly useRoadCtx: UseRoadmapCtx = inject(UseRoadmapCtx);
 
   // ? derived

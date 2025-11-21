@@ -21,14 +21,14 @@ import { CommentFormT } from '@/features/feedbacks/etc/forms/comment_form/etc/fo
 import { from, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-products-read',
+  selector: 'app-feedbacks-read',
   imports: [PageWrapper, CommentItem, UseMetaAppDir, LinkBack, FeedbackItem, LinkMain, CommentForm],
-  templateUrl: './products-read.html',
-  styleUrl: './products-read.scss',
+  templateUrl: './feedbacks-read.html',
+  styleUrl: './feedbacks-read.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UseFindFeedByParams],
 })
-export class ProductsRead extends UseInjCtxHk implements OnInit {
+export class FeedbacksRead extends UseInjCtxHk implements OnInit {
   private readonly useFindFeedByParams: UseFindFeedByParams = inject(UseFindFeedByParams);
 
   // ? derived
