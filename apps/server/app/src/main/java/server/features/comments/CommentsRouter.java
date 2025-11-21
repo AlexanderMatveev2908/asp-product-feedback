@@ -17,8 +17,9 @@ import server.decorators.core.res_api.ResAPI;
 public final class CommentsRouter {
   private final PostComments postCtrl;
 
-  @PostMapping
+  @PostMapping("/{feedbackId}")
   public final Mono<ResponseEntity<ResAPI>> postComment(Api api) {
+
     return postCtrl.postComment(api);
   }
 
