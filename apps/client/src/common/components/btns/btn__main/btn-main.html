@@ -5,8 +5,17 @@
   class="root"
   [style.--hex_def]="useMetaApp.varsHex().hexDef"
   [style.--hex_hover]="useMetaApp.varsHex().hexHover"
+  [disabled]="isDisabled() || isPending()"
 >
+  @if(isPending()){
+  <app-spin-txt appUseMetaEventDir [eventT]="'NONE'" />
+  }
+
   <span class="txt__bd__sm__bold">
+    @if(isPending()){ Pending... }
+    <!--  -->
+    @else{
     {{ useMetaApp.label() }}
+    }
   </span>
 </button>

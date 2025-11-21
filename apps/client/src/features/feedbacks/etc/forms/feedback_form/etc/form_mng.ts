@@ -38,20 +38,21 @@ export class FeedbackFormMng extends RootFormMng {
       .regex(Reg.TXT, 'Invalid content'),
   });
 
-  public static formPost: FormGroup = new FormGroup<{
-    title: FormControl<string>;
-    category: FormControl<string>;
-    content: FormControl<string>;
-  }>(
-    {
-      title: new FormControl('', { nonNullable: true }),
-      category: new FormControl(FeedLibShape.defCat(), { nonNullable: true }),
-      content: new FormControl('', { nonNullable: true }),
-    },
-    {
-      validators: this.validate(this.schemaPost),
-    }
-  );
+  public static readonly formPost: () => FormGroup = () =>
+    new FormGroup<{
+      title: FormControl<string>;
+      category: FormControl<string>;
+      content: FormControl<string>;
+    }>(
+      {
+        title: new FormControl('', { nonNullable: true }),
+        category: new FormControl(FeedLibShape.defCat(), { nonNullable: true }),
+        content: new FormControl('', { nonNullable: true }),
+      },
+      {
+        validators: this.validate(this.schemaPost),
+      }
+    );
 
   public static defPostForm(): FeedbackFormPostT {
     return {

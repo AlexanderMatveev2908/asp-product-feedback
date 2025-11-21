@@ -23,7 +23,7 @@ public class FeedPostSvc {
     PostFeedFormT form = (PostFeedFormT) api.getTypedData().orYell();
     Feedback newFeed = new Feedback(form.getTitle(), form.getContent(), form.getCategory());
 
-    return feedSvc.insert(newFeed).map(created -> Dict.fromT(created));
+    return feedSvc.insert(newFeed).map(created -> Dict.of("feedback", created));
 
   }
 }

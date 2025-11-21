@@ -1,8 +1,8 @@
 .root {
-  @apply w-full h-full flex justify-center items-center;
+  @apply flex justify-center items-center h-[25px] w-[25px];
 
   .root__spin {
     border-color: var(--clr);
-    @apply w-full h-full rounded-full border-[4px] border-t-transparent border-b-transparent;
+    @apply w-full h-full rounded-full border-[3px] border-t-transparent border-b-transparent;
   }
 }

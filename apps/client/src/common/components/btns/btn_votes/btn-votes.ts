@@ -5,7 +5,7 @@ import { SvgStrokeIconArrowUp } from '../../svgs/stroke/icon-arrow-up/icon-arrow
 import { UseFeedKit } from '@/features/feedbacks/etc/services/use_feed_kit';
 import { UseBtnFocusHk } from '@/core/hooks/use_btn_focus';
 import { catchError, throwError } from 'rxjs';
-import { ErrApiT, ResApiT } from '@/core/store/api/etc/types';
+import { ErrApiT } from '@/core/store/api/etc/types';
 import { ToastSlice } from '@/features/toast/slice';
 
 @Component({
@@ -38,13 +38,7 @@ export class BtnVotes {
           return throwError(() => err);
         })
       )
-      .subscribe((_: ResApiT<void>) => {
-        this.toastSlice.ifNotPresent({
-          msg: 'upvote added',
-          eventT: 'OK',
-          status: 200,
-        });
-      });
+      .subscribe();
   }
 
   // ? statics

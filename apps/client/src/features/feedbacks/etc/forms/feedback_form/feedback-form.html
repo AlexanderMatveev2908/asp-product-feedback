@@ -26,14 +26,16 @@
         [varT]="'purple'"
         [minW]="'100%'"
         [btnT]="'submit'"
+        [isPending]="useApiTrack.isPending()"
       />
       <app-btn-main
         appUseMetaApp
         [label]="'Cancel'"
-        [varT]="'blue'"
+        [varT]="'blue_dark'"
         [minW]="'100%'"
         [btnT]="'button'"
         [onClick]="reset"
+        [isDisabled]="useApiTrack.isPending()"
       />
     </div>
   </form>
