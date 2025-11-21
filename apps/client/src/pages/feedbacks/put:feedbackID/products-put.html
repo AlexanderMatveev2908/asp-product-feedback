@@ -1,4 +1,4 @@
-<app-page-wrapper [waitClient]="true" [eventT]="'INFO'">
+<app-page-wrapper [waitClient]="true" [eventT]="'INFO'" [isPending]="!found()">
   <ng-template #contentRef>
     <div class="root">
       <app-link-back [version]="'a'" />

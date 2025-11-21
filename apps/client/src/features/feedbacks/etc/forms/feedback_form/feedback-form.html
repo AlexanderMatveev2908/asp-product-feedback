@@ -26,7 +26,7 @@
     <div class="form__footer">
       <app-btn-main
         appUseMetaApp
-        [label]="'Add Feedback'"
+        [label]="isFormTypePost() ? 'Add Feedback' : 'Save Changes'"
         [varT]="'purple'"
         [minW]="'100%'"
         [btnT]="'submit'"
@@ -38,7 +38,15 @@
         [varT]="'blue_dark'"
         [minW]="'100%'"
         [btnT]="'button'"
-        [onClick]="reset"
+        [onClick]="resetPreFilled"
+        [isDisabled]="useApiTrack.isPending()"
+      />
+      <app-btn-main
+        appUseMetaApp
+        [label]="'Delete'"
+        [varT]="'red'"
+        [minW]="'100%'"
+        [btnT]="'button'"
         [isDisabled]="useApiTrack.isPending()"
       />
     </div>

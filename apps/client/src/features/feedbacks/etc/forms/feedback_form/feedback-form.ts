@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { FeedbackFormFields, FeedbackFormUiFkt } from './etc/ui_fkt';
 import { FormFieldTxt } from '@/common/components/forms/form_field_txt/form-field-txt';
-import { FeedbackFormMng, FeedFormPostT, FormKeyT } from './etc/form_mng';
+import { FeedbackFormMng, FeedFormPostT, FeedFormPutT, FormKeyT } from './etc/form_mng';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UseFormFieldDir } from '@/core/directives/use_form_field';
 import { FormSelect } from '@/common/components/forms/form_select/form-select';
@@ -71,6 +71,16 @@ export class FeedbackForm extends UseInjCtxHk implements OnInit {
     this.isFormTypePost() ? FeedbackFormMng.formPost() : FeedbackFormMng.formPut()
   );
 
+  public readonly preFilledData: Signal<FeedFormPutT> = computed(() => {
+    const found: Nullable<FeedbackT> = this.existingItem();
+    return {
+      title: found?.title ?? '',
+      category: found?.category ?? '',
+      status: found?.status ?? '',
+      content: found?.description ?? '',
+    };
+  });
+
   // ? helpers
   public asFormControl(formKey: FormKeyT): FormControl {
     return this.currForm().get(formKey) as FormControl;
@@ -85,18 +95,26 @@ export class FeedbackForm extends UseInjCtxHk implements OnInit {
 
     this.useApiTrack
       .track(this.strategy()(this.currForm().value))
-      .pipe(tap((_: unknown) => this.reset()))
+      .pipe(tap((_: unknown) => this.resetEmpty()))
       .subscribe();
   }
 
-  public reset: () => void = () => {
-    RootFormMng.reset(this.currForm(), FeedbackFormMng.defPostForm());
+  public resetEmpty: () => void = () => {
+    RootFormMng.reset(
+      this.currForm(),
+      this.isFormTypePost() ? FeedbackFormMng.defPostForm() : FeedbackFormMng.defPutForm()
+    );
   };
+
+  public resetPreFilled: () => void = () =>
+    RootFormMng.reset(this.currForm(), this.preFilledData());
 
   ngOnInit(): void {
     this.useEffect(() => {
       const found: Nullable<FeedbackT> = this.existingItem();
       if (!found) return;
+
+      this.currForm().patchValue(this.preFilledData());
     });
   }
 }

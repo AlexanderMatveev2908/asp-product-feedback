@@ -24,7 +24,10 @@ export class ProductsPut extends UseInjCtxHk implements OnInit {
 
   public readonly found: Signal<Nullable<FeedbackT>> = this.useFindFeedByParams.found;
 
-  public readonly putStrategy: (data: unknown) => Observable<unknown> = (_: unknown) => EMPTY;
+  public readonly putStrategy: (data: unknown) => Observable<unknown> = (_: unknown) => {
+    console.log(_);
+    return EMPTY;
+  };
 
   ngOnInit(): void {
     this.useFindFeedByParams.main();
