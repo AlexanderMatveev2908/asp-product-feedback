@@ -85,6 +85,10 @@ export class FeedLibShape extends RootUiFkt {
     return found;
   }
 
+  public static includedByStatus(arg: string): boolean {
+    return this._statuses.some((pair: WithoutId<FilterRoadmapT>) => pair.val === arg);
+  }
+
   public static statuses(): FilterRoadmapT[] {
     return this.listWithIDs(this._statuses);
   }

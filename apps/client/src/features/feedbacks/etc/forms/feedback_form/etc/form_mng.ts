@@ -7,12 +7,14 @@ import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
 
 export type FormKeyT = 'title' | 'category' | 'status' | 'content';
 
+type SchemaPostT = ZodObject<{
+  title: ZodString;
+  category: ZodString;
+  content: ZodString;
+}>;
+
 export class FeedbackFormMng extends RootFormMng {
-  public static readonly schemaPost: ZodObject<{
-    title: ZodString;
-    category: ZodString;
-    content: ZodString;
-  }> = z.object({
+  public static readonly schemaPost: SchemaPostT = z.object({
     title: z
       .string()
       .min(1, 'Title required')
@@ -38,6 +40,14 @@ export class FeedbackFormMng extends RootFormMng {
       .regex(Reg.TXT, 'Invalid content'),
   });
 
+  public static readonly schemaPut: SchemaPostT & ZodObject<{ status: ZodString }> =
+    this.schemaPost.extend({
+      status: z
+        .string()
+        .min(1, 'Status required')
+        .refine((v: string) => (!v ? true : FeedLibShape.includedByStatus(v)), 'Invalid category'),
+    });
+
   public static readonly formPost: () => FormGroup = () =>
     new FormGroup<{
       title: FormControl<string>;
@@ -54,13 +64,42 @@ export class FeedbackFormMng extends RootFormMng {
       }
     );
 
-  public static defPostForm(): FeedbackFormPostT {
+  public static readonly formPut: () => FormGroup = () =>
+    new FormGroup<{
+      title: FormControl<string>;
+      category: FormControl<string>;
+      status: FormControl<string>;
+      content: FormControl<string>;
+    }>(
+      {
+        title: new FormControl('', { nonNullable: true }),
+        category: new FormControl(FeedLibShape.defCat(), { nonNullable: true }),
+        status: new FormControl('', { nonNullable: true }),
+        content: new FormControl('', { nonNullable: true }),
+      },
+      {
+        validators: this.validate(this.schemaPut),
+      }
+    );
+
+  public static defPostForm(): FeedFormPostT {
     return {
       title: '',
       category: FeedLibShape.defCat(),
       content: '',
     };
   }
+
+  public static defPutForm(): FeedFormPutT {
+    return {
+      title: '',
+      category: FeedLibShape.defCat(),
+      status: '',
+      content: '',
+    };
+  }
 }
 
-export type FeedbackFormPostT = z.infer<typeof FeedbackFormMng.schemaPost>;
+export type FeedFormPostT = z.infer<typeof FeedbackFormMng.schemaPost>;
+
+export type FeedFormPutT = z.infer<typeof FeedbackFormMng.schemaPut>;

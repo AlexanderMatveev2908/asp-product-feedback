@@ -3,7 +3,7 @@
     <ng-container *ngComponentOutlet="currSVG()" />
   </div>
 
-  <form [formGroup]="formPost" (ngSubmit)="onSubmit()" class="root__form">
+  <form [formGroup]="currForm()" (ngSubmit)="onSubmit()" class="root__form">
     <div class="form__title">
       <span class="txt__hd__md">{{ currTitle() }}</span>
     </div>
@@ -16,6 +16,10 @@
     />
 
     <app-form-select appUseFormField [f]="fields.category" [ctrl]="asFormControl('category')" />
+
+    @if(!isFormTypePost()){
+    <app-form-select appUseFormField [f]="fields.status" [ctrl]="asFormControl('status')" />
+    }
 
     <app-form-field-txt appUseFormField [f]="fields.content" [ctrl]="asFormControl('content')" />
 
