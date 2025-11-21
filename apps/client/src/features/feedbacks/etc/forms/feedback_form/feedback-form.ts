@@ -1,6 +1,6 @@
 import { SvgAdvIconEditFeedback } from '@/common/components/svgs/advanced/icon-edit-feedback/icon-edit-feedback';
 import { SvgAdvIconNewFeedback } from '@/common/components/svgs/advanced/icon-new-feedback/icon-new-feedback';
-import { SvgT } from '@/common/types/etc';
+import { Nullable, SvgT } from '@/common/types/etc';
 import { UseNavSvc } from '@/core/services/use_nav';
 import { NgComponentOutlet } from '@angular/common';
 import {
@@ -23,6 +23,7 @@ import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
 import { Observable, tap } from 'rxjs';
 import { UseApiTrackerHk } from '@/core/store/api/etc/hooks/use_tracker';
+import { FeedbackT } from '../../types';
 
 @Component({
   selector: 'app-feedback-form',
@@ -44,6 +45,7 @@ export class FeedbackForm {
   // ? props
   public readonly strategy: InputSignal<(data: FeedbackFormPostT) => Observable<unknown>> =
     input.required();
+  public readonly existingItem: InputSignal<Nullable<FeedbackT>> = input<Nullable<FeedbackT>>(null);
 
   // ? svc
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
