@@ -96,7 +96,7 @@ public class MockData {
   }
 
   private Mono<Dict> insertFeedCommentsPairs(Dict dict) {
-    final Feedback feed = new Feedback(faker.lorem().sentence(), faker.lorem().maxLengthSentence(500),
+    final Feedback feed = new Feedback(faker.lorem().maxLengthSentence(100), faker.lorem().maxLengthSentence(250),
         LibRand.choiceIn(FeedCatT.values()));
     return feedSvc.insert(feed).flatMap(createdFeed -> {
       final List<Mono<Comment>> promises = new ArrayList<>();
@@ -104,7 +104,7 @@ public class MockData {
 
       if (insertOrNot)
         for (int i = 0; i < 2; i++) {
-          final Comment randComment = new Comment(faker.lorem().maxLengthSentence(500),
+          final Comment randComment = new Comment(faker.lorem().maxLengthSentence(250),
               dict.casting("user", User.class).getId(),
               createdFeed.getId());
           promises.add(commentSvc.insert(randComment));
@@ -123,7 +123,7 @@ public class MockData {
     if (insertOrNot)
       for (int i = 0; i < 2; i++) {
         final Reply reply = new Reply(author.getId(),
-            recipient.getId(), comment.getId(), faker.lorem().maxLengthSentence(500));
+            recipient.getId(), comment.getId(), faker.lorem().maxLengthSentence(250));
 
         promises.add(replySvc.insert(reply));
       }

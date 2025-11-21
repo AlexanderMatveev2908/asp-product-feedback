@@ -22,6 +22,6 @@ public class PostFeedFormT {
 
   @NotBlank(message = "content required")
   @Pattern(regexp = Reg.TXT, message = "content invalid")
-  @Size(max = 1000, message = "max length exceeded")
+  @Size(max = 250, message = "max length exceeded")
   private String content;
 }

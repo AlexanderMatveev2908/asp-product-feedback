@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS replies (
-  content VARCHAR(1000) NOT NULL,
+  content VARCHAR(250) NOT NULL,
   user_id UUID NOT NULL REFERENCES users(id),
   replying_to UUID NOT NULL REFERENCES users(id),
   comment_id UUID NOT NULL REFERENCES comments(id)

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS comments (
-  content VARCHAR(1000) NOT NULL,
+  content VARCHAR(250) NOT NULL,
   user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   feedback_id UUID NOT NULL REFERENCES feedbacks(id) ON DELETE CASCADE
 ) INHERITS (root_table);
