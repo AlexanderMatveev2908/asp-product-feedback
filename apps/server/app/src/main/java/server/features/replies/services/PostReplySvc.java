@@ -16,6 +16,6 @@ import server.decorators.types.Dict;
 public class PostReplySvc {
   public Mono<Dict> main(Api api) {
 
-    return Mono.just(Dict.of("aa", "bb"));
+    return Mono.just(Dict.of("form", api.getTypedData().orYell()));
   }
 }

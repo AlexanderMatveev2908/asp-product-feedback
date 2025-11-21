@@ -7,7 +7,7 @@ import lombok.Data;
 import server.paperwork.ContentFormT;
 
 @Data
-public final class CommentFormT implements ContentFormT {
+public class CommentFormT implements ContentFormT {
   private String content;
 
   @NotNull(message = "user id required")

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+import server.decorators.core.ErrAPI;
 import server.models.users.User;
 
 @Service
@@ -21,6 +22,10 @@ public final class UserSvc {
 
   public final Mono<User> byId(UUID id) {
     return userRepo.findById(id);
+  }
+
+  public final Mono<User> throwNotFound(UUID id) {
+    return byId(id).switchIfEmpty(Mono.error(new ErrAPI("user not found", 404)));
   }
 
   public final Mono<User> byUsername(String arg) {

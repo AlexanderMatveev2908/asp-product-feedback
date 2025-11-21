@@ -4,12 +4,13 @@ import java.util.UUID;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import server.paperwork.ContentFormT;
+import lombok.EqualsAndHashCode;
+import server.features.comments.paperwork.CommentFormT;
 
 @Data
-public final class PostReplyFormT implements ContentFormT {
+@EqualsAndHashCode(callSuper = true)
+public final class PostReplyFormT extends CommentFormT {
   @NotNull(message = "replyingTo required")
   private UUID replyingTo;
 
-  private String content;
 }
