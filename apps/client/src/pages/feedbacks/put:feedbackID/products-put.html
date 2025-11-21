@@ -3,7 +3,11 @@
     <div class="root">
       <app-link-back [version]="'a'" />
 
-      <app-feedback-form [strategy]="putStrategy" [existingItem]="found()" />
+      <app-feedback-form
+        [strategy]="putStrategy"
+        [existingItem]="found()"
+        [delStrategy]="delStrategy"
+      />
     </div>
   </ng-template>
 </app-page-wrapper>

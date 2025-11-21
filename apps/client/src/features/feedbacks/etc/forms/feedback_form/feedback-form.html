@@ -30,7 +30,8 @@
         [varT]="'purple'"
         [minW]="'100%'"
         [btnT]="'submit'"
-        [isPending]="useApiTrack.isPending()"
+        [isPending]="useTrackFormPending.isPending()"
+        [isDisabled]="someonePending()"
       />
       <app-btn-main
         appUseMetaApp
@@ -39,7 +40,7 @@
         [minW]="'100%'"
         [btnT]="'button'"
         [onClick]="resetPreFilled"
-        [isDisabled]="useApiTrack.isPending()"
+        [isDisabled]="someonePending()"
       />
 
       @if(!isFormTypePost()){
@@ -49,7 +50,9 @@
         [varT]="'red'"
         [minW]="'100%'"
         [btnT]="'button'"
-        [isDisabled]="useApiTrack.isPending()"
+        [onClick]="delFeed"
+        [isPending]="useTrackDelPending.isPending()"
+        [isDisabled]="someonePending()"
       />}
     </div>
   </form>
