@@ -13,7 +13,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @Component
 @RequiredArgsConstructor
-@SuppressFBWarnings({ "EI2" })
+@SuppressFBWarnings({ "EI2", "EI" })
 public class FeedPostMdw extends BaseMdw {
 
   @Override

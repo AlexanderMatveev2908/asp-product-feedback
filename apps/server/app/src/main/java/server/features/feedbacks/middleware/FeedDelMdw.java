@@ -15,7 +15,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @Component
 @RequiredArgsConstructor
-@SuppressFBWarnings({ "EI2" })
+@SuppressFBWarnings({ "EI2", "EI" })
 public class FeedDelMdw extends BaseMdw implements FeedFinderMdw {
   private final FeedSvc feedSvc;
 
