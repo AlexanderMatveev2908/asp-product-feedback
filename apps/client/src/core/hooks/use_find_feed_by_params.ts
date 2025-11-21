@@ -18,14 +18,16 @@ export class UseFindFeedByParams extends UseInjCtxHk {
   public main(): void {
     this.useEffect(() => {
       const currPath: Nullable<string> = this.useNav.currPath();
-      if (
-        !currPath ||
-        !['put', 'read'].some((str: string) => currPath.startsWith(`/feedbacks/${str}/`))
-      )
-        return;
 
       const vars: Nullable<Params> = this.useNav.pathVariables();
       const feedbackID: Nullable<string> = vars?.['feedbackID'];
+
+      if (
+        !currPath ||
+        !['put', 'read'].some((str: string) => currPath.startsWith(`/feedbacks/${str}/`)) ||
+        !feedbackID
+      )
+        return;
 
       const feedbacks: Nullable<FeedbackT[]> = this.feedbacksSlice.feedbacks();
       if (!feedbacks) return;

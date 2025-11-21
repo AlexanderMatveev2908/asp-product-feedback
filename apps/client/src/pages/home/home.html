@@ -14,7 +14,7 @@
 <app-page-wrapper [waitClient]="false" [eventT]="'INFO'" [isPending]="isPending()" [minH]="'85vh'">
   <ng-template #contentRef>
     <div class="root">
-      @if(feedbacks()) {
+      @if(!!feedbacks()?.length) {
       <!--  -->
       @for(p of sorted(); track p.id){
       <app-feedback-item [item]="p" [withHeader]="false" />
