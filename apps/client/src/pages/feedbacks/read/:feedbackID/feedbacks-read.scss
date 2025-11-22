@@ -10,6 +10,10 @@
 
     .comments__title {
       @apply flex items-center justify-start;
+
+      > span {
+        @apply text-hd__md text-blue__dark__1;
+      }
     }
 
     .comments__content {
