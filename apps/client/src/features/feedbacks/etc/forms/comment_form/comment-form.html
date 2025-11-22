@@ -2,7 +2,7 @@
   <span class="text-blue__dark__1 txt__hd__md">Add Comment</span>
 
   <form class="root__content" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <app-form-field-txt appUseFormField [f]="field" [ctrl]="ctrl" />
+    <app-form-field-txt appUseFormField [f]="field" [ctrl]="asFormControl('content')" />
 
     <div class="content__footer">
       <span class="text-blue__dark__0 txt__bd__sm__reg">{{ charsLeft() }} Characters left</span>

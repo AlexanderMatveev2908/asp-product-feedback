@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { CommentT, FeedbackT } from './etc/types';
 import { LibApiArgs } from '@/core/store/api/etc/lib/api_args';
 import { FeedFormPostT, FeedFormPutT } from './etc/forms/feedback_form/etc/form_mng';
-import { CommentFormT } from './etc/forms/comment_form/etc/form_mng';
+import { ContentFormT } from '../../core/paperwork/etc/content_form_mng';
 
 @Injectable({
   providedIn: 'root',
@@ -57,7 +57,7 @@ export class FeedbacksApiSvc {
   }
 
   public postComm(
-    data: CommentFormT,
+    data: ContentFormT,
     { feedbackId, userId }: { feedbackId: string; userId: string }
   ): ObsResT<{ comment: CommentT }> {
     return this.api.post(
