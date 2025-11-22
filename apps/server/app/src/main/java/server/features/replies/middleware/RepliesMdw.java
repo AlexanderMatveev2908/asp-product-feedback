@@ -5,6 +5,7 @@ import org.springframework.web.server.WebFilterChain;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import server.decorators.core.api.Api;
 import server.features.replies.paperwork.PostReplyFormT;
@@ -28,9 +29,9 @@ public final class RepliesMdw extends BaseMdw {
           .then(
               withPathId(api).flatMap(commentId -> commentSvc.throwNotFound(commentId)))
           .then(
-              checkBodyForm(api, PostReplyFormT.class).flatMap(typedForm -> userSvc.throwNotFound(typedForm.getUserId())
-                  .then(userSvc
-                      .throwNotFound(typedForm.getReplyingTo()))))
+              checkBodyForm(api, PostReplyFormT.class).flatMap(typedForm -> Flux.merge(
+                  userSvc.throwNotFound(typedForm.getUserId()),
+                  userSvc.throwNotFound(typedForm.getReplyingTo())).collectList()))
           .then(chain.filter(api));
     });
   }
