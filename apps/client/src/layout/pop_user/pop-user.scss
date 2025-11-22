@@ -5,6 +5,14 @@
 
   .root__title {
     @apply flex flex-col items-center gap-3;
+
+    .title__sub {
+      @apply txt__lg text-center;
+    }
+
+    .title__main {
+      @apply txt__2xl break-all;
+    }
   }
 
   .root__thumb {

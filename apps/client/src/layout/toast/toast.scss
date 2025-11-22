@@ -13,8 +13,13 @@
   .root__status_row {
     color: var(--clr);
     @apply absolute top-1 left-4;
+
     .status_row__status {
       @apply flex justify-start items-center;
+
+      > span {
+        @apply txt__3xl;
+      }
     }
   }
 
@@ -22,7 +27,7 @@
     @apply w-full flex justify-center mt-8 sm:mt-10 lg:mt-12 pb-4;
 
     .content__msg {
-      @apply px-3;
+      @apply px-3 txt__lg;
     }
   }
 

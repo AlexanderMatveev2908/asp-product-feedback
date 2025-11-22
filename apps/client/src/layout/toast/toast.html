@@ -10,12 +10,12 @@
 
     <div class="root__status_row">
       <div class="status_row__status">
-        <span class="txt__3xl">{{ toastState().status }}</span>
+        <span>{{ toastState().status }}</span>
       </div>
     </div>
 
     <div class="root__content">
-      <span #msgContainer class="txt__lg content__msg">{{ trimmedMsg() }}</span>
+      <span #msgContainer class="content__msg">{{ trimmedMsg() }}</span>
     </div>
 
     <div #timerToast class="root__timer"></div>
