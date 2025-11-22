@@ -14,6 +14,10 @@
 
     .footer__cat {
       @apply flex w-fit justify-center items-center bg-gray__0 rounded-[10px] py-[6px] px-[16px] text-blue__prm;
+
+      > span {
+        @apply text-bd__sm__semi;
+      }
     }
 
     .footer__counts {

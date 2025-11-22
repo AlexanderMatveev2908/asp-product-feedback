@@ -13,6 +13,10 @@
     .left__title {
       @apply text-hd__sm;
     }
+
+    .left__side_title {
+      @apply text-bd__sm__semi opacity-75;
+    }
   }
 
   .root__right {

@@ -17,5 +17,9 @@
 
   .root__right {
     @apply flex h-full items-center;
+
+    > span {
+      @apply text-bd__sm__semi text-blue__prm;
+    }
   }
 }

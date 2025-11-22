@@ -10,7 +10,7 @@
         [style.--bg]="bgFilter(f.val)"
         [style.--clr]="clrFilter(f.val)"
       >
-        <span class="txt__bd__sm__semi">{{ f.label }}</span>
+        <span class="filter__label">{{ f.label }}</span>
       </button>
       }
     </div>
@@ -20,7 +20,7 @@
       <span class="title_row__title"> Roadmap </span>
 
       <a [routerLink]="'/feedbacks/read/roadmap'" (click)="closeOnNav()">
-        <span class="txt__bd__sm__semi text-blue__prm border-b border-blue__prm">View</span>
+        <span class="title_row__link">View</span>
       </a>
     </div>
     <div class="block_b__content">

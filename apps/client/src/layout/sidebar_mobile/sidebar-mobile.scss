@@ -20,8 +20,9 @@
         @include mix.app__btn__scl(1.2);
         @apply rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
 
-        span {
+        .filter__label {
           color: var(--clr);
+          @apply text-bd__sm__semi;
         }
       }
     }
@@ -34,6 +35,10 @@
 
       .title_row__title {
         @apply text-hd__md text-blue__dark__1;
+      }
+
+      .title_row__link {
+        @apply text-bd__sm__semi text-blue__prm border-b border-blue__prm;
       }
     }
 
