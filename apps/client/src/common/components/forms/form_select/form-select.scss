@@ -11,6 +11,10 @@
         border-color: var(--border_clr);
         @apply w-full py-[14px] px-[16px] rounded-[10px] bg-gray__1 flex items-center justify-between border transition-all duration-300;
 
+        .span__label {
+          @apply .txt__bd__sm__reg text-blue__dark__1;
+        }
+
         .span__svg {
           transform: rotate(var(--rot));
           @apply w-[8px] h-[8px] text-blue__prm transition-all duration-300;

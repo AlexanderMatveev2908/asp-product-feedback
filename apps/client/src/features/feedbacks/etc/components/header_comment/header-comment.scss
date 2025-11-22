@@ -8,6 +8,10 @@
 
     .left__labels {
       @apply flex flex-col;
+
+      .labels__username {
+        @apply .txt__bd__sm__reg text-blue__dark__0;
+      }
     }
   }
 

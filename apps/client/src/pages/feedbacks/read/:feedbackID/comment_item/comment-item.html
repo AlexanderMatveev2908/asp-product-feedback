@@ -1,7 +1,7 @@
 <div class="root" [style.--border]="isLast() ? 'none' : '1px solid'">
   <app-header-comment [comment]="comment()" [toggleCb]="useToggleReply.toggle" />
 
-  <span class="txt__bd__sm__reg text-blue__dark__0">
+  <span class="root__content">
     {{ comment().content }}
   </span>
 

@@ -1,3 +1,7 @@
 .root {
   color: #d73737;
+
+  span {
+    @apply .txt__bd__sm__reg;
+  }
 }

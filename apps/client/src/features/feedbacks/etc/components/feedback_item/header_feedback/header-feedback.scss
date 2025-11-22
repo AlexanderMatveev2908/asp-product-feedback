@@ -10,4 +10,8 @@
     background: var(--bg);
     @apply w-[8px] h-[8px] rounded-full;
   }
+
+  .status__label {
+    @apply .txt__bd__sm__reg text-blue__dark__0;
+  }
 }

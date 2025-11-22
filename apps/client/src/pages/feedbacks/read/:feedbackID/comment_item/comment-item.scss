@@ -3,6 +3,10 @@
   border-bottom: var(--border);
   border-color: #8c92b325;
 
+  .root__content {
+    @apply .txt__bd__sm__reg text-blue__dark__0;
+  }
+
   .root__replies {
     @apply w-full flex flex-col gap-[24px] mt-[8px];
   }

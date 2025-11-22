@@ -42,6 +42,10 @@
       .header__label {
         @apply text-hd__md text-blue__dark__1;
       }
+
+      .header__desc {
+        @apply .txt__bd__sm__reg text-blue__dark__0;
+      }
     }
 
     .content__cards {

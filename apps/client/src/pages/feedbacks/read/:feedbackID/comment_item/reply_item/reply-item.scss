@@ -1,6 +1,12 @@
 .root {
   @apply w-full pl-[24px] relative flex flex-col gap-[16px];
 
+  .root__content {
+    .content__reply {
+      @apply text-blue__dark__0 .txt__bd__sm__reg;
+    }
+  }
+
   .root__line {
     background: #64719625;
     @apply absolute w-[1px] top-0 left-0;
