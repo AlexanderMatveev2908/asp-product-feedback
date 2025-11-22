@@ -70,7 +70,7 @@ SELECT f.*,
                     ) image
 
                     FROM users rt
-                      WHERE r.replying_to = rt.id
+                      WHERE r.replying_to_id = rt.id
                   ) rt_obj
                 ) AS "replyingTo"
 

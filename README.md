@@ -349,7 +349,7 @@ erDiagram
     string content
     uuid user_id
     uuid comment_id
-    uuid replying_to
+    uuid replying_to_id
   }
 ```
 

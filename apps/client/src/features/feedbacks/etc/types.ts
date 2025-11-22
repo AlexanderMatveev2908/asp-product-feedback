@@ -24,7 +24,8 @@ export type ImageT = SqlTableT<{
 
 export type ReplyT = SqlTableT<{
   content: string;
-  replyingTo: string;
+  replyingToId: string;
+  replyingTo: UserT;
   user: UserT;
 }>;
 

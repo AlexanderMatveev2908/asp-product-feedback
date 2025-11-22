@@ -24,7 +24,7 @@ public class PostReplySvc {
   public Mono<Dict> main(Api api) {
     final PostReplyFormT form = (PostReplyFormT) api.getTypedData().orYell();
     final UUID commentId = api.getPathVarIdInRoute("commentId").orYell();
-    final Reply newReply = new Reply(form.getUserId(), form.getReplyingTo(), commentId, form.getContent());
+    final Reply newReply = new Reply(form.getUserId(), form.getReplyingToId(), commentId, form.getContent());
 
     return replySvc.insert(newReply).map(created -> Dict.of("reply", created));
   }

@@ -21,8 +21,8 @@ public final class Reply extends RootTable {
   @Column("user_id")
   private UUID userId;
 
-  @Column("replying_to")
-  private UUID replyingTo;
+  @Column("replying_to_id")
+  private UUID replyingToId;
 
   @Column("comment_id")
   private UUID commentId;
