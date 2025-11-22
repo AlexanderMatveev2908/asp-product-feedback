@@ -34,6 +34,16 @@ export default {
       borderWidth: {
         3: '3px',
       },
+      zIndex: {
+        sidebar__bg: '200',
+        navbar: '300',
+        sidebar: '400',
+
+        popup__bg: '600',
+        popup: '800',
+
+        toast: '9999',
+      },
     },
   },
   plugins: [],

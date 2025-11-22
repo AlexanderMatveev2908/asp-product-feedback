@@ -4,7 +4,7 @@
   height: calc(100% - 72px);
   min-height: calc(100% - 72px);
   transition: transform 0.4s, opacity 0.3s;
-  @apply fixed top-[72px] left-full w-[271px] bg-gray__1 p-[24px] flex flex-col gap-[24px];
+  @apply z-sidebar fixed top-[72px] left-full w-[271px] bg-gray__1 p-[24px] flex flex-col gap-[24px];
 
   .root__block_a,
   .root__block_b {

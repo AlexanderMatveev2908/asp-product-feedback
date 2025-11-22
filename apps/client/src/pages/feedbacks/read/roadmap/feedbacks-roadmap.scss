@@ -11,7 +11,7 @@
 }
 
 .root {
-  @apply w-full flex flex-col gap-[24px];
+  @apply z-navbar w-full flex flex-col gap-[24px];
 
   .root__header {
     @apply w-full flex justify-around items-center py-[20px] border-b relative;

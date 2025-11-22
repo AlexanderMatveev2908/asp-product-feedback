@@ -1,6 +1,6 @@
 .root {
   border-color: var(--clr);
-  @apply fixed top-5 right-5 w-[90%] max-w-[600px] border-3 p-3 bg-neutral-950 rounded-xl min-h-[75px] overflow-hidden translate-x-[150%] opacity-0;
+  @apply z-toast fixed top-5 right-5 w-[90%] max-w-[600px] border-3 p-3 bg-neutral-950 rounded-xl min-h-[75px] overflow-hidden translate-x-[150%] opacity-0;
 
   @media (min-width: 600px) {
     @apply w-[80%];
