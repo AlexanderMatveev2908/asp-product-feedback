@@ -9,6 +9,10 @@
 
   .root__left {
     @apply flex flex-col items-start;
+
+    .left__title {
+      @apply text-hd__sm;
+    }
   }
 
   .root__right {
