@@ -17,7 +17,7 @@ import { CommentT, FeedbackT } from '@/features/feedbacks/etc/types';
 import { Nullable } from '@/common/types/etc';
 import { LinkMain } from '@/common/components/links/link_main/link-main';
 import { CommentForm } from '@/features/feedbacks/etc/forms/comment_form/comment-form';
-import { CommentFormT } from '@/features/feedbacks/etc/forms/comment_form/etc/form_mng';
+import { ContentFormT } from '@/core/paperwork/etc/content_form_mng';
 import { Observable, tap } from 'rxjs';
 import { UseFeedKit } from '@/features/feedbacks/etc/services/use_feed_kit';
 import { UserSlice } from '@/features/user/slice';
@@ -41,7 +41,7 @@ export class FeedbacksRead extends UseInjCtxHk implements OnInit {
   public readonly found: Signal<Nullable<FeedbackT>> = this.useFindFeedByParams.found;
   public readonly pathEdit: Signal<string> = computed(() => `/feedbacks/put/${this.found()?.id}`);
 
-  public readonly strategy: (data: CommentFormT) => Observable<unknown> = (data: CommentFormT) =>
+  public readonly strategy: (data: ContentFormT) => Observable<unknown> = (data: ContentFormT) =>
     this.useFeedKit.api
       .postComm(data, {
         userId: this.userSlice.user()?.id as string,

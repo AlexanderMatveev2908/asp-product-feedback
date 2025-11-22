@@ -33,7 +33,7 @@ SELECT f.*,
 
           COALESCE(
           (
-            SELECT JSON_AGG(r_agg ORDER BY r_agg.created_at DESC)
+            SELECT JSON_AGG(r_agg ORDER BY r_agg.created_at ASC)
             FROM (
               SELECT r.*,
                 (
@@ -70,9 +70,9 @@ SELECT f.*,
                     ) image
 
                     FROM users rt
-                      WHERE r.replying_to = rt.id
+                      WHERE r.replying_to_id = rt.id
                   ) rt_obj
-                ) replying_to
+                ) AS "replyingTo"
 
               FROM replies r
                 WHERE r.comment_id = c.id

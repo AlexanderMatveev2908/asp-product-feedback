@@ -11,4 +11,5 @@ import { ImgLoader } from '@/common/components/hoc/assets/img_loader/img-loader'
 })
 export class HeaderComment {
   public readonly comment: InputSignal<CommentT | ReplyT> = input.required();
+  public readonly toggleCb: InputSignal<() => void> = input.required();
 }

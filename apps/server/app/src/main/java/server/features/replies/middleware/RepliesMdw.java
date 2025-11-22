@@ -31,7 +31,7 @@ public final class RepliesMdw extends BaseMdw {
           .then(
               checkBodyForm(api, PostReplyFormT.class).flatMap(typedForm -> Flux.merge(
                   userSvc.throwNotFound(typedForm.getUserId()),
-                  userSvc.throwNotFound(typedForm.getReplyingTo())).collectList()))
+                  userSvc.throwNotFound(typedForm.getReplyingToId())).collectList()))
           .then(chain.filter(api));
     });
   }

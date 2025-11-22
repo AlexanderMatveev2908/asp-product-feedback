@@ -7,13 +7,11 @@
         {{ comment().user.name }}
       </span>
 
-      <span class="txt__bd__sm__reg text-blue__dark__0">
-        {{ comment().user.username }}
-      </span>
+      <span class="txt__bd__sm__reg text-blue__dark__0"> @{{ comment().user.username }} </span>
     </div>
   </div>
 
-  <div class="root__right">
+  <button class="root__right" (click)="toggleCb()()">
     <span class="txt__bd__sm__semi text-blue__prm">Reply</span>
-  </div>
+  </button>
 </div>

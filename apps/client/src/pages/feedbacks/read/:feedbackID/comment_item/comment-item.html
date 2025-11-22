@@ -1,9 +1,16 @@
 <div class="root" [style.--border]="isLast() ? 'none' : '1px solid'">
-  <app-header-comment [comment]="comment()" />
+  <app-header-comment [comment]="comment()" [toggleCb]="useToggleReply.toggle" />
 
   <span class="txt__bd__sm__reg text-blue__dark__0">
     {{ comment().content }}
   </span>
+
+  <app-reply-form
+    [formShown]="useToggleReply.showReply()"
+    [commentId]="comment().id"
+    [replyingToId]="comment().userId"
+    [hideForm]="useToggleReply.hide"
+  />
 
   @if(comment().replies?.length){
   <div class="root__replies">

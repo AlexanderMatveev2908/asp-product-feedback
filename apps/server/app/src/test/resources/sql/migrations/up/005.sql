@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS feedbacks (
   description VARCHAR(250) NOT NULL,
   upvotes INTEGER NOT NULL DEFAULT 0,
   category category_type NOT NULL,
-  status status_type NOT NULL DEFAULT 'suggestion'
+  status status_type NOT NULL DEFAULT 'SUGGESTION'
 ) INHERITS (root_table);
 
 ALTER TABLE feedbacks

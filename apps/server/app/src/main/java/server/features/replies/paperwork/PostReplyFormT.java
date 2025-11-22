@@ -10,7 +10,7 @@ import server.features.comments.paperwork.CommentFormT;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public final class PostReplyFormT extends CommentFormT {
-  @NotNull(message = "replyingTo required")
-  private UUID replyingTo;
+  @NotNull(message = "replyingToId required")
+  private UUID replyingToId;
 
 }

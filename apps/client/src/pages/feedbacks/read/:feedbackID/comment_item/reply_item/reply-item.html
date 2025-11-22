@@ -2,12 +2,19 @@
   @if (isFirst()){
   <div class="root__line"></div>
   }
-  <app-header-comment [comment]="reply()" />
+  <app-header-comment [comment]="reply()" [toggleCb]="useToggleReply.toggle" />
 
   <div class="root__content">
-    <span class="txt__bd__sm__bold text-purple__prm"> {{ reply().replyingTo }}</span
+    <span class="txt__bd__sm__bold text-purple__prm">@{{ reply().replyingTo.username }}</span
     >&nbsp;<span class="text-blue__dark__0 txt__bd__sm__reg">
       {{ reply().content }}
     </span>
   </div>
+
+  <app-reply-form
+    [formShown]="useToggleReply.showReply()"
+    [commentId]="reply().commentId"
+    [replyingToId]="reply().userId"
+    [hideForm]="useToggleReply.hide"
+  />
 </div>

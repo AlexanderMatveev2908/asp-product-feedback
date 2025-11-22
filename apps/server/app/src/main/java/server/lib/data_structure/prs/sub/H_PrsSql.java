@@ -23,7 +23,7 @@ public class H_PrsSql extends G_PrsType {
   private static final Object convertMap(Map<?, ?> m) {
     final Dict nested = new Dict();
     for (final Entry<?, ?> pair : m.entrySet())
-      nested.put(pair.getKey().toString(), convertValue(pair.getValue()));
+      nested.put(camelFromSnake(pair.getKey().toString()), convertValue(pair.getValue()));
     return nested;
   }
 
@@ -55,7 +55,7 @@ public class H_PrsSql extends G_PrsType {
     final Dict map = new Dict();
 
     for (final Entry<String, Object> pair : row.entrySet())
-      map.put(pair.getKey(), convertValue(pair.getValue()));
+      map.put(camelFromSnake(pair.getKey()), convertValue(pair.getValue()));
 
     return map;
   }

@@ -4,7 +4,7 @@ import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
 import { FormControl, FormGroup } from '@angular/forms';
 import z, { ZodObject, ZodString } from 'zod';
 
-export class CommentFormMng extends RootFormMng {
+export class ContentFormMng extends RootFormMng {
   public static readonly schema: ZodObject<{
     content: ZodString;
   }> = z.object({
@@ -25,11 +25,11 @@ export class CommentFormMng extends RootFormMng {
       }
     );
 
-  public static defFormData(): CommentFormT {
+  public static defFormData(): ContentFormT {
     return {
       content: '',
     };
   }
 }
 
-export type CommentFormT = z.infer<typeof CommentFormMng.schema>;
+export type ContentFormT = z.infer<typeof ContentFormMng.schema>;
