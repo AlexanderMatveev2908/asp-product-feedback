@@ -2,7 +2,7 @@
   @if (isFirst()){
   <div class="root__line"></div>
   }
-  <app-header-comment [comment]="reply()" />
+  <app-header-comment [comment]="reply()" [toggleCb]="useToggleReply.toggle" />
 
   <div class="root__content">
     <span class="txt__bd__sm__bold text-purple__prm">@{{ reply().replyingTo.username }}</span
@@ -10,4 +10,6 @@
       {{ reply().content }}
     </span>
   </div>
+
+  <app-reply-form [formShown]="useToggleReply.showReply()" [strategy]="useReply.main" />
 </div>

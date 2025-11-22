@@ -9,7 +9,7 @@
     @apply flex flex-col gap-[16px];
 
     .content__btn {
-      @apply w-full flex justify-center items-center;
+      @apply w-full flex justify-end items-center;
     }
   }
 }

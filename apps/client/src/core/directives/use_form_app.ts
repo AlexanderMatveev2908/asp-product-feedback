@@ -27,6 +27,10 @@ export abstract class UseFormAppDir<T> extends UseInjCtxHk {
     });
   }
 
+  protected reset(): void {
+    RootFormMng.reset(this.form, this.resetFormValue);
+  }
+
   protected submitForm(obs: Observable<unknown>): void {
     if (!this.form.valid) {
       RootFormMng.onSubmitFailed(this.form);
@@ -35,11 +39,7 @@ export abstract class UseFormAppDir<T> extends UseInjCtxHk {
 
     this.useTrackApi
       .track(obs)
-      .pipe(
-        tap((_: unknown) => {
-          RootFormMng.reset(this.form, this.resetFormValue);
-        })
-      )
+      .pipe(tap((_: unknown) => this.reset()))
       .subscribe();
   }
 

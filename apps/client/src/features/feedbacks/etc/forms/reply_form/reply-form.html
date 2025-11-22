@@ -1,3 +1,4 @@
+@if(formShown()){
 <div class="root">
   <form class="root__content" [formGroup]="form" (ngSubmit)="onSubmit()">
     <app-form-field-txt appUseFormField [f]="field" [ctrl]="asFormControl('content')" />
@@ -7,3 +8,4 @@
     </div>
   </form>
 </div>
+}

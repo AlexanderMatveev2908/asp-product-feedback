@@ -22,6 +22,7 @@ import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
   public readonly strategy: InputSignal<(data: ContentFormT) => Observable<unknown>> =
     input.required();
+  public readonly formShown: InputSignal<boolean> = input.required();
 
   // ? statics
   public readonly form: FormGroup = ContentFormMng.form();
@@ -36,5 +37,12 @@ export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
   // ? ng lifecycle
   ngOnInit(): void {
     this.bindFormValue();
+
+    this.useEffect(() => {
+      const formShown: boolean = this.formShown();
+      if (formShown) return;
+
+      this.reset();
+    });
   }
 }
