@@ -4,6 +4,10 @@
   .root__body {
     @apply w-full flex flex-col gap-[9px];
 
+    .body__title {
+      @apply text-bd__sm__bold text-blue__dark__1;
+    }
+
     .body__desc {
       @apply text-bd__sm__reg text-blue__dark__0;
     }
@@ -28,6 +32,10 @@
 
         .comments__svg {
           @apply w-[18px] h-[18px];
+        }
+
+        .comments__length {
+          @apply text-bd__sm__bold text-blue__dark__1;
         }
       }
     }

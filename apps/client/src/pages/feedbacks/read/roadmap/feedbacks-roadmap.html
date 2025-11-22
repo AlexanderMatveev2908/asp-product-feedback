@@ -19,7 +19,7 @@
       <div class="root__header">
         @for(s of useRoadCtx.statusesWithCount(); track s.id; let idx = $index){
         <button (click)="useRoadCtx.onStatusChange(s.val)" class="header__status">
-          <span class="txt__bd__sm__bold" [ngClass]="twdLabel(s.val)">
+          <span class="status__label" [ngClass]="twdLabel(s.val)">
             {{ s.label }} ({{ s.count }})</span
           >
         </button>

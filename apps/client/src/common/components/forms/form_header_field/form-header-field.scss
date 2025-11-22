@@ -1,6 +1,10 @@
 .root {
   @apply w-full flex flex-col gap-[3px];
 
+  .root__label {
+    @apply text-bd__sm__bold text-blue__dark__1;
+  }
+
   .root__comment {
     @apply text-bd__sm__reg text-blue__dark__0;
   }

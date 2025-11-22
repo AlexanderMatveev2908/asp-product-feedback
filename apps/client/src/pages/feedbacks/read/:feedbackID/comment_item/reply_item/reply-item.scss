@@ -2,6 +2,10 @@
   @apply w-full pl-[24px] relative flex flex-col gap-[16px];
 
   .root__content {
+    .content__replying_to {
+      @apply text-bd__sm__bold text-purple__prm;
+    }
+
     .content__reply {
       @apply text-blue__dark__0 text-bd__sm__reg;
     }

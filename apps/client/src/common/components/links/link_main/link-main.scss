@@ -5,6 +5,10 @@
   @include mix.app__el__scl(1.15);
   @apply py-[10px] px-[16px] h-[40px] rounded-[10px] flex justify-center items-center;
 
+  .root__label {
+    @apply text-bd__sm__bold;
+  }
+
   &:hover {
     background: var(--hex_hover);
   }

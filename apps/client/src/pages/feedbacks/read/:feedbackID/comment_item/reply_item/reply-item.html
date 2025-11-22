@@ -5,7 +5,7 @@
   <app-header-comment [comment]="reply()" [toggleCb]="useToggleReply.toggle" />
 
   <div class="root__content">
-    <span class="txt__bd__sm__bold text-purple__prm">@{{ reply().replyingTo.username }}</span
+    <span class="content__replying_to">@{{ reply().replyingTo.username }}</span
     >&nbsp;<span class="content__reply">
       {{ reply().content }}
     </span>
