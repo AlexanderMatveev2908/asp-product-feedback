@@ -9,6 +9,7 @@
     [formShown]="useToggleReply.showReply()"
     [commentId]="comment().id"
     [replyingToId]="comment().userId"
+    [hideForm]="useToggleReply.hide"
   />
 
   @if(comment().replies?.length){

@@ -5,7 +5,10 @@ export class UseToggleReplyHk {
   public readonly showReply: WritableSignal<boolean> = signal(false);
 
   public readonly toggle: () => void = () => {
-    console.log('run');
     this.showReply.set(!this.showReply());
+  };
+
+  public readonly hide: () => void = () => {
+    this.showReply.set(false);
   };
 }

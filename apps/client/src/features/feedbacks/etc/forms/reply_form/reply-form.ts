@@ -17,6 +17,8 @@ import { UseApiTrackerHk } from '@/core/store/api/etc/hooks/use_tracker';
 import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { UseReplySvc } from '../../services/use_reply';
+import { finalize } from 'rxjs';
+import { FocusDom } from '@/core/lib/dom/focus';
 
 @Component({
   selector: 'app-reply-form',
@@ -30,6 +32,7 @@ export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
   public readonly formShown: InputSignal<boolean> = input.required();
   public readonly commentId: InputSignal<string> = input.required();
   public readonly replyingToId: InputSignal<string> = input.required();
+  public readonly hideForm: InputSignal<() => void> = input.required();
 
   private readonly useReply: UseReplySvc = inject(UseReplySvc);
 
@@ -41,10 +44,12 @@ export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
   // ? listeners
   public onSubmit(): void {
     this.submitForm(
-      this.useReply.main(this.form.value, {
-        commentId: this.commentId(),
-        replyingToId: this.replyingToId(),
-      })
+      this.useReply
+        .main(this.form.value, {
+          commentId: this.commentId(),
+          replyingToId: this.replyingToId(),
+        })
+        .pipe(finalize(() => this.hideForm()()))
     );
   }
 
@@ -54,9 +59,12 @@ export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
 
     this.useEffect(() => {
       const formShown: boolean = this.formShown();
-      if (formShown) return;
+      if (!formShown) {
+        this.reset();
+        return;
+      }
 
-      this.reset();
+      FocusDom.focusByDataField('content');
     });
   }
 }
