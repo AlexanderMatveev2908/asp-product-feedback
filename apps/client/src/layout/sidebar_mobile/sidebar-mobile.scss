@@ -31,6 +31,10 @@
 
     .block_b__title_row {
       @apply w-full flex items-center justify-between;
+
+      .title_row__title {
+        @apply text-hd__md text-blue__dark__1;
+      }
     }
 
     .block_b__content {

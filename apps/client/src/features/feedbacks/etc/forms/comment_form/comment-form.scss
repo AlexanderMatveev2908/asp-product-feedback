@@ -5,6 +5,10 @@
 .root {
   @apply w-full p-[24px] flex flex-col gap-[24px] bg-white rounded-[10px];
 
+  .root__title {
+    @apply text-blue__dark__1 text-hd__md;
+  }
+
   .root__content {
     @apply flex flex-col gap-[16px];
 
