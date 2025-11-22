@@ -8,7 +8,7 @@
     [isPending]="isPending()"
     [eventT]="eventT()"
   >
-    <div [class]="svgCls()">
+    <div [class]="useSpanDir.spanSizesProps().svg">
       <ng-container *ngComponentOutlet="Svg; inputs: { fill: 'white' }" />
     </div>
   </app-wrap-txt-api>
@@ -17,6 +17,8 @@
   @let label = useSpanDir.spanProps().label;
   <!--  -->
   @if(label){
-  <span [class]="txtCls()" [attr.data-testid]="'span_label'">{{ label }}</span>
+  <span [class]="useSpanDir.spanSizesProps().txt" [attr.data-testid]="'span_label'">{{
+    label
+  }}</span>
   }
 </div>
