@@ -1,6 +1,6 @@
 <app-black-bg [css]="blackBgCSS()" />
 
-<div #sideRef class="root z__sidebar" [ngClass]="twd()">
+<div #sideRef class="root" [ngClass]="twd()">
   <div class="root__block_a">
     <div class="block_a__content">
       @for (f of filtersFeedback; track f.id){
@@ -10,17 +10,17 @@
         [style.--bg]="bgFilter(f.val)"
         [style.--clr]="clrFilter(f.val)"
       >
-        <span class="txt__bd__sm__semi">{{ f.label }}</span>
+        <span class="filter__label">{{ f.label }}</span>
       </button>
       }
     </div>
   </div>
   <div class="root__block_b">
     <div class="block_b__title_row">
-      <span class="txt__hd__md text-blue__dark__1"> Roadmap </span>
+      <span class="title_row__title"> Roadmap </span>
 
       <a [routerLink]="'/feedbacks/read/roadmap'" (click)="closeOnNav()">
-        <span class="txt__bd__sm__semi text-blue__prm border-b border-blue__prm">View</span>
+        <span class="title_row__link">View</span>
       </a>
     </div>
     <div class="block_b__content">
@@ -29,10 +29,10 @@
         <div class="filter__label">
           <div class="label__circle" [style.--bg]="f.twdClr"></div>
 
-          <span class="txt__bd__lg__reg">{{ f.label }}</span>
+          <span class="label__txt">{{ f.label }}</span>
         </div>
 
-        <span class="txt__bd__lg__bold"> {{ f.count }} </span>
+        <span class="filter__count"> {{ f.count }} </span>
       </div>
       }
     </div>

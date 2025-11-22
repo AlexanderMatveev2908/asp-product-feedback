@@ -18,6 +18,10 @@
 
       .body__span {
         @apply w-full flex justify-center items-center;
+
+        > span {
+          @apply txt__lg text-center;
+        }
       }
 
       .body__header {

@@ -1,17 +1,17 @@
 <div class="root">
   <div class="root__body">
-    <span class="txt__bd__sm__bold text-blue__dark__1">
+    <span class="body__title">
       {{ item().title }}
     </span>
 
-    <span class="txt__bd__sm__reg text-blue__dark__0">
+    <span class="body__desc">
       {{ item().description }}
     </span>
   </div>
 
   <div class="root__footer">
     <div class="footer__cat">
-      <span class="txt__bd__sm__semi">
+      <span>
         {{ catLabel() }}
       </span>
     </div>
@@ -40,7 +40,7 @@
     <ng-content *ngComponentOutlet="Comment" />
   </div>
 
-  <span class="txt__bd__sm__bold text-blue__dark__1">
+  <span class="comments__length">
     {{ item().comments?.length ?? 0 }}
   </span>
 </ng-template>

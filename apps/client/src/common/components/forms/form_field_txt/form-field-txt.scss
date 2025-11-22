@@ -6,7 +6,7 @@
 
     .content__input {
       border-color: var(--border_clr);
-      @apply w-full bg-gray__1 rounded-[10px] py-[13px] px-[24px] outline-none border transition-all duration-300 text-blue__dark__1;
+      @apply w-full bg-gray__1 rounded-[10px] py-[13px] px-[24px] outline-none border transition-all duration-300 text-blue__dark__1 text-bd__md;
     }
   }
 }

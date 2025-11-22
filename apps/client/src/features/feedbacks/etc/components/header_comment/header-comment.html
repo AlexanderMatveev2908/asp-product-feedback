@@ -3,15 +3,15 @@
     <app-img-loader [src]="comment().user.image.url" [size]="'40px'" [radius]="'100%'" />
 
     <div class="left__labels">
-      <span class="txt__bd__sm__bold text-blue__dark__1">
+      <span class="labels__name">
         {{ comment().user.name }}
       </span>
 
-      <span class="txt__bd__sm__reg text-blue__dark__0"> @{{ comment().user.username }} </span>
+      <span class="labels__username"> @{{ comment().user.username }} </span>
     </div>
   </div>
 
   <button class="root__right" (click)="toggleCb()()">
-    <span class="txt__bd__sm__semi text-blue__prm">Reply</span>
+    <span>Reply</span>
   </button>
 </div>

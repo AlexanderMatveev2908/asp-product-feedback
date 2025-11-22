@@ -9,7 +9,7 @@ export class UseSpanDir {
   public readonly spanSizesProps: InputSignal<Partial<SpanSizesPropsT>> = input<
     Partial<SpanSizesPropsT>
   >({
-    svg: 'sm',
-    txt: 'lg',
+    svg: 'svg__sm',
+    txt: 'txt__lg',
   });
 }

@@ -5,6 +5,10 @@
 .root {
   @apply w-full p-[24px] flex flex-col gap-[24px] bg-white rounded-[10px];
 
+  .root__title {
+    @apply text-blue__dark__1 text-hd__md;
+  }
+
   .root__content {
     @apply flex flex-col gap-[16px];
 
@@ -18,6 +22,10 @@
 
     .content__footer {
       @apply w-full flex items-center justify-between;
+
+      .footer__chars {
+        @apply text-blue__dark__0 text-bd__sm__reg;
+      }
     }
   }
 }

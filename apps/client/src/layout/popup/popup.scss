@@ -4,7 +4,7 @@
 }
 
 .root {
-  @apply fixed inset-0 flex justify-center items-center;
+  @apply z-popup fixed inset-0 flex justify-center items-center;
 
   .root__pop {
     border-color: var(--clr);

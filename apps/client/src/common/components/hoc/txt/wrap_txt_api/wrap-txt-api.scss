@@ -1,5 +1,5 @@
 $spin_sizes: (
-  xx: 30,
+  xxs: 30,
   xs: 35,
   sm: 40,
   md: 45,
@@ -10,7 +10,7 @@ $spin_sizes: (
   @apply w-full;
 
   @each $k, $v in $spin_sizes {
-    .wrap__#{$k} {
+    .spin__#{$k} {
       width: #{$v}px;
       height: #{$v}px;
     }

@@ -5,10 +5,18 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  @apply sticky top-0 w-full h-[72px] flex px-[24px] items-center justify-between;
+  @apply z-navbar sticky top-0 w-full h-[72px] flex px-[24px] items-center justify-between;
 
   .root__left {
     @apply flex flex-col items-start;
+
+    .left__title {
+      @apply text-hd__sm;
+    }
+
+    .left__side_title {
+      @apply text-bd__sm__semi opacity-75;
+    }
   }
 
   .root__right {

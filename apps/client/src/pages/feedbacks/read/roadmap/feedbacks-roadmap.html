@@ -1,8 +1,8 @@
-<div class="header z__navbar">
+<div class="header">
   <div class="header__left">
     <app-link-back [version]="'b'" [where]="'/'" />
 
-    <span class="text-white txt__hd__md">Roadmap</span>
+    <span class="left__title">Roadmap</span>
   </div>
 
   <app-link-main
@@ -19,7 +19,7 @@
       <div class="root__header">
         @for(s of useRoadCtx.statusesWithCount(); track s.id; let idx = $index){
         <button (click)="useRoadCtx.onStatusChange(s.val)" class="header__status">
-          <span class="txt__bd__sm__bold" [ngClass]="twdLabel(s.val)">
+          <span class="status__label" [ngClass]="twdLabel(s.val)">
             {{ s.label }} ({{ s.count }})</span
           >
         </button>
@@ -31,9 +31,9 @@
 
       <div class="root__content">
         <div class="content__header">
-          <span class="txt__hd__md text-blue__dark__1">{{ currLabel() }}</span>
+          <span class="header__label">{{ currLabel() }}</span>
 
-          <span class="txt__bd__sm__reg text-blue__dark__0">
+          <span class="label__desc">
             {{ currDescription() }}
           </span>
         </div>

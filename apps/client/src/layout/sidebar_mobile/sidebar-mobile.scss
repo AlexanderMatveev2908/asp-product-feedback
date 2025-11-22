@@ -4,7 +4,7 @@
   height: calc(100% - 72px);
   min-height: calc(100% - 72px);
   transition: transform 0.4s, opacity 0.3s;
-  @apply fixed top-[72px] left-full w-[271px] bg-gray__1 p-[24px] flex flex-col gap-[24px];
+  @apply z-sidebar fixed top-[72px] left-full w-[271px] bg-gray__1 p-[24px] flex flex-col gap-[24px];
 
   .root__block_a,
   .root__block_b {
@@ -20,8 +20,9 @@
         @include mix.app__btn__scl(1.2);
         @apply rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
 
-        span {
+        .filter__label {
           color: var(--clr);
+          @apply text-bd__sm__semi;
         }
       }
     }
@@ -31,6 +32,14 @@
 
     .block_b__title_row {
       @apply w-full flex items-center justify-between;
+
+      .title_row__title {
+        @apply text-hd__md text-blue__dark__1;
+      }
+
+      .title_row__link {
+        @apply text-bd__sm__semi text-blue__prm border-b border-blue__prm;
+      }
     }
 
     .block_b__content {
@@ -41,10 +50,19 @@
 
         .filter__label {
           @apply flex items-center gap-[16px];
+
           .label__circle {
             background: var(--bg);
             @apply w-[8px] h-[8px] rounded-full;
           }
+
+          .label__txt {
+            @apply text-bd__lg__reg;
+          }
+        }
+
+        .filter__count {
+          @apply text-bd__lg__bold;
         }
       }
     }

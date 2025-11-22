@@ -39,8 +39,8 @@
       @include mix.sqr(calc(var(--size) / 1.5));
     }
 
-    span {
-      @apply text-red-600;
+    .error__label {
+      @apply text-red-600 txt__lg;
     }
   }
 }

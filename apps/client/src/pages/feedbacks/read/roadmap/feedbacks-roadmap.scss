@@ -3,11 +3,15 @@
 
   .header__left {
     @apply flex flex-col gap-[8px];
+
+    .left__title {
+      @apply text-white text-hd__md;
+    }
   }
 }
 
 .root {
-  @apply w-full flex flex-col gap-[24px];
+  @apply z-navbar w-full flex flex-col gap-[24px];
 
   .root__header {
     @apply w-full flex justify-around items-center py-[20px] border-b relative;
@@ -16,8 +20,8 @@
     .header__status {
       @apply w-full flex justify-center;
 
-      span {
-        @apply text-blue__dark__1 text-center transition-all duration-300;
+      .status__label {
+        @apply text-bd__sm__bold text-blue__dark__1 text-center transition-all duration-300;
       }
     }
 
@@ -34,6 +38,14 @@
 
     .content__header {
       @apply flex flex-col gap-[4px];
+
+      .header__label {
+        @apply text-hd__md text-blue__dark__1;
+      }
+
+      .header__desc {
+        @apply text-bd__sm__reg text-blue__dark__0;
+      }
     }
 
     .content__cards {

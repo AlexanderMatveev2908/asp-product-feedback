@@ -1,108 +1,47 @@
-// ? == headings ==
-.txt__hd__xl {
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 35px;
-  letter-spacing: -0.33px;
-}
+@layer utilities {
+  .txt__xxs {
+    @apply font-thin text-xs lg:text-sm;
+  }
 
-.txt__hd__lg {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 29px;
-  letter-spacing: -0.25px;
-}
+  .txt__xs {
+    @apply font-normal text-xs sm:text-sm lg:text-base;
+  }
 
-.txt__hd__md {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
-  letter-spacing: -0.25px;
-}
+  .txt__sm {
+    @apply font-normal text-sm sm:text-base lg:text-lg;
+  }
 
-.txt__hd__sm {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: -0.2px;
-}
+  .txt__md {
+    @apply font-medium text-base sm:text-lg lg:text-xl;
+  }
 
-// ? == body ==
-.txt__bd__lg__reg {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 23px;
-}
+  .txt__lg {
+    @apply font-bold text-lg sm:text-xl lg:text-2xl;
+  }
 
-.txt__bd__lg__bold {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 23px;
-}
+  .txt__xl {
+    @apply font-bold text-xl sm:text-2xl lg:text-3xl;
+  }
 
-.txt__bd__md {
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 22px;
-}
+  .txt__2xl {
+    @apply font-bold text-2xl sm:text-3xl lg:text-4xl;
+  }
 
-.txt__bd__sm__reg {
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 19px;
-}
-.txt__bd__sm__semi {
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 19px;
-}
-.txt__bd__sm__bold {
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 19px;
-}
+  .txt__3xl {
+    @apply font-extrabold text-3xl sm:text-4xl lg:text-5xl;
+  }
 
-// ? common classes used custom elements
-.txt__xxs {
-  @apply font-thin text-xs lg:text-sm;
-}
+  .txt__4xl {
+    @apply font-extrabold text-4xl sm:text-5xl lg:text-6xl;
+  }
 
-.txt__xs {
-  @apply font-normal text-xs sm:text-sm lg:text-base;
-}
+  .txt__5xl {
+    @apply font-extrabold text-5xl sm:text-6xl lg:text-7xl;
+  }
 
-.txt__sm {
-  @apply font-normal text-sm sm:text-base lg:text-lg;
-}
-
-.txt__md {
-  @apply font-medium text-base sm:text-lg lg:text-xl;
-}
-
-.txt__lg {
-  @apply font-bold text-lg sm:text-xl lg:text-2xl;
-}
-
-.txt__xl {
-  @apply font-bold text-xl sm:text-2xl lg:text-3xl;
-}
-
-.txt__2xl {
-  @apply font-bold text-2xl sm:text-3xl lg:text-4xl;
-}
-
-.txt__3xl {
-  @apply font-extrabold text-3xl sm:text-4xl lg:text-5xl;
-}
-.txt__4xl {
-  @apply font-extrabold text-4xl sm:text-5xl lg:text-6xl;
-}
-.txt__5xl {
-  @apply font-extrabold text-5xl sm:text-6xl lg:text-7xl;
-}
-
-.txt__clr {
-  @apply text-neutral-300;
+  .txt__clr {
+    @apply text-neutral-300;
+  }
 }
 
 .app__txt__grad {

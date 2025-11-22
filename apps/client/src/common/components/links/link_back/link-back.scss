@@ -5,9 +5,9 @@
     @apply w-[10px] h-[10px];
   }
 
-  span {
+  .root__label {
     color: var(--clr);
-    @apply relative;
+    @apply text-bd__sm__bold relative;
 
     &::after {
       background: var(--clr);

@@ -1,11 +1,9 @@
 <div #dropRef class="root">
   <button type="button" (click)="onClick()" class="root__btn">
     <div class="btn__label">
-      <span class="txt__bd__sm__reg"> Sort by :</span>
+      <span> Sort by :</span>
       &nbsp;
-      <span class="txt__bd__sm__bold" [style.opacity]="useDrop.isOpen() ? '75%' : '100%'">{{
-        currLabel()
-      }}</span>
+      <span [style.opacity]="useDrop.isOpen() ? '75%' : '100%'">{{ currLabel() }}</span>
     </div>
 
     <div class="btn__svg">
@@ -22,7 +20,7 @@
       class="drop__opt"
       [style.--border]="idx === options.length - 1 ? 'none' : '1px solid'"
     >
-      <span class="txt__bd__lg__reg">
+      <span class="opt__label">
         {{ s.label }}
       </span>
 

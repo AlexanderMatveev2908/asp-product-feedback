@@ -36,7 +36,7 @@ export class SidebarMobile implements OnInit {
 
   // ? derived
   public readonly blackBgCSS: Signal<string> = computed(
-    () => `z__sidebar__bg ${this.sideSlice.isOpen() ? 'fixed' : 'hidden'}`
+    () => `z-sidebar__bg ${this.sideSlice.isOpen() ? 'fixed' : 'hidden'}`
   );
   public readonly twd: Signal<string> = computed(() =>
     this.sideSlice.isOpen() ? '-translate-x-full' : '-translate-x-0'

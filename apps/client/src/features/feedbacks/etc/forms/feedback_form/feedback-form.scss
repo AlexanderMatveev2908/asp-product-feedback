@@ -10,6 +10,10 @@
 
     .form__title {
       @apply text-blue__dark__1;
+
+      > span {
+        @apply text-hd__md;
+      }
     }
 
     .form__footer {

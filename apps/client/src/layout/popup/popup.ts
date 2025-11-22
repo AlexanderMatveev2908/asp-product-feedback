@@ -46,7 +46,7 @@ export class Popup extends UseInjCtxHk implements AfterViewInit {
 
   // ? black bg overlay props
   public cssBlackBg: Signal<string> = computed(
-    () => `${this.isPop() ? 'fixed' : 'hidden'} z__generic_popup__bg`
+    () => `${this.isPop() ? 'fixed' : 'hidden'} z-popup__bg`
   );
 
   // ? derived

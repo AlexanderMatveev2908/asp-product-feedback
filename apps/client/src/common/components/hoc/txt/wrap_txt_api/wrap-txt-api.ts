@@ -1,15 +1,7 @@
 import { SpinTxt } from '@/common/components/spins/spin_txt/spin-txt';
 import { SpinTxtClsT } from '@/common/types/css';
 import { NgClass } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  InputSignal,
-  Signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
 import { UseMetaEventDir } from '@/core/directives/use_meta_event';
 import { UseWrapApiDir } from '@/core/directives/use_wrap_api';
 
@@ -26,7 +18,4 @@ export class WrapTxtApi {
 
   // ? props
   public readonly spinSizeT: InputSignal<SpinTxtClsT> = input.required();
-
-  // ? derived
-  public readonly css: Signal<string> = computed(() => `wrap__${this.spinSizeT()}`);
 }
