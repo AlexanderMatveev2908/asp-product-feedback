@@ -72,7 +72,7 @@ SELECT f.*,
                     FROM users rt
                       WHERE r.replying_to = rt.id
                   ) rt_obj
-                ) replying_to
+                ) AS "replyingTo"
 
               FROM replies r
                 WHERE r.comment_id = c.id
