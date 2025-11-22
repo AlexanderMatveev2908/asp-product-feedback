@@ -5,7 +5,11 @@
     {{ comment().content }}
   </span>
 
-  <app-reply-form [strategy]="useReply.main" [formShown]="useToggleReply.showReply()" />
+  <app-reply-form
+    [formShown]="useToggleReply.showReply()"
+    [commentId]="comment().id"
+    [replyingToId]="comment().userId"
+  />
 
   @if(comment().replies?.length){
   <div class="root__replies">

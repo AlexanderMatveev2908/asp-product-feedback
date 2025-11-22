@@ -11,5 +11,9 @@
     </span>
   </div>
 
-  <app-reply-form [formShown]="useToggleReply.showReply()" [strategy]="useReply.main" />
+  <app-reply-form
+    [formShown]="useToggleReply.showReply()"
+    [commentId]="reply().commentId"
+    [replyingToId]="reply().userId"
+  />
 </div>

@@ -27,12 +27,15 @@ export type ReplyT = SqlTableT<{
   replyingToId: string;
   replyingTo: UserT;
   user: UserT;
+  commentId: string;
+  userId: string;
 }>;
 
 export type CommentT = SqlTableT<{
   content: string;
   replies: Nullable<ReplyT[]>;
   user: UserT;
+  userId: string;
 }>;
 
 export type FeedbackT = SqlTableT<{

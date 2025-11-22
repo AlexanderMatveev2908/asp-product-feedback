@@ -4,7 +4,13 @@
     <app-form-field-txt appUseFormField [f]="field" [ctrl]="asFormControl('content')" />
 
     <div class="content__btn">
-      <app-btn-main appUseMetaApp [varT]="'purple'" [label]="'Post Reply'" [btnT]="'submit'" />
+      <app-btn-main
+        appUseMetaApp
+        [varT]="'purple'"
+        [label]="'Post Reply'"
+        [btnT]="'submit'"
+        [isPending]="useTrackApi.isPending()"
+      />
     </div>
   </form>
 </div>

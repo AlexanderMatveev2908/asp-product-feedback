@@ -25,7 +25,7 @@ SELECT f.*,
 
           COALESCE(
           (
-            SELECT JSON_AGG(r_agg ORDER BY r_agg.created_at DESC)
+            SELECT JSON_AGG(r_agg ORDER BY r_agg.created_at ASC)
             FROM (
               SELECT r.*,
                 (

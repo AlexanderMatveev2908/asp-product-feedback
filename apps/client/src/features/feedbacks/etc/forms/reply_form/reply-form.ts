@@ -2,14 +2,21 @@ import { TxtFieldT } from '@/common/types/forms';
 import { UseFormAppDir } from '@/core/directives/use_form_app';
 import { ContentFormMng, ContentFormT } from '@/core/paperwork/etc/content_form_mng';
 import { CommentFormUiFkt } from '@/core/ui_fkt/etc/content_ui_fkt';
-import { ChangeDetectionStrategy, Component, input, InputSignal, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  InputSignal,
+  OnInit,
+} from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { FormFieldTxt } from '@/common/components/forms/form_field_txt/form-field-txt';
 import { UseFormFieldDir } from '@/core/directives/use_form_field';
 import { UseApiTrackerHk } from '@/core/store/api/etc/hooks/use_tracker';
 import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
+import { UseReplySvc } from '../../services/use_reply';
 
 @Component({
   selector: 'app-reply-form',
@@ -20,9 +27,11 @@ import { UseMetaAppDir } from '@/core/directives/use_meta_app';
   providers: [UseApiTrackerHk],
 })
 export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
-  public readonly strategy: InputSignal<(data: ContentFormT) => Observable<unknown>> =
-    input.required();
   public readonly formShown: InputSignal<boolean> = input.required();
+  public readonly commentId: InputSignal<string> = input.required();
+  public readonly replyingToId: InputSignal<string> = input.required();
+
+  private readonly useReply: UseReplySvc = inject(UseReplySvc);
 
   // ? statics
   public readonly form: FormGroup = ContentFormMng.form();
@@ -31,7 +40,12 @@ export class ReplyForm extends UseFormAppDir<ContentFormT> implements OnInit {
 
   // ? listeners
   public onSubmit(): void {
-    this.submitForm(this.strategy()(this.form.value));
+    this.submitForm(
+      this.useReply.main(this.form.value, {
+        commentId: this.commentId(),
+        replyingToId: this.replyingToId(),
+      })
+    );
   }
 
   // ? ng lifecycle

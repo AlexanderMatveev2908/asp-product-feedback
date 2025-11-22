@@ -1,10 +1,20 @@
 import { ObsResT } from '@/core/store/api/etc/types';
 import { UseApiSvc } from '@/core/store/api/use_api';
 import { inject, Injectable } from '@angular/core';
-import { CommentT, FeedbackT } from './etc/types';
+import { CommentT, FeedbackT, ReplyT } from './etc/types';
 import { LibApiArgs } from '@/core/store/api/etc/lib/api_args';
 import { FeedFormPostT, FeedFormPutT } from './etc/forms/feedback_form/etc/form_mng';
 import { ContentFormT } from '../../core/paperwork/etc/content_form_mng';
+
+interface ArgPostCommentT {
+  feedbackId: string;
+  userId: string;
+}
+
+export interface ArgPostReplyT extends Omit<ArgPostCommentT, 'feedbackId'> {
+  replyingToId: string;
+  commentId: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +22,7 @@ import { ContentFormT } from '../../core/paperwork/etc/content_form_mng';
 export class FeedbacksApiSvc {
   private readonly baseFeed: string = '/feedbacks';
   private readonly baseComm: string = '/comments';
+  private readonly baseReply: string = '/replies';
 
   private readonly api: UseApiSvc = inject(UseApiSvc);
 
@@ -58,7 +69,7 @@ export class FeedbacksApiSvc {
 
   public postComm(
     data: ContentFormT,
-    { feedbackId, userId }: { feedbackId: string; userId: string }
+    { feedbackId, userId }: ArgPostCommentT
   ): ObsResT<{ comment: CommentT }> {
     return this.api.post(
       LibApiArgs.withURL(`${this.baseComm}/${feedbackId}`)
@@ -68,6 +79,22 @@ export class FeedbacksApiSvc {
         })
         .toastOnFulfilled()
         .toastOkMsg('comment posted')
+    );
+  }
+
+  public postReply(
+    data: ContentFormT,
+    { commentId, replyingToId, userId }: ArgPostReplyT
+  ): ObsResT<{ reply: ReplyT }> {
+    return this.api.post(
+      LibApiArgs.withURL(`${this.baseReply}/${commentId}`)
+        .body({
+          content: data.content,
+          replyingToId,
+          userId,
+        })
+        .toastOnFulfilled()
+        .toastOkMsg('reply posted')
     );
   }
 }
