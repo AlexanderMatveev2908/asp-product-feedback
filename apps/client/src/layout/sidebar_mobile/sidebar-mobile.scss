@@ -45,9 +45,14 @@
 
         .filter__label {
           @apply flex items-center gap-[16px];
+
           .label__circle {
             background: var(--bg);
             @apply w-[8px] h-[8px] rounded-full;
+          }
+
+          .label__txt {
+            @apply text-bd__lg__reg;
           }
         }
       }

@@ -34,7 +34,7 @@
           [style.--border]="idx === f().options.length - 1 ? 'none' : '1px solid'"
           (click)="onChange(o.val)"
         >
-          <span class="txt__bd__lg__reg item__label">{{ o.label }}</span>
+          <span class="item__label">{{ o.label }}</span>
 
           @if(isChosen(o.val)){
           <div class="item__svg">

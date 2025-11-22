@@ -33,6 +33,10 @@
       border-color: #3a437415;
       @apply w-full flex items-center justify-between px-[24px] py-[12px] transition-all duration-300 text-blue__dark__0;
 
+      .opt__label {
+        @apply text-bd__lg__reg;
+      }
+
       &:hover {
         @apply text-purple__prm;
       }
