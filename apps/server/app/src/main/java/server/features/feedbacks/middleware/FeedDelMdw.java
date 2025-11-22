@@ -6,7 +6,6 @@ import org.springframework.web.server.WebFilterChain;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import server.decorators.core.api.Api;
-import server.features.feedbacks.middleware.shared.FeedFinderMdw;
 import server.middleware.base_mdw.BaseMdw;
 import server.models.feedbacks.etc.FeedSvc;
 
@@ -16,17 +15,14 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @Component
 @RequiredArgsConstructor
 @SuppressFBWarnings({ "EI2", "EI" })
-public class FeedDelMdw extends BaseMdw implements FeedFinderMdw {
+public class FeedDelMdw extends BaseMdw {
   private final FeedSvc feedSvc;
-
-  public FeedSvc getFeedSvc() {
-    return feedSvc;
-  }
 
   @Override
   public final Mono<Void> handle(Api api, WebFilterChain chain) {
     return matchPathAfterCutIdOut(api, chain, "/feedbacks", HttpMethod.DELETE, () -> {
-      return limit(api, 10, 15).then(throwOn404(withPathId(api))).then(chain.filter(api));
+      return limit(api, 10, 15).then(withPathId(api).flatMap(feedbackId -> feedSvc.throwNotFound(feedbackId)))
+          .then(chain.filter(api));
     });
   }
 }

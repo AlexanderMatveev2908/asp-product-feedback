@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+import server.decorators.core.ErrAPI;
 import server.models.comments.Comment;
 
 @Service
@@ -21,5 +22,9 @@ public final class CommentSvc {
 
   public final Mono<Comment> byId(UUID id) {
     return commentRepo.findById(id);
+  }
+
+  public final Mono<Comment> throwNotFound(UUID id) {
+    return byId(id).switchIfEmpty(Mono.error(new ErrAPI("comment not found", 404)));
   }
 }

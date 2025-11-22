@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+import server.decorators.core.ErrAPI;
 import server.features.feedbacks.paperwork.PutFeedFormT;
 import server.models.feedbacks.Feedback;
 
@@ -22,6 +23,10 @@ public final class FeedSvc {
 
   public final Mono<Feedback> byId(UUID id) {
     return feedRepo.findById(id);
+  }
+
+  public final Mono<Feedback> throwNotFound(UUID id) {
+    return byId(id).switchIfEmpty(Mono.error(new ErrAPI("feedback not found", 404)));
   }
 
   public final Mono<Boolean> like(UUID feedbackId) {
