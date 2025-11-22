@@ -1,1 +1,15 @@
-.root{}
+:host {
+  @apply block w-full;
+}
+
+.root {
+  @apply w-full mt-[8px];
+
+  .root__content {
+    @apply flex flex-col gap-[16px];
+
+    .content__btn {
+      @apply w-full flex justify-center items-center;
+    }
+  }
+}

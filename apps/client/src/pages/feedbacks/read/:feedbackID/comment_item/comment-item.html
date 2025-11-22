@@ -5,6 +5,8 @@
     {{ comment().content }}
   </span>
 
+  <app-reply-form [strategy]="useReply.main" />
+
   @if(comment().replies?.length){
   <div class="root__replies">
     @for (r of comment().replies; track r.id; let idx = $index){
