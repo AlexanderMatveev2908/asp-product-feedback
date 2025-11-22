@@ -80,7 +80,8 @@ public class UserRandSvc {
 
   private Mono<Tuple2<User, Image>> newRandomUser(GeoUserT geo) {
     final String randFullName = faker.name().fullName();
-    final String username = geo.countryCode().toLowerCase() + "__" + LibPrs.asUsername(randFullName);
+    final String username = geo.countryCode().toLowerCase() + "_" + geo.city().toLowerCase() + "__"
+        + LibPrs.asUsername(randFullName);
     final User maybeNew = new User(randFullName, username);
 
     return userSvc.byUsername(username).flatMap(existing -> newRandomUser(geo)).switchIfEmpty(
