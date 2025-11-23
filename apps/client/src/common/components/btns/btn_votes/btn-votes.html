@@ -1,5 +1,10 @@
 <button
   class="root"
+  [ngClass]="
+    useTablet.isTabletVersion()
+      ? 'flex flex-col items-center justify-center min-w-[40px] h-[53px] pt-[14px] pb-[8px] gap-[8px]'
+      : 'flex justify-center items-center gap-[10px] py-[6px] px-[15px]'
+  "
   (click)="optimisticLike()"
   (mousedown)="useBtnFocus.onFocus()"
   (mouseup)="useBtnFocus.onBlur()"

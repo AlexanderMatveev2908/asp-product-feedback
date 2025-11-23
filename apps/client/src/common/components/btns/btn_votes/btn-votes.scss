@@ -2,7 +2,7 @@
 
 .root {
   @include mix.app__btn__scl(1.3);
-  @apply flex justify-center items-center gap-[10px] w-fit py-[6px] px-[15px] rounded-[10px] bg-gray__0 min-h-[32px];
+  @apply w-fit rounded-[10px] bg-gray__0 min-h-[32px];
 
   .root__svg {
     @apply w-[8px] h-[8px] text-blue__prm;

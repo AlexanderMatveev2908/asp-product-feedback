@@ -17,7 +17,12 @@
     </div>
 
     <div class="footer__counts">
-      <app-btn-votes [upvotes]="item().upvotes" [feedbackId]="item().id" />
+      <app-btn-votes
+        [upvotes]="item().upvotes"
+        [feedbackId]="item().id"
+        appUseTabletDir
+        [adoptTabletShape]="false"
+      />
 
       @if(footerWithLink()){
 

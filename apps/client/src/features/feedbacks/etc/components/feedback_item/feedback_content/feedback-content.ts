@@ -1,17 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  input,
-  InputSignal,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
 import { FeedbackT } from '../../../types';
-import { BreakCSS } from '@/core/constants/breakpoints';
 import { VersionCol } from './version_col/card-version-col';
 import { VersionRow } from './version_row/card-version-row';
+import { UseTabletDir } from '@/core/services/use_tablet';
 
 @Component({
   selector: 'app-feedback-content',
@@ -20,23 +11,8 @@ import { VersionRow } from './version_row/card-version-row';
   styleUrl: './feedback-content.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedbackContent implements OnInit {
+export class FeedbackContent {
   public readonly item: InputSignal<FeedbackT> = input.required();
-  public readonly rowRenderTablet: InputSignal<boolean> = input.required();
 
-  public readonly isTablet: WritableSignal<boolean> = signal(false);
-
-  private updateRowState(): void {
-    if (!this.rowRenderTablet()) return;
-    this.isTablet.set(BreakCSS.isTablet());
-  }
-
-  ngOnInit(): void {
-    this.updateRowState();
-  }
-
-  @HostListener('window:resize')
-  public onResize(): void {
-    this.updateRowState();
-  }
+  public readonly useTablet: UseTabletDir = inject(UseTabletDir);
 }

@@ -1,5 +1,5 @@
 <div class="root" [style.--bg]="'var(--purple__prm)'">
   @if(withHeader()) { <app-header-feedback [statusLabel]="statusLabel()" />
   }
-  <app-feedback-content [item]="item()" [rowRenderTablet]="rowRenderTablet()" />
+  <app-feedback-content [item]="item()" appUseTabletDir [adoptTabletShape]="rowRenderTablet()" />
 </div>

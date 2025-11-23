@@ -10,10 +10,11 @@ import {
 } from '@angular/core';
 import { HeaderFeedback } from './header_feedback/header-feedback';
 import { FeedbackContent } from './feedback_content/feedback-content';
+import { UseTabletDir } from '@/core/services/use_tablet';
 
 @Component({
   selector: 'app-feedback-item',
-  imports: [FeedbackContent, HeaderFeedback],
+  imports: [FeedbackContent, HeaderFeedback, UseTabletDir],
   templateUrl: './feedback-item.html',
   styleUrl: './feedback-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,1 +1,10 @@
-<div class="root"></div>
+<div class="root">
+  <div class="root__left">
+    <app-btn-votes
+      [upvotes]="item().upvotes"
+      [feedbackId]="item().id"
+      appUseTabletDir
+      [adoptTabletShape]="true"
+    />
+  </div>
+</div>

@@ -1,16 +1,16 @@
 import { SvgT } from '@/common/types/etc';
-import { NgComponentOutlet } from '@angular/common';
+import { NgComponentOutlet, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
 import { SvgStrokeIconArrowUp } from '../../svgs/stroke/icon-arrow-up/icon-arrow-up';
 import { UseFeedKit } from '@/features/feedbacks/etc/services/use_feed_kit';
 import { UseBtnFocusHk } from '@/core/hooks/use_btn_focus';
 import { catchError, throwError } from 'rxjs';
 import { ErrApiT } from '@/core/store/api/etc/types';
-import { ToastSlice } from '@/features/toast/slice';
+import { UseTabletDir } from '@/core/services/use_tablet';
 
 @Component({
   selector: 'app-btn-votes',
-  imports: [NgComponentOutlet],
+  imports: [NgComponentOutlet, NgClass],
   templateUrl: './btn-votes.html',
   styleUrl: './btn-votes.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,8 @@ import { ToastSlice } from '@/features/toast/slice';
 })
 export class BtnVotes {
   private readonly useFeedKit: UseFeedKit = inject(UseFeedKit);
-  private readonly toastSlice: ToastSlice = inject(ToastSlice);
+
+  public readonly useTablet: UseTabletDir = inject(UseTabletDir);
 
   public readonly upvotes: InputSignal<number> = input.required();
   public readonly feedbackId: InputSignal<string> = input.required();
