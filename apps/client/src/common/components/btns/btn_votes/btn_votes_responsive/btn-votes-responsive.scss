@@ -10,13 +10,21 @@
 
   &:active {
     @apply text-white bg-blue__prm;
+
+    .root__svg {
+      @apply text-white;
+    }
+
+    .root__votes {
+      @apply text-white;
+    }
   }
 
   .root__svg {
-    @apply w-[8px] h-[8px];
+    @apply w-[8px] h-[8px] text-blue__prm;
   }
 
   .root__votes {
-    @apply text-bd__sm__bold;
+    @apply text-bd__sm__bold text-blue__dark__1;
   }
 }

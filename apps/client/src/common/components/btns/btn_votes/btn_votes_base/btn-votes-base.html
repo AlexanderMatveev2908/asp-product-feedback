@@ -1,24 +1,9 @@
-<button
-  class="root"
-  (click)="optimisticLike()"
-  (mousedown)="useFocus.onFocus()"
-  (mouseup)="useFocus.onBlur()"
-  (mouseout)="useFocus.onBlur()"
-  (mouseover)="useHover.onHover()"
-  (focus)="useHover.onHover()"
-  (mouseleave)="useHover.onLeave()"
-  (blur)="mixedBlur()"
->
-  <div class="root__svg" [ngClass]="twdSvg()">
-    <ng-content
-      *ngComponentOutlet="
-        Chevron;
-        inputs: { fill: useFocus.isFocused() ? 'var(--blue__prm)' : 'white' }
-      "
-    />
+<button class="root" (click)="optimisticLike()">
+  <div class="root__svg">
+    <ng-content *ngComponentOutlet="Chevron" />
   </div>
 
-  <span class="root__votes" [ngClass]="twdLabel()">
+  <span class="root__votes">
     {{ upvotes() }}
   </span>
 </button>
