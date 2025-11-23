@@ -42,8 +42,6 @@ export class SidebarMobile {
 
   @HostListener('document:mousedown', ['$event'])
   public onMouseDown(e: Event): void {
-    if (!BreakCSS.isTablet()) return;
-
     const side: ElDomT = this.sideRef?.nativeElement;
     const target: Node = e.target as Node;
 
