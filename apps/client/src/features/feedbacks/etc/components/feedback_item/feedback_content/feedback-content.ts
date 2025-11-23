@@ -25,6 +25,7 @@ import { UseNavSvc } from '@/core/services/use_nav';
 })
 export class FeedbackContent {
   public readonly item: InputSignal<FeedbackT> = input.required();
+  public readonly rowRenderTablet: InputSignal<boolean> = input.required();
 
   private readonly useNav: UseNavSvc = inject(UseNavSvc);
 

@@ -30,7 +30,7 @@
       @if(!!feedbacks()?.length) {
       <!--  -->
       @for(p of sorted(); track p.id){
-      <app-feedback-item [item]="p" [withHeader]="false" />
+      <app-feedback-item [item]="p" [withHeader]="false" [rowRenderTablet]="true" />
       }
       <!--  -->
       }@else{

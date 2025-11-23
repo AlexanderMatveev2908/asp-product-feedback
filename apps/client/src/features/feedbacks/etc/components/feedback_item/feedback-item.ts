@@ -22,6 +22,8 @@ export class FeedbackItem {
   public readonly item: InputSignal<FeedbackT> = input.required();
   public readonly withHeader: InputSignal<boolean> = input.required();
 
+  public readonly rowRenderTablet: InputSignal<boolean> = input.required();
+
   public readonly statusLabel: Signal<string> = computed(() =>
     FeedLibShape.statusLabelByVal(this.item().status)
   );
