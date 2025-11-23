@@ -15,4 +15,7 @@ export class FeedbackBase extends UseFeedbackCardDir {
   public readonly statusLabel: Signal<string> = computed(() =>
     FeedLibShape.statusLabelByVal(this.item().status)
   );
+  public readonly statusClr: Signal<string> = computed(() =>
+    FeedLibShape.clrByStatus(this.item().status)
+  );
 }
