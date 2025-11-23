@@ -1,0 +1,9 @@
+<div class="root__svg">
+  <ng-content
+    *ngComponentOutlet="Chevron; inputs: { fill: isFocused() ? 'var(--blue__prm)' : 'white' }"
+  />
+</div>
+
+<span class="root__votes">
+  {{ upvotes() }}
+</span>

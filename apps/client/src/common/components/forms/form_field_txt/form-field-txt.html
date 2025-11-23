@@ -10,7 +10,7 @@
       [placeholder]="f().place"
       [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
       (focus)="useFocus.onFocus()"
-      (blur)="useFocus.onBLur()"
+      (blur)="useFocus.onBlur()"
       class="content__input min-h-[120px]"
     ></textarea>
     }@else{
@@ -21,7 +21,7 @@
       [placeholder]="f().place"
       [style.--border_clr]="useFormField.borderClr(useFocus.isFocused())"
       (focus)="useFocus.onFocus()"
-      (blur)="useFocus.onBLur()"
+      (blur)="useFocus.onBlur()"
       class="content__input"
     />} @if(!useFormField.isValid()){
     <app-form-err [errMsg]="useFormField.errMsg()" />

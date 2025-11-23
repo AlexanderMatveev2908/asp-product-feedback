@@ -1,0 +1,17 @@
+<button
+  class="root"
+  (click)="optimisticLike()"
+  (mousedown)="useFocus.onFocus()"
+  (mouseup)="useFocus.onBlur()"
+  (mouseout)="useFocus.onBlur()"
+  (mouseover)="useHover.onHover()"
+  (focus)="useHover.onHover()"
+  (mouseleave)="useHover.onLeave()"
+  (blur)="mixedBlur()"
+>
+  <app-btn-votes-content
+    [isFocused]="useFocus.isFocused()"
+    [isHover]="useHover.isHover()"
+    [upvotes]="upvotes()"
+  />
+</button>
