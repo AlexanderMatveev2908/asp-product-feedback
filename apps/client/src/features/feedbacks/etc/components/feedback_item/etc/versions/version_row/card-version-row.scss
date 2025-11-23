@@ -6,7 +6,11 @@
   @apply flex justify-between items-center gap-[25px];
 
   .root__left {
-    @apply flex items-center gap-[40px];
+    @apply flex gap-[40px];
+
+    .left__upvotes {
+      @apply min-h-full flex items-start;
+    }
 
     .left__content {
       @apply flex flex-col gap-[12px] items-start;

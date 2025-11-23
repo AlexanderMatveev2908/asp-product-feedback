@@ -1,11 +1,13 @@
 <div class="root">
   <div class="root__left">
-    <app-btn-votes-responsive
-      [upvotes]="item().upvotes"
-      [feedbackId]="item().id"
-      appUseTabletDir
-      [adoptTabletShape]="true"
-    />
+    <div class="left__upvotes">
+      <app-btn-votes-responsive
+        [upvotes]="item().upvotes"
+        [feedbackId]="item().id"
+        appUseTabletDir
+        [adoptTabletShape]="true"
+      />
+    </div>
 
     <div class="left__content">
       <div class="content__text">
