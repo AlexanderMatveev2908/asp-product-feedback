@@ -10,11 +10,12 @@ import {
 } from '@angular/core';
 import { FeedbackT } from '../../../types';
 import { BreakCSS } from '@/core/constants/breakpoints';
-import { VersionCol } from './version_col/version-col';
+import { VersionCol } from './version_col/card-version-col';
+import { VersionRow } from './version_row/card-version-row';
 
 @Component({
   selector: 'app-feedback-content',
-  imports: [VersionCol],
+  imports: [VersionCol, VersionRow],
   templateUrl: './feedback-content.html',
   styleUrl: './feedback-content.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

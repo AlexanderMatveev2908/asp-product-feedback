@@ -17,10 +17,10 @@ import { BtnVotes } from '@/common/components/btns/btn_votes/btn-votes';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 
 @Component({
-  selector: 'app-version-col',
+  selector: 'app-card-version-col',
   imports: [BtnVotes, RouterLink, NgTemplateOutlet, NgComponentOutlet],
-  templateUrl: './version-col.html',
-  styleUrl: './version-col.scss',
+  templateUrl: './card-version-col.html',
+  styleUrl: './card-version-col.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VersionCol {
