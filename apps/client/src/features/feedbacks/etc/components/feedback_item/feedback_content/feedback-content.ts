@@ -1,51 +1,41 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  inject,
+  HostListener,
   input,
   InputSignal,
-  Signal,
+  OnInit,
+  signal,
+  WritableSignal,
 } from '@angular/core';
-import { Nullable, SvgT } from '@/common/types/etc';
-import { BtnVotes } from '@/common/components/btns/btn_votes/btn-votes';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { SvgAdvIconComments } from '@/common/components/svgs/advanced/icon-comments/icon-comments';
-import { Params, RouterLink } from '@angular/router';
-import { FeedLibShape } from '../../../lib_shape';
 import { FeedbackT } from '../../../types';
-import { UseNavSvc } from '@/core/services/use_nav';
+import { BreakCSS } from '@/core/constants/breakpoints';
+import { VersionCol } from './version_col/version-col';
 
 @Component({
   selector: 'app-feedback-content',
-  imports: [BtnVotes, NgComponentOutlet, RouterLink, NgTemplateOutlet],
+  imports: [VersionCol],
   templateUrl: './feedback-content.html',
   styleUrl: './feedback-content.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedbackContent {
+export class FeedbackContent implements OnInit {
   public readonly item: InputSignal<FeedbackT> = input.required();
   public readonly rowRenderTablet: InputSignal<boolean> = input.required();
 
-  private readonly useNav: UseNavSvc = inject(UseNavSvc);
+  public readonly isTablet: WritableSignal<boolean> = signal(false);
 
-  public readonly footerWithLink: Signal<boolean> = computed(() => {
-    const path: Nullable<string> = this.useNav.currPath();
-    if (!path) return false;
+  private updateRowState(): void {
+    if (!this.rowRenderTablet()) return;
+    this.isTablet.set(BreakCSS.isTablet());
+  }
 
-    const vars: Nullable<Params> = this.useNav.pathVariables();
-    return !vars?.['feedbackID'];
-  });
+  ngOnInit(): void {
+    this.updateRowState();
+  }
 
-  // ? statics
-  public readonly Comment: SvgT = SvgAdvIconComments;
-
-  // ? derived
-  public readonly pathComments: Signal<string> = computed(
-    () => `/feedbacks/read/${this.item()?.id}`
-  );
-
-  public readonly catLabel: Signal<Nullable<string>> = computed(() =>
-    FeedLibShape.catLabelByVal(this.item().category)
-  );
+  @HostListener('window:resize')
+  public onResize(): void {
+    this.updateRowState();
+  }
 }

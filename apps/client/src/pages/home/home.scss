@@ -13,7 +13,7 @@
     @apply items-center flex gap-[40px];
 
     .left__count {
-      @apply items-center flex gap-[16px];
+      @apply hidden md:flex items-center gap-[16px];
 
       .count__svg {
         @include mix.sqr(24px);
