@@ -40,7 +40,7 @@
 
         <div class="content__cards">
           @for(p of useRoadCtx.filteredFeedbacks(); track p.id){
-          <app-feedback-item [item]="p" [withHeader]="true" />
+          <app-feedback-base [item]="p" />
           }
         </div>
       </div>

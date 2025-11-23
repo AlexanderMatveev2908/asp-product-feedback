@@ -1,0 +1,31 @@
+:host {
+  @apply hidden md:block;
+}
+
+.root {
+  @apply flex justify-between items-center gap-[25px];
+
+  .root__left {
+    @apply flex items-center gap-[40px];
+
+    .left__content {
+      @apply flex flex-col gap-[12px] items-start;
+
+      .content__text {
+        @apply flex flex-col gap-[4px];
+
+        .text__title {
+          @apply text-hd__md text-blue__dark__1;
+        }
+
+        .text__desc {
+          @apply text-blue__dark__0 text-bd__lg__reg break-all;
+        }
+      }
+    }
+  }
+
+  .root__right {
+    @apply h-full flex items-center;
+  }
+}

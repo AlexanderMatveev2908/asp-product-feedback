@@ -7,7 +7,7 @@ export class UseFocusHk {
   public readonly onFocus: () => void = () => {
     this.isFocused.set(true);
   };
-  public readonly onBLur: () => void = () => {
+  public readonly onBlur: () => void = () => {
     this.isFocused.set(false);
   };
 }

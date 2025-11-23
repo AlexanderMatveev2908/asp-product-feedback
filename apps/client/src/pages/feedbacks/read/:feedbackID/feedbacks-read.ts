@@ -11,7 +11,6 @@ import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { LinkBack } from '@/common/components/links/link_back/link-back';
 import { CommentItem } from './comment_item/comment-item';
-import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/feedback-item';
 import { UseFindFeedByParams } from '@/core/hooks/use_find_feed_by_params';
 import { CommentT, FeedbackT } from '@/features/feedbacks/etc/types';
 import { Nullable } from '@/common/types/etc';
@@ -23,10 +22,19 @@ import { UseFeedKit } from '@/features/feedbacks/etc/services/use_feed_kit';
 import { UserSlice } from '@/features/user/slice';
 import { ResApiT } from '@/core/store/api/etc/types';
 import { UserT } from '@/features/user/etc/types';
+import { FeedbackResponsive } from '@/features/feedbacks/etc/components/feedback_item/feedback_responsive/feedback-responsive';
 
 @Component({
   selector: 'app-feedbacks-read',
-  imports: [PageWrapper, CommentItem, UseMetaAppDir, LinkBack, FeedbackItem, LinkMain, CommentForm],
+  imports: [
+    PageWrapper,
+    CommentItem,
+    UseMetaAppDir,
+    LinkBack,
+    LinkMain,
+    CommentForm,
+    FeedbackResponsive,
+  ],
   templateUrl: './feedbacks-read.html',
   styleUrl: './feedbacks-read.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,30 @@
+@use 'exports/mix' as mix;
+
+.root {
+  @include mix.app__btn__scl(1.3);
+  @apply w-fit rounded-[10px] bg-gray__0 min-h-[32px] flex justify-center items-center gap-[10px] py-[6px] px-[15px] md:flex-col md:min-w-[40px] md:min-h-[53px] md:pt-[14px] md:pb-[8px] md:gap-[8px];
+
+  &:hover {
+    @apply bg-[#CFD7FF];
+  }
+
+  &:active {
+    @apply text-white bg-blue__prm;
+
+    .root__svg {
+      @apply text-white;
+    }
+
+    .root__votes {
+      @apply text-white;
+    }
+  }
+
+  .root__svg {
+    @apply w-[8px] h-[8px] text-blue__prm;
+  }
+
+  .root__votes {
+    @apply text-bd__sm__bold text-blue__dark__1;
+  }
+}

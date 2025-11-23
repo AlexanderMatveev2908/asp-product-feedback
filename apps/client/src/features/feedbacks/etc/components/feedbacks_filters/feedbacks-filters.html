@@ -1,0 +1,7 @@
+<div class="root">
+  <div class="root__content">
+    @for (f of filtersFeedback; track f.id){
+    <app-filter-item [searchCtx]="useSearchCtx" [f]="f" />
+    }
+  </div>
+</div>

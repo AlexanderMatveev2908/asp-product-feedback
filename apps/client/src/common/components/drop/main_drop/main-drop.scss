@@ -8,7 +8,15 @@
       @apply flex items-center h-fit;
 
       span {
-        @apply text-bd__sm__reg transition-all duration-300;
+        @apply transition-all duration-300;
+      }
+
+      .label__pre {
+        @apply text-bd__sm__reg md:text-hd__sm__reg;
+      }
+
+      .label__choice {
+        @apply text-bd__sm__bold md:text-hd__sm__bold;
       }
     }
 

@@ -1,0 +1,31 @@
+:host {
+  @apply hidden md:block w-full;
+}
+
+.root {
+  @apply px-[40px] mt-[56px] mb-[40px] w-full grid grid-cols-3 gap-[10px] items-center h-[173px];
+
+  .root__block_a {
+    background-image: url('/images/bgs/background-header-tablet.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @apply h-full flex flex-col justify-end items-start rounded-[10px] p-[24px];
+
+    .block_a__content {
+      @apply text-white flex flex-col items-start;
+
+      span {
+        @apply text-start;
+      }
+
+      .content__title {
+        @apply text-hd__lg;
+      }
+
+      .content__sub_title {
+        @apply opacity-75 text-bd__md__med;
+      }
+    }
+  }
+}

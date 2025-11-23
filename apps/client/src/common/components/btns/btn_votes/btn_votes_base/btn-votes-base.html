@@ -1,0 +1,9 @@
+<button class="root" (click)="optimisticLike()">
+  <div class="root__svg">
+    <ng-content *ngComponentOutlet="Chevron" />
+  </div>
+
+  <span class="root__votes">
+    {{ upvotes() }}
+  </span>
+</button>

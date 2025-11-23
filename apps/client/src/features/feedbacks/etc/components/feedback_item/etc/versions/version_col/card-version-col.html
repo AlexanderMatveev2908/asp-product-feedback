@@ -1,0 +1,25 @@
+<div class="root">
+  <div class="root__body">
+    <span class="body__title">
+      {{ item().title }}
+    </span>
+
+    <span class="body__desc">
+      {{ item().description }}
+    </span>
+  </div>
+
+  <div class="root__footer">
+    <app-category-span [catLabel]="catLabel()" />
+    <div class="footer__counts">
+      <app-btn-votes-base
+        [upvotes]="item().upvotes"
+        [feedbackId]="item().id"
+        appUseTabletDir
+        [adoptTabletShape]="false"
+      />
+
+      <app-comments-count [item]="item()" />
+    </div>
+  </div>
+</div>

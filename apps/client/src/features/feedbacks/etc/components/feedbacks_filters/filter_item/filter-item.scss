@@ -1,0 +1,12 @@
+@use 'exports/mix' as mix;
+
+.root {
+  background: var(--bg);
+  @include mix.app__btn__scl(1.2);
+  @apply rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
+
+  .root__label {
+    color: var(--clr);
+    @apply text-bd__sm__semi;
+  }
+}

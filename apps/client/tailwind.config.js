@@ -20,12 +20,14 @@ export default {
         hd__xl: ['24px', { lineHeight: '35px', letterSpacing: '-0.33px', fontWeight: '700' }],
         hd__lg: ['20px', { lineHeight: '29px', letterSpacing: '-0.25px', fontWeight: '700' }],
         hd__md: ['18px', { lineHeight: '26px', letterSpacing: '-0.25px', fontWeight: '700' }],
-        hd__sm: ['14px', { lineHeight: '20px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        hd__sm__bold: ['14px', { lineHeight: '20px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        hd__sm__reg: ['14px', { lineHeight: '20px', letterSpacing: '-0.2px', fontWeight: '400' }],
 
         bd__lg__reg: ['16px', { lineHeight: '23px', fontWeight: '400' }],
         bd__lg__bold: ['16px', { lineHeight: '23px', fontWeight: '700' }],
 
-        bd__md: ['15px', { lineHeight: '22px', fontWeight: '400' }],
+        bd__md__reg: ['15px', { lineHeight: '22px', fontWeight: '400' }],
+        bd__md__med: ['15px', { lineHeight: '22px', fontWeight: '500' }],
 
         bd__sm__reg: ['13px', { lineHeight: '19px', fontWeight: '400' }],
         bd__sm__semi: ['13px', { lineHeight: '19px', fontWeight: '600' }],
