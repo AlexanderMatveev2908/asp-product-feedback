@@ -1,5 +1,9 @@
 @use 'exports/mix' as mix;
 
+:host {
+  @apply block sm:hidden;
+}
+
 .root {
   height: calc(100% - 72px);
   min-height: calc(100% - 72px);

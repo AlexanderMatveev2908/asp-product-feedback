@@ -1,5 +1,9 @@
 @use 'exports/mix' as mix;
 
+:host {
+  @apply block sm:hidden;
+}
+
 .root {
   background-image: url('/images/bgs/background-header-mobile.png');
   background-size: cover;
