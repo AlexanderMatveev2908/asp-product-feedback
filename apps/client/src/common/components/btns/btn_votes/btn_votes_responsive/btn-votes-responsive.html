@@ -9,9 +9,16 @@
   (mouseleave)="useHover.onLeave()"
   (blur)="mixedBlur()"
 >
-  <app-btn-votes-content
-    [isFocused]="useFocus.isFocused()"
-    [isHover]="useHover.isHover()"
-    [upvotes]="upvotes()"
-  />
+  <div class="root__svg" [ngClass]="twdSvg()">
+    <ng-content
+      *ngComponentOutlet="
+        Chevron;
+        inputs: { fill: useFocus.isFocused() ? 'var(--blue__prm)' : 'white' }
+      "
+    />
+  </div>
+
+  <span class="root__votes" [ngClass]="twdLabel()">
+    {{ upvotes() }}
+  </span>
 </button>

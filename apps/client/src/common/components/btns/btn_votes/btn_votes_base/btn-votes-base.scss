@@ -9,6 +9,14 @@
   }
 
   &:active {
-    @apply text-white bg-blue__prm;
+    @apply bg-blue__prm;
+  }
+
+  .root__svg {
+    @apply w-[8px] h-[8px];
+  }
+
+  .root__votes {
+    @apply text-bd__sm__bold;
   }
 }

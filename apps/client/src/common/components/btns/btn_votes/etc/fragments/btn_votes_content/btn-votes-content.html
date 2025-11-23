@@ -1,9 +1,0 @@
-<div class="root__svg" [ngClass]="twdSvg()">
-  <ng-content
-    *ngComponentOutlet="Chevron; inputs: { fill: isFocused() ? 'var(--blue__prm)' : 'white' }"
-  />
-</div>
-
-<span class="root__votes" [ngClass]="twdLabel()">
-  {{ upvotes() }}
-</span>
