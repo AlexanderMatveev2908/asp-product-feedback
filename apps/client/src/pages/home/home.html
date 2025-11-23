@@ -4,7 +4,18 @@
 <app-header-tablet />
 
 <div class="header">
-  <app-main-drop />
+  <div class="header__left">
+    <div class="left__count">
+      <div class="count__svg">
+        <ng-container *ngComponentOutlet="SvgIdea" />
+      </div>
+
+      @let count = suggestionsCount();
+      <div class="count__label">{{ count }} Suggestion{{ count !== 1 ? 's' : '' }}</div>
+    </div>
+
+    <app-main-drop />
+  </div>
   <app-link-main
     appUseMetaApp
     [label]="'+ Add Feedback'"

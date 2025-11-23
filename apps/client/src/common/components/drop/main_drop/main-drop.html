@@ -1,7 +1,7 @@
 <div #dropRef class="root">
   <button type="button" (click)="onClick()" class="root__btn">
     <div class="btn__label">
-      <span> Sort by :</span>
+      <span class="label__pre"> Sort by :</span>
       &nbsp;
       <span [style.opacity]="useDrop.isOpen() ? '75%' : '100%'" class="label__choice">{{
         currLabel()

@@ -6,7 +6,7 @@
   @apply py-[10px] px-[16px] h-[40px] rounded-[10px] flex justify-center items-center gap-4;
 
   .root__txt {
-    @apply text-bd__sm__bold;
+    @apply text-bd__sm__bold md:text-hd__sm__bold;
   }
 
   &:enabled:hover {
