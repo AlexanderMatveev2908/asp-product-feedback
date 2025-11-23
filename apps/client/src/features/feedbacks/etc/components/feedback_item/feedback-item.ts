@@ -9,12 +9,12 @@ import {
   Signal,
 } from '@angular/core';
 import { HeaderFeedback } from './header_feedback/header-feedback';
-import { FeedbackContent } from './feedback_content/feedback-content';
-import { UseTabletDir } from '@/core/services/use_tablet';
+import { VersionCol } from './etc/versions/version_col/card-version-col';
+import { VersionRow } from './etc/versions/version_row/card-version-row';
 
 @Component({
   selector: 'app-feedback-item',
-  imports: [FeedbackContent, HeaderFeedback, UseTabletDir],
+  imports: [HeaderFeedback, VersionCol, VersionRow],
   templateUrl: './feedback-item.html',
   styleUrl: './feedback-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

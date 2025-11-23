@@ -1,3 +1,7 @@
+:host {
+  @apply hidden md:block;
+}
+
 .root {
   @apply flex justify-between items-center gap-[25px];
 
