@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from '@angular/core';
 import { FeedbackT } from '../../../types';
-import { VersionCol } from './version_col/card-version-col';
-import { VersionRow } from './version_row/card-version-row';
 import { UseTabletDir } from '@/core/services/use_tablet';
+import { VersionCol } from './etc/versions/version_col/card-version-col';
+import { VersionRow } from './etc/versions/version_row/card-version-row';
 
 @Component({
   selector: 'app-feedback-content',

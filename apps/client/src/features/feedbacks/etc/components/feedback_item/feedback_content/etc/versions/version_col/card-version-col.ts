@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BtnVotes } from '@/common/components/btns/btn_votes/btn-votes';
-import { UseCardVersioningDir } from '../directives/use_card_versioning';
 import { UseTabletDir } from '@/core/services/use_tablet';
-import { CategorySpan } from '../category_span/category-span';
-import { CommentsCount } from '../comments_count/comments-count';
+import { CategorySpan } from '../../fragments/category_span/category-span';
+import { CommentsCount } from '../../fragments/comments_count/comments-count';
+import { UseCardVersioningDir } from '../../directives/use_card_versioning';
 
 @Component({
   selector: 'app-card-version-col',
