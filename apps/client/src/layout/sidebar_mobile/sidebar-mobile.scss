@@ -1,7 +1,7 @@
 @use 'exports/mix' as mix;
 
 :host {
-  @apply block sm:hidden;
+  @apply block md:hidden;
 }
 
 .root {
@@ -12,46 +12,5 @@
 
   .root__block_b {
     @apply w-full bg-white rounded-[10px] flex flex-col px-[20px] py-[24px];
-  }
-
-  .root__block_b {
-    @apply gap-[24px];
-
-    .block_b__title_row {
-      @apply w-full flex items-center justify-between;
-
-      .title_row__title {
-        @apply text-hd__md text-blue__dark__1;
-      }
-
-      .title_row__link {
-        @apply text-bd__sm__semi text-blue__prm border-b border-blue__prm;
-      }
-    }
-
-    .block_b__content {
-      @apply flex flex-col gap-[8px];
-
-      .content__filter {
-        @apply w-full flex items-center justify-between text-blue__dark__0;
-
-        .filter__label {
-          @apply flex items-center gap-[16px];
-
-          .label__circle {
-            background: var(--bg);
-            @apply w-[8px] h-[8px] rounded-full;
-          }
-
-          .label__txt {
-            @apply text-bd__lg__reg;
-          }
-        }
-
-        .filter__count {
-          @apply text-bd__lg__bold;
-        }
-      }
-    }
   }
 }

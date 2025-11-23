@@ -1,0 +1,22 @@
+<div class="root">
+  <div class="root__title_row">
+    <span class="title_row__title"> Roadmap </span>
+
+    <a [routerLink]="'/feedbacks/read/roadmap'" (click)="closeOnNav()?.()">
+      <span class="title_row__link">View</span>
+    </a>
+  </div>
+  <div class="root__content">
+    @for(f of useRoadCtx.statusesWithCount(); track f.id){
+    <div class="content__filter">
+      <div class="filter__label">
+        <div class="label__circle" [style.--bg]="f.twdClr"></div>
+
+        <span class="label__txt">{{ f.label }}</span>
+      </div>
+
+      <span class="filter__count"> {{ f.count }} </span>
+    </div>
+    }
+  </div>
+</div>

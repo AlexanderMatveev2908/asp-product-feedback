@@ -1,7 +1,13 @@
 @use 'exports/mix' as mix;
 
+@media (min-width: 768px) {
+  :host {
+    @apply block h-full;
+  }
+}
+
 .root {
-  @apply w-full bg-white rounded-[10px] flex flex-col px-[20px] py-[24px];
+  @apply w-full md:h-full bg-white rounded-[10px] flex flex-col px-[20px] py-[24px];
 
   .root__content {
     @apply flex flex-wrap items-center gap-x-[8px] gap-y-[14px];

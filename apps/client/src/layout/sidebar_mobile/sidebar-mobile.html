@@ -2,27 +2,5 @@
 
 <div #sideRef class="root" [ngClass]="twd()">
   <app-feedbacks-filters />
-
-  <div class="root__block_b">
-    <div class="block_b__title_row">
-      <span class="title_row__title"> Roadmap </span>
-
-      <a [routerLink]="'/feedbacks/read/roadmap'" (click)="closeOnNav()">
-        <span class="title_row__link">View</span>
-      </a>
-    </div>
-    <div class="block_b__content">
-      @for(f of useRoadCtx.statusesWithCount(); track f.id){
-      <div class="content__filter">
-        <div class="filter__label">
-          <div class="label__circle" [style.--bg]="f.twdClr"></div>
-
-          <span class="label__txt">{{ f.label }}</span>
-        </div>
-
-        <span class="filter__count"> {{ f.count }} </span>
-      </div>
-      }
-    </div>
-  </div>
+  <app-feedbacks-roadmap-counter [closeOnNav]="closeOnNav" />
 </div>

@@ -1,16 +1,15 @@
-@use 'exports/mix' as mix;
-
 :host {
-  @apply hidden sm:block w-full;
+  @apply hidden md:block w-full;
 }
 
 .root {
-  @apply w-full grid grid-cols-3 gap-[10px] items-center h-[173px];
-
-  margin: 56px 40px 40px 40px;
+  @apply px-[40px] mt-[56px] mb-[40px] w-full grid grid-cols-3 gap-[10px] items-center h-[173px];
 
   .root__block_a {
-    @include mix.app__bg_img('/images/bgs/background-header-tablet.png');
+    background-image: url('/images/bgs/background-header-tablet.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     @apply h-full flex flex-col justify-end items-start rounded-[10px] p-[24px];
 
     .block_a__content {

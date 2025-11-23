@@ -4,7 +4,6 @@ import {
   computed,
   HostListener,
   inject,
-  OnInit,
   Signal,
   ViewChild,
 } from '@angular/core';
@@ -12,23 +11,19 @@ import { BlackBg } from '../black_bg/black-bg';
 import { SidebarMobileSlice } from '@/features/sidebar_mobile/slice';
 import { NgClass } from '@angular/common';
 import { ElDomT, RefDomT } from '@/common/types/dom';
-import { RouterLink } from '@angular/router';
-import { UseSearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
-import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx';
 import { FeedbacksFilters } from '@/features/feedbacks/etc/components/feedbacks_filters/feedbacks-filters';
+import { FeedbacksRoadmapCounter } from '@/features/feedbacks/etc/components/feedbacks_roadmap_counter/feedbacks-roadmap-counter';
+import { BreakCSS } from '@/core/constants/breakpoints';
 
 @Component({
   selector: 'app-sidebar-mobile',
-  imports: [BlackBg, NgClass, RouterLink, FeedbacksFilters],
+  imports: [BlackBg, NgClass, FeedbacksFilters, FeedbacksRoadmapCounter],
   templateUrl: './sidebar-mobile.html',
   styleUrl: './sidebar-mobile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarMobile implements OnInit {
+export class SidebarMobile {
   private readonly sideSlice: SidebarMobileSlice = inject(SidebarMobileSlice);
-  private readonly useSearchCtx: UseSearchFeedbacksCtx = inject(UseSearchFeedbacksCtx);
-
-  public readonly useRoadCtx: UseRoadmapCtx = inject(UseRoadmapCtx);
 
   @ViewChild('sideRef')
   private readonly sideRef: RefDomT;
@@ -42,14 +37,13 @@ export class SidebarMobile implements OnInit {
   );
 
   // ? listeners
-  public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
-
-  ngOnInit(): void {
-    this.useSearchCtx.setupForm();
-  }
+  public readonly closeOnNav: () => void = () =>
+    BreakCSS.isTablet() ? this.sideSlice.setIsOpen(false) : null;
 
   @HostListener('document:mousedown', ['$event'])
   public onMouseDown(e: Event): void {
+    if (!BreakCSS.isTablet()) return;
+
     const side: ElDomT = this.sideRef?.nativeElement;
     const target: Node = e.target as Node;
 
