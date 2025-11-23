@@ -1,0 +1,13 @@
+@let filter = f();
+<button
+  (click)="searchCtx().onCatChange(filter.val)"
+  (mouseover)="useHover.onHover()"
+  (focus)="useHover.onLeave()"
+  (mouseleave)="useHover.onLeave()"
+  (blur)="useHover.onLeave()"
+  class="root"
+  [style.--bg]="bgFilter(filter.val)"
+  [style.--clr]="clrFilter(filter.val)"
+>
+  <span class="root__label">{{ filter.label }}</span>
+</button>
