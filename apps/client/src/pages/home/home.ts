@@ -16,7 +16,6 @@ import { NavbarHomeMobile } from '@/layout/navbar_home_mobile/navbar-home-mobile
 import { SidebarMobile } from '@/layout/sidebar_mobile/sidebar-mobile';
 import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { LinkMain } from '@/common/components/links/link_main/link-main';
-import { FeedbackItem } from '@/features/feedbacks/etc/components/feedback_item/feedback-item';
 import { UseSearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
 import { LibSort } from '@/core/lib/data_structure/sort';
 import {
@@ -26,6 +25,7 @@ import {
 import { HeaderTablet } from '@/layout/header_tablet/header-tablet';
 import { SvgFillIconSuggestions } from '@/common/components/svgs/fill/icon-suggestions/icon-suggestions';
 import { NgComponentOutlet } from '@angular/common';
+import { FeedbackResponsive } from '@/features/feedbacks/etc/components/feedback_item/feedback_responsive/feedback-responsive';
 
 @Component({
   selector: 'app-home',
@@ -37,9 +37,9 @@ import { NgComponentOutlet } from '@angular/common';
     SidebarMobile,
     UseMetaAppDir,
     LinkMain,
-    FeedbackItem,
     HeaderTablet,
     NgComponentOutlet,
+    FeedbackResponsive,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

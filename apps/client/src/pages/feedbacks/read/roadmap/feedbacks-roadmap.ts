@@ -5,14 +5,14 @@ import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { PageWrapper } from '@/layout/page_wrapper/page-wrapper';
 import { FeedbackStatusT } from '@/features/feedbacks/etc/types';
 import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
-import { FeedbackItem } from '../../../../features/feedbacks/etc/components/feedback_item/feedback-item';
 import { ErrApp } from '@/core/lib/etc/err';
 import { NgClass } from '@angular/common';
 import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx';
+import { FeedbackBase } from '@/features/feedbacks/etc/components/feedback_item/feedback_base/feedback-base';
 
 @Component({
   selector: 'app-feedbacks-roadmap',
-  imports: [LinkBack, LinkMain, UseMetaAppDir, PageWrapper, FeedbackItem, NgClass],
+  imports: [LinkBack, LinkMain, UseMetaAppDir, PageWrapper, NgClass, FeedbackBase],
   templateUrl: './feedbacks-roadmap.html',
   styleUrl: './feedbacks-roadmap.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
