@@ -23,6 +23,7 @@ import {
   KeySortT,
   SearchFeedbacksFormT,
 } from '@/features/feedbacks/etc/forms/search_feedbacks/form_mng';
+import { HeaderTablet } from '@/layout/header_tablet/header-tablet';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ import {
     UseMetaAppDir,
     LinkMain,
     FeedbackItem,
+    HeaderTablet,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

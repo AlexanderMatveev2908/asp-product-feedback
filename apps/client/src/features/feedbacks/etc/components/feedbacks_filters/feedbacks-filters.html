@@ -1,0 +1,14 @@
+<div class="root">
+  <div class="root__content">
+    @for (f of filtersFeedback; track f.id){
+    <button
+      (click)="onCatChange(f.val)"
+      class="content__filter"
+      [style.--bg]="bgFilter(f.val)"
+      [style.--clr]="clrFilter(f.val)"
+    >
+      <span class="filter__label">{{ f.label }}</span>
+    </button>
+    }
+  </div>
+</div>

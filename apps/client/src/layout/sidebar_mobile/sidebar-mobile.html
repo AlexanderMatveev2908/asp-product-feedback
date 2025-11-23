@@ -1,20 +1,8 @@
 <app-black-bg [css]="blackBgCSS()" />
 
 <div #sideRef class="root" [ngClass]="twd()">
-  <div class="root__block_a">
-    <div class="block_a__content">
-      @for (f of filtersFeedback; track f.id){
-      <button
-        (click)="onCatChange(f.val)"
-        class="content__filter"
-        [style.--bg]="bgFilter(f.val)"
-        [style.--clr]="clrFilter(f.val)"
-      >
-        <span class="filter__label">{{ f.label }}</span>
-      </button>
-      }
-    </div>
-  </div>
+  <app-feedbacks-filters />
+
   <div class="root__block_b">
     <div class="block_b__title_row">
       <span class="title_row__title"> Roadmap </span>

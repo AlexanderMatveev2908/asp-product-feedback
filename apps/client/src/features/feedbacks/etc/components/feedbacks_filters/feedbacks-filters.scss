@@ -1,0 +1,20 @@
+@use 'exports/mix' as mix;
+
+.root {
+  @apply w-full bg-white rounded-[10px] flex flex-col px-[20px] py-[24px];
+
+  .root__content {
+    @apply flex flex-wrap items-center gap-x-[8px] gap-y-[14px];
+
+    .content__filter {
+      background: var(--bg);
+      @include mix.app__btn__scl(1.2);
+      @apply rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
+
+      .filter__label {
+        color: var(--clr);
+        @apply text-bd__sm__semi;
+      }
+    }
+  }
+}

@@ -25,7 +25,8 @@ export default {
         bd__lg__reg: ['16px', { lineHeight: '23px', fontWeight: '400' }],
         bd__lg__bold: ['16px', { lineHeight: '23px', fontWeight: '700' }],
 
-        bd__md: ['15px', { lineHeight: '22px', fontWeight: '400' }],
+        bd__md__reg: ['15px', { lineHeight: '22px', fontWeight: '400' }],
+        bd__md__med: ['15px', { lineHeight: '22px', fontWeight: '500' }],
 
         bd__sm__reg: ['13px', { lineHeight: '19px', fontWeight: '400' }],
         bd__sm__semi: ['13px', { lineHeight: '19px', fontWeight: '600' }],

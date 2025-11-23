@@ -58,3 +58,10 @@
   padding: $padding;
   @apply flex w-full justify-center max-w-full border-2 rounded-xl;
 }
+
+@mixin app__bg_img($url) {
+  background: url($url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

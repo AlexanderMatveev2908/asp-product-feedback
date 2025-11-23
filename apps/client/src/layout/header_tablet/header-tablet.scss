@@ -1,0 +1,32 @@
+@use 'exports/mix' as mix;
+
+:host {
+  @apply hidden sm:block w-full;
+}
+
+.root {
+  @apply w-full grid grid-cols-3 gap-[10px] items-center h-[173px];
+
+  margin: 56px 40px 40px 40px;
+
+  .root__block_a {
+    @include mix.app__bg_img('/images/bgs/background-header-tablet.png');
+    @apply h-full flex flex-col justify-end items-start rounded-[10px] p-[24px];
+
+    .block_a__content {
+      @apply text-white flex flex-col items-start;
+
+      span {
+        @apply text-start;
+      }
+
+      .content__title {
+        @apply text-hd__lg;
+      }
+
+      .content__sub_title {
+        @apply opacity-75 text-bd__md__med;
+      }
+    }
+  }
+}

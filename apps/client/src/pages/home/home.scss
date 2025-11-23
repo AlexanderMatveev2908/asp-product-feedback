@@ -1,7 +1,13 @@
 .header {
   @apply h-[56px] w-full bg-blue__dark__2 px-[24px] flex justify-between items-center;
+
+  @media (min-width: 768px) {
+    width: calc(100% - 80px);
+    margin: auto;
+    @apply rounded-[10px];
+  }
 }
 
 .root {
-  @apply w-full py-[32px] px-[24px] flex flex-col gap-[16px];
+  @apply w-full py-[32px] px-[24px] sm:px-[40px] flex flex-col gap-[16px];
 }

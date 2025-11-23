@@ -10,27 +10,10 @@
   transition: transform 0.4s, opacity 0.3s;
   @apply z-sidebar fixed top-[72px] left-full w-[271px] bg-gray__1 p-[24px] flex flex-col gap-[24px];
 
-  .root__block_a,
   .root__block_b {
     @apply w-full bg-white rounded-[10px] flex flex-col px-[20px] py-[24px];
   }
 
-  .root__block_a {
-    .block_a__content {
-      @apply flex flex-wrap items-center gap-x-[8px] gap-y-[14px];
-
-      .content__filter {
-        background: var(--bg);
-        @include mix.app__btn__scl(1.2);
-        @apply rounded-[10px] flex justify-center items-center py-[5px] px-[16px];
-
-        .filter__label {
-          color: var(--clr);
-          @apply text-bd__sm__semi;
-        }
-      }
-    }
-  }
   .root__block_b {
     @apply gap-[24px];
 

@@ -10,6 +10,10 @@
       span {
         @apply text-bd__sm__reg transition-all duration-300;
       }
+
+      .label__choice {
+        @apply text-bd__sm__bold;
+      }
     }
 
     .btn__svg {

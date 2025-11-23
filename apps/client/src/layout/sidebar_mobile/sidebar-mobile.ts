@@ -11,16 +11,15 @@ import {
 import { BlackBg } from '../black_bg/black-bg';
 import { SidebarMobileSlice } from '@/features/sidebar_mobile/slice';
 import { NgClass } from '@angular/common';
-import { PairValLabelT } from '@/common/types/forms';
 import { ElDomT, RefDomT } from '@/common/types/dom';
 import { RouterLink } from '@angular/router';
 import { UseSearchFeedbacksCtx } from '@/features/feedbacks/etc/context/use_search_feedbacks_ctx';
-import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx';
+import { FeedbacksFilters } from '@/features/feedbacks/etc/components/feedbacks_filters/feedbacks-filters';
 
 @Component({
   selector: 'app-sidebar-mobile',
-  imports: [BlackBg, NgClass, RouterLink],
+  imports: [BlackBg, NgClass, RouterLink, FeedbacksFilters],
   templateUrl: './sidebar-mobile.html',
   styleUrl: './sidebar-mobile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,21 +41,8 @@ export class SidebarMobile implements OnInit {
     this.sideSlice.isOpen() ? '-translate-x-full' : '-translate-x-0'
   );
 
-  public bgFilter(v: string): string {
-    return this.useSearchCtx.isCatChosen(v) ? 'var(--blue__prm)' : 'var(--gray__0)';
-  }
-  public clrFilter(v: string): string {
-    return this.useSearchCtx.isCatChosen(v) ? '#fff' : 'var(--blue__prm)';
-  }
-
   // ? listeners
   public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
-  public onCatChange(v: string): void {
-    this.useSearchCtx.onCatChange(v);
-  }
-
-  // ? static
-  public readonly filtersFeedback: PairValLabelT[] = FeedLibShape.categoriesPlusAll();
 
   ngOnInit(): void {
     this.useSearchCtx.setupForm();

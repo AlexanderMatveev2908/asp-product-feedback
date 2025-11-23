@@ -3,7 +3,9 @@
     <div class="btn__label">
       <span> Sort by :</span>
       &nbsp;
-      <span [style.opacity]="useDrop.isOpen() ? '75%' : '100%'">{{ currLabel() }}</span>
+      <span [style.opacity]="useDrop.isOpen() ? '75%' : '100%'" class="label__choice">{{
+        currLabel()
+      }}</span>
     </div>
 
     <div class="btn__svg">
