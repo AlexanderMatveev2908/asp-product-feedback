@@ -1,0 +1,11 @@
+.root {
+  @apply flex items-center gap-[4px] w-fit;
+
+  .root__svg {
+    @apply w-[18px] h-[18px];
+  }
+
+  .root__length {
+    @apply text-bd__sm__bold text-blue__dark__1;
+  }
+}

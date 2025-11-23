@@ -6,5 +6,23 @@
       appUseTabletDir
       [adoptTabletShape]="true"
     />
+
+    <div class="left__content">
+      <div class="content__text">
+        <span class="text__title">
+          {{ item().title }}
+        </span>
+
+        <span class="text__desc">
+          {{ item().description }}
+        </span>
+      </div>
+
+      <app-category-span [catLabel]="catLabel()" />
+    </div>
+  </div>
+
+  <div class="root__right">
+    <app-comments-count [item]="item()" />
   </div>
 </div>

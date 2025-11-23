@@ -1,0 +1,22 @@
+@if(footerWithLink()){
+<a [routerLink]="pathComments()">
+  <ng-container *ngTemplateOutlet="content" />
+</a>
+}
+<!--  -->
+@else {
+<ng-container *ngTemplateOutlet="content" />
+
+}
+
+<ng-template #content>
+  <div class="root">
+    <div class="root__svg">
+      <ng-content *ngComponentOutlet="Comment" />
+    </div>
+
+    <span class="root__length">
+      {{ item().comments?.length ?? 0 }}
+    </span>
+  </div>
+</ng-template>

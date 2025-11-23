@@ -10,12 +10,7 @@
   </div>
 
   <div class="root__footer">
-    <div class="footer__cat">
-      <span>
-        {{ catLabel() }}
-      </span>
-    </div>
-
+    <app-category-span [catLabel]="catLabel()" />
     <div class="footer__counts">
       <app-btn-votes
         [upvotes]="item().upvotes"
@@ -24,28 +19,7 @@
         [adoptTabletShape]="false"
       />
 
-      @if(footerWithLink()){
-
-      <a [routerLink]="pathComments()" class="counts__comments">
-        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
-      </a>
-      }
-      <!--  -->
-      @else {
-      <div class="counts__comments">
-        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
-      </div>
-      }
+      <app-comments-count [item]="item()" />
     </div>
   </div>
 </div>
-
-<ng-template #footerContent>
-  <div class="comments__svg">
-    <ng-content *ngComponentOutlet="Comment" />
-  </div>
-
-  <span class="comments__length">
-    {{ item().comments?.length ?? 0 }}
-  </span>
-</ng-template>
