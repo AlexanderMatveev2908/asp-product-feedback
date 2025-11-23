@@ -6,6 +6,6 @@
   }
 
   .root__length {
-    @apply text-bd__sm__bold text-blue__dark__1;
+    @apply text-bd__sm__bold md:text-bd__lg__bold text-blue__dark__1;
   }
 }

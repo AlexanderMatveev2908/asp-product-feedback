@@ -19,11 +19,11 @@
         @apply flex flex-col gap-[4px];
 
         .text__title {
-          @apply text-hd__md text-blue__dark__1;
+          @apply text-hd__md md:text-hd__md text-blue__dark__1;
         }
 
         .text__desc {
-          @apply text-blue__dark__0 text-bd__lg__reg break-all;
+          @apply text-blue__dark__0 text-bd__lg__reg md:text-bd__lg__reg break-all;
         }
       }
     }
