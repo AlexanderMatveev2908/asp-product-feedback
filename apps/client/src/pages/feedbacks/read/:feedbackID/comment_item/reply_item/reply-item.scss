@@ -3,11 +3,11 @@
 
   .root__content {
     .content__replying_to {
-      @apply text-bd__sm__bold text-purple__prm;
+      @apply text-bd__sm__bold text-purple__prm md:text-bd__md__bold;
     }
 
     .content__reply {
-      @apply text-blue__dark__0 text-bd__sm__reg;
+      @apply text-blue__dark__0 text-bd__sm__reg md:text-bd__md__reg;
     }
   }
 
