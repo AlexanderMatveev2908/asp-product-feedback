@@ -1,0 +1,15 @@
+:host {
+  @apply hidden md:block;
+}
+
+.root {
+  @apply grid grid-cols-[1fr_2fr];
+
+  .root__left {
+    @apply w-full flex justify-start;
+  }
+
+  .root__right {
+    @apply w-full flex justify-end gap-[16px];
+  }
+}

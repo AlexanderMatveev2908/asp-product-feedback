@@ -1,0 +1,32 @@
+<div class="root">
+  <app-btn-main
+    appUseMetaApp
+    [label]="isFormTypePost() ? 'Add Feedback' : 'Save Changes'"
+    [varT]="'purple'"
+    [minW]="'100%'"
+    [btnT]="'submit'"
+    [isPending]="useTrackFormPending().isPending()"
+    [isDisabled]="someonePending()"
+  />
+  <app-btn-main
+    appUseMetaApp
+    [label]="'Cancel'"
+    [varT]="'blue_dark'"
+    [minW]="'100%'"
+    [btnT]="'button'"
+    [onClick]="resetPreFilled()"
+    [isDisabled]="someonePending()"
+  />
+
+  @if(!isFormTypePost()){
+  <app-btn-main
+    appUseMetaApp
+    [label]="'Delete'"
+    [varT]="'red'"
+    [minW]="'100%'"
+    [btnT]="'button'"
+    [onClick]="delFeed"
+    [isPending]="useTrackDelPending().isPending()"
+    [isDisabled]="someonePending()"
+  />}
+</div>

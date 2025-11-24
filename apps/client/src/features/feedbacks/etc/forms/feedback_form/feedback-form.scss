@@ -2,7 +2,7 @@
   @apply w-full relative pt-[20px];
 
   .root__svg {
-    @apply absolute top-0 left-[24px] w-[40px] h-[40px];
+    @apply absolute top-0 left-[24px] w-[40px] h-[40px] md:w-[56px] md:h-[56px];
   }
 
   .root__form {
@@ -12,12 +12,8 @@
       @apply text-blue__dark__1;
 
       > span {
-        @apply text-hd__md;
+        @apply text-hd__md md:text-hd__xl;
       }
-    }
-
-    .form__footer {
-      @apply w-full flex flex-col gap-[16px];
     }
   }
 }
