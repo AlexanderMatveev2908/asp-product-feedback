@@ -37,8 +37,7 @@ export class SidebarMobile {
   );
 
   // ? listeners
-  public readonly closeOnNav: () => void = () =>
-    BreakCSS.isTablet() ? this.sideSlice.setIsOpen(false) : null;
+  public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
 
   @HostListener('document:mousedown', ['$event'])
   public onMouseDown(e: Event): void {
