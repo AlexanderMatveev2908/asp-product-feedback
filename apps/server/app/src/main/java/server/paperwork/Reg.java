@@ -8,7 +8,7 @@ import server.decorators.types.Nullable;
 public final class Reg {
         public static final String CITY = "^[\\p{L}\\s'\\-]+$";
         public static final String NAME = "^[\\p{L}\\s,`'\\-]*$";
-        public static final String TXT = "^[\\p{L}\\d\\s\\-'\\\".,;!?]*$";
+        public static final String TXT = "^[\\p{L}\\d\\s\\-'\\\".,;!?\\p{So}\\p{Cn}]*$";
         public static final String EMOJI = "^\\s*[\\p{So}\\p{Cn}].*";
         public static final String INT = "^\\d+$";
         public static final String FLOAT = "^(?:\\d+(?:\\.\\d{1,2})?|\\.\\d{1,2})$";

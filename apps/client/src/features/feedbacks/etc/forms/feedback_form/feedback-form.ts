@@ -19,8 +19,6 @@ import { FeedbackFormMng, FeedFormPostT, FeedFormPutT, FormKeyT } from './etc/fo
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UseFormFieldDir } from '@/core/directives/use_form_field';
 import { FormSelect } from '@/common/components/forms/form_select/form-select';
-import { BtnMain } from '@/common/components/btns/btn__main/btn-main';
-import { UseMetaAppDir } from '@/core/directives/use_meta_app';
 import { RootFormMng } from '@/core/paperwork/root_form_mng/root_form_mng';
 import { Observable, tap } from 'rxjs';
 import { UseApiTrackerHk } from '@/core/store/api/etc/hooks/use_tracker';
@@ -28,6 +26,8 @@ import { FeedbackT } from '../../types';
 import { UseInjCtxHk } from '@/core/hooks/use_inj_ctx';
 import { ErrApp } from '@/core/lib/etc/err';
 import { FeedbackFormTokens } from './etc/tokens';
+import { FeedbackFormMobileFooter } from './etc/components/mobile/feedback_form_mobile_footer/feedback-form-mobile-footer';
+import { FeedbackFormTabletFooter } from './etc/components/tablet/feedback_form_tablet_footer/feedback-form-tablet-footer';
 
 @Component({
   selector: 'app-feedback-form',
@@ -37,8 +37,8 @@ import { FeedbackFormTokens } from './etc/tokens';
     FormFieldTxt,
     UseFormFieldDir,
     FormSelect,
-    BtnMain,
-    UseMetaAppDir,
+    FeedbackFormMobileFooter,
+    FeedbackFormTabletFooter,
   ],
   templateUrl: './feedback-form.html',
   styleUrl: './feedback-form.scss',
@@ -62,11 +62,6 @@ export class FeedbackForm extends UseInjCtxHk implements OnInit {
   // ? hooks
   public readonly useTrackFormPending: UseApiTrackerHk = inject(FeedbackFormTokens.FORM_TRACKER);
   public readonly useTrackDelPending: UseApiTrackerHk = inject(FeedbackFormTokens.DEL_TRACKER);
-
-  // ? derived
-  public readonly someonePending: Signal<boolean> = computed(
-    () => this.useTrackDelPending.isPending() || this.useTrackFormPending.isPending()
-  );
 
   public readonly isFormTypePost: Signal<boolean> = computed(
     () => !!this.useNav.currPath()?.includes('post')
@@ -120,7 +115,9 @@ export class FeedbackForm extends UseInjCtxHk implements OnInit {
   };
 
   public resetPreFilled: () => void = () =>
-    RootFormMng.reset(this.currForm(), this.preFilledData());
+    this.isFormTypePost()
+      ? RootFormMng.reset(this.currForm(), FeedbackFormMng.defPostForm())
+      : RootFormMng.reset(this.currForm(), this.preFilledData());
 
   // ? deleting
   public readonly delFeed: () => void = () => {

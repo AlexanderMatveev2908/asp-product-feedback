@@ -12,7 +12,7 @@
         @apply w-full py-[14px] px-[16px] rounded-[10px] bg-gray__1 flex items-center justify-between border transition-all duration-300;
 
         .span__label {
-          @apply text-bd__sm__reg text-blue__dark__1;
+          @apply text-bd__sm__reg md:text-bd__md__reg text-blue__dark__1;
         }
 
         .span__svg {

@@ -3,7 +3,7 @@
 }
 
 .root {
-  @apply w-full mt-[8px];
+  @apply w-full mt-[8px] md:pl-[72px] md:justify-end;
 
   .root__content {
     @apply flex flex-col gap-[16px];

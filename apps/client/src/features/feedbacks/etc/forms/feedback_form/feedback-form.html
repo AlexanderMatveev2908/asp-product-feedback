@@ -23,37 +23,20 @@
 
     <app-form-field-txt appUseFormField [f]="fields.content" [ctrl]="asFormControl('content')" />
 
-    <div class="form__footer">
-      <app-btn-main
-        appUseMetaApp
-        [label]="isFormTypePost() ? 'Add Feedback' : 'Save Changes'"
-        [varT]="'purple'"
-        [minW]="'100%'"
-        [btnT]="'submit'"
-        [isPending]="useTrackFormPending.isPending()"
-        [isDisabled]="someonePending()"
-      />
-      <app-btn-main
-        appUseMetaApp
-        [label]="'Cancel'"
-        [varT]="'blue_dark'"
-        [minW]="'100%'"
-        [btnT]="'button'"
-        [onClick]="resetPreFilled"
-        [isDisabled]="someonePending()"
-      />
+    <app-feedback-form-mobile-footer
+      [useTrackDelPending]="useTrackDelPending"
+      [useTrackFormPending]="useTrackFormPending"
+      [delFeed]="delFeed"
+      [resetPreFilled]="resetPreFilled"
+      [isFormTypePost]="isFormTypePost()"
+    />
 
-      @if(!isFormTypePost()){
-      <app-btn-main
-        appUseMetaApp
-        [label]="'Delete'"
-        [varT]="'red'"
-        [minW]="'100%'"
-        [btnT]="'button'"
-        [onClick]="delFeed"
-        [isPending]="useTrackDelPending.isPending()"
-        [isDisabled]="someonePending()"
-      />}
-    </div>
+    <app-feedback-form-tablet-footer
+      [useTrackDelPending]="useTrackDelPending"
+      [useTrackFormPending]="useTrackFormPending"
+      [delFeed]="delFeed"
+      [resetPreFilled]="resetPreFilled"
+      [isFormTypePost]="isFormTypePost()"
+    />
   </form>
 </div>

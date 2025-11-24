@@ -4,7 +4,11 @@
   border-color: #8c92b325;
 
   .root__content {
-    @apply text-bd__sm__reg text-blue__dark__0;
+    @apply w-full flex md:pl-[72px] justify-start;
+
+    > span {
+      @apply text-bd__sm__reg text-blue__dark__0 md:text-bd__md__reg;
+    }
   }
 
   .root__replies {

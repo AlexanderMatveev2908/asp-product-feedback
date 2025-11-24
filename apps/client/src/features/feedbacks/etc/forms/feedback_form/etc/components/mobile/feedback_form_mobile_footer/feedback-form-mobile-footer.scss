@@ -1,0 +1,7 @@
+:host {
+  @apply block md:hidden;
+}
+
+.root {
+  @apply w-full flex flex-col gap-[16px];
+}

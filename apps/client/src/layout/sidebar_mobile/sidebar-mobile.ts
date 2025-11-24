@@ -13,7 +13,6 @@ import { NgClass } from '@angular/common';
 import { ElDomT, RefDomT } from '@/common/types/dom';
 import { FeedbacksFilters } from '@/features/feedbacks/etc/components/feedbacks_filters/feedbacks-filters';
 import { FeedbacksRoadmapCounter } from '@/features/feedbacks/etc/components/feedbacks_roadmap_counter/feedbacks-roadmap-counter';
-import { BreakCSS } from '@/core/constants/breakpoints';
 
 @Component({
   selector: 'app-sidebar-mobile',
@@ -37,8 +36,7 @@ export class SidebarMobile {
   );
 
   // ? listeners
-  public readonly closeOnNav: () => void = () =>
-    BreakCSS.isTablet() ? this.sideSlice.setIsOpen(false) : null;
+  public readonly closeOnNav: () => void = () => this.sideSlice.setIsOpen(false);
 
   @HostListener('document:mousedown', ['$event'])
   public onMouseDown(e: Event): void {
