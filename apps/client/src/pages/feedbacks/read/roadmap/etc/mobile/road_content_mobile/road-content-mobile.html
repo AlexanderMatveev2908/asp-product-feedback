@@ -1,0 +1,15 @@
+<div class="root">
+  <div class="root__header">
+    <span class="header__label">{{ currLabel() }}</span>
+
+    <span class="label__desc">
+      {{ currDescription() }}
+    </span>
+  </div>
+
+  <div class="root__cards">
+    @for(p of useRoadCtx.filteredFeedbacks(); track p.id){
+    <app-feedback-base [item]="p" />
+    }
+  </div>
+</div>

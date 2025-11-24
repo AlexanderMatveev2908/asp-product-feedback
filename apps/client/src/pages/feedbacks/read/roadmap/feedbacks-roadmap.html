@@ -16,23 +16,11 @@
 <app-page-wrapper [eventT]="'INFO'" [waitClient]="false">
   <ng-template #contentRef>
     <div class="root">
-      <app-mobile-road-header [useRoadCtx]="useRoadCtx" />
+      <app-mobile-road-header />
+      <app-tablet-road-header />
 
-      <div class="root__content">
-        <div class="content__header">
-          <span class="header__label">{{ currLabel() }}</span>
-
-          <span class="label__desc">
-            {{ currDescription() }}
-          </span>
-        </div>
-
-        <div class="content__cards">
-          @for(p of useRoadCtx.filteredFeedbacks(); track p.id){
-          <app-feedback-base [item]="p" />
-          }
-        </div>
-      </div>
+      <app-road-content-mobile />
+      <app-road-content-tablet />
     </div>
   </ng-template>
 </app-page-wrapper>

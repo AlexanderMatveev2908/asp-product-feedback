@@ -1,6 +1,6 @@
 <div class="root">
-  @for(s of useRoadCtx().statusesWithCount(); track s.id; let idx = $index){
-  <button (click)="useRoadCtx().onStatusChange(s.val)" class="root__status">
+  @for(s of useRoadCtx.statusesWithCount(); track s.id; let idx = $index){
+  <button (click)="useRoadCtx.onStatusChange(s.val)" class="root__status">
     <span class="status__label" [ngClass]="twdLabel(s.val)"> {{ s.label }} ({{ s.count }})</span>
   </button>
 

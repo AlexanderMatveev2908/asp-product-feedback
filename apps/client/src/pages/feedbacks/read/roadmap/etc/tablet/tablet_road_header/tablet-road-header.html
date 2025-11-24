@@ -1,0 +1,11 @@
+<div class="root">
+  <!--  -->
+  @for(s of useRoadCtx.statusesWithCount() ; track s.id){
+  <div class="root__item">
+    <span class="item__title"> {{ s.label }} ({{ s.count }}) </span>
+    <span class="item__comment">
+      {{ s.comment }}
+    </span>
+  </div>
+  }
+</div>

@@ -1,0 +1,8 @@
+<div class="root">
+  <div class="root__col">
+    <!--  -->
+    @for(s of statuses; track s){
+    <app-column-feedbacks [currStatus]="s.val" />
+    }
+  </div>
+</div>

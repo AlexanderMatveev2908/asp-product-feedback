@@ -17,25 +17,5 @@
 }
 
 .root {
-  @apply z-navbar w-full flex flex-col gap-[24px];
-
-  .root__content {
-    @apply w-full flex flex-col gap-[24px] px-[24px];
-
-    .content__header {
-      @apply md:hidden flex flex-col gap-[4px];
-
-      .header__label {
-        @apply text-hd__md text-blue__dark__1;
-      }
-
-      .header__desc {
-        @apply text-bd__sm__reg text-blue__dark__0;
-      }
-    }
-
-    .content__cards {
-      @apply w-full flex flex-col gap-[16px];
-    }
-  }
+  @apply z-navbar w-full flex flex-col gap-[24px] px-[40px];
 }

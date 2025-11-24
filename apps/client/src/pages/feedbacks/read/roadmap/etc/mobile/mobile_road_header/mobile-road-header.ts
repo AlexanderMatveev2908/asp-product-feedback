@@ -3,14 +3,7 @@ import { UseRoadmapCtx } from '@/features/feedbacks/etc/context/use_roadmap_ctx'
 import { FeedLibShape } from '@/features/feedbacks/etc/lib_shape';
 import { FeedbackStatusT } from '@/features/feedbacks/etc/types';
 import { NgClass } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  InputSignal,
-  Signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
 
 @Component({
   selector: 'app-mobile-road-header',
@@ -20,19 +13,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileRoadHeader {
-  public readonly useRoadCtx: InputSignal<UseRoadmapCtx> = input.required();
+  public readonly useRoadCtx: UseRoadmapCtx = inject(UseRoadmapCtx);
 
   public bgHeaderLine(): string {
-    const clr: string = FeedLibShape.clrByStatus(this.useRoadCtx().currStatus());
+    const clr: string = FeedLibShape.clrByStatus(this.useRoadCtx.currStatus());
     return clr;
   }
 
   public twdLabel(v: FeedbackStatusT): string {
-    return this.useRoadCtx().currStatus() === v ? 'opacity-1' : 'opacity-[0.4]';
+    return this.useRoadCtx.currStatus() === v ? 'opacity-1' : 'opacity-[0.4]';
   }
 
   public readonly twdHeaderLine: Signal<string> = computed(() => {
-    switch (this.useRoadCtx().currStatus()) {
+    switch (this.useRoadCtx.currStatus()) {
       case FeedbackStatusT.PLANNED:
         return 'translate-x-0';
       case FeedbackStatusT.IN_PROGRESS:
