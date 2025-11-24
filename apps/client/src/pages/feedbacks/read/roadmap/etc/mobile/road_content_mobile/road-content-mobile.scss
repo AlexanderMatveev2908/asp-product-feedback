@@ -1,0 +1,23 @@
+:host {
+  @apply block md:hidden;
+}
+
+.root {
+  @apply w-full flex flex-col gap-[24px] px-[24px];
+
+  .root__header {
+    @apply md:hidden flex flex-col gap-[4px];
+
+    .header__label {
+      @apply text-hd__md text-blue__dark__1;
+    }
+
+    .header__desc {
+      @apply text-bd__sm__reg text-blue__dark__0;
+    }
+  }
+
+  .root__cards {
+    @apply w-full flex flex-col gap-[16px] md:hidden;
+  }
+}

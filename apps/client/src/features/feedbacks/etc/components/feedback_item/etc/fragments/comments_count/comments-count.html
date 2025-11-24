@@ -15,7 +15,7 @@
       <ng-content *ngComponentOutlet="Comment" />
     </div>
 
-    <span class="root__length">
+    <span class="root__length" [ngClass]="responsive() ? 'root__length_rwd' : ''">
       {{ item().comments?.length ?? 0 }}
     </span>
   </div>

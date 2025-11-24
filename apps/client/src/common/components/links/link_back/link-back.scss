@@ -2,12 +2,12 @@
   @apply w-fit flex items-center gap-[16px];
 
   .root__svg {
-    @apply w-[10px] h-[10px];
+    @apply w-[10px] h-[10px] md:w-[12px] md:h-[12px];
   }
 
   .root__label {
     color: var(--clr);
-    @apply text-bd__sm__bold relative;
+    @apply text-bd__sm__bold md:text-hd__sm__bold relative;
 
     &::after {
       background: var(--clr);

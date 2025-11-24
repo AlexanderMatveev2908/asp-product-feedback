@@ -30,6 +30,7 @@ import server.models.comments.etc.CommentSvc;
 import server.models.feedbacks.Feedback;
 import server.models.feedbacks.etc.FeedSvc;
 import server.models.feedbacks.etc.types.FeedCatT;
+import server.models.feedbacks.etc.types.FeedStatT;
 import server.models.images.Image;
 import server.models.images.etc.ImageSvc;
 import server.models.replies.Reply;
@@ -97,7 +98,7 @@ public class MockData {
 
   private Mono<Dict> insertFeedCommentsPairs(Dict dict) {
     final Feedback feed = new Feedback(faker.lorem().maxLengthSentence(100), faker.lorem().maxLengthSentence(250),
-        LibRand.choiceIn(FeedCatT.values()));
+        LibRand.choiceIn(FeedCatT.values()), LibRand.choiceIn(FeedStatT.values()));
     return feedSvc.insert(feed).flatMap(createdFeed -> {
       final List<Mono<Comment>> promises = new ArrayList<>();
       final boolean insertOrNot = LibRand.trueOrFalse();

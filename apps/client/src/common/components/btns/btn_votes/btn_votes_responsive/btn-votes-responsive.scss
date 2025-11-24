@@ -21,7 +21,7 @@
   }
 
   .root__svg {
-    @apply w-[8px] h-[8px] text-blue__prm;
+    @apply w-[8px] h-[8px] md:w-[12px] md:h-[12px] text-blue__prm;
   }
 
   .root__votes {

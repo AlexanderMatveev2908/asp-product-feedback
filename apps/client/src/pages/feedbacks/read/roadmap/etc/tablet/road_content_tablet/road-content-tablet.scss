@@ -1,0 +1,11 @@
+:host {
+  @apply hidden md:block;
+}
+
+.root {
+  @apply grid grid-cols-3 gap-[10px];
+
+  .root__col {
+    @apply w-full flex flex-col;
+  }
+}

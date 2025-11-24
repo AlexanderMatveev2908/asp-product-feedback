@@ -8,4 +8,7 @@
   .root__length {
     @apply text-bd__sm__bold text-blue__dark__1;
   }
+  .root__length_rwd {
+    @apply md:text-bd__lg__bold;
+  }
 }

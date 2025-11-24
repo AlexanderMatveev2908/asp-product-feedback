@@ -57,21 +57,25 @@ export class FeedLibShape extends RootUiFkt {
       label: 'Suggestion',
       val: FeedbackStatusT.SUGGESTION,
       twdClr: '',
+      comment: '',
     },
     {
       label: 'Planned',
       val: FeedbackStatusT.PLANNED,
       twdClr: 'var(--orange__prm)',
+      comment: 'Ideas prioritized for research',
     },
     {
       label: 'In-Progress',
       val: FeedbackStatusT.IN_PROGRESS,
       twdClr: 'var(--purple__prm)',
+      comment: 'Currently being developed',
     },
     {
       label: 'Live',
       val: FeedbackStatusT.LIVE,
       twdClr: 'var(--blue__light__0)',
+      comment: 'Released features',
     },
   ];
 
@@ -106,19 +110,11 @@ export class FeedLibShape extends RootUiFkt {
   }
 
   public static descriptionStatusByVal(v: FeedbackStatusT): string {
-    switch (v) {
-      case FeedbackStatusT.PLANNED:
-        return 'Ideas prioritized for research';
-      case FeedbackStatusT.IN_PROGRESS:
-        return 'Currently being developed';
-      case FeedbackStatusT.LIVE:
-        return 'Released features';
-      case FeedbackStatusT.SUGGESTION:
-        throw new ErrApp('not supposed to be asked');
-      default:
-        throw new ErrApp('passed invalid argument to get description');
-    }
+    return this._statuses.find((f: WithoutId<FilterRoadmapT>) => f.val === v)?.comment ?? '';
   }
 }
 
-export type FilterRoadmapT = PairValLabelTypedT<FeedbackStatusT> & { twdClr: string };
+export type FilterRoadmapT = PairValLabelTypedT<FeedbackStatusT> & {
+  twdClr: string;
+  comment: string;
+};

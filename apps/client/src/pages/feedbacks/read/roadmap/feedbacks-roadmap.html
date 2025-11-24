@@ -16,34 +16,11 @@
 <app-page-wrapper [eventT]="'INFO'" [waitClient]="false">
   <ng-template #contentRef>
     <div class="root">
-      <div class="root__header">
-        @for(s of useRoadCtx.statusesWithCount(); track s.id; let idx = $index){
-        <button (click)="useRoadCtx.onStatusChange(s.val)" class="header__status">
-          <span class="status__label" [ngClass]="twdLabel(s.val)">
-            {{ s.label }} ({{ s.count }})</span
-          >
-        </button>
+      <app-mobile-road-header />
+      <app-tablet-road-header />
 
-        }
-
-        <div class="header__line" [ngClass]="[twdHeaderLine()]" [style.--bg]="bgHeaderLine()"></div>
-      </div>
-
-      <div class="root__content">
-        <div class="content__header">
-          <span class="header__label">{{ currLabel() }}</span>
-
-          <span class="label__desc">
-            {{ currDescription() }}
-          </span>
-        </div>
-
-        <div class="content__cards">
-          @for(p of useRoadCtx.filteredFeedbacks(); track p.id){
-          <app-feedback-base [item]="p" />
-          }
-        </div>
-      </div>
+      <app-road-content-mobile />
+      <app-road-content-tablet />
     </div>
   </ng-template>
 </app-page-wrapper>
