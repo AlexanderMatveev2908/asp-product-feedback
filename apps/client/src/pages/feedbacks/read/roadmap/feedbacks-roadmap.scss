@@ -1,6 +1,12 @@
 .header {
   @apply w-full h-[100px] bg-blue__dark__2 sticky top-0 py-[26px] px-[24px] flex items-center justify-between gap-[116px];
 
+  @media (min-width: 768px) {
+    width: calc(100% - 80px);
+    margin: 56px auto 32px auto;
+    @apply rounded-[10px];
+  }
+
   .header__left {
     @apply flex flex-col gap-[8px];
 
@@ -13,31 +19,11 @@
 .root {
   @apply z-navbar w-full flex flex-col gap-[24px];
 
-  .root__header {
-    @apply w-full flex justify-around items-center py-[20px] border-b relative;
-    border-color: #8c92b325;
-
-    .header__status {
-      @apply w-full flex justify-center;
-
-      .status__label {
-        @apply text-bd__sm__bold text-blue__dark__1 text-center transition-all duration-300;
-      }
-    }
-
-    .header__line {
-      transition: 0.4s;
-      width: 33%;
-      background: var(--bg);
-      @apply absolute bottom-0 h-[4px] left-0;
-    }
-  }
-
   .root__content {
     @apply w-full flex flex-col gap-[24px] px-[24px];
 
     .content__header {
-      @apply flex flex-col gap-[4px];
+      @apply md:hidden flex flex-col gap-[4px];
 
       .header__label {
         @apply text-hd__md text-blue__dark__1;

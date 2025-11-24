@@ -1,0 +1,23 @@
+:host {
+  @apply block md:hidden;
+}
+
+.root {
+  @apply w-full flex justify-around items-center py-[20px] border-b relative;
+  border-color: #8c92b325;
+
+  .root__status {
+    @apply w-full flex justify-center;
+
+    .status__label {
+      @apply text-bd__sm__bold text-blue__dark__1 text-center transition-all duration-300;
+    }
+  }
+
+  .root__line {
+    transition: 0.4s;
+    width: 33%;
+    background: var(--bg);
+    @apply absolute bottom-0 h-[4px] left-0;
+  }
+}
