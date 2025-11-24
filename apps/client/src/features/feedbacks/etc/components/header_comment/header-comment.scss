@@ -4,7 +4,7 @@
   @apply flex items-center justify-between;
 
   .root__left {
-    @apply flex items-center gap-[16px];
+    @apply flex items-center gap-[16px] md:gap-[32px];
 
     .left__labels {
       @apply flex flex-col;

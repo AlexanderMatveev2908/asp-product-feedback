@@ -1,9 +1,11 @@
 <div class="root" [style.--border]="isLast() ? 'none' : '1px solid'">
   <app-header-comment [comment]="comment()" [toggleCb]="useToggleReply.toggle" />
 
-  <span class="root__content">
-    {{ comment().content }}
-  </span>
+  <div class="root__content">
+    <span>
+      {{ comment().content }}
+    </span>
+  </div>
 
   <app-reply-form
     [formShown]="useToggleReply.showReply()"

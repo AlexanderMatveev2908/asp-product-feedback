@@ -2,6 +2,8 @@
   @apply w-full pl-[24px] relative flex flex-col gap-[16px];
 
   .root__content {
+    @apply md:pl-[72px] flex justify-start;
+
     .content__replying_to {
       @apply text-bd__sm__bold text-purple__prm md:text-bd__md__bold;
     }
