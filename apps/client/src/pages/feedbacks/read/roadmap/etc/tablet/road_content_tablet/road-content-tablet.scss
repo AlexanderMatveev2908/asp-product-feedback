@@ -3,9 +3,9 @@
 }
 
 .root {
-  @apply flex items-start justify-between;
+  @apply grid grid-cols-3 gap-[10px];
 
   .root__col {
-    @apply w-full flex flex-col gap-[16px];
+    @apply w-full flex flex-col;
   }
 }

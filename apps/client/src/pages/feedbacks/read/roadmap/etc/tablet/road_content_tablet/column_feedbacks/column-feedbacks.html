@@ -1,1 +1,6 @@
-<div class="root"></div>
+<div class="root">
+  <!--  -->
+  @for(f of currFeedbacks(); track f.id){
+  <app-feedback-base [item]="f" />
+  }
+</div>

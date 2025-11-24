@@ -1,5 +1,5 @@
 .header {
-  @apply w-full h-[100px] bg-blue__dark__2 sticky top-0 py-[26px] px-[24px] flex items-center justify-between gap-[116px];
+  @apply w-full h-[100px] bg-blue__dark__2 sticky md:static top-0 py-[26px] px-[24px] flex items-center justify-between gap-[116px];
 
   @media (min-width: 768px) {
     width: calc(100% - 80px);
@@ -17,5 +17,5 @@
 }
 
 .root {
-  @apply z-navbar w-full flex flex-col gap-[24px] px-[40px];
+  @apply z-navbar w-full flex flex-col gap-[24px] md:px-[40px];
 }

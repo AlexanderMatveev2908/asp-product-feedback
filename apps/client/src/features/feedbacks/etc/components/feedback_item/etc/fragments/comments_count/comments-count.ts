@@ -2,7 +2,7 @@ import { SvgAdvIconComments } from '@/common/components/svgs/advanced/icon-comme
 import { Nullable, SvgT } from '@/common/types/etc';
 import { UseNavSvc } from '@/core/services/use_nav';
 import { FeedbackT } from '@/features/feedbacks/etc/types';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,12 +16,14 @@ import { Params, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-comments-count',
-  imports: [NgComponentOutlet, RouterLink, NgTemplateOutlet],
+  imports: [NgComponentOutlet, RouterLink, NgTemplateOutlet, NgClass],
   templateUrl: './comments-count.html',
   styleUrl: './comments-count.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentsCount {
+  public readonly responsive: InputSignal<boolean> = input.required();
+
   // ? statics
   public readonly Comment: SvgT = SvgAdvIconComments;
 

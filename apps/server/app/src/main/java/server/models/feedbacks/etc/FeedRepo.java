@@ -14,8 +14,8 @@ import server.models.feedbacks.Feedback;
 public interface FeedRepo extends ReactiveCrudRepository<Feedback, UUID> {
 
   @Query("""
-      INSERT INTO feedbacks (title, description, category)
-      VALUES (:#{#feedback.title}, :#{#feedback.description}, CAST(:#{#feedback.category} AS category_type))
+      INSERT INTO feedbacks (title, description, category, status)
+      VALUES (:#{#feedback.title}, :#{#feedback.description}, CAST(:#{#feedback.category} AS category_type), CAST(:#{#feedback.status} AS status_type))
       RETURNING *
       """)
   public Mono<Feedback> insert(Feedback feedback);

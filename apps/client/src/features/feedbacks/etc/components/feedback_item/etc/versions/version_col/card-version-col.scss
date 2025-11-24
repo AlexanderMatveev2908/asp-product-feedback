@@ -5,11 +5,11 @@
     @apply w-full flex flex-col gap-[9px];
 
     .body__title {
-      @apply text-bd__sm__bold md:text-hd__md text-blue__dark__1;
+      @apply text-bd__sm__bold text-blue__dark__1;
     }
 
     .body__desc {
-      @apply text-bd__sm__reg md:text-bd__lg__reg text-blue__dark__0 break-all;
+      @apply text-bd__sm__reg text-blue__dark__0 break-all;
     }
   }
 

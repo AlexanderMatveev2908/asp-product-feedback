@@ -41,6 +41,11 @@ public final class Feedback extends RootTable {
     this.status = FeedStatT.SUGGESTION;
   }
 
+  public Feedback(String title, String description, FeedCatT category, FeedStatT status) {
+    this(title, description, category);
+    this.status = status;
+  }
+
   @Override
   public final String toString() {
     return reflectiveToString();
