@@ -26,6 +26,7 @@ import { HeaderTablet } from '@/layout/header_tablet/header-tablet';
 import { SvgFillIconSuggestions } from '@/common/components/svgs/fill/icon-suggestions/icon-suggestions';
 import { NgComponentOutlet } from '@angular/common';
 import { FeedbackResponsive } from '@/features/feedbacks/etc/components/feedback_item/feedback_responsive/feedback-responsive';
+import { SidebarDesktop } from '@/layout/sidebar_desktop/sidebar-desktop';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ import { FeedbackResponsive } from '@/features/feedbacks/etc/components/feedback
     HeaderTablet,
     NgComponentOutlet,
     FeedbackResponsive,
+    SidebarDesktop,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

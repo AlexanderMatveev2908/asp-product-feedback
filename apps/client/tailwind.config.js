@@ -4,6 +4,9 @@ export default {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
+      screens: {
+        xl2: '1440px',
+      },
       colors: {
         white_smoke: 'var(--white_smoke)',
         purple__prm: 'var(--purple__prm)',
