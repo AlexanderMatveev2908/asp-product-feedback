@@ -3,7 +3,7 @@
 }
 
 .root {
-  @apply grid grid-cols-3 gap-[10px];
+  @apply grid grid-cols-3 gap-[10px] xxl:gap-[30px];
 
   .root__col {
     @apply w-full flex flex-col;

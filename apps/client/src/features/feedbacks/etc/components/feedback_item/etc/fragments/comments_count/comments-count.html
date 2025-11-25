@@ -15,8 +15,13 @@
       <ng-content *ngComponentOutlet="Comment" />
     </div>
 
-    <span class="root__length" [ngClass]="responsive() ? 'root__length_rwd' : ''">
-      {{ item().comments?.length ?? 0 }}
+    @let l = item().comments?.length ?? 0 ;
+    <span
+      class="root__length"
+      [ngClass]="responsive() ? 'root__length_rwd' : ''"
+      [style.--opc]="l ? '1' : '50'"
+    >
+      {{ l }}
     </span>
   </div>
 </ng-template>

@@ -7,6 +7,11 @@
     @apply rounded-[10px];
   }
 
+  @media (min-width: 1440px) {
+    width: calc(100% - (165 * 2px));
+    margin-top: 78px;
+  }
+
   .header__left {
     @apply flex flex-col gap-[8px];
 
@@ -17,5 +22,5 @@
 }
 
 .root {
-  @apply z-navbar w-full flex flex-col gap-[24px] md:px-[40px];
+  @apply z-navbar w-full flex flex-col gap-[24px] md:px-[40px] xxl:px-[165px];
 }

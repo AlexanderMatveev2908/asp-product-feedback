@@ -1,0 +1,23 @@
+:host {
+  @apply hidden xxl:block;
+}
+
+.root {
+  @apply fixed w-[255px] h-[500px] top-[95px] left-[165px] flex flex-col gap-[24px];
+
+  .root__block_a {
+    background-image: url('/images/bgs/background-header-desktop.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @apply p-[24px] flex flex-col justify-end items-start rounded-[10px] min-h-[137px];
+
+    .block_a__title {
+      @apply text-hd__lg;
+    }
+
+    .block_a__sub_title {
+      @apply text-bd__md__med opacity-75;
+    }
+  }
+}
