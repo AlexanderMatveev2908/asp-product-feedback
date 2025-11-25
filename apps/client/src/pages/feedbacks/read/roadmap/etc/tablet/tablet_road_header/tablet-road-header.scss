@@ -3,17 +3,17 @@
 }
 
 .root {
-  @apply grid grid-cols-3 gap-[10px];
+  @apply grid grid-cols-3 gap-[10px] xxl:gap-[30px];
 
   .root__item {
     @apply flex flex-col items-start gap-[4px];
 
     .item__title {
-      @apply text-blue__dark__1 text-hd__sm__bold;
+      @apply text-blue__dark__1 text-hd__sm__bold xl:text-hd__md;
     }
 
     .item__comment {
-      @apply text-blue__dark__0 text-hd__sm__reg;
+      @apply text-blue__dark__0 text-hd__sm__reg xxl:text-bd__lg__reg;
     }
   }
 }

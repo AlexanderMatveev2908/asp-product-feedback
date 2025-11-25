@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        xl2: '1440px',
+        xxl: '1440px',
       },
       colors: {
         white_smoke: 'var(--white_smoke)',

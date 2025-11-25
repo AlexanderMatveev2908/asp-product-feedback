@@ -6,9 +6,11 @@
   }
 
   .root__length {
+    opacity: var(--opc);
     @apply text-bd__sm__bold text-blue__dark__1;
   }
   .root__length_rwd {
+    opacity: var(--opc);
     @apply md:text-bd__lg__bold;
   }
 }

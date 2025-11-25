@@ -1,5 +1,5 @@
 .root {
-  @apply p-[24px] md:px-[40px] md:pt-[56px] flex flex-col items-center w-full gap-[24px];
+  @apply p-[24px] md:px-[40px] md:pt-[56px] flex flex-col items-center w-full gap-[24px] xxl:pt-[92px] xxl:px-[361px];
 
   .root__header {
     @apply w-full flex items-center justify-between;
