@@ -1,16 +1,16 @@
 .root {
-  @apply bg-white w-full flex flex-col justify-center items-center py-[76px] px-[24px] rounded-[10px];
+  @apply bg-white w-full flex flex-col justify-center items-center py-[76px] px-[24px] rounded-[10px] md:min-h-[600px] md:px-[140px] md:py-[110px];
 
   .root__svg {
-    @apply w-[110px] h-[110px];
+    @apply w-[110px] h-[110px] md:w-[130px] md:h-[130px];
   }
 
   .root__label {
-    @apply mt-[40px] text-blue__dark__1 text-bd__md__reg;
+    @apply mt-[40px] text-blue__dark__1 text-bd__md__reg md:text-hd__xl;
   }
 
   .root__msg {
-    @apply text-bd__sm__reg mt-[14px] text-blue__dark__0;
+    @apply text-bd__sm__reg mt-[14px] text-blue__dark__0 md:text-bd__lg__reg;
   }
 
   .root__btn {
